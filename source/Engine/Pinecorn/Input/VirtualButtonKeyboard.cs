@@ -9,14 +9,25 @@ namespace Pinecorn
         {
             this.Key = input;
         }
+
         public override bool Pressed()
         {
-           return Keyboard.GetState().IsKeyDown(Key);
+            if(Keyboard.GetState().IsKeyDown(Key))
+            {
+                hasPressed = true;
+                return true;
+            }
+            return false;
         }
 
         public override bool Released()
         {
-             return Keyboard.GetState().IsKeyUp(Key);
+            if(Keyboard.GetState().IsKeyUp(Key) && hasPressed)
+            {
+                hasPressed = false;
+                return true;
+            }
+            return false; 
         }
     }
 

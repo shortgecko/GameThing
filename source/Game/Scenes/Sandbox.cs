@@ -10,8 +10,8 @@ namespace Game
         public override void Initialize()
         {
             Engine.RenderTarget.Width = 320;
-            Engine.RenderTarget.Height = 180;
-            Engine.RenderTarget.Scale = 6f;
+            Engine.RenderTarget.Height = 184;
+            Engine.RenderTarget.Scale = 5f;
             var level = new LevelLoader();
             level = null;
             Engine.Collect();

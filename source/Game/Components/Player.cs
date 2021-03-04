@@ -20,11 +20,16 @@ namespace Game
             return e;
         }
 
-        public StateMachine StateMachine;
-        public Texture2D Texture;
-        public Mover Mover;
-        public float Speed = 48f;
-        public float Gravity = 32f;
+        private StateMachine StateMachine;
+        private Mover Mover;
+        private float Speed = 128f;
+        private float Gravity = 32f;
+        private const float JumpForce = -400f;
+        private const float JumpBufferMax = 0.8f;
+        private const float MinJumpVarMult = 1.15f;
+        private const float MaxJumpVarMult = 1.75f;
+        private float  JumpBuffer = 0f;
+
 
         public override void Initialize()
         {
@@ -37,8 +42,26 @@ namespace Game
             //Regular moving
             Mover.MoveX = Input.Horizontal.GetAxis() * Speed * Engine.DeltaTime;
 
-            if(!Mover.OnGround)
-                Mover.MoveY = Gravity * Engine.DeltaTime;
+            Mover.MoveY = Gravity * Engine.DeltaTime;
+
+            if(Input.Jump.Pressed() && Mover.OnGround)
+            {
+                JumpBuffer += Engine.DeltaTime;
+            }
+
+            if(Input.Jump.Released())
+            {
+                if(JumpBuffer <= JumpBufferMax)
+                {
+                    Mover.MoveY = JumpForce * MinJumpVarMult *Engine.DeltaTime;
+                }
+                else
+                {
+                    Mover.MoveY = JumpForce * MaxJumpVarMult * Engine.DeltaTime;
+                }
+                JumpBuffer = 0f;
+            }
+            Console.WriteLine(JumpBuffer);
         }
 
 
