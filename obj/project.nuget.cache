@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "WxbV552qr0NvjYU/kTEC2jph2A/ebYAuZx5jU/S5qvuJBL39uUeZxVLK8V1015XKKjNycMzpMbThPTUr9argMw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\muham\\Downloads\\repos\\GameThing\\GameThing.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\muham\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.0.1641\\monogame.framework.desktopgl.3.8.0.1641.nupkg.sha512",
+    "C:\\Users\\muham\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
