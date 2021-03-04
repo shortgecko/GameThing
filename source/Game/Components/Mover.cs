@@ -26,13 +26,20 @@ namespace Game
                     this.Velocity.X = 0;
                 if(CheckY(solid))
                     this.Velocity.Y = 0;
-                if(MoveY != 0)
-                    OnGround = this.Velocity.Y == 0;
                         
             }
 
+            if(MoveY != 0 && Velocity.Y == 0)
+            {
+                OnGround = true;
+            }
+            else
+                OnGround = false;
+
             Entity.Position += Velocity;
             Velocity = Vector2.Zero;
+            MoveX = 0;
+            MoveY = 0;
         }
 
         public bool CheckX(Hitbox solid)

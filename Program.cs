@@ -14,5 +14,6 @@ class Runner
 			Engine.Scene = new Sandbox();
 			engine.Run();
 		}
+		Logger.Save();
 	}
 }

@@ -12,7 +12,7 @@ namespace Pinecorn
     {
         public Entity Entity;
         public bool Active = false;
-
+        
         public virtual void Initialize() {}
         public virtual void Update() { }
         public virtual void Render() { }

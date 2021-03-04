@@ -11,6 +11,8 @@ namespace Game
         private int Width;
         private int Height;
 
+        public Rectangle Bounds;
+
         public Hitbox(float posX, float posY, int width, int height)
         {
             PX = posX;
@@ -18,17 +20,20 @@ namespace Game
 
             Width = width;
             Height = height;
-            Bounds = new Rectangle((int)posX, (int)posY, width, height);
+
+            Bounds = new Rectangle((int)posX, (int)posY, width,height);
+
         }
+
+
+
+        #region Collision
+
 
         public override void Update()
         {
             Bounds = new Rectangle((int)Entity.Position.X + (int)PX, (int)Entity.Position.Y + (int)PY, Width, Height);
         }
-
-        public Rectangle Bounds;
-
-        #region Collision
 
         public bool IsTouchingLeft(Hitbox sprite, Mover _this)
         {

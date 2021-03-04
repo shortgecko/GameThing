@@ -8,62 +8,43 @@ namespace Game
 {
     public class Player : Component
     {
-        private Vector2 Position = Vector2.Zero;
-        private float Speed = 48f;
-        public float Gravity = 1f;
-
-        public float JumpForce = -72f;
-        public float JumpTimeMult = 15f;
-        public float JumpGravity = 5f;
-        private Texture2D texture;
-        private Mover mover;
-        private StateMachine stateMachine {get;set;}
-        private Timer Timer;
- 
-        public Player() //component
+        
+        public static Entity Create(Vector2 Pos)
         {
-            texture = Asset.Texture("player02.png");
+            Entity e = new Entity();
+            e.Add<Player>();
+            e.Add<StateMachine>();
+            e.Add<Mover>();
+            e.Add(new Hitbox(0,0,8,8));
+            e.Position = Pos;
+            return e;
         }
+
+        public StateMachine StateMachine;
+        public Texture2D Texture;
+        public Mover Mover;
+        public float Speed = 48f;
+        public float Gravity = 32f;
 
         public override void Initialize()
         {
-           mover = Entity.Get<Mover>();
-           mover.Hitbox = new Hitbox(0,0,48,48);
-           stateMachine = Entity.Get<StateMachine>();
-           Timer = Entity.Get<Timer>();
-           stateMachine.AddState(1,NormalUpdate);
-           stateMachine.State = 1;
-
+            StateMachine = Entity.Get<StateMachine>();
+            Mover = Entity.Get<Mover>();
+            StateMachine.AddState(0,null,NormalUpdate,null);
         }
         public void NormalUpdate()
         {
-            if(mover.OnGround == false)
-                mover.MoveY = Gravity;
+            //Regular moving
+            Mover.MoveX = Input.Horizontal.GetAxis() * Speed * Engine.DeltaTime;
 
-            Speed += Engine.DeltaTime;
-            mover.MoveX = Input.Horizontal.GetAxis() * Speed * Engine.DeltaTime;
-            if(mover.OnGround && Input.Jump.Pressed())
-            {
-               Timer.Start();
-            }
-
-            if(Timer.Get() >= 0.2f)
-            {
-                if(Input.Jump.Released())
-                {
-                    mover.MoveY = (JumpForce + (-Timer.Get() * JumpTimeMult) * Engine.DeltaTime);
-                    Timer.Stop();
-                    Gravity = JumpGravity;
-                }
-            }
-
-            Timer.Log();
-
+            if(!Mover.OnGround)
+                Mover.MoveY = Gravity * Engine.DeltaTime;
         }
+
 
         public override void Render()
         {
-            Drawer.Batch.Draw(texture, new Vector2(this.Entity.Position.X, this.Entity.Position.Y), Color.White);
+           Asset.DrawRectangle(new Rectangle((int)Entity.Position.X, (int)Entity.Position.Y, 8,8), Color.Red);
         }
     }
 }

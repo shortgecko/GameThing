@@ -30,14 +30,12 @@ namespace Game
                 {
                     foreach(var entity in layer.GetProperty("entities").EnumerateArray())
                     {
-                        var id = entity.GetProperty("id").GetInt32();
+                        var name = entity.GetProperty("name").GetString();
 
                         var x = entity.GetProperty("x").GetInt32();
                         var y = entity.GetProperty("y").GetInt32();
 
-                        var entt = Factory.Player(Engine.CurrentScene().World);
-                        entt.Position = new Vector2(x * 6,y * 6);
-                        Engine.CurrentScene().World.AddEntity(entt);
+                        Engine.CurrentScene().World.AddEntity(Factory.Load(name,new Vector2(x,y)));
                     }
                 }
             }
@@ -67,7 +65,7 @@ namespace Game
                     if(grid[x+y * width].GetString() == "1")
                     {
                         tileData[x+y* width] = 1;
-                        Level.Solids.Add(new Hitbox(x * 48, y * 48, 48,48));
+                        Level.Solids.Add(new Hitbox(x * 8, y * 8, 8,8));
                     }
                     else
                         tileData[x+y* width] = -1;

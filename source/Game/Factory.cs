@@ -6,19 +6,15 @@ namespace Game
 {
     public static class Factory
     {
-        
-        public static Entity Player(World world)
+        public static Entity Load(string name, Microsoft.Xna.Framework.Vector2 Position)
         {
-            var player = new Entity();
-            player.World = world;
-            player.Add<Mover>();
-            player.Add<Player>();
-            player.Add <Animator>();
-            player.Add<StateMachine>();
-            player.Add<Timer>();    
-            player.Add(new Hitbox(0,0,48,48));
-            player.Name = "player";
-            return player;
+            switch(name)
+            {
+                case "player":
+                    return Player.Create(Position);
+            }
+
+            throw new Exception("Entity does not exist");
         }
     }
 }

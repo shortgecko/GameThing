@@ -26,8 +26,7 @@ namespace Pinecorn
             {
                 for (int j = 0; j < Entities[i].Components.Count; j++)
                 {
-                    Entities[i].Components[j].Update();
-                    
+                    Entities[i].Components[j].Update();                    
                 }
             }
         }

@@ -1,0 +1,46 @@
+ERROR LOG
+--------------------------------------------------------------------------------
+ERROR 3/4/2021 5:58:58 PM
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Pinecorn.StateMachine.Update() in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Pinecorn\StateMachine.cs:line 59
+   at Pinecorn.World.Update() in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Pinecorn\World.cs:line 29
+   at Pinecorn.Scene.Update() in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Scene.cs:line 20
+   at Game.Sandbox.Update() in C:\Users\muham\Downloads\repos\GameThing\source\Game\Scenes\Sandbox.cs:line 32
+   at Pinecorn.Engine.Update(GameTime gameTime) in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Engine.cs:line 95
+   at Microsoft.Xna.Framework.Game.DoUpdate(GameTime gameTime)
+   at Microsoft.Xna.Framework.Game.Run(GameRunBehavior runBehavior)
+   at Microsoft.Xna.Framework.Game.Run()
+   at Pinecorn.Engine.RunWithLogging() in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Engine.cs:line 76
+ERROR 3/4/2021 5:57:27 PM
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Pinecorn.StateMachine.Update() in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Pinecorn\StateMachine.cs:line 59
+   at Pinecorn.World.Update() in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Pinecorn\World.cs:line 29
+   at Pinecorn.Scene.Update() in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Scene.cs:line 20
+   at Game.Sandbox.Update() in C:\Users\muham\Downloads\repos\GameThing\source\Game\Scenes\Sandbox.cs:line 32
+   at Pinecorn.Engine.Update(GameTime gameTime) in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Engine.cs:line 95
+   at Microsoft.Xna.Framework.Game.DoUpdate(GameTime gameTime)
+   at Microsoft.Xna.Framework.Game.Run(GameRunBehavior runBehavior)
+   at Microsoft.Xna.Framework.Game.Run()
+   at Pinecorn.Engine.RunWithLogging() in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Engine.cs:line 76
+ERROR 3/4/2021 5:56:52 PM
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Pinecorn.StateMachine.Update() in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Pinecorn\StateMachine.cs:line 59
+   at Pinecorn.World.Update() in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Pinecorn\World.cs:line 29
+   at Pinecorn.Scene.Update() in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Scene.cs:line 20
+   at Game.Sandbox.Update() in C:\Users\muham\Downloads\repos\GameThing\source\Game\Scenes\Sandbox.cs:line 32
+   at Pinecorn.Engine.Update(GameTime gameTime) in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Engine.cs:line 95
+   at Microsoft.Xna.Framework.Game.DoUpdate(GameTime gameTime)
+   at Microsoft.Xna.Framework.Game.Run(GameRunBehavior runBehavior)
+   at Microsoft.Xna.Framework.Game.Run()
+   at Pinecorn.Engine.RunWithLogging() in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Engine.cs:line 76
+ERROR 3/4/2021 5:56:30 PM
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Pinecorn.StateMachine.Update() in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Pinecorn\StateMachine.cs:line 59
+   at Pinecorn.World.Update() in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Pinecorn\World.cs:line 29
+   at Pinecorn.Scene.Update() in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Scene.cs:line 20
+   at Game.Sandbox.Update() in C:\Users\muham\Downloads\repos\GameThing\source\Game\Scenes\Sandbox.cs:line 32
+   at Pinecorn.Engine.Update(GameTime gameTime) in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Engine.cs:line 95
+   at Microsoft.Xna.Framework.Game.DoUpdate(GameTime gameTime)
+   at Microsoft.Xna.Framework.Game.Run(GameRunBehavior runBehavior)
+   at Microsoft.Xna.Framework.Game.Run()
+   at Pinecorn.Engine.RunWithLogging() in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Engine.cs:line 76

@@ -32,6 +32,8 @@ namespace Pinecorn
 			Device = new GraphicsDeviceManager(this);
 			Device.PreferMultiSampling = true;
 			Device.IsFullScreen = false;
+			Window.AllowUserResizing = true;
+			IsMouseVisible = true;
 		}
 
 		protected override void Initialize()
@@ -69,6 +71,18 @@ namespace Pinecorn
 			base.UnloadContent();
 		}
 
+		public void RunWithLogging()
+		{
+			try
+			{
+				Run();
+			}
+			catch(Exception e)
+			{
+				ErrorLog.Log(e);
+			}
+		}
+
 		public static Scene CurrentScene()
 		{
 			return Scene;
@@ -84,14 +98,15 @@ namespace Pinecorn
 		}
 		protected override void Draw(GameTime gameTime)
 		{
-			GraphicsDevice.Clear(Color.Red);
 
 			GraphicsDevice.SetRenderTarget(RenderTarget.Target);
+			GraphicsDevice.Clear(Color.Black);
             Drawer.Batch.Begin(/*transformMatrix: map.Camera.Transform*/);
 			Scene.Render();
             Drawer.Batch.End();
             GraphicsDevice.SetRenderTarget(null);
-
+			
+			GraphicsDevice.Clear(Color.Black);
 			Blah.Drawer.Batch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, transformMatrix: Scene.Camera.Transform);
 			Blah.Drawer.Batch.Draw(RenderTarget.Target, Vector2.Zero, null, Color.White, 0f, Vector2.Zero, RenderTarget.Scale, SpriteEffects.None, 0f);
 			Blah.Drawer.Batch.End();

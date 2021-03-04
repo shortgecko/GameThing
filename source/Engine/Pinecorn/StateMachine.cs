@@ -6,15 +6,36 @@ namespace Pinecorn
 {
     public class StateMachine : Component
     {
-
-        private static int MaxStates = 10;
-        private Action[] States = new Action[MaxStates];
-
+        public int MaxStates = 10;
+        public Action[] InitializeStates;
+        public Action[] UpdateStates;
+        public Action[] EndStates;
         public int State = 0;
-
-        public void AddState(int state, Action action)
+        private bool Begun = false;
+        private bool End = false;
+        public StateMachine()
         {
-            States[state] = action;
+            InitializeStates = new Action[MaxStates];
+            UpdateStates = new Action[MaxStates];
+            EndStates = new Action[MaxStates];
+        }
+
+        public StateMachine(int maxStates)
+        {
+            MaxStates = maxStates;
+            InitializeStates = new Action[MaxStates];
+            UpdateStates = new Action[MaxStates];
+            EndStates = new Action[MaxStates];
+        }
+        public void AddState(int state, Action innit = null, Action update = null, Action end = null)
+        {
+            if(update == null)
+                throw new Exception("Update cannot be null!");
+            InitializeStates[state] = innit;
+            UpdateStates[state] = update;
+            EndStates[state] = end;
+                        if(UpdateStates[State] == null)
+                throw new Exception();
         }
 
         public override void Initialize()
@@ -24,7 +45,29 @@ namespace Pinecorn
     
         public override void Update()
         {
-            States[State].Invoke();
+            if(!Begun && InitializeStates[State] != null)
+            {
+                InitializeStates[State].Invoke();
+                Begun = true;
+            }
+
+            UpdateStates[State].Invoke();
+
+            if(End)
+            {
+                EndStates[State].Invoke();
+                End = false;
+
+                //Clear states
+                Begun = false;
+                End = false;
+            }
+            
+        }
+
+        public void EndState()
+        {
+            End = true;
         }
     }
 }

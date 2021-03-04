@@ -26,7 +26,7 @@ namespace Game
                 for (int y = 0; y < Height; y++)
                 {
                     if(Data[x + y * Width] > -1)
-                        Asset.DrawRectangle(new Rectangle(x * 48, y * 48, 48,48), Color.White);
+                        Asset.DrawRectangle(new Rectangle(x * 8, y * 8, 8,8), Color.White);
                 }
         }
     }

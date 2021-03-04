@@ -25,7 +25,8 @@ namespace Pinecorn
 
             using(StreamWriter writer = new StreamWriter(Path))
             {
-                writer.Write(Title);
+                writer.WriteLine(Title);
+                writer.WriteLine("-------------------------------------------------------------------------------------------------");
                 foreach (var log in Logs)
                 {
                     writer.WriteLine(log);

@@ -69,7 +69,7 @@ namespace Pinecorn
 
         public static string Path(string path)
         {
-            return Engine.Config.AssetDirectory + path.Replace('\\', '/');        
+            return AppDomain.CurrentDomain.BaseDirectory + "/" + path.Replace('\\', '/');        
         }
 
 

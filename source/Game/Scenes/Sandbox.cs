@@ -9,23 +9,27 @@ namespace Game
     {
         public override void Initialize()
         {
-            new LevelLoader();
+            Engine.RenderTarget.Width = 320;
+            Engine.RenderTarget.Height = 180;
+            Engine.RenderTarget.Scale = 6f;
+            var level = new LevelLoader();
+            level = null;
+            Engine.Collect();
             base.Initialize();
         }
 
         public override void Load()
         {
-           
+           base.Load();
         }
 
         public override void Unload()
         {
-
+            base.Unload();
         }
 
         public override void Update()
         {
-            Input.Update();
             base.Update();
         }
 
