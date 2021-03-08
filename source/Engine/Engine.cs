@@ -15,7 +15,7 @@ namespace Pinecorn
 		public static Config Config { get; set; }
 
 		public static float RawDeltaTime;
-		public static float DeltaTime;
+		public static float Delta;
 		public static float Timer;
 		public static float TimeRate = 1f;
 
@@ -24,6 +24,8 @@ namespace Pinecorn
 		private int fpsCounter = 0;
 		public static GamePadState[] GamePads = new GamePadState[4];
 		private GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
+		public static GameTime GameTime;
+
 
 		public static Pinecorn.RenderTarget RenderTarget;
 
@@ -58,6 +60,7 @@ namespace Pinecorn
 
 			RenderTarget = new RenderTarget(Vector2.Zero, Config.Width, Config.Height, 1f);
 
+			
 			LoadContent();
 		}
 
@@ -91,10 +94,11 @@ namespace Pinecorn
 		protected override void Update(GameTime gameTime)
         {
 			RawDeltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-			DeltaTime = RawDeltaTime * TimeRate;
+			Delta = RawDeltaTime * TimeRate;
 			Timer += RawDeltaTime;
 			Scene.Begin();
 			Scene.Update();
+			Engine.GameTime = gameTime;
 		}
 		protected override void Draw(GameTime gameTime)
 		{

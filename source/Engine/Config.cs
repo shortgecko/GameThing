@@ -18,7 +18,7 @@ namespace Pinecorn
         public Config(string windowTitle, string assetDirectory, bool fixedTimestep, int width, int height, bool isMouseVisible=false)
         {
             WindowTitle = windowTitle;
-            AssetDirectory = assetDirectory;
+            AssetDirectory = AppDomain.CurrentDomain.BaseDirectory + "/" + assetDirectory;
             FixedTimeStep = fixedTimestep;
             Width = width;
             Height = height;

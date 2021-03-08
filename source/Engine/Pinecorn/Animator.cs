@@ -36,7 +36,7 @@ namespace Pinecorn
                 IsPlaying = true;
                 //values
                 var frame = animation.Frames[CurrentFrame];
-                var frameLen = animation.FrameSpeeds[CurrentFrame] * Engine.DeltaTime;
+                var frameLen = animation.FrameSpeeds[CurrentFrame] * Engine.Delta;
 
                 if (frameLen == 1)
                 {
@@ -47,7 +47,7 @@ namespace Pinecorn
                 else
                 {
                     //if frame len greater then 1
-                    Timer += Engine.DeltaTime;
+                    Timer += Engine.Delta;
 
                     //if timer is less then the frame len, continue playing the same frame
                     if (Timer < frameLen)

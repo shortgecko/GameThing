@@ -9,10 +9,7 @@ namespace Game
     {
         public int[] Data;
         public readonly int Width;
-        public readonly int Height;
-
-        public Texture2D Texture;
-        
+        public readonly int Height;        
         public Tilemap(int[] data, int width, int height)
         {
             Data = data;
@@ -28,6 +25,12 @@ namespace Game
                     if(Data[x + y * Width] > -1)
                         Asset.DrawRectangle(new Rectangle(x * 8, y * 8, 8,8), Color.White);
                 }
+        }
+
+        public void Clear()
+        {
+            for(int i = 0; i < Data.Length; i++)
+                Data[i] = -1;
         }
     }
 }

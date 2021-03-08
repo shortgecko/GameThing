@@ -15,6 +15,11 @@ namespace Game
         {
             FG_Tiles.Render();
         }
+
+        public static void Clear()
+        {
+            
+        }
                 
     }
 }

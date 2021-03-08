@@ -1,0 +1,10 @@
+player - move horiz. and can wall jump to an unlimite degree (super meat boy style, not celeste)
+spring - its a spring, 4 dir up right left down
+falling block - falls down when touched by player, doesnt matter where it is
+
+entity ideas
+elevators (goes up or down, but you have to trigger the event that does that and wait a bit) (elevator functions more as trigger lift)
+
+level ideas
+level 1 -4 falling blcoks / springs, get used to movement
+then you get 4 elevator centric leveles

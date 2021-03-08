@@ -12,12 +12,16 @@ namespace Pinecorn
 
         public static void Initialize()
         {
-            Title = "LOG " + Engine.Config.AssetDirectory;
+            Title = "LOG " + Engine.Config.WindowTitle.ToUpper();
+            Console.WriteLine(Title);
+            Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
         }
 
         public static void Log(object log)
         {
-            Logs.Add("[" + Title+ "]" + log.ToString());
+            var logLine = "[" + Title + "]" + log.ToString();
+            Logs.Add(logLine);
+            Console.WriteLine(logLine);
         }
 
         public static void Save()

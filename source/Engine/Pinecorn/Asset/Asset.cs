@@ -171,5 +171,10 @@ namespace Pinecorn
             }
         }
 
+        public static string TitlePath(string path)
+        {
+            return Engine.Config.AssetDirectory + "/" + path;
+        }
+
     }
 }

@@ -1,79 +1,64 @@
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System.Text.Json;
+using Newtonsoft.Json;
 using System;
-using Pinecorn;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using Pinecorn;
+using Microsoft.Xna.Framework;
 
 namespace Game
 {
     public class LevelLoader
     {
+        public OgmoLevel OgmoLevel;
 
-        public LevelLoader()
+        public LevelLoader(string filepath)
         {
-            var data = Asset.LoadFile("Levels/Level01.json");
-            ParseTilemap(data);
-            ParseEntityLayer(data);
+            string realPath = Asset.TitlePath(filepath);
+            OgmoLevel = new OgmoLevel(File.OpenRead(realPath));
+            GetEntityLayer("entity");
+            Level.FG_Tiles = GetTilemap("fg_tiles");
         }
 
-        public void ParseEntityLayer(string data)
+        public Tilemap GetTilemap(string tilemap)
         {
-            using JsonDocument doc = JsonDocument.Parse(data);
-            JsonElement root = doc.RootElement;
-
-            JsonElement layers = root.GetProperty("layers");
-
-            foreach(var layer in layers.EnumerateArray())
-            {
-                if(layer.GetProperty("name").GetString() == "entity")
+            var layer = OgmoLevel.Data.Get(tilemap);
+            var data = gridToInt( layer.grid);
+            for(int x = 0;x < layer.gridCellsX; x++)
+                for(int y = 0; y < layer.gridCellsY; y++)
                 {
-                    foreach(var entity in layer.GetProperty("entities").EnumerateArray())
+                    if(data[x+y * layer.gridCellsX] > -1)
                     {
-                        var name = entity.GetProperty("name").GetString();
-
-                        var x = entity.GetProperty("x").GetInt32();
-                        var y = entity.GetProperty("y").GetInt32();
-
-                        Engine.CurrentScene().World.AddEntity(Factory.Load(name,new Vector2(x,y)));
-                    }
-                }
-            }
-
-            
-        }
-
-        public void ParseTilemap(string data)
-        {
-            using JsonDocument doc = JsonDocument.Parse(data);
-            JsonElement root = doc.RootElement;
-
-            int width = root.GetProperty("width").GetInt32() / 8;
-            int height =  root.GetProperty("height").GetInt32() / 8;
-
-            var tileData = new int[width * width];
-
-            JsonElement layers = root.GetProperty("layers");
-
-            var tileLayer = layers[0];
-
-            var grid = tileLayer.GetProperty("grid");
-
-            for(int x=0; x < width; x++)
-                for(int y = 0; y <height; y++)
-                {
-                    if(grid[x+y * width].GetString() == "1")
-                    {
-                        tileData[x+y* width] = 1;
                         Level.Solids.Add(new Hitbox(x * 8, y * 8, 8,8));
                     }
-                    else
-                        tileData[x+y* width] = -1;
-
                 }
-
-           Level.FG_Tiles = new Tilemap(tileData, width, height);
+            return new Tilemap(data, layer.gridCellsX, layer.gridCellsY);
         }
+    
+        public int[] gridToInt(string[] grid)
+        {
+            int[] data = new int[grid.Length];
+            for(int i = 0; i < grid.Length; i++)
+            {
+                if(grid[i] == "0")
+                {
+                    data[i] = -1;
+                }
+                else
+                {
+                    data[i] = 1;
+                }
+            }
+            return data;
+    }
 
+        public void GetEntityLayer(string entitylayer)
+        {
+            var layer = OgmoLevel.Data.Get(entitylayer);
+            foreach(OgmoEntity entity in layer.entities)
+            {
+                Engine.CurrentScene().World.Entities.Add(EntityManager.Create(entity.name,new Vector2(entity.x, entity.y), entity.width, entity.height,entity.values));
+            }
+        }
     }
 }

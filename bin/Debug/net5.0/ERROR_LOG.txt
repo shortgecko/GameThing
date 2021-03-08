@@ -1,5 +1,41 @@
 ERROR LOG
 --------------------------------------------------------------------------------
+ERROR 3/6/2021 1:45:18 PM
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ImMonoGame.ImguiComponent.Draw(GameTime gameTime) in C:\Users\muham\Downloads\repos\GameThing\libs\ImMonoGame\source\ImMonoGame\ImguiComponent.cs:line 63
+   at Game.DebugAction.Render(GameTime gameTime) in C:\Users\muham\Downloads\repos\GameThing\source\Game\DebugActions.cs:line 19
+   at Game.Sandbox.Render() in C:\Users\muham\Downloads\repos\GameThing\source\Game\Scenes\Sandbox.cs:line 41
+   at Pinecorn.Engine.Draw(GameTime gameTime) in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Engine.cs:line 109
+   at Microsoft.Xna.Framework.Game.DoDraw(GameTime gameTime)
+   at Microsoft.Xna.Framework.Game.Tick()
+   at Microsoft.Xna.Framework.SdlGamePlatform.RunLoop()
+   at Microsoft.Xna.Framework.Game.Run(GameRunBehavior runBehavior)
+   at Microsoft.Xna.Framework.Game.Run()
+   at Pinecorn.Engine.RunWithLogging() in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Engine.cs:line 81
+ERROR 3/6/2021 1:44:26 PM
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ImMonoGame.ImguiComponent.Draw(GameTime gameTime) in C:\Users\muham\Downloads\repos\GameThing\libs\ImMonoGame\source\ImMonoGame\ImguiComponent.cs:line 63
+   at Game.DebugAction.Render(GameTime gameTime) in C:\Users\muham\Downloads\repos\GameThing\source\Game\DebugActions.cs:line 19
+   at Game.Sandbox.Render() in C:\Users\muham\Downloads\repos\GameThing\source\Game\Scenes\Sandbox.cs:line 41
+   at Pinecorn.Engine.Draw(GameTime gameTime) in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Engine.cs:line 109
+   at Microsoft.Xna.Framework.Game.DoDraw(GameTime gameTime)
+   at Microsoft.Xna.Framework.Game.Tick()
+   at Microsoft.Xna.Framework.SdlGamePlatform.RunLoop()
+   at Microsoft.Xna.Framework.Game.Run(GameRunBehavior runBehavior)
+   at Microsoft.Xna.Framework.Game.Run()
+   at Pinecorn.Engine.RunWithLogging() in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Engine.cs:line 81
+ERROR 3/6/2021 12:24:20 PM
+System.Exception: Entity does not exist
+   at Game.Factory.Load(String name, Vector2 Position) in C:\Users\muham\Downloads\repos\GameThing\source\Game\Factory.cs:line 17
+   at Game.LevelLoader.ParseEntityLayer(String data) in C:\Users\muham\Downloads\repos\GameThing\source\Game\LevelLoader.cs:line 38
+   at Game.LevelLoader..ctor() in C:\Users\muham\Downloads\repos\GameThing\source\Game\LevelLoader.cs:line 17
+   at Game.Sandbox.Initialize() in C:\Users\muham\Downloads\repos\GameThing\source\Game\Scenes\Sandbox.cs:line 15
+   at Pinecorn.Scene.Begin() in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Scene.cs:line 33
+   at Pinecorn.Engine.Update(GameTime gameTime) in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Engine.cs:line 96
+   at Microsoft.Xna.Framework.Game.DoUpdate(GameTime gameTime)
+   at Microsoft.Xna.Framework.Game.Run(GameRunBehavior runBehavior)
+   at Microsoft.Xna.Framework.Game.Run()
+   at Pinecorn.Engine.RunWithLogging() in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Engine.cs:line 78
 ERROR 3/4/2021 5:58:58 PM
 System.NullReferenceException: Object reference not set to an instance of an object.
    at Pinecorn.StateMachine.Update() in C:\Users\muham\Downloads\repos\GameThing\source\Engine\Pinecorn\StateMachine.cs:line 59
