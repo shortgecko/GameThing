@@ -18,6 +18,7 @@ namespace Game
 
         public void Start(float duration)
         {
+            m_Duration = 0f;
             m_Duration = duration;
         }
 

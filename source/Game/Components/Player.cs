@@ -24,22 +24,26 @@ namespace Game
         public Vector2 Spawn;
         private StateMachine StateMachine;
         private Mover Mover;
-        private float Speed = 128f;
-        private float Gravity = 32f;
-        private const float JumpForce = -600f;
+        private float Speed = 144f;
+        private float Gravity = 80f;
+        private const float JumpForce = -800f;
         private const float JumpBufferMax = 0.3f;
         private const float MinJumpVarMult = 1.15f;
         private const float MaxJumpVarMult = 2.25f;
         private float  JumpBuffer = 0f;
         private bool CanJump = false;
-        public Timer CoyoteTimer;
-        public float CoyoteJumpGrace = 0.03f;
+        private Timer CoyoteTimer;
+        private Timer Jumput;
+        private float CoyoteJumpGrace = 0.03f;
+        private float JumputGrace = 0.02f;
+        private bool DoJump = false;
         public override void Initialize()
         {
             StateMachine = Entity.Get<StateMachine>();
             Mover = Entity.Get<Mover>();
             StateMachine.AddState(0,null,NormalUpdate,null);
             Entity.Add(CoyoteTimer = new Timer());
+            Entity.Add(Jumput = new Timer());
         }
         public void NormalUpdate()
         {
@@ -50,12 +54,13 @@ namespace Game
 
             JumpGrace();
 
-            if(Input.Jump.Pressed() && CanJump)
+            if(Input.Jump.Pressed())
             {
+                Jumput.Start(JumputGrace);
                 JumpBuffer += Engine.Delta;
             }
 
-            if(Input.Jump.Released() && CanJump)
+            if(DoJump)
             {
                 if(JumpBuffer <= JumpBufferMax)
                 {
@@ -65,10 +70,13 @@ namespace Game
                 else
                 {
                     Mover.MoveY = JumpForce * MaxJumpVarMult * Engine.Delta;
+                    // Mover.MoveX = 100f;
                     Logger.Log("BIG JUMP");
                 }
                 JumpBuffer = 0f;
+                Gravity += Engine.Delta;
             }
+
 
             if(Keyboard.GetState().IsKeyDown(Keys.R))
             {
@@ -84,6 +92,7 @@ namespace Game
             }
 
             CanJump = CoyoteTimer.Duration > 0;
+            DoJump = Input.Jump.Released() && CanJump || Mover.OnGround && Jumput.Duration > 0;
         }
 
 

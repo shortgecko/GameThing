@@ -17,7 +17,11 @@ namespace Game
 
         public static void Update()
         {
-            System.Console.WriteLine(Engine.GamePads[0].IsConnected);
+            if(Engine.GamePads[0].IsConnected)
+            {
+                Logger.Log("CONTROLLER CONNTECTED");
+                Jump = new VirtualButtonGamepad(Buttons.A);
+            }
         }
 
     }

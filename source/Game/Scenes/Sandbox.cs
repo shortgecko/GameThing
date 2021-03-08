@@ -31,6 +31,7 @@ namespace Game
 
         public override void Update()
         {
+            Input.Update();
             base.Update();
         }
 

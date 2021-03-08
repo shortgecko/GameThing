@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Pinecorn;
+using System;
 
 namespace Game
 {
@@ -22,11 +23,10 @@ namespace Game
 
             foreach(var solid in Level.Solids)
             { 
-                if(CheckX(solid))
+               if(CheckX(solid))
                     this.Velocity.X = 0;
                 if(CheckY(solid))
-                    this.Velocity.Y = 0;
-                        
+                    this.Velocity.Y = 0;                   
             }
 
             if(MoveY != 0 && Velocity.Y == 0)
@@ -50,6 +50,27 @@ namespace Game
         public bool CheckY(Hitbox solid)
         {
             return ((this.Velocity.Y > 0 && this.Hitbox.IsTouchingTop(solid, this)) || (this.Velocity.Y < 0 & this.Hitbox.IsTouchingBottom(solid, this)));
+        }
+
+
+        public bool HitboxIntersects(Hitbox box,Point offset)
+        {
+            return new Rectangle(Hitbox.Bounds.X + offset.X, Hitbox.Bounds.Y + offset.Y, Hitbox.Bounds.Width, Hitbox.Bounds.Height).Intersects(box.Bounds);
+        }
+
+        public void CollisionCheckX(Hitbox solid)
+        {
+            if(HitboxIntersects(solid, new Point((int)MoveX * Math.Sign((int)MoveX),0)))
+            {
+                 this.Velocity.X = 0;
+            }
+        }
+        public void CollisionCheckY(Hitbox solid)
+        {
+            if(HitboxIntersects(solid, new Point(0,(int)MoveY)))
+            {
+                //  this.Velocity.Y = 0;
+            }
         }
 
 

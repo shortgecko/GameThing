@@ -33,20 +33,14 @@ namespace Pinecorn
 
             foreach(XmlElement subtexture in subtextures)
             {
-                var name = subtexture.Attributes["n"].Value;
-                var x = subtexture.Attributes["x"].Value;
-                var y = subtexture.Attributes["y"].Value;
-                var w = subtexture.Attributes["w"].Value;
-                var h = subtexture.Attributes["h"].Value;
-                Subtextures.Add(name,new Subtexture(new Rectangle(int.Parse(x), int.Parse(y), int.Parse(w), int.Parse(h))));
-               
+                string name = subtexture.Attributes["n"].Value;
+                int x = int.Parse(subtexture.Attributes["x"].Value);
+                int y = int.Parse(subtexture.Attributes["y"].Value);
+                int w = int.Parse(subtexture.Attributes["w"].Value);
+                int h = int.Parse(subtexture.Attributes["h"].Value);
+                Subtextures.Add(name,new Subtexture(new Rectangle(x,w,w,h)));  
             }
             
-        }
-
-        public void Debug()
-        {
-            System.Console.WriteLine(Subtextures.Count);
         }
     }
 }
