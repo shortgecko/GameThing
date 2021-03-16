@@ -24,8 +24,8 @@ namespace Pinecorn
 
         public void Follow(Entity entity)
         {                
-            Bounds.X += (int)entity.Position.X;
-            Bounds.Y += (int)entity.Position.Y;
+            Bounds.X += (int)entity.position.X;
+            Bounds.Y += (int)entity.position.Y;
         }
 
         public void Update()

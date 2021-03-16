@@ -27,7 +27,7 @@ namespace Pinecorn
             UpdateStates = new Action[MaxStates];
             EndStates = new Action[MaxStates];
         }
-        public void AddState(int state, Action innit = null, Action update = null, Action end = null)
+        public void add(int state, Action innit = null, Action update = null, Action end = null)
         {
             if(update == null)
                 throw new Exception("Update cannot be null!");

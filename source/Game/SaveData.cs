@@ -13,7 +13,9 @@ namespace Game
 {
     public class Instance
     {
-        public int LevelID;  
+        public int Health;
+        public float FileTime;
+        public int LevelID;
     }
     public static class SaveData
     {

@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Xml;
 using System.IO;
 using Newtonsoft.Json;
+using IO = System.IO;
 
 namespace Pinecorn
 {
@@ -31,7 +32,7 @@ namespace Pinecorn
         }
         public static Texture2D Texture(string assetName)
         {
-            var filepath = Engine.Config.AssetDirectory + "/" + assetName;
+            var filepath = IO.Path.Combine(Engine.Config.AssetDirectory + "/" + assetName);
             if (string.IsNullOrEmpty(filepath))
             {
                 throw new ArgumentNullException("Asset Name cannot be null or empty");
@@ -69,7 +70,7 @@ namespace Pinecorn
 
         public static string Path(string path)
         {
-            return AppDomain.CurrentDomain.BaseDirectory + "/" + path.Replace('\\', '/');        
+            return IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "/" + path.Replace('\\', '/'));     
         }
 
 

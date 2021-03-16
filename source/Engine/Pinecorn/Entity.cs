@@ -8,7 +8,7 @@ namespace Pinecorn
     public class Entity
     {
         public List<Component> Components = new List<Component>();
-        public Vector2 Position;
+        public Vector2 position;
         public World World;
 
         public string Name;
@@ -20,22 +20,22 @@ namespace Pinecorn
 
         }
 
-        public void Add(Component component)
+        public void add(Component component)
         {
-            component.Entity = this;
+            component.entity = this;
             Components.Add(component);
         }
-        public void Add<T>() where T: Component
+        public void add<T>() where T: Component
         {
-            if(Get<T>() == null)
+            if(get<T>() == null)
             {
                 Component component = (T)Activator.CreateInstance<T>();
-                component.Entity = this;
+                component.entity = this;
                 Components.Add(component);
             }
         }
 
-        public T Get<T>() where T : Component
+        public T get<T>() where T : Component
         {
             var comp = Components.FirstOrDefault(c => c.GetType() == typeof(T));//--searches the components for a type = to the type that was passed in
 

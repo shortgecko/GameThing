@@ -74,18 +74,6 @@ namespace Pinecorn
 			base.UnloadContent();
 		}
 
-		public void RunWithLogging()
-		{
-			try
-			{
-				Run();
-			}
-			catch(Exception e)
-			{
-				ErrorLog.Log(e);
-			}
-		}
-
 		public static Scene CurrentScene()
 		{
 			return Scene;
@@ -125,8 +113,35 @@ namespace Pinecorn
 				FPS = fpsCounter;
 				fpsCounter = 0;
 				counterElapsed -= TimeSpan.FromSeconds(1);
+
 			}
 		}
+
+		public static void Run(Scene scene)
+        {
+			Engine engine = new Engine();
+			Engine.Scene = scene;
+			engine.Run();
+			Logger.Save();
+        }
+
+		public static void RunWithLogging(Scene scene)
+		{
+			Engine engine = new Engine();
+			Engine.Scene = scene;
+			try
+			{
+				engine.Run();
+				Logger.Log("[EVENT] APP CLOSED");
+			}
+			catch (Exception e)
+			{
+				Logger.Log("[ERROR] APP CRASHED CHECK ERROR LOG FOR MORE DETAILS");
+				Logger.Save();
+				ErrorLog.Log(e);
+			}
+		}
+
 
 		public static void Collect()
 		{ 

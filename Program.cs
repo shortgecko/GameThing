@@ -1,21 +1,13 @@
-﻿
-using Pinecorn;
-using Game;
-using System;
+﻿using Pinecorn;
 
-
-class Runner
+namespace Game
 {
-	static void Main()
-	{
-		Engine.Config= new Config("game.exe","Assets",true, 1920, 1080);
-		using (var engine = new Engine())
+    class Runner
+    {
+        static void Main(string[] args)
         {
-
-			DebugAction.Game = engine;
-			Engine.Scene = new Sandbox();
-			engine.Run();
-		}
-		Logger.Save();
-	}
+            Engine.Config = new Config("Game Thing", "Assets", true, 1920, 1080);
+            Engine.Run(new Sandbox());
+        }
+    }
 }

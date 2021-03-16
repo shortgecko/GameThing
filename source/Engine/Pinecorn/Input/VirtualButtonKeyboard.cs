@@ -14,7 +14,6 @@ namespace Pinecorn
         {
             if(Keyboard.GetState().IsKeyDown(Key))
             {
-                hasPressed = true;
                 return true;
             }
             return false;
@@ -22,9 +21,8 @@ namespace Pinecorn
 
         public override bool Released()
         {
-            if(Keyboard.GetState().IsKeyUp(Key) && hasPressed)
+            if(Keyboard.GetState().IsKeyUp(Key) && Pressed())
             {
-                hasPressed = false;
                 return true;
             }
             return false; 

@@ -71,7 +71,7 @@ namespace Pinecorn
         public override void Render()
         {
             if(IsPlaying)
-                Drawer.Batch.Draw(Frame, this.Entity.Position, Color.White);
+                Drawer.Batch.Draw(Frame, this.entity.position, Color.White);
         }
     }
 }

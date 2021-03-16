@@ -16,7 +16,6 @@ namespace Game
             level = null;
             Engine.Collect();
             base.Initialize();
-            DebugAction.Initialize();
         }
 
         public override void Load()

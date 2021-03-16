@@ -55,10 +55,14 @@ namespace Pinecorn
             entity.World = this;
             this.Entities.Add(entity);
         }
-
         public void Log()
         {
             Console.WriteLine("Entities: " + Entities.Count);
+        }
+
+        public Entity get(string name)
+        {
+            return Entities.FirstOrDefault(c => c.Name == name);
         }
 
     }

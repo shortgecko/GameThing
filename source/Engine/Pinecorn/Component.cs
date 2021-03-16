@@ -10,7 +10,7 @@ namespace Pinecorn
 {
     public class Component
     {
-        public Entity Entity;
+        public Entity entity;
         public bool Active = false;
         
         public virtual void Initialize() {}

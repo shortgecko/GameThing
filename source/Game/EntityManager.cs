@@ -15,9 +15,12 @@ namespace Game
             switch(name)
             {
                 case "player":
-                    return Player.Create(pos,pos);
+                    return Player.Create(pos);
             }
+#if DEBUG
             return new Entity();
+#endif
+            throw new Exception("Entity Does not Exist");
         }
     }
 }
