@@ -11,7 +11,7 @@ namespace Pinecorn
     public class Engine : Microsoft.Xna.Framework.Game
     {
 		public static GraphicsDeviceManager Device;
-		public static Scene Scene;
+		private static Scene m_Scene;
 		public static Config Config { get; set; }
 
 		public static float RawDeltaTime;
@@ -23,7 +23,6 @@ namespace Pinecorn
 		private TimeSpan counterElapsed = TimeSpan.Zero;
 		private int fpsCounter = 0;
 		public static GamePadState[] GamePads = new GamePadState[4];
-		private GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
 		public static GameTime GameTime;
 
 
@@ -47,20 +46,16 @@ namespace Pinecorn
 				throw new Exception("no");
 
 			Window.Title = Config.WindowTitle;
-		Device.PreferredBackBufferWidth = Config.Width;
+			Device.PreferredBackBufferWidth = Config.Width;
 			Device.PreferredBackBufferHeight = Config.Height;
 			Device.ApplyChanges();
 
-			GamePads[0] = GamePad.GetState(PlayerIndex.One);
-			GamePads[1] = GamePad.GetState(PlayerIndex.Two);
-			GamePads[2] = GamePad.GetState(PlayerIndex.Three);
-			GamePads[3] = GamePad.GetState(PlayerIndex.Four);	
 
 			Logger.Initialize();
 
 			RenderTarget = new RenderTarget(Vector2.Zero, Config.Width, Config.Height, 1f);
 
-			
+			Asset.Initialize();
 			LoadContent();
 		}
 
@@ -74,19 +69,44 @@ namespace Pinecorn
 			base.UnloadContent();
 		}
 
-		public static Scene CurrentScene()
+		public static Scene Scene
 		{
-			return Scene;
+			get
+            {
+				return m_Scene;
+            }
 		}
+
+		public static void Size(Point size)
+        {
+			Device.PreferredBackBufferWidth = size.X;
+			Device.PreferredBackBufferHeight = size.Y;
+			Device.ApplyChanges();
+		}
+
+		public static void Set(Scene scene)
+        {
+			m_Scene = scene;
+        }
 
 		protected override void Update(GameTime gameTime)
         {
 			RawDeltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 			Delta = RawDeltaTime * TimeRate;
 			Timer += RawDeltaTime;
-			Scene.Begin();
-			Scene.Update();
+
+			MouseInput.Update();
+
+			GamePads[0] = GamePad.GetState(PlayerIndex.One);
+			GamePads[1] = GamePad.GetState(PlayerIndex.Two);
+			GamePads[2] = GamePad.GetState(PlayerIndex.Three);
+			GamePads[3] = GamePad.GetState(PlayerIndex.Four);
+
+			m_Scene.Begin();
+			m_Scene.Update();
 			Engine.GameTime = gameTime;
+
+			
 		}
 		protected override void Draw(GameTime gameTime)
 		{
@@ -94,12 +114,12 @@ namespace Pinecorn
 			GraphicsDevice.SetRenderTarget(RenderTarget.Target);
 			GraphicsDevice.Clear(Color.Black);
             Drawer.Batch.Begin(/*transformMatrix: map.Camera.Transform*/);
-			Scene.Render();
+			m_Scene.Render();
             Drawer.Batch.End();
             GraphicsDevice.SetRenderTarget(null);
 			
 			GraphicsDevice.Clear(Color.Black);
-			Blah.Drawer.Batch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, transformMatrix: Scene.Camera.Transform);
+			Blah.Drawer.Batch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, transformMatrix: m_Scene.Camera.Transform);
 			Blah.Drawer.Batch.Draw(RenderTarget.Target, Vector2.Zero, null, Color.White, 0f, Vector2.Zero, RenderTarget.Scale, SpriteEffects.None, 0f);
 			Blah.Drawer.Batch.End();
 
@@ -120,7 +140,7 @@ namespace Pinecorn
 		public static void Run(Scene scene)
         {
 			Engine engine = new Engine();
-			Engine.Scene = scene;
+			Engine.m_Scene = scene;
 			engine.Run();
 			Logger.Save();
         }
@@ -128,7 +148,7 @@ namespace Pinecorn
 		public static void RunWithLogging(Scene scene)
 		{
 			Engine engine = new Engine();
-			Engine.Scene = scene;
+			Engine.m_Scene = scene;
 			try
 			{
 				engine.Run();

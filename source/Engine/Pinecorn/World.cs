@@ -8,18 +8,6 @@ namespace Pinecorn
     public class World
     {
         public List<Entity> Entities = new List<Entity>();
-        public void Initialize()
-        {
-            for(int i = 0; i < Entities.Count; i++)
-            {
-                for (int j = 0; j < Entities[i].Components.Count; j++)
-                {
-                    Entities[i].Components[j].Initialize();
-                }
-            }
-                        
-        }
-
         public void Update()
         {
             for (int i = 0; i < Entities.Count; i++)
@@ -50,9 +38,11 @@ namespace Pinecorn
             Entities.Remove(Entities[id]);
         }
 
-        public void AddEntity(Entity entity)
+        public void Add(Entity entity)
         {
             entity.World = this;
+            for (int i = 0; i < entity.Components.Count; i++)
+                entity.Components[i].Initialize();
             this.Entities.Add(entity);
         }
         public void Log()

@@ -12,7 +12,7 @@ namespace Pinecorn
         public Camera Camera = new Camera();
         public virtual void Initialize() 
         {
-            World.Initialize();
+            
         }
         public virtual void Load() { }
         public virtual void Update() 

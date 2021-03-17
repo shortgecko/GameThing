@@ -5,56 +5,42 @@ namespace Game
 {
     public class Player : Component
     {   
-        public static Entity Create(Vector2 Pos)
+        public static Entity Create()
         {
             Entity player = new Entity();
             player.add<Player>();
-            player.get<Player>().spawn = Pos;
-            player.add<StateMachine>();
-            player.add<Mover>();
-            player.add(new Hitbox(0,0,8,8));
-            player.position = Pos;
             player.Name = "player";
             return player;
         }
 
-        public Vector2 spawn;
-        private StateMachine stateMachine;
-        private Mover mover;
-        private float speed = 96f;
-        private float gravity = 144f;
-        private const float jumpForce = -700f;
-        private const float jumpBufferMax = 20f;
-        private const float hJumpForce = 71f;
-        private Timer jumpBufferTimer;	
-	
+        private const float speed = 550f;
+        private Timer fireRateTimer;
+        private float fireRate = 0.07f;
+
         public override void Initialize()
         {
-            stateMachine = entity.get<StateMachine>();
-            mover = entity.get<Mover>();
-            stateMachine.add(0,null,NormalUpdate,null);
-            entity.add(jumpBufferTimer = new Timer());
+            entity.add(fireRateTimer = new Timer());
+            
         }
-        public void NormalUpdate()
+
+        public override void Update()
         {
-            //Regular moving
-            mover.moveX = Input.Horizontal.GetAxis() * speed * Engine.Delta;
-            Logger.Log("DELTA " + Engine.Delta); ;
+            entity.position.X += Input.Horizontal.GetAxis() * speed * Engine.Delta;
+            entity.position.Y += Input.Vertical.GetAxis() * speed * Engine.Delta;
 
-            mover.moveY += gravity * Engine.Delta;
-
-            if (Input.Jump.Pressed() && mover.onGround)
+            if(Input.Shoot.Pressed() && fireRateTimer.Duration <= 0)
             {
-                mover.moveY = jumpForce * Engine.Delta;
-                mover.moveX += hJumpForce *  Engine.Delta;
+                entity.World.Add(Bullet.Create(new Vector2(entity.position.X , entity.position.Y)));
+                entity.World.Add(Bullet.Create(new Vector2(entity.position.X + 4, entity.position.Y)));
+                fireRateTimer.Start(fireRate);
             }
 
-        }
 
+        }
 
         public override void Render()
         {
-           Asset.DrawRectangle(new Rectangle((int)entity.position.X, (int)entity.position.Y, 8,8), Color.Red);
+            Asset.DrawRectangle(new Rectangle((int)entity.position.X, (int)entity.position.Y, 8, 8), Color.White);
         }
     }
 

@@ -11,7 +11,7 @@ namespace Pinecorn
             Negative = negative;
         }
 
-        public override int GetAxis()
+        public override float GetAxis()
         {
             if (Positive.Pressed())
                 return 1;

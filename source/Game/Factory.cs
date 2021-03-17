@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Game
 {
-    public class EntityManager
+    public class Factory
     {
         
         public static Entity Create(string name, Vector2 pos, int width, int height, Dictionary<string,object> values)
@@ -15,7 +15,7 @@ namespace Game
             switch(name)
             {
                 case "player":
-                    return Player.Create(pos);
+                    return Player.Create();
             }
 #if DEBUG
             return new Entity();

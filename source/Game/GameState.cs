@@ -8,6 +8,7 @@ using MonoGame.Framework.Utilities.Deflate;
 using System;
 using System.IO;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Game
 {
@@ -16,11 +17,17 @@ namespace Game
         public int Health;
         public float FileTime;
         public int LevelID;
+        
+        public bool Paused = false;
+
     }
-    public static class SaveData
+
+
+    public static class GameState
     {
-        public static readonly string SavePath = "save";
-        public static Instance Instance = new Instance();
+        public static readonly string SavePath = "save1.save";
+        private static Instance Instance = new Instance();
+        public static bool Paused => Instance.Paused;
 
         public static void Read()
         {

@@ -6,8 +6,8 @@ namespace Game
     {
         static void Main(string[] args)
         {
-            Engine.Config = new Config("Game Thing", "Assets", true, 1920, 1080);
-            Engine.Run(new Sandbox());
+            Engine.Config = new Config("Game Thing", "Assets", true, 160 * 4, 200 * 4);
+            Engine.Run(new Level());
         }
     }
 }

@@ -13,6 +13,11 @@ namespace Pinecorn
     {
         private static Dictionary<string, object> Assets = new Dictionary<string, object>();
 
+        private static Texture2D EmptyTexture;
+        public static void Initialize()
+        {
+            EmptyTexture = Empty();
+        }
         public static Texture2D Empty()
 		{
 			//initialize a texture
@@ -25,7 +30,6 @@ namespace Pinecorn
 			return texture;
 		}
 
-        private static Texture2D EmptyTexture = Empty();
         public static void DrawRectangle(Rectangle rect, Color c)
         {
             Drawer.Batch.Draw(EmptyTexture, rect,c);
@@ -146,11 +150,6 @@ namespace Pinecorn
             {
                 return Texture2D.FromStream(Engine.Device.GraphicsDevice, titleStream);
             }
-        }
-
-        public static void Debug()
-        {
-            Console.WriteLine("Assets :" + Assets.Count);
         }
 
         private static XmlDocument XMLFromFile(string filepath)

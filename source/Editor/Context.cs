@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Pinecorn
+namespace Game.Editor
 {
-    public abstract class VirtualAxis
+    public static class Context
     {
-        public abstract float GetAxis();
+        
+
     }
 }
