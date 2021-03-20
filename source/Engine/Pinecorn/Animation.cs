@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
-namespace Pinecorn
+namespace Frankenweenie
 {
 
     public class Animation

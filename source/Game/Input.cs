@@ -1,5 +1,7 @@
-﻿using Microsoft.Xna.Framework.Input;
-using Pinecorn;
+﻿using Frankenweenie;
+using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework.Input;
 
 namespace Game
 {
@@ -14,7 +16,7 @@ namespace Game
             Horizontal = new VirtualInputAxis()
             {
                 Axis1 = new VirtualAxisGamePadDPadX(),
-                Axis2 = new VirtualAxisKeyboard(new VirtualButtonKeyboard(Keys.A), new VirtualButtonKeyboard(Keys.D)),
+                Axis2 = new VirtualAxisKeyboard(new VirtualButtonKeyboard(Keys.D), new VirtualButtonKeyboard(Keys.A)),
             };
             Vertical = new VirtualInputAxis()
             {

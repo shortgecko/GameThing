@@ -1,12 +1,13 @@
-﻿using Pinecorn;
+﻿using Frankenweenie;
+using System;
 
 namespace Game
 {
-    class Runner
+    public class Runner
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            Engine.Config = new Config("Game Thing", "Assets", true, 160 * 4, 200 * 4);
+            Engine.Config = new Config("Game Thing", "Assets", true, 160 * 4, 200 * 4, true);
             Engine.Run(new Level());
         }
     }

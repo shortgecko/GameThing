@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
-namespace Pinecorn
+namespace Frankenweenie
 {
     public class Tileset
     {

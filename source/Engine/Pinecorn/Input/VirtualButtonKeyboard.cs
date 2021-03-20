@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework.Input;
 
-namespace Pinecorn
+namespace Frankenweenie
 {
     public class VirtualButtonKeyboard : VirtualButton
     {

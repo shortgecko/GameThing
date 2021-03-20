@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Pinecorn
+namespace Frankenweenie
 {
     public class Subtexture
     {

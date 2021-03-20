@@ -1,4 +1,3 @@
 LOG GAME THING
 -------------------------------------------------------------------------------------------------
 [LOG GAME THING][ASSET][TEXTURE] Assets/Graphics/background.png
-[LOG GAME THING][ASSET][TEXTURE] Assets/Graphics/bullet.png

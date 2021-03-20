@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Xna.Framework.Input;
 
-namespace Pinecorn
+namespace Frankenweenie
 {
     public class VirtualAxisGamepadLeftX: VirtualAxis
     {

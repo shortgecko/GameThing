@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Pinecorn
+namespace Frankenweenie
 {
     public abstract class VirtualAxis
     {

@@ -1,32 +1,26 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Pinecorn
+namespace Frankenweenie
 {
     public class Scene
     {
         public World World = new World();
         public bool IsRunning { get; set; }
         private bool HasInitialized = false;
-        private bool HasLoaded = false;
-        public Camera Camera = new Camera();
-        public virtual void Initialize() 
+        private bool HasLoaded = false;        
+        protected virtual void Initialize() {  }
+        protected virtual void Load() { }
+        protected virtual void Update() 
         {
-            
+            World.Update();         
         }
-        public virtual void Load() { }
-        public virtual void Update() 
-        {
-            World.Update();
-            Camera.Update();          
-        }
-        public virtual void Render() 
+        protected virtual void Render() 
         { 
             World.Render();
         }
-        public virtual void Unload() { }
 
-        public void Begin()
+        private void Begin()
         {
             if(HasInitialized == false)
             {
@@ -40,6 +34,17 @@ namespace Pinecorn
                 IsRunning = true;
             }
 
+        }
+
+        public void Run()
+        {
+            Begin();
+            Update();
+        }
+
+        public void Draw()
+        {
+            Render();
         }
     }
 }

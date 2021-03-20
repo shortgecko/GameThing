@@ -7,11 +7,11 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 
-namespace Pinecorn
+namespace Frankenweenie
 {
     public static class MouseInput
     {
-        public static Vector2 MousePosition = new Vector2(200, 200);
+        public static Vector2 Position = new Vector2(200, 200);
         public static MouseState MouseState;
         private static MouseState PreviousState;
         public static Rectangle MouseRectangle;
@@ -22,8 +22,8 @@ namespace Pinecorn
             MouseRectangle = new Rectangle(MouseState.X, MouseState.Y, 5, 5);
             PreviousState = MouseState;
             MouseState = Mouse.GetState(); 
-            MousePosition.X = MouseState.X;  
-            MousePosition.Y = MouseState.Y;
+            Position.X = MouseState.X;  
+            Position.Y = MouseState.Y;
         }
     }
 }

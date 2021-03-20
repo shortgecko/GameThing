@@ -1,19 +1,17 @@
-﻿
-using System;
+﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Blah = Pinecorn;
+using Blah = Frankenweenie;
 using Microsoft.Xna.Framework.Input;
-using Pinecorn;
+using System.Collections.Generic;
 
-namespace Pinecorn
+namespace Frankenweenie
 {
     public class Engine : Microsoft.Xna.Framework.Game
     {
 		public static GraphicsDeviceManager Device;
 		private static Scene m_Scene;
 		public static Config Config { get; set; }
-
 		public static float RawDeltaTime;
 		public static float Delta;
 		public static float Timer;
@@ -25,8 +23,8 @@ namespace Pinecorn
 		public static GamePadState[] GamePads = new GamePadState[4];
 		public static GameTime GameTime;
 
-
-		public static Pinecorn.RenderTarget RenderTarget;
+		public static VirtualRenderTarget RenderTarget;
+		public static Matrix Transform = Matrix.CreateTranslation(0, 0, 0);
 
 		public Engine()
 		{
@@ -53,7 +51,7 @@ namespace Pinecorn
 
 			Logger.Initialize();
 
-			RenderTarget = new RenderTarget(Vector2.Zero, Config.Width, Config.Height, 1f);
+			RenderTarget = new VirtualRenderTarget();
 
 			Asset.Initialize();
 			LoadContent();
@@ -95,33 +93,32 @@ namespace Pinecorn
 			Delta = RawDeltaTime * TimeRate;
 			Timer += RawDeltaTime;
 
-			MouseInput.Update();
 
 			GamePads[0] = GamePad.GetState(PlayerIndex.One);
 			GamePads[1] = GamePad.GetState(PlayerIndex.Two);
 			GamePads[2] = GamePad.GetState(PlayerIndex.Three);
 			GamePads[3] = GamePad.GetState(PlayerIndex.Four);
 
-			m_Scene.Begin();
-			m_Scene.Update();
+
+			MouseInput.Update();
+			m_Scene.Run();
 			Engine.GameTime = gameTime;
 
 			
 		}
 		protected override void Draw(GameTime gameTime)
-		{
-
+		{	
 			GraphicsDevice.SetRenderTarget(RenderTarget.Target);
 			GraphicsDevice.Clear(Color.Black);
-            Drawer.Batch.Begin(/*transformMatrix: map.Camera.Transform*/);
-			m_Scene.Render();
+            Drawer.Batch.Begin();
+			m_Scene.Draw();
             Drawer.Batch.End();
             GraphicsDevice.SetRenderTarget(null);
 			
 			GraphicsDevice.Clear(Color.Black);
-			Blah.Drawer.Batch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, transformMatrix: m_Scene.Camera.Transform);
-			Blah.Drawer.Batch.Draw(RenderTarget.Target, Vector2.Zero, null, Color.White, 0f, Vector2.Zero, RenderTarget.Scale, SpriteEffects.None, 0f);
-			Blah.Drawer.Batch.End();
+			Drawer.Batch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null);
+			RenderTarget.Render();
+			Drawer.Batch.End();
 
 			fpsCounter++;
 			counterElapsed += gameTime.ElapsedGameTime;

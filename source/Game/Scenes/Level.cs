@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Pinecorn;
+using Frankenweenie;
 using System.Collections.Generic;
 
 namespace Game
@@ -21,37 +21,27 @@ namespace Game
         };
 
         public States State = States.Playing;
-
-        public override void Initialize()
+        private Camera Camera = new Camera();
+        protected override void Initialize()
         {
-            Engine.RenderTarget.Width = 160;
-            Engine.RenderTarget.Height = 200;
-            Engine.RenderTarget.Scale = 4f;
-
-
+            //Engine.RenderTarget.Width = 160;
+            //Engine.RenderTarget.Height = 200;
+            Engine.RenderTarget.Scale.X = 4f;
+            Engine.RenderTarget.Scale.Y = 4f;
             Entity entity = Player.Create();
-            entity.position.Y = 100;
             World.Add(entity);
-
-            //var entity2 = Player.Create();
-            //entity2.position.Y = 300;
-            //World.AddEntity(entity2);
 
             base.Initialize();
         }
 
-        public override void Load()
+        protected override void Load()
         {
             Background = Asset.Texture("Graphics/background.png");
         }
 
-        public override void Unload()
+        protected override void Update()
         {
-            base.Unload();
-        }
-
-        public override void Update()
-        {
+            
             switch(State)
             {
                 case States.Playing:
@@ -63,11 +53,10 @@ namespace Game
                     Editor.GameLayer.Update();
                     break;
             }
-            Camera.Update();
             LevelTime += Engine.Delta;
         }
 
-        public override void Render()
+        protected override void Render()
         {
             base.Render();
             if (State == States.Editor)

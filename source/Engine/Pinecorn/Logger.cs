@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Pinecorn
+namespace Frankenweenie
 {
     public static class Logger
     {

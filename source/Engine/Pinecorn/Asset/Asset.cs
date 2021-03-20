@@ -7,7 +7,7 @@ using System.IO;
 using Newtonsoft.Json;
 using IO = System.IO;
 
-namespace Pinecorn
+namespace Frankenweenie
 {
     public class Asset
     {

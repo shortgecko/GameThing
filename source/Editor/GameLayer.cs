@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Pinecorn;
+using Frankenweenie;
 using Microsoft.Xna.Framework;
 
 namespace Game.Editor
@@ -13,14 +13,14 @@ namespace Game.Editor
         private static bool Loaded = false;
         private static void Initialize()
         {
-
+           
         }
 
         public static void Update()
         {
             foreach(Entity Entity in Engine.Scene.World.Entities)
             {
-                Gizmo.Position = MouseInput.MousePosition;
+                Gizmo.Position = MouseInput.Position;
                 Entity.position = Gizmo.Position;
             }
         }
