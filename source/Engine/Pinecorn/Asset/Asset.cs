@@ -30,9 +30,42 @@ namespace Frankenweenie
 			return texture;
 		}
 
-        public static void DrawRectangle(Rectangle rect, Color c)
+        public static Texture2D Rectangle(int width, int height, Color color)
+        {
+            //initialize a texture
+            var texture = new Texture2D(Engine.Device.GraphicsDevice,width, height);
+            //the array holds the color for each pixel in the texture
+            Color[] data = new Color[width * height];
+            for (int i = 0; i < data.Length; i++)
+                data[i] = color;
+            //set the color
+            texture.SetData(data);
+            return texture;
+        }
+
+        public static void Rect(Rectangle rect, Color c)
         {
             Drawer.Batch.Draw(EmptyTexture, rect,c);
+        }
+        private static Rectangle HollowRect;
+        public static void HollowRectangle(int x, int y, int w, int h, int t, Color c)
+        {
+            HollowRect.X = x;
+            HollowRect.Y = y;
+            HollowRect.Width = w;
+            HollowRect.Height = t;
+            Rect(HollowRect, c);
+
+            HollowRect.Y += h - t;
+            Rect(HollowRect, c);
+
+            HollowRect.Y = y;
+            HollowRect.Width = t;
+            HollowRect.Height = h;
+            Rect(HollowRect, c);
+
+            HollowRect.X += w - t;
+            Rect(HollowRect, c);
         }
         public static Texture2D Texture(string assetName)
         {

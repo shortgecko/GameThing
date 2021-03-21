@@ -9,6 +9,7 @@ namespace Frankenweenie
 {
     public class Engine : Microsoft.Xna.Framework.Game
     {
+		public static Engine Instance;
 		public static GraphicsDeviceManager Device;
 		private static Scene m_Scene;
 		public static Config Config { get; set; }
@@ -100,7 +101,7 @@ namespace Frankenweenie
 			GamePads[3] = GamePad.GetState(PlayerIndex.Four);
 
 
-			MouseInput.Update();
+			VirtualMouse.Update();
 			m_Scene.Run();
 			Engine.GameTime = gameTime;
 
@@ -116,7 +117,7 @@ namespace Frankenweenie
             GraphicsDevice.SetRenderTarget(null);
 			
 			GraphicsDevice.Clear(Color.Black);
-			Drawer.Batch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null);
+			Drawer.Batch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, transformMatrix:Transform);
 			RenderTarget.Render();
 			Drawer.Batch.End();
 
@@ -136,19 +137,19 @@ namespace Frankenweenie
 
 		public static void Run(Scene scene)
         {
-			Engine engine = new Engine();
+			Engine.Instance = new Engine();
 			Engine.m_Scene = scene;
-			engine.Run();
+			Engine.Instance.Run();
 			Logger.Save();
         }
 
 		public static void RunWithLogging(Scene scene)
 		{
-			Engine engine = new Engine();
+			Engine.Instance = new Engine();
 			Engine.m_Scene = scene;
 			try
 			{
-				engine.Run();
+				Engine.Instance.Run();
 				Logger.Log("[EVENT] APP CLOSED");
 			}
 			catch (Exception e)

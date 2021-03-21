@@ -10,7 +10,7 @@ namespace Game
     public class Factory
     {
         
-        public static Entity Create(string name, Vector2 pos, int width, int height, Dictionary<string,object> values)
+        public static Entity Create(string name, Dictionary<string,object> values = null)
         {
             switch(name)
             {
@@ -22,5 +22,7 @@ namespace Game
 #endif
             throw new Exception("Entity Does not Exist");
         }
+
+        
     }
 }

@@ -5,9 +5,8 @@ namespace Frankenweenie
 {
     public class VirtualRenderTarget
     {
-        //TODO: Get the width and height of the render target to be variable????
-        public int Width;
-        public int Height;
+        public readonly int Width;
+        public readonly int Height;
         public RenderTarget2D Target;
         public Vector2 Position = Vector2.Zero;
         public Rectangle SourceRectangle;
@@ -22,6 +21,8 @@ namespace Frankenweenie
         {
             SourceRectangle = new Rectangle(0,0,Engine.Config.Width, Engine.Config.Height);
             Target = new RenderTarget2D(Engine.Device.GraphicsDevice, Engine.Config.Width, Engine.Config.Height);
+            Width = Engine.Config.Width;
+            Height = Engine.Config.Height;
         }
     
         public VirtualRenderTarget(Vector2 position, int width, int height, float scale)
@@ -31,6 +32,7 @@ namespace Frankenweenie
            Height = height; 
            Scale.X = scale;
            Target = new RenderTarget2D(Engine.Device.GraphicsDevice, width, height);
+
         }
 
         public VirtualRenderTarget(Vector2 position, int width, int height, Vector2 scale)
@@ -40,12 +42,9 @@ namespace Frankenweenie
             Height = height; 
             Scale = scale;
             Target = new RenderTarget2D(Engine.Device.GraphicsDevice, width, height);
+            Width = Engine.Config.Width;
+            Height = Engine.Config.Height;
 
-        }
-
-        public void Update()
-        {
-            Target = new RenderTarget2D(Engine.Device.GraphicsDevice,Width, Height);
         }
 
         public void Render()

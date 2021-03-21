@@ -11,4 +11,7 @@
     <PackageReference Include="ImGui.NET" Version="1.78.0" />
     <Content Include="source\Game\Components\Mover.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="source\Game\Scenes\" />
+  </ItemGroup>
 </Project>

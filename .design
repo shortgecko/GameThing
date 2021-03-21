@@ -1,0 +1,26 @@
+Date started: 3/21/2021
+Engine design:
+
+Game design:
+First, what do I think is good game design: Good game design is things that make a game fun, 
+derek yu, creator of spelunky says: "Way harder and also more important to figure out how to 
+get players excited about a game than how to "balance" a game, even though the latter sounds 
+more designer-y. Balancing a game too early is like painting with small brushes too early."
+
+Genre: Shoot um up
+Player: Can shoot two bullets at a time, no guns witching, but they are limited time powerups
+
+Enemy Ideas:
+	-"Suicide Bomber"(make sure to change name) enemy does little damage and can be killed easily
+	however, when killed it causes a massive explosion which does a lot of damage
+
+
+Engine Design:
+The engine must accomadate the game, at this point the engine has an animation system, a 
+state machine, an entity component system, and other things (these things are important, but 
+dont really help make the game any better, it's jsut boilerplate engine code, like an input system
+and so on.)
+
+Engine needs (based on game):
+particle system
+audio system (maybe look into using FMOD)

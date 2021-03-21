@@ -9,6 +9,7 @@ namespace Game
         {
             Entity player = new Entity();
             player.add<Player>();
+            player.add(new Editor.EditorComponent(8,8));
             player.Name = "player";
             return player;
         }
@@ -30,8 +31,8 @@ namespace Game
 
             if(Input.Shoot.Pressed() && fireRateTimer.Duration <= 0)
             {
-                entity.World.Add(Bullet.Create(new Vector2(entity.position.X , entity.position.Y)));
-                entity.World.Add(Bullet.Create(new Vector2(entity.position.X + 4, entity.position.Y)));
+                World.Add(Bullet.Create(new Vector2(entity.position.X , entity.position.Y)));
+                World.Add(Bullet.Create(new Vector2(entity.position.X + 4, entity.position.Y)));
                 fireRateTimer.Start(fireRate);
             }
 
@@ -40,7 +41,7 @@ namespace Game
 
         public override void Render()
         {
-            Asset.DrawRectangle(new Rectangle((int)entity.position.X, (int)entity.position.Y, 8, 8), Color.White);
+            Asset.Rect(new Rectangle((int)entity.position.X, (int)entity.position.Y, 8, 8), Color.White);
         }
     }
 

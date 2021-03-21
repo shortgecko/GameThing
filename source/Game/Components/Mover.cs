@@ -11,11 +11,11 @@ namespace Game
         public float moveX = 0f;
         public float moveY = 0f;
         public bool onGround = false;
-        public Level Level;
+        public Game Level;
 
         public override void Initialize()
         {
-            Level = (Level)Engine.Scene;
+            Level = (Game)Engine.Scene;
         }
 
         public override void Update()

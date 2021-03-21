@@ -25,10 +25,10 @@ namespace Frankenweenie
 
                 if(Lines != null)
                 {
-                    foreach(var line in Lines)
+                    foreach(string Line in Lines)
                     {
-                        if(line != Header && line != "ERROR LOG")
-                            writer.WriteLine(line);
+                        if(Line != Header && Line != "ERROR LOG")
+                            writer.WriteLine(Line);
                     }
                 }
 

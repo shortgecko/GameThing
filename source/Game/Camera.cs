@@ -19,7 +19,7 @@ namespace Game
         }
         public void Update()
         {
-            MouseInput.Position = Vector2.Transform(new Vector2(MouseInput.MouseState.X, MouseInput.MouseState.Y), Matrix.Invert(Transform)) / 4f;
+            VirtualMouse.Position = Vector2.Transform(new Vector2(VirtualMouse.State.X, VirtualMouse.State.Y), Matrix.Invert(Transform)) / 4f;
         }
     }
 }

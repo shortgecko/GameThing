@@ -11,6 +11,8 @@ namespace Game
         public static VirtualAxis Vertical;
         public static VirtualInputButton Shoot;
         public static VirtualInputButton Pause;
+        public static VirtualInputButton EditorPlace;
+
         static Input()
         {
             Horizontal = new VirtualInputAxis()
@@ -33,6 +35,8 @@ namespace Game
                 Input1 = new VirtualButtonKeyboard(Keys.Escape),
                 Input2 = new VirtualButtonGamepad(Buttons.Start),
             };
+
+
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Frankenweenie
 {
     public class World
     {
-        public List<Entity> Entities = new List<Entity>();
+        public static List<Entity> Entities = new List<Entity>();
         public void Update()
         {
             for (int i = 0; i < Entities.Count; i++)
@@ -38,12 +38,11 @@ namespace Frankenweenie
             Entities.Remove(Entities[id]);
         }
 
-        public void Add(Entity entity)
+        public static void Add(Entity entity)
         {
-            entity.World = this;
             for (int i = 0; i < entity.Components.Count; i++)
                 entity.Components[i].Initialize();
-            this.Entities.Add(entity);
+            Entities.Add(entity);
         }
         public void Log()
         {

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Game.Editor
+namespace Game
 {
-    public static class Context
+    public class LevelConfig
     {
-        
-
+        public string Name;
+        public int ID;
     }
 }

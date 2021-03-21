@@ -9,8 +9,6 @@ namespace Frankenweenie
     {
         public List<Component> Components = new List<Component>();
         public Vector2 position;
-        public World World;
-
         public string Name;
 
         public int ID;
