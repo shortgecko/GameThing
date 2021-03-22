@@ -5,6 +5,8 @@ Done: Done, the particle system was suprisingly easy, and I got positon manipula
 going on with entities in the level editor, but the codebase is really bas right now, and 
 everyhting is messes up and should be reworked
 especially in Game.cs (the main game scene), and VirtualMouse.cs
+Mar22: Removed the mouse issue and added imgui support to engine
+
 
 
 

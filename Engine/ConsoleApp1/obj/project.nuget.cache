@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "SGx4VXs3gEqQJF4T00KW73oHTrnvlfpdCSBz0GJYi2BbtxDK2bqwWy7T99oDuhe+HsKgXCpltH0XSCb6wcfzpA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\muham\\source\\repos\\projects\\c#\\GameThing\\Engine\\ConsoleApp1\\Engine.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\muham\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.0.1641\\monogame.framework.desktopgl.3.8.0.1641.nupkg.sha512"
+  ],
+  "logs": []
+}

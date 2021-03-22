@@ -1,0 +1,15 @@
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\obj\Debug\net5.0\Game.csprojAssemblyReference.cache
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\obj\Debug\net5.0\Game.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\obj\Debug\net5.0\Game.AssemblyInfoInputs.cache
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\obj\Debug\net5.0\Game.AssemblyInfo.cs
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\obj\Debug\net5.0\Game.csproj.CoreCompileInputs.cache
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\bin\Debug\net5.0\Game.deps.json
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\bin\Debug\net5.0\Game.dll
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\bin\Debug\net5.0\ref\Game.dll
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\bin\Debug\net5.0\Game.pdb
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\bin\Debug\net5.0\Frankenweenie.dll
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\bin\Debug\net5.0\Frankenweenie.pdb
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\obj\Debug\net5.0\Game.csproj.CopyComplete
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\obj\Debug\net5.0\Game.dll
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\obj\Debug\net5.0\ref\Game.dll
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\obj\Debug\net5.0\Game.pdb

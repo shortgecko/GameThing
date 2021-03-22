@@ -14,13 +14,3 @@ Enemy Ideas:
 	-"Suicide Bomber"(make sure to change name) enemy does little damage and can be killed easily
 	however, when killed it causes a massive explosion which does a lot of damage
 
-
-Engine Design:
-The engine must accomadate the game, at this point the engine has an animation system, a 
-state machine, an entity component system, and other things (these things are important, but 
-dont really help make the game any better, it's jsut boilerplate engine code, like an input system
-and so on.)
-
-Engine needs (based on game):
-particle system
-audio system (maybe look into using FMOD)
