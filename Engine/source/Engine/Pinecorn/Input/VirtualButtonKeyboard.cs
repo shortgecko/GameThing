@@ -12,7 +12,7 @@ namespace Frankenweenie
 
         public override bool Pressed()
         {
-            if(Keyboard.GetState().IsKeyDown(Key))
+            if (Keyboard.GetState().IsKeyDown(Key))
             {
                 return true;
             }
@@ -21,11 +21,11 @@ namespace Frankenweenie
 
         public override bool Released()
         {
-            if(Keyboard.GetState().IsKeyUp(Key) && Pressed())
+            if (Keyboard.GetState().IsKeyUp(Key) && Pressed())
             {
                 return true;
             }
-            return false; 
+            return false;
         }
     }
 

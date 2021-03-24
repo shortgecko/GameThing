@@ -5,8 +5,21 @@ namespace Frankenweenie
 {
     public class VirtualRenderTarget
     {
-        public readonly int Width;
-        public readonly int Height;
+        public int Width
+        {
+            get
+            {
+                return Target.Width;
+            }
+        }
+        public int Height
+        {
+            get
+            {
+                return Target.Height;
+            }
+        }
+
         public RenderTarget2D Target;
         public Vector2 Position = Vector2.Zero;
         public Rectangle SourceRectangle;
@@ -19,32 +32,29 @@ namespace Frankenweenie
 
         public VirtualRenderTarget()
         {
-            SourceRectangle = new Rectangle(0,0,Engine.Config.Width, Engine.Config.Height);
+            SourceRectangle = new Rectangle(0, 0, Engine.Config.Width, Engine.Config.Height);
             Target = new RenderTarget2D(Engine.Device.GraphicsDevice, Engine.Config.Width, Engine.Config.Height);
-            Width = Engine.Config.Width;
-            Height = Engine.Config.Height;
         }
-    
+
         public VirtualRenderTarget(Vector2 position, int width, int height, float scale)
         {
-           Position = position; 
-           Width = width; 
-           Height = height; 
-           Scale.X = scale;
-           Target = new RenderTarget2D(Engine.Device.GraphicsDevice, width, height);
+            Position = position;
+            Scale.X = scale;
+            Target = new RenderTarget2D(Engine.Device.GraphicsDevice, width, height);
 
         }
 
         public VirtualRenderTarget(Vector2 position, int width, int height, Vector2 scale)
         {
-            Position = position; 
-            Width = width; 
-            Height = height; 
+            Position = position;
             Scale = scale;
             Target = new RenderTarget2D(Engine.Device.GraphicsDevice, width, height);
-            Width = Engine.Config.Width;
-            Height = Engine.Config.Height;
 
+        }
+
+        public void Set(int width, int height)
+        {
+            Target = new RenderTarget2D(Engine.Device.GraphicsDevice, width, height);
         }
 
         public void Render()

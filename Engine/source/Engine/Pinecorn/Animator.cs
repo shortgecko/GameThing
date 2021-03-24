@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
+using System.Collections.Generic;
 
 namespace Frankenweenie
 {
@@ -31,7 +30,7 @@ namespace Frankenweenie
             Animation animation = null;
             Animations.TryGetValue(anim, out animation);
 
-            if(CurrentFrame < animation.Frames.Count)
+            if (CurrentFrame < animation.Frames.Count)
             {
                 IsPlaying = true;
                 //values
@@ -61,7 +60,7 @@ namespace Frankenweenie
                     }
                 }
             }
-            else if(loop)
+            else if (loop)
             {
                 CurrentFrame = 0;
             }
@@ -70,7 +69,7 @@ namespace Frankenweenie
 
         public override void Render()
         {
-            if(IsPlaying)
+            if (IsPlaying)
                 Drawer.Batch.Draw(Frame, this.entity.position, Color.White);
         }
     }

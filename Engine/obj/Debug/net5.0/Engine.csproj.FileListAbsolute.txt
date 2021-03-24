@@ -2,7 +2,6 @@ C:\Users\muham\source\repos\projects\c#\GameThing\Engine\bin\Debug\net5.0\Franke
 C:\Users\muham\source\repos\projects\c#\GameThing\Engine\bin\Debug\net5.0\Frankenweenie.dll
 C:\Users\muham\source\repos\projects\c#\GameThing\Engine\bin\Debug\net5.0\ref\Frankenweenie.dll
 C:\Users\muham\source\repos\projects\c#\GameThing\Engine\bin\Debug\net5.0\Frankenweenie.pdb
-C:\Users\muham\source\repos\projects\c#\GameThing\Engine\obj\Debug\net5.0\Engine.csprojAssemblyReference.cache
 C:\Users\muham\source\repos\projects\c#\GameThing\Engine\obj\Debug\net5.0\Engine.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\muham\source\repos\projects\c#\GameThing\Engine\obj\Debug\net5.0\Engine.AssemblyInfoInputs.cache
 C:\Users\muham\source\repos\projects\c#\GameThing\Engine\obj\Debug\net5.0\Engine.AssemblyInfo.cs

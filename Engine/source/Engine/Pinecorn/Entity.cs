@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Xna.Framework;
 
 namespace Frankenweenie
 {
@@ -23,9 +23,9 @@ namespace Frankenweenie
             component.entity = this;
             Components.Add(component);
         }
-        public void add<T>() where T: Component
+        public void add<T>() where T : Component
         {
-            if(get<T>() == null)
+            if (get<T>() == null)
             {
                 Component component = (T)Activator.CreateInstance<T>();
                 component.entity = this;

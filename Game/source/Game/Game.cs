@@ -14,7 +14,7 @@ namespace Game
             var data = LevelData.Load(path);
             foreach(EntityData entityData in data.EntityData)
             {
-                Entity entity = Factory.Create(entityData.Name);
+                Entity entity = EntityManager.Create(entityData.Name);
                 entity.position = entityData.Position;
                 World.Add(entity);
             }

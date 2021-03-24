@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Frankenweenie
 {
@@ -14,7 +13,7 @@ namespace Frankenweenie
             {
                 for (int j = 0; j < Entities[i].Components.Count; j++)
                 {
-                    Entities[i].Components[j].Update();                    
+                    Entities[i].Components[j].Update();
                 }
             }
         }
@@ -32,6 +31,10 @@ namespace Frankenweenie
         public Entity GetEntity(int id)
         {
             return Entities[id];
+        }
+        public Entity GetEntity(string name)
+        {
+            return Entities.FirstOrDefault(e => e.Name == name);
         }
         public void DestoryEntity(int id)
         {

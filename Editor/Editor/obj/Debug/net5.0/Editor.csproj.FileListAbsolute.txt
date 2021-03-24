@@ -1,3 +1,8 @@
+C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\obj\Debug\net5.0\Editor.csprojAssemblyReference.cache
+C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\obj\Debug\net5.0\Editor.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\obj\Debug\net5.0\Editor.AssemblyInfoInputs.cache
+C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\obj\Debug\net5.0\Editor.AssemblyInfo.cs
+C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\obj\Debug\net5.0\Editor.csproj.CoreCompileInputs.cache
 C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\bin\Debug\net5.0\Editor.exe
 C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\bin\Debug\net5.0\Editor.deps.json
 C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\bin\Debug\net5.0\Editor.runtimeconfig.json
@@ -5,15 +10,6 @@ C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\bin\Debug\net5.0
 C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\bin\Debug\net5.0\Editor.dll
 C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\bin\Debug\net5.0\ref\Editor.dll
 C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\bin\Debug\net5.0\Editor.pdb
-C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\obj\Debug\net5.0\Editor.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\obj\Debug\net5.0\Editor.AssemblyInfoInputs.cache
-C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\obj\Debug\net5.0\Editor.AssemblyInfo.cs
-C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\obj\Debug\net5.0\Editor.csproj.CoreCompileInputs.cache
-C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\obj\Debug\net5.0\Editor.dll
-C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\obj\Debug\net5.0\ref\Editor.dll
-C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\obj\Debug\net5.0\Editor.pdb
-C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\obj\Debug\net5.0\Editor.genruntimeconfig.cache
-C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\obj\Debug\net5.0\Editor.csprojAssemblyReference.cache
 C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\bin\Debug\net5.0\ImGui.NET.dll
 C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\bin\Debug\net5.0\MonoGame.Framework.dll
 C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\bin\Debug\net5.0\Newtonsoft.Json.dll
@@ -34,3 +30,7 @@ C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\bin\Debug\net5.0
 C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\bin\Debug\net5.0\Game.pdb
 C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\bin\Debug\net5.0\Frankenweenie.pdb
 C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\obj\Debug\net5.0\Editor.csproj.CopyComplete
+C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\obj\Debug\net5.0\Editor.dll
+C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\obj\Debug\net5.0\ref\Editor.dll
+C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\obj\Debug\net5.0\Editor.pdb
+C:\Users\muham\source\repos\projects\c#\GameThing\Editor\Editor\obj\Debug\net5.0\Editor.genruntimeconfig.cache

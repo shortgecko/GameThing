@@ -1,8 +1,0 @@
-LOG GAME THING
--------------------------------------------------------------------------------------------------
-[LOG GAME THING]{X:0 Y:0 Width:8 Height:8}
-[LOG GAME THING]Entity Selected
-[LOG GAME THING]{X:0 Y:0 Width:8 Height:8}
-[LOG GAME THING]Entity Selected
-[LOG GAME THING]{X:0 Y:0 Width:8 Height:8}
-[LOG GAME THING]Entity Selected

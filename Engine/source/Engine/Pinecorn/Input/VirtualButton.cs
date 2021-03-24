@@ -1,5 +1,3 @@
-using Microsoft.Xna.Framework.Input;
-
 namespace Frankenweenie
 {
     public abstract class VirtualButton

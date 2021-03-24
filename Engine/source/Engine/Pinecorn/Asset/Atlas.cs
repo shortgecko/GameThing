@@ -1,7 +1,7 @@
-﻿using System.Xml;
-using Microsoft.Xna.Framework;
-using System.Collections.Generic;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
+using System.Xml;
 
 namespace Frankenweenie
 {
@@ -31,16 +31,16 @@ namespace Frankenweenie
             Source = Asset.Texture("Graphics/" + filepath);
             var subtextures = TextureAtlas.GetElementsByTagName("sprite");
 
-            foreach(XmlElement subtexture in subtextures)
+            foreach (XmlElement subtexture in subtextures)
             {
                 string name = subtexture.Attributes["n"].Value;
                 int x = int.Parse(subtexture.Attributes["x"].Value);
                 int y = int.Parse(subtexture.Attributes["y"].Value);
                 int w = int.Parse(subtexture.Attributes["w"].Value);
                 int h = int.Parse(subtexture.Attributes["h"].Value);
-                Subtextures.Add(name,new Subtexture(new Rectangle(x,w,w,h)));  
+                Subtextures.Add(name, new Subtexture(new Rectangle(x, w, w, h)));
             }
-            
+
         }
     }
 }

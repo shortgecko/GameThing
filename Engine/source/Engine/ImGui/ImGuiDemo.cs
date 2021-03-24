@@ -1,5 +1,5 @@
-﻿using System;
-using ImGuiNET;
+﻿using ImGuiNET;
+using System;
 using Num = System.Numerics;
 
 namespace Frankenweenie
@@ -10,7 +10,7 @@ namespace Frankenweenie
         private IntPtr _imGuiTexture;
         public ImGuiDemo()
         {
-           _imGuiTexture = ImGuiLayer.ImGuiTexture;
+            _imGuiTexture = ImGuiLayer.ImGuiTexture;
         }
         private float f = 0.0f;
         private bool show_test_window = false;

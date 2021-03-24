@@ -1,39 +1,32 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace Frankenweenie
+﻿namespace Frankenweenie
 {
     public class Scene
     {
         public World World = new World();
         public bool IsRunning { get; set; }
         private bool HasInitialized = false;
-        private bool HasLoaded = false;        
-        protected virtual void Initialize() {  }
+        private bool HasLoaded = false;
+        protected virtual void Initialize() { }
         protected virtual void Load() { }
-        protected virtual void Update() 
+        protected virtual void Update()
         {
-            World.Update();         
+            World.Update();
         }
-        protected virtual void Render() 
-        { 
+        protected virtual void Render()
+        {
             World.Render();
         }
+        protected virtual void End() { }
 
         public void Begin()
         {
-            if(HasInitialized == false)
+            if (HasInitialized == false)
             {
                 this.Initialize();
-                this.HasInitialized = true;
-            }
-            if (HasLoaded == false)
-            {
                 this.Load();
-                this.HasLoaded = true;
-                IsRunning = true;
+                this.HasInitialized = true;
+                this.IsRunning = true;
             }
-
             Update();
 
         }
@@ -41,6 +34,13 @@ namespace Frankenweenie
         public void Draw()
         {
             Render();
+        }
+
+        public void Leave()
+        {
+            this.HasInitialized = false;
+            this.IsRunning = false;
+            End();
         }
 
     }

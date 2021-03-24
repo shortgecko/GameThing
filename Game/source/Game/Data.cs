@@ -6,6 +6,7 @@ using System.Xml.Serialization;
 
 namespace Game.Editor
 {
+
     public class EntityData
     {
         public string Name;

@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
+﻿using System;
 
 namespace Frankenweenie
 {
@@ -29,12 +27,12 @@ namespace Frankenweenie
         }
         public void add(int state, Action innit = null, Action update = null, Action end = null)
         {
-            if(update == null)
+            if (update == null)
                 throw new Exception("Update cannot be null!");
             InitializeStates[state] = innit;
             UpdateStates[state] = update;
             EndStates[state] = end;
-                        if(UpdateStates[State] == null)
+            if (UpdateStates[State] == null)
                 throw new Exception();
         }
 
@@ -42,10 +40,10 @@ namespace Frankenweenie
         {
 
         }
-    
+
         public override void Update()
         {
-            if(!Begun && InitializeStates[State] != null)
+            if (!Begun && InitializeStates[State] != null)
             {
                 InitializeStates[State].Invoke();
                 Begun = true;
@@ -53,7 +51,7 @@ namespace Frankenweenie
 
             UpdateStates[State].Invoke();
 
-            if(End)
+            if (End)
             {
                 EndStates[State].Invoke();
                 End = false;
@@ -62,7 +60,7 @@ namespace Frankenweenie
                 Begun = false;
                 End = false;
             }
-            
+
         }
 
         public void EndState()

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LevelData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>UNTITLED</Name>
+  <ID>0</ID>
+  <EntityData>
+    <EntityData>
+      <Name>player</Name>
+      <Position>
+        <X>24</X>
+        <Y>110.5</Y>
+      </Position>
+    </EntityData>
+  </EntityData>
+</LevelData>

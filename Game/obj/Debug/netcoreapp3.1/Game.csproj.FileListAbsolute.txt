@@ -1,0 +1,12 @@
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\bin\Debug\netcoreapp3.1\Game.deps.json
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\bin\Debug\netcoreapp3.1\Game.dll
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\bin\Debug\netcoreapp3.1\Game.pdb
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\bin\Debug\netcoreapp3.1\Frankenweenie.dll
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\bin\Debug\netcoreapp3.1\Frankenweenie.pdb
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\obj\Debug\netcoreapp3.1\Game.csprojAssemblyReference.cache
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\obj\Debug\netcoreapp3.1\Game.AssemblyInfoInputs.cache
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\obj\Debug\netcoreapp3.1\Game.AssemblyInfo.cs
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\obj\Debug\netcoreapp3.1\Game.csproj.CoreCompileInputs.cache
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\obj\Debug\netcoreapp3.1\Game.csproj.CopyComplete
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\obj\Debug\netcoreapp3.1\Game.dll
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\obj\Debug\netcoreapp3.1\Game.pdb

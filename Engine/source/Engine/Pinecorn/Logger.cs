@@ -27,7 +27,7 @@ namespace Frankenweenie
         public static void Save()
         {
 
-            using(StreamWriter writer = new StreamWriter(Path))
+            using (StreamWriter writer = new StreamWriter(Path))
             {
                 writer.WriteLine(Title);
                 writer.WriteLine("-------------------------------------------------------------------------------------------------");

@@ -21,7 +21,6 @@ namespace Game
         public override void Initialize()
         {
             entity.add(fireRateTimer = new Timer());
-            
         }
 
         public override void Update()

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Xml;
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Xml;
 using IO = System.IO;
 
 namespace Frankenweenie
@@ -18,21 +18,21 @@ namespace Frankenweenie
             EmptyTexture = Empty();
         }
         public static Texture2D Empty()
-		{
-			//initialize a texture
-			var texture = new Texture2D(Engine.Device.GraphicsDevice, 1, 1);
-			//the array holds the color for each pixel in the texture
-			Color[] data = new Color[1];
+        {
+            //initialize a texture
+            var texture = new Texture2D(Engine.Device.GraphicsDevice, 1, 1);
+            //the array holds the color for each pixel in the texture
+            Color[] data = new Color[1];
             data[0] = Color.White;
-			//set the color
+            //set the color
             texture.SetData(data);
-			return texture;
-		}
+            return texture;
+        }
 
         public static Texture2D Rectangle(int width, int height, Color color)
         {
             //initialize a texture
-            var texture = new Texture2D(Engine.Device.GraphicsDevice,width, height);
+            var texture = new Texture2D(Engine.Device.GraphicsDevice, width, height);
             //the array holds the color for each pixel in the texture
             Color[] data = new Color[width * height];
             for (int i = 0; i < data.Length; i++)
@@ -44,7 +44,7 @@ namespace Frankenweenie
 
         public static void Rect(Rectangle rect, Color c)
         {
-            Drawer.Batch.Draw(EmptyTexture, rect,c);
+            Drawer.Batch.Draw(EmptyTexture, rect, c);
         }
         private static Rectangle HollowRect;
         public static void HollowRectangle(int x, int y, int w, int h, int t, Color c)
@@ -87,7 +87,7 @@ namespace Frankenweenie
             object asset = null;
             if (Assets.TryGetValue(key, out asset))
             {
-                if(asset is Texture2D)
+                if (asset is Texture2D)
                 {
                     return (Texture2D)asset;
                 }
@@ -106,7 +106,7 @@ namespace Frankenweenie
 
         public static string Path(string path)
         {
-            return IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "/" + path.Replace('\\', '/'));     
+            return IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "/" + path.Replace('\\', '/'));
         }
 
 
@@ -131,7 +131,7 @@ namespace Frankenweenie
             object asset = null;
             if (Assets.TryGetValue(key, out asset))
             {
-                if(asset is string)
+                if (asset is string)
                 {
                     return (string)asset;
                 }
@@ -164,7 +164,7 @@ namespace Frankenweenie
             object asset = null;
             if (Assets.TryGetValue(key, out asset))
             {
-                if(asset is XmlDocument)
+                if (asset is XmlDocument)
                 {
                     return (XmlDocument)asset;
                 }
@@ -186,9 +186,9 @@ namespace Frankenweenie
 
         private static XmlDocument XMLFromFile(string filepath)
         {
-          XmlDocument xml = new XmlDocument();
-          xml.Load(TitleContainer.OpenStream(filepath));
-          return xml;
+            XmlDocument xml = new XmlDocument();
+            xml.Load(TitleContainer.OpenStream(filepath));
+            return xml;
         }
 
         private static string FromFile(string filepath)

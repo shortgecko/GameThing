@@ -1,9 +1,8 @@
-using System;
 using Microsoft.Xna.Framework.Input;
 
 namespace Frankenweenie
 {
-    public class VirtualAxisGamepadLeftX: VirtualAxis
+    public class VirtualAxisGamepadLeftX : VirtualAxis
     {
         public override float GetAxis()
         {

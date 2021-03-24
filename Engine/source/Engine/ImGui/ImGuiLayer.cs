@@ -27,7 +27,7 @@ namespace Frankenweenie
         public static void Initialize()
         {
             _imGuiRenderer = new ImGuiRenderer(Game);
-            if(ImGuiTheme != null)
+            if (ImGuiTheme != null)
                 ImGuiTheme.Invoke();
             var io = ImGui.GetIO();
             io.Fonts.AddFontFromFileTTF(Font, fontSize);
@@ -43,7 +43,7 @@ namespace Frankenweenie
             // First, load the texture as a Texture2D (can also be done using the XNA/FNA content pipeline)
             _xnaTexture = CreateTexture(_graphics.GraphicsDevice, 300, 150, pixel =>
             {
-               var red = (pixel % 300) / 2;
+                var red = (pixel % 300) / 2;
                 return new Color(red, 1, 1);
             });
 
@@ -58,7 +58,7 @@ namespace Frankenweenie
             // Call BeforeLayout first to set things up
             _imGuiRenderer.BeforeLayout(Engine.GameTime);
             // Draw our UI
-            for(int i = 0; i < Elements.Count; i++)
+            for (int i = 0; i < Elements.Count; i++)
                 Elements[i].Draw();
             // Call AfterLayout now to finish up and draw all the things
             _imGuiRenderer.AfterLayout();
@@ -87,7 +87,7 @@ namespace Frankenweenie
         //Utils
         public static IntPtr TexToIntPtr(Texture2D texture)
         {
-            var  _imGuiTexture = _imGuiRenderer.BindTexture(texture);
+            var _imGuiTexture = _imGuiRenderer.BindTexture(texture);
             return _imGuiTexture;
         }
 
@@ -96,6 +96,27 @@ namespace Frankenweenie
             Elements.Add((T)Activator.CreateInstance<T>());
         }
 
+        public static void add(ImGuiElement e)
+        {
+            Elements.Add(e);
+        }
+
+        public static void remove(ImGuiElement e)
+        {
+            Elements.Remove(e);
+        }
+
+        public static void remove<T>() where T : ImGuiElement
+        {
+            var element = Elements.Find(c => c.GetType() == typeof(T));
+            Elements.Remove(element);
+        }
+
+        public static ImGuiElement get<T>() where T : ImGuiElement
+        {
+            var element = Elements.Find(c => c.GetType() == typeof(T));
+            return element;
+        }
     }
 
 }

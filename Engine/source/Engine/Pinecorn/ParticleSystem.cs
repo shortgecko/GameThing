@@ -1,11 +1,11 @@
-﻿using System;
-using Microsoft.Xna.Framework;
-using System.Collections.Generic;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
 
 namespace Frankenweenie
 {
-    
+
     public class Particle
     {
         public Texture2D Texture { get; set; }        // The texture that will be drawn to represent the particle
@@ -63,7 +63,7 @@ namespace Frankenweenie
             Vector2 velocity = new Vector2(1f * (float)(Random.NextDouble() * 2 - 1), 1f * (float)(Random.NextDouble() * 2 - 1));
             float angle = 0;
             float angularVelocity = 0.1f * (float)(Random.NextDouble() * 2 - 1);
-            Color color = new Color((float)Random.NextDouble(),(float)Random.NextDouble(),(float)Random.NextDouble());
+            Color color = new Color((float)Random.NextDouble(), (float)Random.NextDouble(), (float)Random.NextDouble());
             float size = (float)Random.NextDouble();
             int ttl = 20 + Random.Next(40);
             return new Particle(texture, position, velocity, angle, angularVelocity, color, size, ttl);

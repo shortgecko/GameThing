@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net5.0": {
+    ".NETCoreApp,Version=v3.1": {
       "ImGui.NET/1.78.0": {
         "type": "package",
         "dependencies": {
@@ -118,7 +118,7 @@
       },
       "Frankenweenie/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v5.0",
+        "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
           "ImGui.NET": "1.78.0",
           "MonoGame.Framework.DesktopGL": "3.8.0.1641"
@@ -132,7 +132,7 @@
       },
       "Game/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v5.0",
+        "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
           "Frankenweenie": "1.0.0",
           "ImGui.NET": "1.78.0",
@@ -326,7 +326,7 @@
     }
   },
   "projectFileDependencyGroups": {
-    "net5.0": [
+    ".NETCoreApp,Version=v3.1": [
       "Game >= 1.0.0"
     ]
   },
@@ -352,15 +352,15 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net5.0"
+        "netcoreapp3.1"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {
             "C:\\Users\\muham\\source\\repos\\projects\\c#\\GameThing\\Game\\Game.csproj": {
               "projectPath": "C:\\Users\\muham\\source\\repos\\projects\\c#\\GameThing\\Game\\Game.csproj"
@@ -375,8 +375,8 @@
       }
     },
     "frameworks": {
-      "net5.0": {
-        "targetAlias": "net5.0",
+      "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "imports": [
           "net461",
           "net462",

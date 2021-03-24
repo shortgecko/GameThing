@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace Frankenweenie
 {
@@ -11,7 +10,7 @@ namespace Frankenweenie
             subtexture = Rect;
         }
 
-        
+
 
     }
 }

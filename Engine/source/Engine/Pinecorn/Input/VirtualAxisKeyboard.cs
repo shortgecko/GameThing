@@ -1,7 +1,6 @@
-﻿using Microsoft.Xna.Framework.Input;
-namespace Frankenweenie
+﻿namespace Frankenweenie
 {
-    public class VirtualAxisKeyboard: VirtualAxis
+    public class VirtualAxisKeyboard : VirtualAxis
     {
         private VirtualButton Positive;
         private VirtualButton Negative;

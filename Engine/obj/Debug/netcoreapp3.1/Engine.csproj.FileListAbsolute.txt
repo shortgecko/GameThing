@@ -1,0 +1,9 @@
+C:\Users\muham\source\repos\projects\c#\GameThing\Engine\bin\Debug\netcoreapp3.1\Frankenweenie.deps.json
+C:\Users\muham\source\repos\projects\c#\GameThing\Engine\bin\Debug\netcoreapp3.1\Frankenweenie.dll
+C:\Users\muham\source\repos\projects\c#\GameThing\Engine\bin\Debug\netcoreapp3.1\Frankenweenie.pdb
+C:\Users\muham\source\repos\projects\c#\GameThing\Engine\obj\Debug\netcoreapp3.1\Engine.csprojAssemblyReference.cache
+C:\Users\muham\source\repos\projects\c#\GameThing\Engine\obj\Debug\netcoreapp3.1\Engine.AssemblyInfoInputs.cache
+C:\Users\muham\source\repos\projects\c#\GameThing\Engine\obj\Debug\netcoreapp3.1\Engine.AssemblyInfo.cs
+C:\Users\muham\source\repos\projects\c#\GameThing\Engine\obj\Debug\netcoreapp3.1\Engine.csproj.CoreCompileInputs.cache
+C:\Users\muham\source\repos\projects\c#\GameThing\Engine\obj\Debug\netcoreapp3.1\Frankenweenie.dll
+C:\Users\muham\source\repos\projects\c#\GameThing\Engine\obj\Debug\netcoreapp3.1\Frankenweenie.pdb
