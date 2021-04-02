@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using Frankenweenie;
 using System.Xml;
-using System.Xml.Serialization;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace Game.Editor
 {
@@ -18,25 +19,27 @@ namespace Game.Editor
         public string Name = "UNTITLED";
         public int ID;
         public List<EntityData> EntityData = new List<EntityData>();
+        public int[,] TileData;
 
         public static LevelData Load(string path)
         {
-            var stream = TitleContainer.OpenStream(path);
-            var serializer = new System.Xml.Serialization.XmlSerializer(typeof(LevelData));
-            var data = (LevelData)serializer.Deserialize(stream);
+            LevelData data;
+            var stream = TitleContainer.OpenStream("Assets/Levels/" + path);
+            using (StreamReader file = new StreamReader(stream))
+            {
+                data = JsonConvert.DeserializeObject<LevelData>(file.ReadToEnd());
+            }
             stream.Close();
             return data;
         }
 
         public void Save(string path)
         {
-            using (var writer = new System.IO.StreamWriter(Asset.Path(path)))
-            {
-                var serializer = new XmlSerializer(typeof(LevelData));
-                serializer.Serialize(writer, this);
-                Logger.Log("[SAVE PATH] " + Asset.Path(path));
-                writer.Flush();
-            }
+            var filepath = Asset.Path($"Assets/Levels/{path}");
+            JsonSerializer serializer = new JsonSerializer();
+            string data = Newtonsoft.Json.JsonConvert.SerializeObject(this);
+            File.WriteAllText(filepath, data);
+                
         }
     }
 }

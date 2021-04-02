@@ -7,6 +7,8 @@ everyhting is messes up and should be reworked
 especially in Game.cs (the main game scene), and VirtualMouse.cs
 Mar22: Removed the mouse issue and added imgui support to engine
 Mar23: Level Editor is pretty much complete
+Mar28: Level Editor updated for tile layer support (the level editor was not complete
+due to design changes)
 
 
 

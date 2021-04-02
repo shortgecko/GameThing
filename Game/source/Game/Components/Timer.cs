@@ -6,7 +6,7 @@ namespace Game
 {
     public class Timer : Component
     {
-        private float m_Duration =0f;
+        private float m_Duration = 0f;
         public float Duration
         {
             get 

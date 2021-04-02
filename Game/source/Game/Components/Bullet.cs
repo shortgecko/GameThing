@@ -6,11 +6,10 @@ namespace Game
 {
     public class Bullet : Component
     {
-        public static Entity Create(Vector2 pos)
+        public static Entity Create()
         {
             Entity bullet = new Entity();
             bullet.add<Bullet>();
-            bullet.get<Bullet>().position = pos;
             return bullet;
         }
 

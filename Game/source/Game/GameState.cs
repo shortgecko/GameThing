@@ -2,7 +2,6 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Frankenweenie;
-using System;
 using System.Collections.Generic;
 using MonoGame.Framework.Utilities.Deflate;
 using System;
@@ -22,7 +21,6 @@ namespace Game
 
     }
 
-
     public static class GameState
     {
         public static readonly string SavePath = "save1.save";
@@ -35,6 +33,8 @@ namespace Game
             {
                 writer.Write(Instance.LevelID);
             }
+
+            
         }
         public static void Save()
         {

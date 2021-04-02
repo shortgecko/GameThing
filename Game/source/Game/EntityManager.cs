@@ -7,12 +7,12 @@ using System.Collections.Generic;
 
 namespace Game
 {
+    
     public class EntityManager
     {
         public static string[] Names =
         {
             "player",
-            "bullet",
         };
 
         public static Entity Create(string name, Dictionary<string,object> values = null)
@@ -21,16 +21,10 @@ namespace Game
             {
                 case "player":
                     return Player.Create();
-                case "bullet":
-                    Entity bullet = new Entity();
-                    bullet.add<Bullet>();
-                    bullet.add(new EditorComponent(8, 8));
-                    return bullet;
+                case "tracer":
+                    return Tracer.Create();
             }
-#if DEBUG
-            return new Entity();
-#endif
-            throw new Exception("Entity Does not Exist");
+            throw new Exception("Entity was null");
         }
 
         

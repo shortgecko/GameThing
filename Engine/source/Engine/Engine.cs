@@ -25,6 +25,8 @@ namespace Frankenweenie
 
         public static VirtualRenderTarget RenderTarget;
         public static Matrix Transform = Matrix.CreateTranslation(0, 0, 0);
+        public static int Width;
+        public static int Height;
 
         public Engine()
         {
@@ -48,13 +50,13 @@ namespace Frankenweenie
             Window.Title = Config.WindowTitle;
             Device.PreferredBackBufferWidth = Config.Width;
             Device.PreferredBackBufferHeight = Config.Height;
+            Width = Config.Width;
+            Height = Config.Height;
             Device.ApplyChanges();
 
             Logger.Initialize();
 
             RenderTarget = new VirtualRenderTarget();
-
-            Asset.Initialize();
 #if DEBUG
             ImGuiLayer.Initialize();
 #endif
@@ -63,6 +65,7 @@ namespace Frankenweenie
 
         protected override void LoadContent()
         {
+            new Drawer();
             Blah.Drawer.Batch = new SpriteBatch(Device.GraphicsDevice);
         }
 
@@ -103,12 +106,15 @@ namespace Frankenweenie
             GamePads[1] = GamePad.GetState(PlayerIndex.Two);
             GamePads[2] = GamePad.GetState(PlayerIndex.Three);
             GamePads[3] = GamePad.GetState(PlayerIndex.Four);
+            
+            Engine.GameTime = gameTime;
+            Width = Device.GraphicsDevice.PresentationParameters.BackBufferWidth;
+            Height = Device.GraphicsDevice.PresentationParameters.BackBufferHeight;
 
             VirtualMouse.Update();
-            m_Scene.Begin();
-            Engine.GameTime = gameTime;
-
+            m_Scene.Begin();    
         }
+
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.SetRenderTarget(RenderTarget.Target);

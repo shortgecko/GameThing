@@ -1,46 +1,45 @@
 ﻿using Frankenweenie;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
 
 namespace Game
 {
     public class Player : Component
-    {   
+    {
+        private const int speed = 512;
+        private const int gravity = 100;
+        private Mover mover;
+
         public static Entity Create()
         {
             Entity player = new Entity();
             player.add<Player>();
-            player.add(new EditorComponent(8, 8));
+            player.add(new Hitbox(0, 0,8,8));
+            player.add<Mover>();
             player.Name = "player";
             return player;
         }
 
-        private const float speed = 550f;
-        private Timer fireRateTimer;
-        private float fireRate = 0.07f;
 
         public override void Initialize()
         {
-            entity.add(fireRateTimer = new Timer());
+
+            mover = entity.get<Mover>();
         }
+
 
         public override void Update()
         {
-            entity.position.X += Input.Horizontal.GetAxis() * speed * Engine.Delta;
-            entity.position.Y += Input.Vertical.GetAxis() * speed * Engine.Delta;
-
-            if(Input.Shoot.Pressed() && fireRateTimer.Duration <= 0)
-            {
-                World.Add(Bullet.Create(new Vector2(entity.position.X , entity.position.Y)));
-                World.Add(Bullet.Create(new Vector2(entity.position.X + 4, entity.position.Y)));
-                fireRateTimer.Start(fireRate);
-            }
-
+            mover.Move.X = Input.Horizontal.GetAxis() * speed * Engine.Delta;
+            mover.Move.Y = Input.Vertical.GetAxis() * speed * Engine.Delta;
 
         }
 
         public override void Render()
         {
-            Asset.Rect(new Rectangle((int)entity.position.X, (int)entity.position.Y, 8, 8), Color.White);
+            Drawer.Rect(new Rectangle((int)entity.position.X, (int)entity.position.Y, 8,8), Color.Red);
         }
     }
 

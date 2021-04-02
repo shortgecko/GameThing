@@ -5,30 +5,42 @@ namespace Game
 {
     public class Hitbox : Component
     {
-        private float PX;
-        private float PY;
+        public int X;
+        public int Y;
+        public int Width;
+        public int Height;
 
-        private int Width;
-        private int Height;
-
-        public Rectangle Bounds;
-
-        public Hitbox(float posX, float posY, int width, int height)
+        public int Left
         {
-            PX = posX;
-            PY = posY;
-
-            Width = width;
-            Height = height;
-
-            Bounds = new Rectangle((int)posX, (int)posY, width,height);
-
+            get { return this.X; }
         }
 
-
-        public override void Update()
+        public int Right
         {
-            Bounds = new Rectangle((int)entity.position.X + (int)PX, (int)entity.position.Y + (int)PY, Width, Height);
+            get { return (this.X + this.Width); }
+        }
+
+        public int Top
+        {
+            get { return this.Y; }
+        }
+
+        public int Bottom
+        {
+            get { return (this.Y + this.Height); }
+        }
+
+        public override string ToString()
+        {
+            return $"X: {X} Y: {Y} Width: {Width} Height: {Height}";
+        }
+
+        public Hitbox(int x, int y, int width, int height)
+        {
+            X = x;
+            Y = y;
+            Width = width;
+            Height = height;
         }
 
 
