@@ -6,6 +6,13 @@ namespace Game
 {
     public class Mover : Component
     {
+        public enum Masks
+        {
+            Solids,
+            Actors,
+            All
+        };
+
         public Hitbox Hitbox;
         public Vector2 Move;
         public bool OnGround = false;
@@ -13,10 +20,6 @@ namespace Game
 
         public override void Update()
         {
-            Hitbox = entity.get<Hitbox>();
-            Hitbox.X = (int)entity.position.X;
-            Hitbox.Y = (int)entity.position.Y;
-
             CheckX();
             CheckY();
 
@@ -24,6 +27,9 @@ namespace Game
 
         private bool Check(Point offset, Hitbox other)
         {
+            Hitbox = entity.get<Hitbox>();
+            Hitbox.X = (int)entity.position.X;
+            Hitbox.Y = (int)entity.position.Y;
             var box = new Hitbox(Hitbox.X + offset.X, Hitbox.Y + offset.Y, Hitbox.Width, Hitbox.Height);
             return Intersects(box, other);
         }
@@ -36,15 +42,61 @@ namespace Game
                 hitbox.Top < other.Bottom;
         }
 
-        private bool collisionAt(Point offset)
+        public bool collision(Point offset, Masks mask)
         {
-            foreach(Hitbox hitbox in Level.Solids)
+            switch(mask)
             {
-                if(Check(offset, hitbox))
-                {
-                    if (hitbox != this.Hitbox)
-                        return true;
-                }
+                case Masks.Solids:
+                    if(Level.Solids.Count > 1)
+                    {
+                        foreach (Hitbox hitbox in Level.Solids)
+                        {
+                            if (Check(offset, hitbox))
+                            {
+                                if (hitbox != this.Hitbox)
+                                    return true;
+                            }
+                        }
+                    }
+                    break;
+                case Masks.Actors:
+                    if (Level.Actors.Count > 1)
+                    {
+                        foreach (Hitbox hitbox in Level.Actors)
+                        {
+                            if (Check(offset, hitbox))
+                            {
+                                if (hitbox != this.Hitbox)
+                                    return true;
+                            }
+                        }
+                    }
+                    break;
+                case Masks.All:
+                    if(Level.Solids.Count > 1)
+                    {
+                        foreach (Hitbox hitbox in Level.Solids)
+                        {
+                            if (Check(offset, hitbox))
+                            {
+                                if (hitbox != this.Hitbox)
+                                    return true;
+                            }
+                        }
+                    }
+                    if(Level.Actors.Count > 1)
+                    {
+                        foreach (Hitbox hitbox in Level.Actors)
+                        {
+                            if (Check(offset, hitbox))
+                            {
+                                if (hitbox != this.Hitbox)
+                                    return true;
+                            }
+                        }
+                    }
+                break;
+
             }
 
             return false;
@@ -53,52 +105,40 @@ namespace Game
         private void CheckX()
         {
             int sign = Math.Sign(Move.X);
-            int move = (int)Move.X;
+            Move.X = (float)Math.Round(Move.X);
 
-            if(move != 0)
+            while (Move.X != 0)
             {
-                if(!collisionAt(new Point(sign, 0)))
+                if (!collision(new Point(sign, 0),Masks.All))
                 {
                     entity.position.X += sign;
-                    move -= sign;
+                    Move.X -= sign;
+                }
+                else
+                {
+                    Move.X = 0;
+                    break;
                 }
             }
         }
 
         private void CheckY()
         {
-            int sign = Math.Sign(Move.Y);
-            int move = (int)Move.Y;
+            int sign = Math.Sign(Math.Round(Move.Y));
+            Move.Y = (float)Math.Round(Move.Y);
 
-            if (move != 0)
+            while(Move.Y != 0)
             {
-                if(sign < 0)
+                if (!collision(new Point(0, sign), Masks.All))
                 {
-                    //need to check grounded as well
-                    if (!collisionAt(new Point(0, sign)))
-                    {
-                        entity.position.Y += sign;
-                        move -= sign;
-                    }
-
-                    if (collisionAt(new Point(0, 1)))
-                        OnGround = true;
-                    else
-                        OnGround = false;
+                    entity.position.Y += sign;
+                    Move.Y -= sign;         
                 }
                 else
                 {
-                    if (!collisionAt(new Point(0, sign)))
-                    {
-                        entity.position.Y += sign;
-                        move -= sign;
-                        OnGround = false;
-                    }
-                    else
-                        OnGround = true;
+                    Move.Y = 0;
+                    break;
                 }
-
-
             }
         }
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Frankenweenie
 {
-    public struct Animator
+    public class Animator : Component
     {
         public Dictionary<string, Animation> Animations;
         public Texture2D Frame;
@@ -14,28 +14,18 @@ namespace Frankenweenie
         public int CurrentFrame;
 
         public bool IsPlaying;
-    }
 
-    public class AnimationSystem : System
-    {
-        public Animator Animator;
-
-        public override void Update()
-        {
-
-        }
-
-        public static void Play(string anim, bool loop = false)
+        public void Play(string anim, bool loop = false)
         {
             Animation animation = null;
-            Animations.TryGetValue(anim, out animation);
+             Animations.TryGetValue(anim, out animation);
 
-            if (CurrentFrame < animation.Frames.Count)
+            if ( CurrentFrame < animation.Frames.Count)
             {
-                IsPlaying = true;
+                 IsPlaying = true;
                 //values
-                var frame = animation.Frames[CurrentFrame];
-                var frameLen = animation.FrameSpeeds[CurrentFrame] * Engine.Delta;
+                var frame = animation.Frames[ CurrentFrame];
+                var frameLen = animation.FrameSpeeds[ CurrentFrame] * Engine.Delta;
 
                 if (frameLen == 1)
                 {
@@ -69,15 +59,8 @@ namespace Frankenweenie
 
         public override void Render()
         {
-            foreach(var entity in World.Buckets[typeof(Animator)].Entities)
-            {
-                var animator = Entity.get<Animator>(entity);
-                var position = Entity.get<Vector2>(entity);
-
-                if (animator.IsPlaying)
-                    Drawer.Batch.Draw(animator.Frame, position, Color.White);
-
-            }
+            if (IsPlaying)
+                Drawer.Batch.Draw(Frame, entity.position, Color.White);
         }
     }
 }

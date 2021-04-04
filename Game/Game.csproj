@@ -2,17 +2,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>.net5</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="source\Game\Scenes\**" />
+    <EmbeddedResource Remove="source\Game\Scenes\**" />
+    <None Remove="source\Game\Scenes\**" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="ImGui.NET" Version="1.78.0" />
     <Content Include="source\Game\Components\Mover.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="source\Game\Scenes\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.csproj" />

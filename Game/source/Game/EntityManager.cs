@@ -17,12 +17,12 @@ namespace Game
 
         public static Entity Create(string name, Dictionary<string,object> values = null)
         {
+            
             switch(name)
             {
                 case "player":
                     return Player.Create();
-                case "tracer":
-                    return Tracer.Create();
+ 
             }
             throw new Exception("Entity was null");
         }

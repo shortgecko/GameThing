@@ -9,3 +9,4 @@ C:\Users\muham\source\repos\projects\c#\GameThing\Engine\obj\Debug\net5.0\Engine
 C:\Users\muham\source\repos\projects\c#\GameThing\Engine\obj\Debug\net5.0\Frankenweenie.dll
 C:\Users\muham\source\repos\projects\c#\GameThing\Engine\obj\Debug\net5.0\ref\Frankenweenie.dll
 C:\Users\muham\source\repos\projects\c#\GameThing\Engine\obj\Debug\net5.0\Frankenweenie.pdb
+C:\Users\muham\source\repos\projects\c#\GameThing\Engine\obj\Debug\net5.0\Engine.csprojAssemblyReference.cache

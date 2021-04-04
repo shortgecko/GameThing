@@ -31,8 +31,12 @@ namespace Game
             World.Clear();
             foreach(OgmoEntity Entity in entityLayer.entities)
             {
-                Entity entity = EntityManager.Create(Entity.name);
-                World.Add(entity, new Vector2(Entity.x, Entity.y));
+                var entity = EntityManager.Create(Entity.name);
+                entity.position = new Vector2(Entity.x, Entity.y);
+                var mover = entity.get<Mover>();
+                if(mover != null)
+                    Level.Actors.Add(mover.Hitbox);
+                World.Add(entity);
             }
 
             level = null;
