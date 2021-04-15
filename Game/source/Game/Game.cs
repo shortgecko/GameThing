@@ -17,7 +17,7 @@ namespace Game
         public static void Load(string path)
         {
             OgmoLevel level = new OgmoLevel(TitleContainer.OpenStream($"assets/levels/{path}"));
-            var tileLayer = level.Layer("Solids");
+            var tileLayer = level["Solids"];
             var tileLayerData = level.GridToTileLayer(tileLayer);     
             Level.Tiles = new Tilemap(tileLayerData, tileLayer.gridCellsX, tileLayer.gridCellsY);
             for (int x = 0; x < Level.Tiles.Width; x++)
@@ -26,7 +26,7 @@ namespace Game
                     if (Level.Tiles.Data[x + y * Level.Tiles.Width] > -1)
                         Level.Solids.Add(new Hitbox(x * 8, y * 8, 8, 8));
                 }
-            var entityLayer = level.Layer("Entities");
+            var entityLayer = level["Entities"];
 
             World.Clear();
             foreach(OgmoEntity Entity in entityLayer.entities)

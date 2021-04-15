@@ -55,36 +55,38 @@ namespace Game
     public class OgmoLevel
     {
         public OgmoLevelData Data { get; set; }
-
         public Vector2 LevelSize { get; protected set; }
         public Vector2 TileSize { get; protected set; }
         public Vector2 LevelPixelSize { get; protected set; }
 
         public OgmoLevel(Stream fs)
         {
-            using var streamReader = new StreamReader(fs);
-            using var jsonTextReader = new JsonTextReader(streamReader);
+            using StreamReader streamReader = new StreamReader(fs);
+            using JsonTextReader jsonTextReader = new JsonTextReader(streamReader);
 
-            var serializer = new JsonSerializer();
+            JsonSerializer serializer = new JsonSerializer();
             Data = serializer.Deserialize<OgmoLevelData>(jsonTextReader);
 
-            var firstLayer = Data.layers[0];
+            OgmoLayer firstLayer = Data.layers[0];
             LevelSize = new Vector2(firstLayer.gridCellsX, firstLayer.gridCellsY);
             TileSize = new Vector2(firstLayer.gridCellWidth, firstLayer.gridCellHeight);
             LevelPixelSize = LevelSize * TileSize;
         }
 
-        public OgmoLayer Layer(string name)
+        public OgmoLayer this[string name]
         {
-            foreach(OgmoLayer layer in Data.layers)
+            get
             {
-                if(layer.name == name)
-                    return layer;
+                foreach (OgmoLayer layer in Data.layers)
+                {
+                    if (layer.name == name)
+                        return layer;
+                }
 
+                throw new Exception($"Layer {name} does not exist!");
             }
-
-            throw new Exception($"Layer {name} does not exist!");
         }
+
 
         public int[] GridToTileLayer(OgmoLayer layer)
         {

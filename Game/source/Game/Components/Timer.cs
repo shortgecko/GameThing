@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.Xna.Framework;
 using Frankenweenie;
 
@@ -9,9 +9,9 @@ namespace Game
         private float m_Duration = 0f;
         public float Duration
         {
-            get 
+            get
             {
-                return m_Duration;    
+                return m_Duration;
             }
         }
 
@@ -24,7 +24,7 @@ namespace Game
 
         public override void Update()
         {
-            if(m_Duration > 0 )
+            if (m_Duration > 0)
             {
                 m_Duration -= Engine.Delta;
             }
@@ -33,6 +33,11 @@ namespace Game
         public void Clear()
         {
             m_Duration = 0f;
+        }
+
+        public override string ToString()
+        {
+            return Duration.ToString();
         }
     }
 }

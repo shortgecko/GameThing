@@ -43,7 +43,7 @@
           "lib/netstandard2.0/MonoGame.Framework.dll": {}
         },
         "build": {
-          "build/MonoGame.Framework.DesktopGL.targets": {}
+          "build/_._": {}
         },
         "runtimeTargets": {
           "runtimes/linux-x64/native/libSDL2-2.0.so.0": {
@@ -307,8 +307,6 @@
   "projectFileDependencyGroups": {
     "net5.0": [
       "Frankenweenie >= 1.0.0",
-      "ImGui.NET >= 1.78.0",
-      "MonoGame.Framework.DesktopGL >= 3.8.0.1641",
       "Newtonsoft.Json >= 12.0.3"
     ]
   },
@@ -342,7 +340,7 @@
       },
       "frameworks": {
         "net5.0": {
-          "targetAlias": ".net5",
+          "targetAlias": "net5.0",
           "projectReferences": {
             "C:\\Users\\muham\\source\\repos\\projects\\c#\\GameThing\\Engine\\Engine.csproj": {
               "projectPath": "C:\\Users\\muham\\source\\repos\\projects\\c#\\GameThing\\Engine\\Engine.csproj"
@@ -358,16 +356,8 @@
     },
     "frameworks": {
       "net5.0": {
-        "targetAlias": ".net5",
+        "targetAlias": "net5.0",
         "dependencies": {
-          "ImGui.NET": {
-            "target": "Package",
-            "version": "[1.78.0, )"
-          },
-          "MonoGame.Framework.DesktopGL": {
-            "target": "Package",
-            "version": "[3.8.0.1641, )"
-          },
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[12.0.3, )"

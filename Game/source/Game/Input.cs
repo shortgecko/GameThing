@@ -7,35 +7,28 @@ namespace Game
 {
     public static class Input
     {
-        public static VirtualInputAxis Horizontal;
-        public static VirtualAxis Vertical;
-        public static VirtualInputButton Jump;
-        public static VirtualInputButton Pause;
-        public static VirtualInputButton EditorPlace;
+        public static VirtualInputAxis Horizontal = new();
+        public static VirtualInputButton Jump = new();
+        public static VirtualInputButton Pause = new();
+        public static VirtualInputButton TempRestart = new();
 
         static Input()
         {
-            Horizontal = new VirtualInputAxis()
-            {
-                Axis1 = new VirtualAxisGamepadLeftX(),
-                Axis2 = new VirtualAxisKeyboard(new VirtualButtonKeyboard(Keys.D), new VirtualButtonKeyboard(Keys.A)),
-            };
-            Vertical = new VirtualInputAxis()
-            {
-                Axis1 = new VirtualAxisGamepadLeftY(),
-                Axis2 = new VirtualAxisKeyboard(new VirtualButtonKeyboard(Keys.S), new VirtualButtonKeyboard(Keys.W)),
-            };
-            Jump = new VirtualInputButton()
-            {
-                Input1 = new VirtualButtonKeyboard(Keys.Z),
-                Input2 = new VirtualButtonGamepad(Buttons.A),
-            };
-            Pause = new VirtualInputButton()
-            {
-                Input1 = new VirtualButtonKeyboard(Keys.Escape),
-                Input2 = new VirtualButtonGamepad(Buttons.Start),
-            };
+            Horizontal.add(new VirtualAxisGamepadLeftX());
+            Horizontal.add(new VirtualAxisKeyboard(Keys.D, Keys.A));
 
+            Jump.add(new VirtualButtonKeyboard(Keys.Z));
+            Jump.add(new VirtualButtonGamepad(Buttons.A));
+
+            Pause.add(new VirtualButtonKeyboard(Keys.Escape));
+            Pause.add(new VirtualButtonGamepad(Buttons.Start));
+
+            TempRestart.add(new VirtualButtonGamepad(Buttons.X));
+            TempRestart.add(new VirtualButtonKeyboard(Keys.Escape));
+
+            Frankenweenie.Input.add(Horizontal);
+            Frankenweenie.Input.add(Jump);
+            Frankenweenie.Input.add(Pause);
 
         }
     }

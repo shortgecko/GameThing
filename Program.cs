@@ -8,8 +8,7 @@ namespace Game
         private static void Main(string[] args)
         {
             Engine.Config = new Config("Game Thing", "Assets", true, 160 * 4, 200 * 4, true);
-            Engine.RunWithLogging(new Game())';'
-            
+            Engine.RunWithLogging(new Game());           
         }
     }
 }

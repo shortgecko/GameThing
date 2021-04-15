@@ -111,7 +111,7 @@ namespace Game
             {
                 if (!collision(new Point(sign, 0),Masks.All))
                 {
-                    entity.position.X += sign;
+                    entity.position.X += sign * Engine.Delta;
                     Move.X -= sign;
                 }
                 else
@@ -126,12 +126,13 @@ namespace Game
         {
             int sign = Math.Sign(Math.Round(Move.Y));
             Move.Y = (float)Math.Round(Move.Y);
-
             while(Move.Y != 0)
             {
+                //Logger.Log(Move.Y);
+                //Logger.Log($"sign {sign}");
                 if (!collision(new Point(0, sign), Masks.All))
                 {
-                    entity.position.Y += sign;
+                    entity.position.Y += sign * Engine.Delta;
                     Move.Y -= sign;         
                 }
                 else
