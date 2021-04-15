@@ -48,7 +48,8 @@ namespace Frankenweenie
         private Random Random = new Random();
         public Vector2 EmitterLocation { get; set; }
         private List<Particle> Particles = new List<Particle>();
-        private List<Texture2D> Textures;
+        public List<Texture2D> Textures;
+        public List<Color> Colors;
 
         public ParticleSystem(List<Texture2D> textures, Vector2 location)
         {
@@ -56,17 +57,31 @@ namespace Frankenweenie
             Textures = textures;
         }
 
-        private Particle GenerateNewParticle()
+        public ParticleSystem()
         {
-            Texture2D texture = Textures[Random.Next(Textures.Count)];
-            Vector2 position = EmitterLocation;
-            Vector2 velocity = new Vector2(1f * (float)(Random.NextDouble() * 2 - 1), 1f * (float)(Random.NextDouble() * 2 - 1));
-            float angle = 0;
-            float angularVelocity = 0.1f * (float)(Random.NextDouble() * 2 - 1);
-            Color color = new Color((float)Random.NextDouble(), (float)Random.NextDouble(), (float)Random.NextDouble());
-            float size = (float)Random.NextDouble();
-            int ttl = 20 + Random.Next(40);
-            return new Particle(texture, position, velocity, angle, angularVelocity, color, size, ttl);
+            Textures = new();
+            Colors = new();
+        }
+
+        private Particle GenerateNewParticle
+        {
+            get
+            {
+                Texture2D texture = Textures[Random.Next(Textures.Count)];
+                Vector2 position = EmitterLocation;
+                Vector2 velocity = new Vector2(1f * (float)(Random.NextDouble() * 2 - 1), 1f * (float)(Random.NextDouble() * 2 - 1));
+                float angle = 0;
+                float angularVelocity = 0.1f * (float)(Random.NextDouble() * 2 - 1);
+                Color color;
+                if (Colors.Count < 0)
+                    color = new Color((float)Random.NextDouble(), (float)Random.NextDouble(), (float)Random.NextDouble());
+                else
+                    color = Colors[Random.Next(Colors.Count)];
+                float size = (float)Random.NextDouble();
+                int ttl = 20 + Random.Next(40);
+                return new Particle(texture, position, velocity, angle, angularVelocity, color, size, ttl);
+            }
+           
         }
 
         public override void Update()
@@ -76,7 +91,7 @@ namespace Frankenweenie
 
             for (int i = 0; i < total; i++)
             {
-                Particles.Add(GenerateNewParticle());
+                Particles.Add(GenerateNewParticle);
             }
 
             for (int particle = 0; particle < Particles.Count; particle++)

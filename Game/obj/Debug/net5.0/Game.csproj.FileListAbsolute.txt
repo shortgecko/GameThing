@@ -32,3 +32,4 @@ C:\Users\muham\source\repos\projects\c#\GameThing\Game\bin\Debug\net5.0\runtimes
 C:\Users\muham\source\repos\projects\c#\GameThing\Game\bin\Debug\net5.0\runtimes\win-x86\native\SDL2.dll
 C:\Users\muham\source\repos\projects\c#\GameThing\Game\bin\Debug\net5.0\runtimes\win-x86\native\soft_oal.dll
 C:\Users\muham\source\repos\projects\c#\GameThing\Game\obj\Debug\net5.0\Game.genruntimeconfig.cache
+C:\Users\muham\source\repos\projects\c#\GameThing\Game\bin\Debug\net5.0\SpriteFontPlus.dll

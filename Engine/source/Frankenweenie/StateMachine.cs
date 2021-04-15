@@ -11,6 +11,7 @@ namespace Frankenweenie
         public T State;
         private bool BeginState = false;
         private bool EndState;
+        private T NextState;
      
         public void add(T state, Action innit = null, Action update = null, Action end = null)
         {
@@ -47,6 +48,7 @@ namespace Frankenweenie
             {
                 EndStates[State].Invoke();
                 Reset();
+                State = NextState;
             }
         }
 
@@ -62,7 +64,11 @@ namespace Frankenweenie
             Reset();
         }
 
-        public void End() => EndState = true;
+        public void End(T nextState)
+        {
+            NextState = nextState;
+            EndState = true;
+        }
 
     }
 }

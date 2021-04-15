@@ -14,6 +14,8 @@ namespace Game
     public class Game : Scene
     {
         public float LevelTime;
+
+
         public static void Load(string path)
         {
             OgmoLevel level = new OgmoLevel(TitleContainer.OpenStream($"assets/levels/{path}"));
@@ -54,6 +56,11 @@ namespace Game
                 ImGuiLayer.add<Cmd>();
             Load("test.json");
             base.Initialize();
+        }
+
+        protected override void Load()
+        {
+
         }
 
         protected override void Update()

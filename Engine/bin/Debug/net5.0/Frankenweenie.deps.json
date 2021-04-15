@@ -9,7 +9,8 @@
       "Frankenweenie/1.0.0": {
         "dependencies": {
           "ImGui.NET": "1.78.0",
-          "MonoGame.Framework.DesktopGL": "3.8.0.1641"
+          "MonoGame.Framework.DesktopGL": "3.8.0.1641",
+          "SpriteFontPlus.MonoGame": "0.7.0.22"
         },
         "runtime": {
           "Frankenweenie.dll": {}
@@ -100,6 +101,14 @@
           }
         }
       },
+      "SpriteFontPlus.MonoGame/0.7.0.22": {
+        "runtime": {
+          "lib/netstandard2.0/SpriteFontPlus.dll": {
+            "assemblyVersion": "0.7.0.22",
+            "fileVersion": "0.7.0.22"
+          }
+        }
+      },
       "System.Buffers/4.4.0": {},
       "System.Numerics.Vectors/4.4.0": {},
       "System.Runtime.CompilerServices.Unsafe/4.4.0": {}
@@ -124,6 +133,13 @@
       "sha512": "sha512-rJQlrlHQbnOECYV6EcQ8GlGRQ2lzPTroXQcyyOZ0ki+BQRSJEN2zVBm9skqLiXya348aGAfTSSGTaSKjAy9NaA==",
       "path": "monogame.framework.desktopgl/3.8.0.1641",
       "hashPath": "monogame.framework.desktopgl.3.8.0.1641.nupkg.sha512"
+    },
+    "SpriteFontPlus.MonoGame/0.7.0.22": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-RLI504OcKDPINGs2IveCYORuEuf8YxRJ6bIE1suttmrzstKHlkd7k2O6apfuoXICfT81Gqczsgczn2SEeFHFuQ==",
+      "path": "spritefontplus.monogame/0.7.0.22",
+      "hashPath": "spritefontplus.monogame.0.7.0.22.nupkg.sha512"
     },
     "System.Buffers/4.4.0": {
       "type": "package",

@@ -39,5 +39,12 @@ namespace Frankenweenie
             hollowRect.X += input.Width - t;
             Rect(hollowRect, c);
         }
+
+        public static void String(SpriteFont font, string text, Vector2 positon, Color color)
+        {
+            Batch.DrawString(font, text, positon, color);
+        }
+
+
     }
 }

@@ -5,6 +5,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using IO = System.IO;
+using SpriteFontPlus;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace Frankenweenie
 {
@@ -37,23 +42,28 @@ namespace Frankenweenie
             texture.SetData(data);
             return texture;
         }
-        public static Texture2D Texture(string assetName)
+        private static string Directory(string input)
         {
-            var filepath = IO.Path.Combine(Engine.Config.AssetDirectory + "/" + assetName);
+            var filepath = IO.Path.Combine(Engine.Config.AssetDirectory + "/" + input);
             if (string.IsNullOrEmpty(filepath))
             {
                 throw new ArgumentNullException("Asset Name cannot be null or empty");
             }
 
-            // On some platforms, name and slash direction matter.
-            // We store the asset by a /-seperating key rather than how the
-            // path to the file was passed to us to avoid
-            // loading "content/asset1.xnb" and "content\\ASSET1.xnb" as if they were two 
-            // different files. This matches stock XNA behavior.
-            // The dictionary will ignore case differences
-            //Coments Taken from MonoGame Content Pipeline
-            var key = filepath.Replace('\\', '/');
+            return filepath.Replace('\\', '/');
+        }
 
+        public static void Dispose(object input)
+        {
+            if (!(input is IDisposable))
+                throw new Exception("Cannot dispose non disposable object");
+            var asset = (IDisposable)input;
+            asset.Dispose();
+        }
+
+        public static Texture2D Texture(string assetName)
+        {
+            var key = Directory(assetName);
             // Check for a previously loaded asset first
             object asset = null;
             if (Assets.TryGetValue(key, out asset))
@@ -80,22 +90,8 @@ namespace Frankenweenie
         }
         public static string LoadFile(string assetName)
         {
-            var filepath = Engine.Config.AssetDirectory + "/" + assetName;
-            if (string.IsNullOrEmpty(filepath))
-            {
-                throw new ArgumentNullException("Asset Name cannot be null or empty");
-            }
+            var key = Directory(assetName);
 
-            // On some platforms, name and slash direction matter.
-            // We store the asset by a /-seperating key rather than how the
-            // path to the file was passed to us to avoid
-            // loading "content/asset1.xnb" and "content\\ASSET1.xnb" as if they were two 
-            // different files. This matches stock XNA behavior.
-            // The dictionary will ignore case differences
-            //Coments Taken from MonoGame Content Pipeline
-            var key = filepath.Replace('\\', '/');
-
-            // Check for a previously loaded asset first
             object asset = null;
             if (Assets.TryGetValue(key, out asset))
             {
@@ -112,20 +108,7 @@ namespace Frankenweenie
         }
         public static XmlDocument LoadXml(string assetName)
         {
-            var filepath = Engine.Config.AssetDirectory + "/" + assetName;
-            if (string.IsNullOrEmpty(filepath))
-            {
-                throw new ArgumentNullException("Asset Name cannot be null or empty");
-            }
-
-            // On some platforms, name and slash direction matter.
-            // We store the asset by a /-seperating key rather than how the
-            // path to the file was passed to us to avoid
-            // loading "content/asset1.xnb" and "content\\ASSET1.xnb" as if they were two 
-            // different files. This matches stock XNA behavior.
-            // The dictionary will ignore case differences
-            //Coments Taken from MonoGame Content Pipeline
-            var key = filepath.Replace('\\', '/');
+            var key = Directory(assetName);
 
             // Check for a previously loaded asset first
             object asset = null;
@@ -170,6 +153,48 @@ namespace Frankenweenie
         {
             return Engine.Config.AssetDirectory + "/" + path;
         }
+
+        public static SpriteFont Font(string assetName, float size)
+        {
+            var key = Directory(assetName);
+            object asset = null;
+            if (Assets.TryGetValue(key, out asset))
+            {
+                if (asset is SpriteFont)
+                {
+                    return (SpriteFont)asset;
+                }
+            }
+
+            // Load the asset.
+            var result = LoadFont(assetName, size);
+            Assets[key] = result;
+            return result;
+        }
+
+        private static SpriteFont LoadFont(string file, float size)
+        {
+            var fontBakeResult = TtfFontBaker.Bake(File.ReadAllBytes(@"C:\\Windows\\Fonts\arial.ttf"),
+            size,
+            1024,
+            1024,
+            new[]
+            {
+                CharacterRange.BasicLatin,
+                CharacterRange.Latin1Supplement,
+                CharacterRange.LatinExtendedA,
+                CharacterRange.Cyrillic
+            }
+        );
+
+            return fontBakeResult.CreateSpriteFont(Engine.Device.GraphicsDevice);
+        }
+
+        //private static Song LoadSong(string file)
+        //{
+        //   //var uri = new Uri(file);
+        //   // Song.FromUri("song", uri);
+        //}
 
     }
 }

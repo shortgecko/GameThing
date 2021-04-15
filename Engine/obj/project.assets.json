@@ -80,6 +80,15 @@
           }
         }
       },
+      "SpriteFontPlus.MonoGame/0.7.0.22": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/SpriteFontPlus.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/SpriteFontPlus.dll": {}
+        }
+      },
       "System.Buffers/4.4.0": {
         "type": "package",
         "compile": {
@@ -151,6 +160,19 @@
         "runtimes/win-x64/native/soft_oal.dll",
         "runtimes/win-x86/native/SDL2.dll",
         "runtimes/win-x86/native/soft_oal.dll"
+      ]
+    },
+    "SpriteFontPlus.MonoGame/0.7.0.22": {
+      "sha512": "RLI504OcKDPINGs2IveCYORuEuf8YxRJ6bIE1suttmrzstKHlkd7k2O6apfuoXICfT81Gqczsgczn2SEeFHFuQ==",
+      "type": "package",
+      "path": "spritefontplus.monogame/0.7.0.22",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/SpriteFontPlus.dll",
+        "lib/netstandard2.0/SpriteFontPlus.dll",
+        "spritefontplus.monogame.0.7.0.22.nupkg.sha512",
+        "spritefontplus.monogame.nuspec"
       ]
     },
     "System.Buffers/4.4.0": {
@@ -248,7 +270,8 @@
   "projectFileDependencyGroups": {
     "net5.0": [
       "ImGui.NET >= 1.78.0",
-      "MonoGame.Framework.DesktopGL >= 3.8.0.1641"
+      "MonoGame.Framework.DesktopGL >= 3.8.0.1641",
+      "SpriteFontPlus.MonoGame >= 0.7.0.22"
     ]
   },
   "packageFolders": {
@@ -302,6 +325,10 @@
           "MonoGame.Framework.DesktopGL": {
             "target": "Package",
             "version": "[3.8.0.1641, )"
+          },
+          "SpriteFontPlus.MonoGame": {
+            "target": "Package",
+            "version": "[0.7.0.22, )"
           }
         },
         "imports": [

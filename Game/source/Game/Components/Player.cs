@@ -22,11 +22,12 @@ namespace Game
         private Vector2 startPos;
         private bool canCoyote = false;
         private StateMachine<States> StateMachine;
-        
+       
         
         private enum States
         {
-            Normal
+            Normal,
+            None
         };
 
         public static Entity Create()
@@ -48,7 +49,9 @@ namespace Game
             startPos = entity.position;
             StateMachine = entity.get<StateMachine<States>>();
             StateMachine.add(States.Normal, InnitState, UpdateState, EndState);
+            StateMachine.add(States.None, null, Empty, null);
         }
+        private void Empty() { }
 
         private void InnitState()
         {
@@ -59,8 +62,8 @@ namespace Game
             timer += Engine.Delta;
             Logger.Log("Updating...");
 
-            if (timer > 20)
-                StateMachine.End();    
+            if (timer > 5)
+                StateMachine.End(States.None);    
         }
         private void EndState()
         {

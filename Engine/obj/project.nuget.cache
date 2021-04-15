@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "63aRd+6ylXqYLHDQzV3dRkcGqaQitORgzUiClXj/3ebEJ4Bt+a0R3GGgUfUYPC3IAevAXPT7mdCAlonHcVDZHw==",
+  "dgSpecHash": "mdYVruPg6JUDDNkMVrV2xqQkNVm6ptK64HsudZwHBdAOor/UlQc+6u6UDscehjHRabFpm/Tz/t0ObtydD9n9TQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\muham\\source\\repos\\projects\\c#\\GameThing\\Engine\\Engine.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\muham\\.nuget\\packages\\imgui.net\\1.78.0\\imgui.net.1.78.0.nupkg.sha512",
     "C:\\Users\\muham\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.0.1641\\monogame.framework.desktopgl.3.8.0.1641.nupkg.sha512",
+    "C:\\Users\\muham\\.nuget\\packages\\spritefontplus.monogame\\0.7.0.22\\spritefontplus.monogame.0.7.0.22.nupkg.sha512",
     "C:\\Users\\muham\\.nuget\\packages\\system.buffers\\4.4.0\\system.buffers.4.4.0.nupkg.sha512",
     "C:\\Users\\muham\\.nuget\\packages\\system.numerics.vectors\\4.4.0\\system.numerics.vectors.4.4.0.nupkg.sha512",
     "C:\\Users\\muham\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.4.0\\system.runtime.compilerservices.unsafe.4.4.0.nupkg.sha512"

@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "pL2xvUsRnDtIt5RXqxfsDnvXmKvy98McH+Ji2qQ2ofvo8FO73D/Hlhe6U2cdheYxW0/iz6HLDXsRGUn42ICSXA==",
+  "dgSpecHash": "c73ctnYaHCEmjWxQCdAQyuYyuHkowNVslD7CrOcap/kEBWizlKQx0iTPmiRyDqMw0iO2CmSozsr8WCDSYpHMyw==",
   "success": true,
   "projectFilePath": "C:\\Users\\muham\\source\\repos\\projects\\c#\\GameThing\\Game\\Game.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\muham\\.nuget\\packages\\imgui.net\\1.78.0\\imgui.net.1.78.0.nupkg.sha512",
     "C:\\Users\\muham\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.0.1641\\monogame.framework.desktopgl.3.8.0.1641.nupkg.sha512",
     "C:\\Users\\muham\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\muham\\.nuget\\packages\\spritefontplus.monogame\\0.7.0.22\\spritefontplus.monogame.0.7.0.22.nupkg.sha512",
     "C:\\Users\\muham\\.nuget\\packages\\system.buffers\\4.4.0\\system.buffers.4.4.0.nupkg.sha512",
     "C:\\Users\\muham\\.nuget\\packages\\system.numerics.vectors\\4.4.0\\system.numerics.vectors.4.4.0.nupkg.sha512",
     "C:\\Users\\muham\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.4.0\\system.runtime.compilerservices.unsafe.4.4.0.nupkg.sha512"
