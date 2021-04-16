@@ -7,12 +7,12 @@ namespace Frankenweenie
     public static class Logger
     {
         private static List<string> Logs = new List<string>();
-        private static string Path = Asset.Path("log.txt");
+        private static string Path = Content.Path("log.txt");
         private static string Title;
 
         public static void Initialize()
         {
-            Title = "LOG " + Engine.Config.WindowTitle.ToUpper();
+            Title = "LOG " + Engine.Title;
             Console.WriteLine(Title);
             Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
         }

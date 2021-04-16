@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 namespace Game
 {
     //very bad, especially when dealing with agruments
-    public class Cmd : ImGuiElement
+    public class CommandPrompt : ImGuiElement
     {
         private bool showConsole;
         private static Dictionary<string, Action> Commands = new Dictionary<string, Action>();
@@ -32,7 +32,7 @@ namespace Game
             ImGui.Text("Commands: "); foreach (var cmd in Commands.Keys) ImGui.Text(cmd);
         }
 
-        public Cmd()
+        public CommandPrompt()
         {
             Commands.Add("help", Help_CMD);
             Commands.Add("entity_count", () => ImGui.Text(World.Entities.Count.ToString()));

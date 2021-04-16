@@ -11,7 +11,7 @@ namespace Frankenweenie
 
         public Drawer()
         {
-            EmptyTexture = Asset.Empty;
+            EmptyTexture = Content.Empty;
         }
 
         public static void Rect(Rectangle rect, Color c)

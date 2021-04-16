@@ -14,14 +14,23 @@ namespace Frankenweenie
             for (int i = 0; i < entity.Components.Count; i++)
             {
                 var component = entity.Components[i];
-                component.entity = entity;
+                component.Entity = entity;
                 component.Initialize();
             }
 
             World.Entities.Add(entity);
         }
 
-        public static void Remove(Entity entity) => World.Entities.Remove(entity);
+        public static void Remove(Entity entity)
+        {
+            for (int j = 0; j < entity.Components.Count; j++)
+            {
+                var component = entity.Components[j];
+                component.Removed();
+                Pooler.EntityRemoved(component);
+            }
+            Entities.Remove(entity);
+        }
 
         public static void Update()
         {
@@ -32,7 +41,6 @@ namespace Frankenweenie
                     Entities[i].Components[j].Update();
                 }
             }
-
         }
 
         public static void Render()
@@ -44,10 +52,16 @@ namespace Frankenweenie
                     Entities[i].Components[j].Render();
                 }
             }
-
         }
 
-        public static void Clear() => World.Entities.Clear();
+        public static void Clear()
+        {
+            for (int i = 0; i < Entities.Count; i++)
+            {
+                var entity = Entities[i];
+                Remove(entity);
+            }
+        }
     }
 
 }

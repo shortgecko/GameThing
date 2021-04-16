@@ -2,24 +2,15 @@
 {
     public class Scene
     {
-        public World World = new World();
+        public string Name = "Scene";
         public bool IsRunning { get; set; }
         private bool HasInitialized = false;
         private bool HasLoaded = false;
         protected virtual void Initialize() { }
         protected virtual void Load() { }
-        protected virtual void Update()
-        {
-            foreach (VirtualButton Button in Input.Buttons)
-                Button.EarlyUpdate();
-            World.Update();
-            foreach (VirtualButton Button in Input.Buttons)
-                Button.LateUpdate();
-        }
-        protected virtual void Render()
-        {
-            World.Render();
-        }
+        protected virtual void Update() => World.Update();
+        protected virtual void Render() => World.Render();
+        protected virtual void Unload() { }
         protected virtual void End() { }
 
         public void Begin()
@@ -40,11 +31,12 @@
             Render();
         }
 
-        public void Leave()
+        public void Dispose()
         {
             this.HasInitialized = false;
             this.IsRunning = false;
             End();
+            World.Clear();
         }
 
     }

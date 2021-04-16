@@ -18,19 +18,19 @@ namespace Game
         private float airTime = 0f;
         public override void Initialize()
         {
-            entity.position = position;
-            sprite = Asset.Texture("Graphics/bullet.png");
+            Entity.Position = position;
+            sprite = Content.Texture("Graphics/bullet.png");
         }
 
         public override void Update()
         {
             airTime += Engine.Delta;
-            entity.position.Y -= 1200f * airTime * Engine.Delta;
+            Entity.Position.Y -= 1200f * airTime * Engine.Delta;
         }
 
         public override void Render()
         {
-            Drawer.Batch.Draw(sprite, entity.position, Color.White);
+            Drawer.Batch.Draw(sprite, Entity.Position, Color.White);
         }
     }
 }

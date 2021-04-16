@@ -14,19 +14,19 @@ namespace Frankenweenie
     public class Entity
     {
         public int id;
-        public Vector2 position;
+        public Vector2 Position;
         public List<Component> Components = new List<Component>();
 
-        public void add<T>() where T : Component
+        public void add<T>() where T : Component, new()
         {
-            Component Component = (T)Activator.CreateInstance<T>();
-            Component.entity = this;
+            Component Component = Pooler.Create<T>();
+            Component.Entity = this;
             Components.Add(Component);
         }
 
         public void add(Component Component)
-        {
-            Component.entity = this;
+        { 
+            Component.Entity = this;
             Components.Add(Component);
         }
         

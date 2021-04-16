@@ -6,28 +6,31 @@ using System.Collections.Generic;
 
 namespace Game
 {
+    [Pooled]   
     public class Player : Component
     {
+        private Vector2 startPos;
+        private Mover mover;
         private const int speed = 240;
+        private int normalGravity = 20;
+        private StateMachine<States> StateMachine;
+        private bool grounded;
+
         private const int jumpForce = -900;
         private const int hJumpForce = 140;
-        private int normalGravity = 20;
-        private Mover mover;
         private Timer coyoteTimer;
         private float coyoteTime = 0.3f;
         private Timer jumpInputTimer;
         private float jumpInputTime = 0.3f;
-        private bool grounded;
         private bool jumped = false;
-        private Vector2 startPos;
-        private bool canCoyote = false;
-        private StateMachine<States> StateMachine;
-       
-        
+
+        private bool wallTouch = false;
+        private bool updated = false;
+
         private enum States
         {
             Normal,
-            None
+            Wall,
         };
 
         public static Entity Create()
@@ -35,81 +38,80 @@ namespace Game
             Entity player = new Entity();
             player.add(new Hitbox(0, 0, 8, 8));
             player.add<Player>();
-            
             player.add<Mover>();
             player.add<StateMachine<States>>();
             return player;
         }
-        float timer = 0;
+
         public override void Initialize()
         {
-            mover = entity.get<Mover>();
-            entity.add(coyoteTimer = new());
-            entity.add(jumpInputTimer = new());
-            startPos = entity.position;
-            StateMachine = entity.get<StateMachine<States>>();
-            StateMachine.add(States.Normal, InnitState, UpdateState, EndState);
-            StateMachine.add(States.None, null, Empty, null);
+            mover = Entity.get<Mover>();
+            Entity.add(coyoteTimer = new());
+            Entity.add(jumpInputTimer = new());
+            startPos = Entity.Position;
+            StateMachine = Entity.get<StateMachine<States>>();
+            StateMachine.Add(States.Normal, null, NormalState, null);
+            StateMachine.Add(States.Wall, null, WallState, null);
         }
-        private void Empty() { }
 
-        private void InnitState()
-        {
-            Logger.Log("Initialize State");
-        }
-        private void UpdateState()
-        {
-            timer += Engine.Delta;
-            Logger.Log("Updating...");
 
-            if (timer > 5)
-                StateMachine.End(States.None);    
-        }
-        private void EndState()
-        {
-            Logger.Log("End");
-        }
         private void NormalState()
         {
-            grounded = mover.collision(new Point(0, 1), Mover.Masks.All);
-
             if (!grounded)
                 mover.Move.Y = normalGravity;
             else
                 coyoteTimer.Start(coyoteTime);
 
             mover.Move.X = Input.Horizontal * speed;
-            canCoyote = coyoteTimer.Duration > 0;
 
             if (Input.Jump.Pressed)
             {
+                updated = true;
                 jumpInputTimer.Start(jumpInputTime);
             }
-
-            if (jumpInputTimer.Duration > 0 && canCoyote && !jumped)
+            
+            if (jumpInputTimer.Duration > 0 && coyoteTimer.Duration > 0 && !jumped)
             {
                 mover.Move.Y = jumpForce;
                 mover.Move.X = Input.Horizontal * hJumpForce;
                 jumped = true;
+                coyoteTimer.Clear();
+                jumpInputTimer.Clear();
             }
 
             if (Input.Jump.Released)
                 jumped = false;
 
-            if (mover.Move.Y < 0 /*&& jumpTimer.Duration == 0*/)
+            if (mover.Move.Y < 0)
             {
                 mover.Move.Y *= 0.5f;
             }
-        }
-        public override void Update()
-        {
-            if(!new Rectangle(0,0,320,180).Contains(entity.position) || Input.TempRestart)
-                entity.position = startPos;
+
+            if (Input.WallClimb && wallTouch)
+            {
+                StateMachine.Set(States.Wall);
+            }
+
         }
 
+        private void WallState()
+        {
+            if (Input.WallClimb.Released)
+                StateMachine.Set(States.Normal);
+            Logger.Log((bool)Input.WallClimb);
+            mover.Move.Y = Input.Vertical * speed;
+        }
+
+        public override void Update()
+        {
+            if(!new Rectangle(0,0,320,180).Contains(Entity.Position) || Input.TempRestart)
+                Entity.Position = startPos;
+            grounded = mover.collision(new Point(0, 1), Mover.Masks.All);
+            wallTouch = mover.collision(new Point(Math.Sign(mover.Move.X), 0), Mover.Masks.All);
+        }
         public override void Render()
         {
-            Drawer.Rect(Utils.RectF(entity.position,8 ,8), Color.Red);
+            Drawer.Rect(Utils.RectF(Entity.Position,8 ,8), Color.Red);
         }
 
     }

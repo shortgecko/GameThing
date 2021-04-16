@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace Frankenweenie
 {
+    [Pooled]
     public class Animator : Component
     {
         public Dictionary<string, Animation> Animations;
@@ -60,7 +61,7 @@ namespace Frankenweenie
         public override void Render()
         {
             if (IsPlaying)
-                Drawer.Batch.Draw(Frame, entity.position, Color.White);
+                Drawer.Batch.Draw(Frame, Entity.Position, Color.White);
         }
     }
 }

@@ -19,6 +19,15 @@ namespace Game
             Height = height;
         }
 
+        public Hitbox Hitbox(Point Position)
+        {
+            int x = Position.X / 8 * 8;
+            int y = Position.Y / 8 * 8;
+            int coordinates = x + y * Width;
+            return new Hitbox(x, y, 8, 8);
+        }
+        
+
         public void Render()
         {
             for (int x = 0; x < Width; x++)

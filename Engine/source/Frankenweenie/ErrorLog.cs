@@ -10,7 +10,7 @@ namespace Frankenweenie
         private static string[] Lines;
         public static void Log(Exception e)
         {
-            var realPath = Asset.Path(Path);
+            var realPath = Content.Path(Path);
             if (File.Exists(realPath))
             {
                 Lines = File.ReadAllLines(realPath);

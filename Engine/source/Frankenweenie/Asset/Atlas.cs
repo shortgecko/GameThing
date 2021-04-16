@@ -14,7 +14,7 @@ namespace Frankenweenie
 
         public Atlas(string atlasDef)
         {
-            AtlasDef = Asset.LoadXml(atlasDef);
+            AtlasDef = Content.LoadXml(atlasDef);
             Load();
         }
 
@@ -28,7 +28,7 @@ namespace Frankenweenie
         {
             XmlElement TextureAtlas = AtlasDef["TextureAtlas"];
             var filepath = TextureAtlas.Attributes["imagePath"].Value;
-            Source = Asset.Texture("Graphics/" + filepath);
+            Source = Content.Texture("Graphics/" + filepath);
             var subtextures = TextureAtlas.GetElementsByTagName("sprite");
 
             foreach (XmlElement subtexture in subtextures)

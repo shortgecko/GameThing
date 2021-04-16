@@ -27,15 +27,15 @@ namespace Game
 
         private bool Check(Point offset, Hitbox other)
         {
-            Hitbox = entity.get<Hitbox>();
-            Hitbox.X = (int)entity.position.X;
-            Hitbox.Y = (int)entity.position.Y;
+            Hitbox = Entity.get<Hitbox>();
+            Hitbox.X = (int)Entity.Position.X;
+            Hitbox.Y = (int)Entity.Position.Y;
             var box = new Hitbox(Hitbox.X + offset.X, Hitbox.Y + offset.Y, Hitbox.Width, Hitbox.Height);
             return Intersects(box, other);
         }
 
-        private bool Intersects(Hitbox hitbox,Hitbox other)
-        {            
+        private bool Intersects(Hitbox hitbox, Hitbox other)
+        {
             return other.Left < hitbox.Right &&
                 hitbox.Left < other.Right &&
                 other.Top < hitbox.Bottom &&
@@ -44,59 +44,61 @@ namespace Game
 
         public bool collision(Point offset, Masks mask)
         {
-            switch(mask)
+            switch (mask)
             {
                 case Masks.Solids:
-                    if(Level.Solids.Count > 1)
-                    {
-                        foreach (Hitbox hitbox in Level.Solids)
-                        {
-                            if (Check(offset, hitbox))
-                            {
-                                if (hitbox != this.Hitbox)
-                                    return true;
-                            }
-                        }
-                    }
+                    if (CheckSolids(offset))
+                        return true;
                     break;
                 case Masks.Actors:
-                    if (Level.Actors.Count > 1)
-                    {
-                        foreach (Hitbox hitbox in Level.Actors)
-                        {
-                            if (Check(offset, hitbox))
-                            {
-                                if (hitbox != this.Hitbox)
-                                    return true;
-                            }
-                        }
-                    }
+                    if (CheckActors(offset))
+                        return true;
                     break;
                 case Masks.All:
-                    if(Level.Solids.Count > 1)
-                    {
-                        foreach (Hitbox hitbox in Level.Solids)
-                        {
-                            if (Check(offset, hitbox))
-                            {
-                                if (hitbox != this.Hitbox)
-                                    return true;
-                            }
-                        }
-                    }
-                    if(Level.Actors.Count > 1)
-                    {
-                        foreach (Hitbox hitbox in Level.Actors)
-                        {
-                            if (Check(offset, hitbox))
-                            {
-                                if (hitbox != this.Hitbox)
-                                    return true;
-                            }
-                        }
-                    }
-                break;
+                    if (CheckSolids(offset))
+                        return true;
+                    if (CheckActors(offset))
+                        return true;
+                    break;
 
+            }
+
+            return false;
+        }
+
+        private bool CheckSolids(Point offset)
+        {
+            if (Level.Solids.Count > 1)
+            {
+                for (int i = 0; i < Level.Solids.Count; i++)
+                {
+                    var hitbox = Level.Solids[i];
+                    if (Check(offset, hitbox))
+                    {
+                        if (hitbox != this.Hitbox)
+                            return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        private bool CheckActors(Point offset)
+        {
+            if (Level.Actors.Count > 1)
+            {
+                for (int i = 0; i < Level.Actors.Count; i++)
+                {
+                    var hitbox = Level.Actors[i];
+                    if (hitbox != null)
+                    {
+                        if (Check(offset, hitbox))
+                        {
+                            if (hitbox != this.Hitbox)
+                                return true;
+                        }
+                    }
+                }
             }
 
             return false;
@@ -109,9 +111,9 @@ namespace Game
 
             while (Move.X != 0)
             {
-                if (!collision(new Point(sign, 0),Masks.All))
+                if (!collision(new Point(sign, 0), Masks.All))
                 {
-                    entity.position.X += sign * Engine.Delta;
+                    Entity.Position.X += sign * Engine.Delta;
                     Move.X -= sign;
                 }
                 else
@@ -126,14 +128,14 @@ namespace Game
         {
             int sign = Math.Sign(Math.Round(Move.Y));
             Move.Y = (float)Math.Round(Move.Y);
-            while(Move.Y != 0)
+            while (Move.Y != 0)
             {
                 //Logger.Log(Move.Y);
                 //Logger.Log($"sign {sign}");
                 if (!collision(new Point(0, sign), Masks.All))
                 {
-                    entity.position.Y += sign * Engine.Delta;
-                    Move.Y -= sign;         
+                    Entity.Position.Y += sign * Engine.Delta;
+                    Move.Y -= sign;
                 }
                 else
                 {
@@ -145,4 +147,3 @@ namespace Game
 
     }
 }
-

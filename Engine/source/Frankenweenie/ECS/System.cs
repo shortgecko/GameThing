@@ -2,11 +2,17 @@
 
 namespace Frankenweenie
 {
+
     public class Component
     {
-        public Entity entity;
+        public Component()
+        {
+
+        }
+        public Entity Entity;
         public virtual void Initialize() { }
         public virtual void Update() { }
         public virtual void Render() { }
+        public virtual void Removed() { }
     }
 }

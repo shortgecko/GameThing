@@ -11,7 +11,7 @@ namespace Frankenweenie
         public static Engine Instance;
         public static GraphicsDeviceManager Device;
         private static Scene m_Scene;
-        public static Config Config { get; set; }
+        private static Config Config { get; set; }
         public static float RawDeltaTime;
         public static float Delta;
         public static float Timer;
@@ -25,8 +25,38 @@ namespace Frankenweenie
 
         public static VirtualRenderTarget RenderTarget;
         public static Matrix Transform = Matrix.CreateTranslation(0, 0, 0);
-        public static int Width;
-        public static int Height;
+        public static SceneManager SceneManager;
+
+        public static int Width
+        {
+            get
+            {
+                return Device.GraphicsDevice.PresentationParameters.BackBufferWidth;
+            }
+        }
+
+        public static int Height
+        {
+            get
+            {
+                return Device.GraphicsDevice.PresentationParameters.BackBufferHeight;
+            }
+        }
+        public static string AssetDirectory
+        {
+            get
+            {
+                return Config.AssetDirectory;
+            }
+        }
+
+        public static string Title
+        {
+            get
+            {
+                return Instance.Window.Title;
+            }
+        }
 
         public Engine()
         {
@@ -35,7 +65,6 @@ namespace Frankenweenie
             Device.IsFullScreen = false;
             Window.AllowUserResizing = true;
             IsMouseVisible = true;
-
 #if DEBUG
             new ImGuiLayer(Device, this);
 #endif
@@ -48,10 +77,9 @@ namespace Frankenweenie
             Content.RootDirectory = Config.AssetDirectory;
             IsFixedTimeStep = Config.FixedTimeStep;
             Window.Title = Config.WindowTitle;
+            SceneManager = Config.SceneManager;
             Device.PreferredBackBufferWidth = Config.Width;
             Device.PreferredBackBufferHeight = Config.Height;
-            Width = Config.Width;
-            Height = Config.Height;
             Device.ApplyChanges();
 
             Logger.Initialize();
@@ -91,7 +119,7 @@ namespace Frankenweenie
 
         public static void Set(Scene scene)
         {
-            m_Scene.Leave();
+            m_Scene.Dispose();
             m_Scene = scene;
         }
 
@@ -109,11 +137,13 @@ namespace Frankenweenie
             GamePads[3] = GamePad.GetState(PlayerIndex.Four);
             
             Engine.GameTime = gameTime;
-            Width = Device.GraphicsDevice.PresentationParameters.BackBufferWidth;
-            Height = Device.GraphicsDevice.PresentationParameters.BackBufferHeight;
 
             VirtualMouse.Update();
+            foreach (VirtualButton Button in Input.Buttons)
+                Button.EarlyUpdate();
             m_Scene.Begin();
+            foreach (VirtualButton Button in Input.Buttons)
+                Button.LateUpdate();
         }
 
         protected override void Draw(GameTime gameTime)
@@ -121,7 +151,8 @@ namespace Frankenweenie
             GraphicsDevice.SetRenderTarget(RenderTarget.Target);
             GraphicsDevice.Clear(Color.Black);
             Drawer.Batch.Begin();
-            m_Scene.Draw();
+            if(m_Scene.IsRunning)
+                m_Scene.Draw();
             Drawer.Batch.End();
             GraphicsDevice.SetRenderTarget(null);
 
@@ -149,18 +180,16 @@ namespace Frankenweenie
             }
         }
 
-        public static void Run(Scene scene)
+        public static void Run(ref Config config, string scene)
         {
-            Engine.Instance = new Engine();
-            Engine.m_Scene = scene;
+            CreateInstance(config, scene);
             Engine.Instance.Run();
-            Logger.Save();
+            End();
         }
 
-        public static void RunWithLogging(Scene scene)
+        public static void RunWithLogging(ref Config config, string scene)
         {
-            Engine.Instance = new Engine();
-            Engine.m_Scene = scene;
+            CreateInstance(config, scene);
             try
             {
                 Engine.Instance.Run();
@@ -173,9 +202,23 @@ namespace Frankenweenie
             }
             finally
             {
-                Logger.Save();
+                End();
             }
         }
+
+        private static void CreateInstance(Config config, string scene)
+        {
+            Config = config;
+            Engine.Instance = new Engine();
+            Engine.m_Scene = Config.SceneManager[scene];
+        }
+
+        private static void End()
+        {
+            Logger.Save();
+            Frankenweenie.Content.Dispose();
+        }
+
 
     }
 }

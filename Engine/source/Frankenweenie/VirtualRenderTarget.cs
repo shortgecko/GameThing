@@ -32,8 +32,8 @@ namespace Frankenweenie
 
         public VirtualRenderTarget()
         {
-            SourceRectangle = new Rectangle(0, 0, Engine.Config.Width, Engine.Config.Height);
-            Target = new RenderTarget2D(Engine.Device.GraphicsDevice, Engine.Config.Width, Engine.Config.Height);
+            SourceRectangle = new Rectangle(0, 0, Engine.Width, Engine.Height);
+            Target = new RenderTarget2D(Engine.Device.GraphicsDevice, Engine.Width, Engine.Height);
         }
 
         public VirtualRenderTarget(Vector2 position, int width, int height, float scale)

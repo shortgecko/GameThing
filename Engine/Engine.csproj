@@ -17,8 +17,4 @@
     <PackageReference Include="SpriteFontPlus.MonoGame" Version="0.7.0.22" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="source\Frankenweenie\Libs\" />
-  </ItemGroup>
-
 </Project>

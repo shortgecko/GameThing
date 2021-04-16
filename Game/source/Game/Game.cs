@@ -7,6 +7,8 @@ using Microsoft.Xna.Framework.Content;
 using System;
 using System.Xml;
 using IO = System.IO;
+using Microsoft.Xna.Framework.Input;
+using System.Diagnostics;
 
 
 namespace Game
@@ -15,9 +17,9 @@ namespace Game
     {
         public float LevelTime;
 
-
         public static void Load(string path)
         {
+            World.Clear();
             OgmoLevel level = new OgmoLevel(TitleContainer.OpenStream($"assets/levels/{path}"));
             var tileLayer = level["Solids"];
             var tileLayerData = level.GridToTileLayer(tileLayer);     
@@ -30,15 +32,14 @@ namespace Game
                 }
             var entityLayer = level["Entities"];
 
-            World.Clear();
             foreach(OgmoEntity Entity in entityLayer.entities)
             {
-                var entity = EntityManager.Create(Entity.name);
-                entity.position = new Vector2(Entity.x, Entity.y);
-                var mover = entity.get<Mover>();
+                var e = EntityManager.Create(Entity.name);
+                e.Position = new Vector2(Entity.x, Entity.y);
+                var mover = e.get<Mover>();
                 if(mover != null)
                     Level.Actors.Add(mover.Hitbox);
-                World.Add(entity);
+                World.Add(e);
             }
 
             level = null;
@@ -52,19 +53,24 @@ namespace Game
         {
             Engine.RenderTarget.Scale = new Vector2(4f, 4f);
             Engine.Size(320 * 4, 180 * 4);
-            if (ImGuiLayer.get<Cmd>() == null)
-                ImGuiLayer.add<Cmd>();
+            if (ImGuiLayer.get<CommandPrompt>() == null)
+                ImGuiLayer.add<CommandPrompt>();
             Load("test.json");
             base.Initialize();
         }
 
-        protected override void Load()
-        {
-
-        }
 
         protected override void Update()
         {
+            if(Input.Reload.Released)
+            {
+                Load("test.json");
+            }
+            if(Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
+                Process.Start(@"C:\Users\muham\apps\Ogmo Editor\Ogmo Editor.exe");
+            }
+
             base.Update();
         }
 

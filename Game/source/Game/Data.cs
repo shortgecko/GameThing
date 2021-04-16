@@ -35,7 +35,7 @@ namespace Game.Editor
 
         public void Save(string path)
         {
-            var filepath = Asset.Path($"Assets/Levels/{path}");
+            var filepath = Content.Path($"Assets/Levels/{path}");
             JsonSerializer serializer = new JsonSerializer();
             string data = Newtonsoft.Json.JsonConvert.SerializeObject(this);
             File.WriteAllText(filepath, data);

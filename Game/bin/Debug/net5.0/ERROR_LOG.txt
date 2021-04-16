@@ -1,0 +1,24 @@
+ERROR LOG
+--------------------------------------------------------------------------------
+ERROR 4/16/2021 1:07:27 PM
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Game.Splash.Update() in C:\Users\muham\source\repos\projects\c#\GameThing\Game\source\Game\Splash.cs:line 28
+   at Frankenweenie.Scene.Begin() in C:\Users\muham\source\repos\projects\c#\GameThing\Engine\source\Frankenweenie\Scene.cs:line 24
+   at Frankenweenie.Engine.Update(GameTime gameTime) in C:\Users\muham\source\repos\projects\c#\GameThing\Engine\source\Frankenweenie\Engine.cs:line 143
+   at Microsoft.Xna.Framework.Game.DoUpdate(GameTime gameTime)
+   at Microsoft.Xna.Framework.Game.Tick()
+   at Microsoft.Xna.Framework.SdlGamePlatform.RunLoop()
+   at Microsoft.Xna.Framework.Game.Run(GameRunBehavior runBehavior)
+   at Microsoft.Xna.Framework.Game.Run()
+   at Frankenweenie.Engine.RunWithLogging(Config& config, String scene) in C:\Users\muham\source\repos\projects\c#\GameThing\Engine\source\Frankenweenie\Engine.cs:line 193
+ERROR 4/16/2021 1:06:55 PM
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Game.Splash.Update() in C:\Users\muham\source\repos\projects\c#\GameThing\Game\source\Game\Splash.cs:line 28
+   at Frankenweenie.Scene.Begin() in C:\Users\muham\source\repos\projects\c#\GameThing\Engine\source\Frankenweenie\Scene.cs:line 24
+   at Frankenweenie.Engine.Update(GameTime gameTime) in C:\Users\muham\source\repos\projects\c#\GameThing\Engine\source\Frankenweenie\Engine.cs:line 143
+   at Microsoft.Xna.Framework.Game.DoUpdate(GameTime gameTime)
+   at Microsoft.Xna.Framework.Game.Tick()
+   at Microsoft.Xna.Framework.SdlGamePlatform.RunLoop()
+   at Microsoft.Xna.Framework.Game.Run(GameRunBehavior runBehavior)
+   at Microsoft.Xna.Framework.Game.Run()
+   at Frankenweenie.Engine.RunWithLogging(Config& config, String scene) in C:\Users\muham\source\repos\projects\c#\GameThing\Engine\source\Frankenweenie\Engine.cs:line 193

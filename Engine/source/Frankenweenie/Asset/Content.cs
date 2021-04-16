@@ -13,9 +13,9 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Frankenweenie
 {
-    public class Asset
+    public class Content
     {
-        private static Dictionary<string, object> Assets = new Dictionary<string, object>();
+        private static Dictionary<string, object> loadedAssets = new Dictionary<string, object>();
         public static Texture2D Empty
         {
             get
@@ -44,7 +44,7 @@ namespace Frankenweenie
         }
         private static string Directory(string input)
         {
-            var filepath = IO.Path.Combine(Engine.Config.AssetDirectory + "/" + input);
+            var filepath = IO.Path.Combine(Engine.AssetDirectory + "/" + input);
             if (string.IsNullOrEmpty(filepath))
             {
                 throw new ArgumentNullException("Asset Name cannot be null or empty");
@@ -53,12 +53,23 @@ namespace Frankenweenie
             return filepath.Replace('\\', '/');
         }
 
-        public static void Dispose(object input)
+        public static void Dispose()
         {
-            if (!(input is IDisposable))
-                throw new Exception("Cannot dispose non disposable object");
-            var asset = (IDisposable)input;
-            asset.Dispose();
+            Logger.Log("[Content] Disposing assets..");
+            foreach(var assetName in loadedAssets.Keys)
+            {
+                var input = loadedAssets[assetName];
+                if(input is IDisposable)
+                {
+                    var asset = (IDisposable)input;
+                    asset.Dispose();
+                    asset = null;
+                }
+                input = null;
+            }
+            loadedAssets.Clear();
+            Logger.Log("[CONTENT] Assets disposed");
+
         }
 
         public static Texture2D Texture(string assetName)
@@ -66,7 +77,7 @@ namespace Frankenweenie
             var key = Directory(assetName);
             // Check for a previously loaded asset first
             object asset = null;
-            if (Assets.TryGetValue(key, out asset))
+            if (loadedAssets.TryGetValue(key, out asset))
             {
                 if (asset is Texture2D)
                 {
@@ -80,8 +91,8 @@ namespace Frankenweenie
 
             // Load the asset.
             var result = TexFromFile(key);
-            Assets[key] = result;
-            Logger.Log("[ASSET]" + "[TEXTURE] " + key);
+            loadedAssets[key] = result;
+            Logger.Log("[CONTENT]" + "[TEXTURE] " + key);
             return result;
         }
         public static string Path(string path)
@@ -93,7 +104,7 @@ namespace Frankenweenie
             var key = Directory(assetName);
 
             object asset = null;
-            if (Assets.TryGetValue(key, out asset))
+            if (loadedAssets.TryGetValue(key, out asset))
             {
                 if (asset is string)
                 {
@@ -103,7 +114,7 @@ namespace Frankenweenie
 
             // Load the asset.
             var result = FromFile(key);
-            Assets[key] = result;
+            loadedAssets[key] = result;
             return result;
         }
         public static XmlDocument LoadXml(string assetName)
@@ -112,7 +123,7 @@ namespace Frankenweenie
 
             // Check for a previously loaded asset first
             object asset = null;
-            if (Assets.TryGetValue(key, out asset))
+            if (loadedAssets.TryGetValue(key, out asset))
             {
                 if (asset is XmlDocument)
                 {
@@ -122,7 +133,7 @@ namespace Frankenweenie
 
             // Load the asset.
             var result = XMLFromFile(key);
-            Assets[key] = result;
+            loadedAssets[key] = result;
             return result;
         }
         private static Texture2D TexFromFile(string file)
@@ -151,14 +162,14 @@ namespace Frankenweenie
         }
         public static string TitlePath(string path)
         {
-            return Engine.Config.AssetDirectory + "/" + path;
+            return Engine.AssetDirectory + "/" + path;
         }
 
         public static SpriteFont Font(string assetName, float size)
         {
             var key = Directory(assetName);
             object asset = null;
-            if (Assets.TryGetValue(key, out asset))
+            if (loadedAssets.TryGetValue(key, out asset))
             {
                 if (asset is SpriteFont)
                 {
@@ -168,7 +179,7 @@ namespace Frankenweenie
 
             // Load the asset.
             var result = LoadFont(assetName, size);
-            Assets[key] = result;
+            loadedAssets[key] = result;
             return result;
         }
 
@@ -189,6 +200,7 @@ namespace Frankenweenie
 
             return fontBakeResult.CreateSpriteFont(Engine.Device.GraphicsDevice);
         }
+
 
         //private static Song LoadSong(string file)
         //{

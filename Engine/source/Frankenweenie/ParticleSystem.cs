@@ -43,6 +43,7 @@ namespace Frankenweenie
             Drawer.Batch.Draw(Texture, Position, sourceRectangle, Color, Angle, origin, Size, SpriteEffects.None, 0f);
         }
     }
+    [Pooled]
     public class ParticleSystem : Component
     {
         private Random Random = new Random();

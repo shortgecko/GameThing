@@ -8,12 +8,19 @@ namespace Frankenweenie
         private Dictionary<T, Action> InitializeStates = new();
         private Dictionary<T,Action> UpdateStates = new();
         private Dictionary<T, Action> EndStates = new();
-        public T State;
+        public T currentState;
         private bool BeginState = false;
         private bool EndState;
         private T NextState;
+        public T State
+        {
+            get
+            {
+                return currentState;
+            }
+        }
      
-        public void add(T state, Action innit = null, Action update = null, Action end = null)
+        public void Add(T state, Action innit = null, Action update = null, Action end = null)
         {
             if (update == null)
                 throw new Exception("Update cannot be null!");
@@ -30,25 +37,24 @@ namespace Frankenweenie
             states.TryGetValue(state, out Action action);
             if (action == null)
                 return false;
-            else
-                return true;
+            return true;
         }
 
         public override void Update()
         {
-            if (!BeginState && HasState(InitializeStates, State))
+            if (!BeginState && HasState(InitializeStates, currentState))
             {
-                InitializeStates[State].Invoke();
+                InitializeStates[currentState].Invoke();
                 BeginState = true;
             }
 
-            UpdateStates[State].Invoke();
+            UpdateStates[currentState].Invoke();
 
-            if(EndState && HasState(EndStates, State))
+            if(EndState && HasState(EndStates, currentState))
             {
-                EndStates[State].Invoke();
+                EndStates[currentState].Invoke();
                 Reset();
-                State = NextState;
+                currentState = NextState;
             }
         }
 
@@ -60,7 +66,7 @@ namespace Frankenweenie
         
         public void Set(T state)
         {
-            State = state;
+            currentState = state;
             Reset();
         }
 
