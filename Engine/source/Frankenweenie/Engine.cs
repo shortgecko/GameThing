@@ -26,6 +26,7 @@ namespace Frankenweenie
         public static VirtualRenderTarget RenderTarget;
         public static Matrix Transform = Matrix.CreateTranslation(0, 0, 0);
         public static SceneManager SceneManager;
+        private static Color clearColor = Color.Black;
 
         public static int Width
         {
@@ -65,10 +66,7 @@ namespace Frankenweenie
             Device.IsFullScreen = false;
             Window.AllowUserResizing = true;
             IsMouseVisible = true;
-#if DEBUG
             new ImGuiLayer(Device, this);
-#endif
-
         }
 
 
@@ -95,6 +93,7 @@ namespace Frankenweenie
         {
             new Drawer();
             Blah.Drawer.Batch = new SpriteBatch(Device.GraphicsDevice);
+            
         }
 
         protected override void UnloadContent()
@@ -149,7 +148,7 @@ namespace Frankenweenie
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.SetRenderTarget(RenderTarget.Target);
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(clearColor);
             Drawer.Batch.Begin();
             if(m_Scene.IsRunning)
                 m_Scene.Draw();
@@ -218,6 +217,10 @@ namespace Frankenweenie
             Logger.Save();
             Frankenweenie.Content.Dispose();
         }
+
+        public static void ClearColor(Color color) => clearColor = color;
+
+        public static void Fullscreen(bool value) => Device.IsFullScreen = value;
 
 
     }

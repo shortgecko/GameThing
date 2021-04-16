@@ -15,6 +15,14 @@ namespace Game
             }
         }
 
+        public bool Ended
+        {
+            get
+            {
+                return Duration < 0f;
+            }
+        }
+
 
         public void Start(float duration)
         {
@@ -35,9 +43,6 @@ namespace Game
             m_Duration = 0f;
         }
 
-        public override string ToString()
-        {
-            return Duration.ToString();
-        }
+        public override string ToString() => Duration.ToString();
     }
 }

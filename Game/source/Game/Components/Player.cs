@@ -11,21 +11,37 @@ namespace Game
     {
         private Vector2 startPos;
         private Mover mover;
+        private Facing Facing;
         private const int speed = 240;
         private int normalGravity = 20;
         private StateMachine<States> StateMachine;
-        private bool grounded;
-
-        private const int jumpForce = -900;
+        private bool grounded { get { return mover.collision(new Point(0, 1), Mover.Masks.All); } }
+        private const int jumpForce = -600;
         private const int hJumpForce = 140;
         private Timer coyoteTimer;
         private float coyoteTime = 0.3f;
         private Timer jumpInputTimer;
         private float jumpInputTime = 0.3f;
         private bool jumped = false;
-
-        private bool wallTouch = false;
-        private bool updated = false;
+        private Timer varJumpTimer = new Timer();
+        private float varJumpTime = 0.2f;
+        private bool WallCheck
+        {
+            get
+            { 
+                if (Facing != 0)
+                    return mover.collision(new Point(Facing, 0), Mover.Masks.All);
+                else
+                {
+                    if (mover.collision(new Point(1, 0), Mover.Masks.All))
+                        return true;
+                    else if (mover.collision(new Point(-1, 0), Mover.Masks.All))
+                        return true;
+                }
+                return false;
+            }
+        }
+        private const float climbSpeed = 180;
 
         private enum States
         {
@@ -36,7 +52,7 @@ namespace Game
         public static Entity Create()
         {
             Entity player = new Entity();
-            player.add(new Hitbox(0, 0, 8, 8));
+            player.Add(new Hitbox(0, 0, 8, 8));
             player.add<Player>();
             player.add<Mover>();
             player.add<StateMachine<States>>();
@@ -45,11 +61,13 @@ namespace Game
 
         public override void Initialize()
         {
-            mover = Entity.get<Mover>();
-            Entity.add(coyoteTimer = new());
-            Entity.add(jumpInputTimer = new());
+            mover = Entity.Get<Mover>();
+            Entity.Add(coyoteTimer = new());
+            Entity.Add(jumpInputTimer = new());
+            Entity.Add(Facing = new Facing());
+            Entity.Add(varJumpTimer = new Timer());
             startPos = Entity.Position;
-            StateMachine = Entity.get<StateMachine<States>>();
+            StateMachine = Entity.Get<StateMachine<States>>();
             StateMachine.Add(States.Normal, null, NormalState, null);
             StateMachine.Add(States.Wall, null, WallState, null);
         }
@@ -58,7 +76,7 @@ namespace Game
         private void NormalState()
         {
             if (!grounded)
-                mover.Move.Y = normalGravity;
+                mover.Move.Y += normalGravity;
             else
                 coyoteTimer.Start(coyoteTime);
 
@@ -66,30 +84,33 @@ namespace Game
 
             if (Input.Jump.Pressed)
             {
-                updated = true;
                 jumpInputTimer.Start(jumpInputTime);
-            }
-            
-            if (jumpInputTimer.Duration > 0 && coyoteTimer.Duration > 0 && !jumped)
-            {
-                mover.Move.Y = jumpForce;
-                mover.Move.X = Input.Horizontal * hJumpForce;
-                jumped = true;
-                coyoteTimer.Clear();
-                jumpInputTimer.Clear();
             }
 
             if (Input.Jump.Released)
                 jumped = false;
 
-            if (mover.Move.Y < 0)
+            if (jumpInputTimer.Duration > 0 && coyoteTimer.Duration > 0 && !jumped)
             {
-                mover.Move.Y *= 0.5f;
+                mover.Move.Y = jumpForce;
+                mover.Move.X += Input.Horizontal * hJumpForce;
+                coyoteTimer.Clear();
+                jumpInputTimer.Clear();
+                varJumpTimer.Start(varJumpTime);
+                jumped = true;
             }
 
-            if (Input.WallClimb && wallTouch)
+
+            if (varJumpTimer.Duration < 0 && jumped)
             {
-                StateMachine.Set(States.Wall);
+                Logger.Log("big jump");
+                mover.Move.Y -= 10f;
+            }
+
+            if (Input.WallClimb)
+            {
+                if(WallCheck)
+                    StateMachine.Set(States.Wall);
             }
 
         }
@@ -97,22 +118,25 @@ namespace Game
         private void WallState()
         {
             if (Input.WallClimb.Released)
+            {
+                
+            }
                 StateMachine.Set(States.Normal);
-            Logger.Log((bool)Input.WallClimb);
-            mover.Move.Y = Input.Vertical * speed;
+            if (WallCheck)
+                mover.Move.Y = Input.Vertical * climbSpeed;
         }
 
         public override void Update()
         {
             if(!new Rectangle(0,0,320,180).Contains(Entity.Position) || Input.TempRestart)
                 Entity.Position = startPos;
-            grounded = mover.collision(new Point(0, 1), Mover.Masks.All);
-            wallTouch = mover.collision(new Point(Math.Sign(mover.Move.X), 0), Mover.Masks.All);
         }
         public override void Render()
         {
+            
             Drawer.Rect(Utils.RectF(Entity.Position,8 ,8), Color.Red);
         }
+
 
     }
 }

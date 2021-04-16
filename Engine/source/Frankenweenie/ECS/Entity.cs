@@ -24,15 +24,15 @@ namespace Frankenweenie
             Components.Add(Component);
         }
 
-        public void add(Component Component)
+        public void Add(Component Component)
         { 
             Component.Entity = this;
             Components.Add(Component);
         }
         
-        public T get<T>() where T : Component => (T)Components.FirstOrDefault(c => c.GetType() == typeof(T));
+        public T Get<T>() where T : Component => (T)Components.FirstOrDefault(c => c.GetType() == typeof(T));
         
-        public void remove<T>() where T : Component => Components.Remove(get<T>());
+        public void remove<T>() where T : Component => Components.Remove(Get<T>());
 
     }
 }

@@ -1,2 +1,19 @@
 LOG Game Thing
 -------------------------------------------------------------------------------------------------
+[LOG Game Thing][CONTENT][TEXTURE] Assets/graphics/stone.png
+[LOG Game Thing][CONTENT][TEXTURE] Assets/graphics/bg_tile.png
+[LOG Game Thing]-600
+[LOG Game Thing]-600
+[LOG Game Thing]-600
+[LOG Game Thing]-600
+[LOG Game Thing]-600
+[LOG Game Thing]-600
+[LOG Game Thing]-600
+[LOG Game Thing]-600
+[LOG Game Thing]-600
+[LOG Game Thing]-600
+[LOG Game Thing]-600
+[LOG Game Thing]-600
+[LOG Game Thing]-600
+[LOG Game Thing]-600
+[LOG Game Thing]-600

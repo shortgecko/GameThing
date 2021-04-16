@@ -27,7 +27,7 @@ namespace Game
 
         private bool Check(Point offset, Hitbox other)
         {
-            Hitbox = Entity.get<Hitbox>();
+            Hitbox = Entity.Get<Hitbox>();
             Hitbox.X = (int)Entity.Position.X;
             Hitbox.Y = (int)Entity.Position.Y;
             var box = new Hitbox(Hitbox.X + offset.X, Hitbox.Y + offset.Y, Hitbox.Width, Hitbox.Height);

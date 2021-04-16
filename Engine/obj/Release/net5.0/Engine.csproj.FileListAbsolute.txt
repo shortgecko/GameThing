@@ -2,3 +2,11 @@ C:\Users\muham\source\repos\projects\c#\GameThing\Engine\obj\Release\net5.0\Engi
 C:\Users\muham\source\repos\projects\c#\GameThing\Engine\obj\Release\net5.0\Engine.AssemblyInfoInputs.cache
 C:\Users\muham\source\repos\projects\c#\GameThing\Engine\obj\Release\net5.0\Engine.AssemblyInfo.cs
 C:\Users\muham\source\repos\projects\c#\GameThing\Engine\obj\Release\net5.0\Engine.csproj.CoreCompileInputs.cache
+C:\Users\muham\source\repos\projects\c#\GameThing\Engine\obj\Release\net5.0\Engine.csprojAssemblyReference.cache
+C:\Users\muham\source\repos\projects\c#\GameThing\Engine\bin\Release\net5.0\Frankenweenie.deps.json
+C:\Users\muham\source\repos\projects\c#\GameThing\Engine\bin\Release\net5.0\Frankenweenie.dll
+C:\Users\muham\source\repos\projects\c#\GameThing\Engine\bin\Release\net5.0\ref\Frankenweenie.dll
+C:\Users\muham\source\repos\projects\c#\GameThing\Engine\bin\Release\net5.0\Frankenweenie.pdb
+C:\Users\muham\source\repos\projects\c#\GameThing\Engine\obj\Release\net5.0\Frankenweenie.dll
+C:\Users\muham\source\repos\projects\c#\GameThing\Engine\obj\Release\net5.0\ref\Frankenweenie.dll
+C:\Users\muham\source\repos\projects\c#\GameThing\Engine\obj\Release\net5.0\Frankenweenie.pdb

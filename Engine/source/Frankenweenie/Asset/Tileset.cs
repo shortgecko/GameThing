@@ -5,25 +5,37 @@ namespace Frankenweenie
 {
     public class Tileset
     {
-        public Rectangle[,] Tiles;
-        public Texture2D Source;
-        public int TileWidth;
-        public int TileHeight;
+        private Rectangle[,] Tiles;
+        private Texture2D Source;
+        private int TileWidth;
+        private int TileHeight;
 
-        public Tileset(Texture2D texture, int tileWidth, int tileHeight)
+        public Tileset(string texture, int tileWidth, int tileHeight)
         {
-            Source = texture;
+            Source = Content.Texture(texture);
             Tiles = new Rectangle[Source.Width / tileWidth, Source.Height / tileHeight];
 
             TileWidth = tileWidth;
             TileHeight = tileHeight;
 
-            for (int x = 0; x < tileWidth; x++)
-                for (int y = 0; x < tileWidth; y++)
+            for (int x = 0; x < Source.Width / tileWidth; x++)
+                for (int y = 0; y < Source.Width / tileHeight; y++)
                 {
                     Tiles[x, y] = new Rectangle(x * tileWidth, y * tileHeight, tileWidth, tileHeight);
                 }
         }
+
+        public void Draw(int id, Point Position, Color color)
+        {
+            int w = Source.Width / TileWidth;
+            int h = Source.Height / TileHeight;
+            int x = id / w;
+            int y = id % w ;
+            var tile = Tiles[y, x];
+            Drawer.Batch.Draw(Source, new Rectangle(Position.X * TileWidth, Position.Y * TileHeight, TileWidth, TileHeight), tile, Color.White);
+        }
+
+        public void Dispose() => Source.Dispose();
 
     }
 }

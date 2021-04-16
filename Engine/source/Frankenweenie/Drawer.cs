@@ -21,7 +21,6 @@ namespace Frankenweenie
 
         public static void HollowRectangle(Rectangle input, int t, Color c)
         {
-
             hollowRect.X = input.X;
             hollowRect.Y = input.Y;
             hollowRect.Width = input.Width;
