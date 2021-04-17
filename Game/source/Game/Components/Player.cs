@@ -13,6 +13,7 @@ namespace Game
         private Mover mover;
         private Facing Facing;
         private const int speed = 240;
+        private const int vSpeed = -20;
         private int normalGravity = 20;
         private StateMachine<States> StateMachine;
         private bool grounded { get { return mover.collision(new Point(0, 1), Mover.Masks.All); } }
@@ -77,7 +78,20 @@ namespace Game
         {
             if (!grounded)
                 mover.Move.Y += normalGravity;
-            else
+
+            Jump();
+
+            if (Input.WallClimb)
+            {
+                if(WallCheck)
+                    StateMachine.Set(States.Wall);
+            }
+
+        }
+
+        private void Jump()
+        {
+            if (grounded)
                 coyoteTimer.Start(coyoteTime);
 
             mover.Move.X = Input.Horizontal * speed;
@@ -104,15 +118,8 @@ namespace Game
             if (varJumpTimer.Duration < 0 && jumped)
             {
                 Logger.Log("big jump");
-                mover.Move.Y -= 10f;
+                mover.Move.Y *= -2f;
             }
-
-            if (Input.WallClimb)
-            {
-                if(WallCheck)
-                    StateMachine.Set(States.Wall);
-            }
-
         }
 
         private void WallState()

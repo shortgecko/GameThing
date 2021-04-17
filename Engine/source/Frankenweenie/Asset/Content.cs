@@ -16,6 +16,33 @@ namespace Frankenweenie
     public class Content
     {
         private static Dictionary<string, object> loadedAssets = new Dictionary<string, object>();
+        public static void Dispose()
+        {
+            Logger.Log("[Content] Disposing assets..");
+            foreach(var assetName in loadedAssets.Keys)
+            {
+                var input = loadedAssets[assetName];
+                if(input is IDisposable)
+                {
+                    var asset = (IDisposable)input;
+                    asset.Dispose();
+                    asset = null;
+                }
+                input = null;
+            }
+            loadedAssets.Clear();
+            Logger.Log("[CONTENT] Assets disposed");
+
+        }
+        public static string Path
+        {
+            get
+            {
+                return Engine.AssetDirectory;
+            }
+        }       
+
+        #region TextureFunc
         public static Texture2D Empty
         {
             get
@@ -42,100 +69,8 @@ namespace Frankenweenie
             texture.SetData(data);
             return texture;
         }
-        private static string Directory(string input)
-        {
-            var filepath = IO.Path.Combine(Engine.AssetDirectory + "/" + input);
-            if (string.IsNullOrEmpty(filepath))
-            {
-                throw new ArgumentNullException("Asset Name cannot be null or empty");
-            }
-
-            return filepath.Replace('\\', '/');
-        }
-
-        public static void Dispose()
-        {
-            Logger.Log("[Content] Disposing assets..");
-            foreach(var assetName in loadedAssets.Keys)
-            {
-                var input = loadedAssets[assetName];
-                if(input is IDisposable)
-                {
-                    var asset = (IDisposable)input;
-                    asset.Dispose();
-                    asset = null;
-                }
-                input = null;
-            }
-            loadedAssets.Clear();
-            Logger.Log("[CONTENT] Assets disposed");
-
-        }
-
-        public static Texture2D Texture(string assetName)
-        {
-            var key = Directory(assetName);
-            // Check for a previously loaded asset first
-            object asset = null;
-            if (loadedAssets.TryGetValue(key, out asset))
-            {
-                if (asset is Texture2D)
-                {
-                    return (Texture2D)asset;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-
-            // Load the asset.
-            var result = TexFromFile(key);
-            loadedAssets[key] = result;
-            Logger.Log("[CONTENT]" + "[TEXTURE] " + key);
-            return result;
-        }
-        public static string Path(string path)
-        {
-            return IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "/" + path.Replace('\\', '/'));
-        }
-        public static string LoadFile(string assetName)
-        {
-            var key = Directory(assetName);
-
-            object asset = null;
-            if (loadedAssets.TryGetValue(key, out asset))
-            {
-                if (asset is string)
-                {
-                    return (string)asset;
-                }
-            }
-
-            // Load the asset.
-            var result = FromFile(key);
-            loadedAssets[key] = result;
-            return result;
-        }
-        public static XmlDocument LoadXml(string assetName)
-        {
-            var key = Directory(assetName);
-
-            // Check for a previously loaded asset first
-            object asset = null;
-            if (loadedAssets.TryGetValue(key, out asset))
-            {
-                if (asset is XmlDocument)
-                {
-                    return (XmlDocument)asset;
-                }
-            }
-
-            // Load the asset.
-            var result = XMLFromFile(key);
-            loadedAssets[key] = result;
-            return result;
-        }
+        #endregion
+        #region Texture
         private static Texture2D TexFromFile(string file)
         {
             using (System.IO.Stream titleStream = TitleContainer.OpenStream(file))
@@ -143,46 +78,56 @@ namespace Frankenweenie
                 return Texture2D.FromStream(Engine.Device.GraphicsDevice, titleStream);
             }
         }
+        public static Texture2D Texture(string assetName)
+        {
+            var key = Directory(assetName);
+            // Check for a previously loaded asset first
+            object asset = null;
+            if(GetLoaded<Texture2D>(key, out asset))
+                return (Texture2D)asset;
+            // Load the asset.
+            var result = TexFromFile(key);
+            loadedAssets[key] = result;
+            Logger.Log("[CONTENT]" + "[TEXTURE] " + key);
+            return result;
+        }
+        #endregion
+        #region XML
+        public static XmlDocument LoadXml(string assetName)
+        {
+            var key = Directory(assetName);
+
+            // Check for a previously loaded asset first
+            object asset = null;
+            if (GetLoaded<XmlDataDocument>(key, out asset))
+                return (XmlDocument)asset;
+
+            // Load the asset.
+            var result = XMLFromFile(key);
+            loadedAssets[key] = result;
+            return result;
+        }
         private static XmlDocument XMLFromFile(string filepath)
         {
             XmlDocument xml = new XmlDocument();
             xml.Load(TitleContainer.OpenStream(filepath));
             return xml;
         }
-        private static string FromFile(string filepath)
-        {
-            using (var stream = TitleContainer.OpenStream(filepath))
-            {
-                using (var reader = new StreamReader(stream))
-                {
-                    string text = reader.ReadToEnd();
-                    return text;
-                }
-            }
-        }
-        public static string TitlePath(string path)
-        {
-            return Engine.AssetDirectory + "/" + path;
-        }
-
+        #endregion
+        #region SpriteFont
         public static SpriteFont Font(string assetName, float size)
         {
             var key = Directory(assetName);
             object asset = null;
-            if (loadedAssets.TryGetValue(key, out asset))
-            {
-                if (asset is SpriteFont)
-                {
-                    return (SpriteFont)asset;
-                }
-            }
+
+            if (GetLoaded<SpriteFont>(key, out asset))
+                return (SpriteFont)asset;
 
             // Load the asset.
             var result = LoadFont(assetName, size);
             loadedAssets[key] = result;
             return result;
         }
-
         private static SpriteFont LoadFont(string file, float size)
         {
             var fontBakeResult = TtfFontBaker.Bake(File.ReadAllBytes(@"C:\\Windows\\Fonts\arial.ttf"),
@@ -200,13 +145,60 @@ namespace Frankenweenie
 
             return fontBakeResult.CreateSpriteFont(Engine.Device.GraphicsDevice);
         }
+        #endregion
+        #region FileLoading
+        private static string ReadFile(string filepath)
+        {
+            using (var stream = TitleContainer.OpenStream(filepath))
+            {
+                using (var reader = new StreamReader(stream))
+                {
+                    string text = reader.ReadToEnd();
+                    return text;
+                }
+            }
+        }
+        public static string LoadFile(string assetName)
+        {
+            var key = Directory(assetName);
 
+            object asset = null;
+            if (loadedAssets.TryGetValue(key, out asset))
+            {
+                if (asset is string)
+                {
+                    return (string)asset;
+                }
+            }
 
-        //private static Song LoadSong(string file)
-        //{
-        //   //var uri = new Uri(file);
-        //   // Song.FromUri("song", uri);
-        //}
+            // Load the asset.
+            var result = ReadFile(key);
+            loadedAssets[key] = result;
+            return result;
+        }
+        #endregion
+        #region Helper
+        private static bool GetLoaded<T>(string key, out object asset)
+        {
+            if (loadedAssets.TryGetValue(key, out asset))
+            {
+                if (asset is T)
+                    return true;
+                else
+                    return false;
+            }
+            return false;
+        }
+        private static string Directory(string input)
+        {
+            var filepath = IO.Path.Combine(Engine.AssetDirectory + "/" + input);
+            if (string.IsNullOrEmpty(filepath))
+            {
+                throw new ArgumentNullException("Asset Name cannot be null or empty");
+            }
 
+            return filepath.Replace('\\', '/');
+        }
+        #endregion
     }
 }

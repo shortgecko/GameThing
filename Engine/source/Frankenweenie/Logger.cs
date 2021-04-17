@@ -7,7 +7,7 @@ namespace Frankenweenie
     public static class Logger
     {
         private static List<string> Logs = new List<string>();
-        private static string Path = Content.Path("log.txt");
+        private static string Path = $"{Engine.Directory}/log.txt";
         private static string Title;
 
         public static void Initialize()

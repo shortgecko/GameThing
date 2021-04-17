@@ -9,12 +9,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-
 namespace Frankenweenie
 {
     public static class Pooler
     {
-        public static int StartCount;
         private static Dictionary<Type, Queue<Component>> Pools = new();
 
         static Pooler()
@@ -53,9 +51,7 @@ namespace Frankenweenie
         {
             var type = c.GetType();
             if(Pools.ContainsKey(type))
-            {
-                Pools[c.GetType()].Enqueue(c);
-            }
+                Pools[type].Enqueue(c);
         }
 
     }

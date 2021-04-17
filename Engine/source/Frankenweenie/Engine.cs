@@ -58,7 +58,13 @@ namespace Frankenweenie
                 return Instance.Window.Title;
             }
         }
-
+        public static string Directory
+        {
+            get
+            {
+                return AppDomain.CurrentDomain.BaseDirectory;
+            }
+        }
         public Engine()
         {
             Device = new GraphicsDeviceManager(this);

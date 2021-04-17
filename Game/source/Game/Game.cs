@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using Game.Editor;
 using Microsoft.Xna.Framework.Content;
 using System;
 using System.Xml;
