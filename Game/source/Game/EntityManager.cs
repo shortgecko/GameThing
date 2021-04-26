@@ -11,12 +11,14 @@ namespace Game
     
     public class EntityManager
     {
-        public static Entity Create(string name, Dictionary<string,object> values = null)
+        public static Entity Create(string name, Parameters p)
         {
             switch(name)
             {
                 case "player":
                     return Player.Create();
+                case "platform":
+                    return Platform.Create(p);
             }
             throw new Exception("Entity was null");
         }

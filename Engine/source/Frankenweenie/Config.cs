@@ -8,9 +8,8 @@
         public int Width { get; set; }
         public int Height { get; set; }
         public bool IsMouseVisible { get; set; }
-        public SceneManager SceneManager;
 
-        public Config(string windowTitle, string assetDirectory, bool fixedTimestep, int width, int height, SceneManager manager, bool isMouseVisible = false)
+        public Config(string windowTitle, string assetDirectory, bool fixedTimestep, int width, int height, bool isMouseVisible = false)
         {
             WindowTitle = windowTitle;
             AssetDirectory = assetDirectory;
@@ -18,7 +17,6 @@
             Width = width;
             Height = height;
             IsMouseVisible = isMouseVisible;
-            SceneManager = manager;
         }
 
     }

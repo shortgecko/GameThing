@@ -1,13 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Frankenweenie
 {
@@ -43,8 +36,10 @@ namespace Frankenweenie
                 return new T();
             else
             {
+                Logger.Log("from pool");
                 return queue.Dequeue() as T;
             }
+
         }
 
         public static void EntityRemoved(Component c)
@@ -55,9 +50,5 @@ namespace Frankenweenie
         }
 
     }
-
-    public class Pooled : Attribute
-    {
-
-    }
+    public class Pooled : Attribute {}
 }

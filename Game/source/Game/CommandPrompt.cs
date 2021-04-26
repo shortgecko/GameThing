@@ -50,7 +50,7 @@ namespace Game
             {
                 ImGui.Begin("Command Prompt", ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoCollapse);
                 ImGui.SetWindowPos(Vector2.Zero);
-                ImGui.SetWindowSize(new Vector2(Engine.Width, ImGui.GetWindowSize().Y));
+                ImGui.SetWindowSize(new Vector2(Window.Width, ImGui.GetWindowSize().Y));
                 ImGui.InputText("Command", ref command, 1000);
                 Action cmd;
                 if (Commands.TryGetValue(command, out cmd))

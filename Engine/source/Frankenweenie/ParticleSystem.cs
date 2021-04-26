@@ -60,8 +60,8 @@ namespace Frankenweenie
 
         public ParticleSystem()
         {
-            Textures = new();
-            Colors = new();
+            Textures = new List<Texture2D>();
+            Colors = new List<Color>();
         }
 
         private Particle GenerateNewParticle

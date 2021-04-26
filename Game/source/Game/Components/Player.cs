@@ -9,6 +9,7 @@ namespace Game
     [Pooled]   
     public class Player : Component
     {
+
         private Vector2 startPos;
         private Mover mover;
         private Facing Facing;
@@ -17,7 +18,7 @@ namespace Game
         private int normalGravity = 20;
         private StateMachine<States> StateMachine;
         private bool grounded { get { return mover.collision(new Point(0, 1), Mover.Masks.All); } }
-        private const int jumpForce = -600;
+        private const int jumpForce = -800;
         private const int hJumpForce = 140;
         private Timer coyoteTimer;
         private float coyoteTime = 0.3f;
@@ -28,6 +29,7 @@ namespace Game
         private float varJumpTime = 0.2f;
         private bool WallCheck
         {
+            
             get
             { 
                 if (Facing != 0)
@@ -54,9 +56,9 @@ namespace Game
         {
             Entity player = new Entity();
             player.Add(new Hitbox(0, 0, 8, 8));
-            player.add<Player>();
-            player.add<Mover>();
-            player.add<StateMachine<States>>();
+            player.Add<Player>();
+            player.Add<Mover>();
+            player.Add<StateMachine<States>>();
             return player;
         }
 
@@ -78,7 +80,6 @@ namespace Game
         {
             if (!grounded)
                 mover.Move.Y += normalGravity;
-
             Jump();
 
             if (Input.WallClimb)
@@ -114,11 +115,11 @@ namespace Game
                 jumped = true;
             }
 
-
             if (varJumpTimer.Duration < 0 && jumped)
             {
-                Logger.Log("big jump");
-                mover.Move.Y *= -2f;
+                mover.Move.Y *= 2;
+                //Logger.Log();
+                jumped = false;
             }
         }
 
@@ -128,20 +129,27 @@ namespace Game
             {
                 
             }
-                StateMachine.Set(States.Normal);
-            if (WallCheck)
-                mover.Move.Y = Input.Vertical * climbSpeed;
+            
+            StateMachine.Set(States.Normal);
+
         }
 
+        bool a = false;
         public override void Update()
         {
-            if(!new Rectangle(0,0,320,180).Contains(Entity.Position) || Input.TempRestart)
+            if (Input.Jump.Pressed)
+            {
+                World.Entities.Add(new Entity());
+            }
+
+            Logger.Log(World.Entities.Count);
+
+            if (!new Rectangle(0,0,320,180).Contains(Entity.Position) || Input.TempRestart)
                 Entity.Position = startPos;
         }
         public override void Render()
-        {
-            
-            Drawer.Rect(Utils.RectF(Entity.Position,8 ,8), Color.Red);
+        {            
+            Drawer.Rect(Utils.RectF(Entity.Position, 8 ,8), Color.Red);
         }
 
 

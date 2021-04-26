@@ -4,9 +4,18 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Frankenweenie;
 
-namespace Game
+namespace Frankenweenie
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "External JSON format")]
+
+    public class OgmoVector
+    {
+        public float x { get; set; }
+        public float y { get; set; }
+    }
+
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "External JSON format")]
     public class OgmoEntity
     {
@@ -19,6 +28,8 @@ namespace Game
         public int height { get; set; }
         public int originX { get; set; }
         public int originY { get; set; }
+        public List<OgmoVector> nodes { get; set; }
+
     }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "External JSON format")]
@@ -38,6 +49,21 @@ namespace Game
         public int arrayMode { get; set; }
         public string[] grid { get; set; }
         public OgmoEntity[] entities { get; set; }
+        public int[] GridToTileLayer()
+        {
+            var layer = this;
+            int[] data = new int[layer.grid.Length];
+            for (int i = 0; i < data.Length; i++)
+            {
+                if (layer.grid[i] != "0")
+                    data[i] = int.Parse(layer.grid[i]);
+                else
+                    data[i] = -1;
+
+            }
+
+            return data;
+        }
     }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "External JSON format")]
@@ -61,12 +87,12 @@ namespace Game
 
         public OgmoLevel(Stream fs)
         {
+
             using StreamReader streamReader = new StreamReader(fs);
             using JsonTextReader jsonTextReader = new JsonTextReader(streamReader);
 
             JsonSerializer serializer = new JsonSerializer();
             Data = serializer.Deserialize<OgmoLevelData>(jsonTextReader);
-
             OgmoLayer firstLayer = Data.layers[0];
             LevelSize = new Vector2(firstLayer.gridCellsX, firstLayer.gridCellsY);
             TileSize = new Vector2(firstLayer.gridCellWidth, firstLayer.gridCellHeight);
@@ -88,19 +114,5 @@ namespace Game
         }
 
 
-        public int[] GridToTileLayer(OgmoLayer layer)
-        {
-            int[] data = new int[layer.grid.Length];
-            for(int i = 0; i < data.Length; i++)
-            {
-                if (layer.grid[i] != "0")
-                    data[i] = int.Parse(layer.grid[i]);
-                else
-                    data[i] = -1;
-
-            }
-            
-            return data;
-        }
     }
 }

@@ -32,12 +32,13 @@ namespace Frankenweenie
 
         public VirtualRenderTarget()
         {
-            SourceRectangle = new Rectangle(0, 0, Engine.Width, Engine.Height);
-            Target = new RenderTarget2D(Engine.Device.GraphicsDevice, Engine.Width, Engine.Height);
+            SourceRectangle = new Rectangle(0, 0, Window.Width,Window.Height);
+            Target = new RenderTarget2D(Engine.Device.GraphicsDevice, Window.Width, Window.Height);
         }
 
         public VirtualRenderTarget(Vector2 position, int width, int height, float scale)
         {
+            SourceRectangle = new Rectangle(0, 0, width, height);
             Position = position;
             Scale.X = scale;
             Target = new RenderTarget2D(Engine.Device.GraphicsDevice, width, height);
@@ -46,6 +47,7 @@ namespace Frankenweenie
 
         public VirtualRenderTarget(Vector2 position, int width, int height, Vector2 scale)
         {
+            SourceRectangle = new Rectangle(0, 0, width, height);
             Position = position;
             Scale = scale;
             Target = new RenderTarget2D(Engine.Device.GraphicsDevice, width, height);
@@ -54,6 +56,7 @@ namespace Frankenweenie
 
         public void Set(int width, int height)
         {
+            SourceRectangle = new Rectangle(0, 0, width, height);
             Target = new RenderTarget2D(Engine.Device.GraphicsDevice, width, height);
         }
 

@@ -10,7 +10,6 @@ using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
 using System.Linq;
 
-
 namespace Game
 {
     public class Game : Scene
@@ -22,9 +21,9 @@ namespace Game
         public static void Load(string path)
         {
             World.Clear();
-            OgmoLevel level = new OgmoLevel(TitleContainer.OpenStream($"assets/levels/{path}"));
+            OgmoLevel level = Content.LoadOgmo($"levels/{path}");
             var tileLayer = level["Solids"];
-            var tileLayerData = level.GridToTileLayer(tileLayer);     
+            var tileLayerData = tileLayer.GridToTileLayer();     
             Level.Tiles = new Tilemap(tileLayerData, tileLayer.gridCellsX, tileLayer.gridCellsY);
             for (int x = 0; x < Level.Tiles.Width; x++)
                 for (int y = 0; y < Level.Tiles.Height; y++)
@@ -33,18 +32,16 @@ namespace Game
                         Level.Solids.Add(new Hitbox(x * 8, y * 8, 8, 8));
                 }
             var background = level["Background"];
-            Level.BgTiles = new Tilemap(level.GridToTileLayer(background), background.gridCellsX, background.gridCellsY);
+            Level.BgTiles = new Tilemap(background.GridToTileLayer(), background.gridCellsX, background.gridCellsY);
             var entityLayer = level["Entities"];
 
             foreach(OgmoEntity Entity in entityLayer.entities)
             {
-                var e = EntityManager.Create(Entity.name);
+                var e = EntityManager.Create(Entity.name, new Parameters(Entity));
                 e.Position = new Vector2(Entity.x, Entity.y);
-                var mover = e.Get<Mover>();
-                if(mover != null)
-                    Level.Actors.Add(mover.Hitbox);
                 World.Add(e);
             }
+
 
             Tiler.Tile(Level.Tiles);
 
@@ -59,7 +56,7 @@ namespace Game
         protected override void Initialize()
         {
             Engine.RenderTarget.Scale = new Vector2(4f, 4f);
-            Engine.Size(320 * 4, 180 * 4);
+            Window.Size(320 * 4, 180 * 4);
             if (ImGuiLayer.get<CommandPrompt>() == null)
                 ImGuiLayer.add<CommandPrompt>();
             Load("one.json");
@@ -68,9 +65,12 @@ namespace Game
 
         protected override void Load()
         {
-            Tileset = new Tileset("graphics/stone.png", 8, 8 );
+            Tileset = new Tileset("graphics/tileset.png", 8, 8 );
             BgTile = Content.Texture("graphics/bg_tile.png");
+            Level.Tiles.LayerDepth = 0.2f;
+            Level.BgTiles.LayerDepth = 0.1f;
         }
+
 
         protected override void End()
         {

@@ -9,7 +9,7 @@ namespace Game
         public static Entity Create()
         {
             Entity bullet = new Entity();
-            bullet.add<Bullet>();
+            bullet.Add<Bullet>();
             return bullet;
         }
 

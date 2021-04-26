@@ -6,13 +6,10 @@ using System.IO;
 using System.Xml;
 using IO = System.IO;
 using SpriteFontPlus;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
 
 namespace Frankenweenie
 {
+
     public class Content
     {
         private static Dictionary<string, object> loadedAssets = new Dictionary<string, object>();
@@ -57,7 +54,7 @@ namespace Frankenweenie
                 return texture;
             }
         }
-        public static Texture2D Rectangle(int width, int height, Color color)
+        public static Texture2D CreateTexture(int width, int height, Color color)
         {
             //initialize a texture
             var texture = new Texture2D(Engine.Device.GraphicsDevice, width, height);
@@ -88,7 +85,7 @@ namespace Frankenweenie
             // Load the asset.
             var result = TexFromFile(key);
             loadedAssets[key] = result;
-            Logger.Log("[CONTENT]" + "[TEXTURE] " + key);
+            Logger.Log($"Loaded {key}");
             return result;
         }
         #endregion
@@ -112,6 +109,28 @@ namespace Frankenweenie
             XmlDocument xml = new XmlDocument();
             xml.Load(TitleContainer.OpenStream(filepath));
             return xml;
+        }
+        #endregion
+        #region Ogmo
+        public static OgmoLevel LoadOgmo(string assetName)
+        {
+            var key = Directory(assetName);
+
+            // Check for a previously loaded asset first
+            object asset = null;
+            if (GetLoaded<OgmoLevel>(key, out asset))
+                return (OgmoLevel)asset;
+
+            // Load the asset.
+            var result = LoadOgmoLevelFromFile(key);
+            loadedAssets[key] = result;
+            return result;
+        }
+        private static OgmoLevel LoadOgmoLevelFromFile(string path)
+        {
+            Logger.Log(path);
+            OgmoLevel level = new OgmoLevel(TitleContainer.OpenStream($"{path}"));
+            return level;
         }
         #endregion
         #region SpriteFont

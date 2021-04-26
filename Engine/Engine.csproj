@@ -16,20 +16,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="source\Frankenweenie\Components\Mover.cs" />
-    <Compile Remove="source\Frankenweenie\Components\Player.cs" />
-    <Compile Remove="source\Frankenweenie\Components\Timer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="source\Frankenweenie\Components\Mover.cs" />
-    <Content Include="source\Frankenweenie\Components\Player.cs" />
-    <Content Include="source\Frankenweenie\Components\Timer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="ImGui.NET" Version="1.78.0" />
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="SpriteFontPlus.MonoGame" Version="0.7.0.22" />
   </ItemGroup>
 

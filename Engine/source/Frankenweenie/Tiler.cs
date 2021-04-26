@@ -8,8 +8,6 @@ namespace Frankenweenie
 {
     public class Tiler
     {
-        private const int variable = -1;
-
         public static void Tile(Tilemap tilemap)
         {
             for(int x = 0; x < tilemap.Width; x++)
@@ -17,27 +15,26 @@ namespace Frankenweenie
                 {
                     int i = tilemap.Data[x + y * tilemap.Width];
                     if (i > -1)
-                        tilemap.Data[x + y * tilemap.Width] = GetID(tilemap, x, y);
+                        tilemap.Data[x + y * tilemap.Width] = set(tilemap, x, y);
                 }
         }              
 
-        private static int GetID(Tilemap tilemap, int x, int y)
+        private static int set(Tilemap tilemap, int x, int y)
         {
-            var north = GetTile(tilemap, x, y - 1);
-            var south = GetTile(tilemap, x, y + 1);
-            var east = GetTile(tilemap, x + 1, y);
-            var west = GetTile(tilemap, x - 1, y);
-            var id = north + 2 * west + 4 * east + 8 * south;
-            //id -= 1;
-            return id;
+            int north = get(tilemap, x, y - 1);
+            int south = get(tilemap, x, y + 1);
+            int east = get(tilemap, x + 1, y);
+            int west = get(tilemap, x - 1, y);
+            return north + 2 * west + 4 * east + 8 * south;
         }
 
-        private static int GetTile(Tilemap tilemap,int x, int y)
+        private static int get(Tilemap tilemap, int x, int y)
         {
             bool lessX = x < 0;
             bool lessY = y < 0;
             bool biggerX = x > tilemap.Width - 1;
             bool biggerY = y > tilemap.Height - 1;
+
             if (lessX || lessY || biggerX || biggerY)
                 return 0;
             if (tilemap.Data[x + y * tilemap.Width] > -1)

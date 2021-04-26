@@ -7,8 +7,25 @@ namespace Frankenweenie
     public class World
     {
         public static List<Entity> Entities = new List<Entity>();
-        //public static Dictionary<Type, Bucket> Buckets = new Dictionary<Type, Bucket>();
+        private static List<Entity> toRemove = new List<Entity>();
+        private static Dictionary<Type, List<Component>> TypeCollection = new Dictionary<Type, List<Component>>();
 
+        public static void AddToTypeCollection(Type t, Component c)
+        {
+
+            if (TypeCollection.ContainsKey(t))
+                TypeCollection[t].Add(c);
+            else
+            {
+                List<Component> components = new List<Component>();
+                components.Add(c);
+                TypeCollection.Add(t, components);
+            }
+        }
+        public static List<Component> All<T>() where T : Component
+        {
+            return TypeCollection[typeof(T)];
+        }
         public static void Add(Entity entity)
         {
             for (int i = 0; i < entity.Components.Count; i++)
@@ -29,17 +46,24 @@ namespace Frankenweenie
                 component.Removed();
                 Pooler.EntityRemoved(component);
             }
-            Entities.Remove(entity);
+
+            toRemove.Add(entity);
         }
 
         public static void Update()
-        {
-            for (int i = 0; i < Entities.Count; i++)
+        {            
+            for (int i = 0; i < World.Entities.Count; i++)
             {
                 for (int j = 0; j < Entities[i].Components.Count; j++)
-                {
+                {                 
                     Entities[i].Components[j].Update();
                 }
+            }
+            foreach (Entity e in toRemove)
+                Entities.Remove(e);
+            if(toRemove.Count > 0)
+            {
+                toRemove.Clear();
             }
         }
 

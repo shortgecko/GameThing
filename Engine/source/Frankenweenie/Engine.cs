@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using Blah = Frankenweenie;
+using System.Linq;
+
 
 namespace Frankenweenie
 {
@@ -28,21 +30,6 @@ namespace Frankenweenie
         public static SceneManager SceneManager;
         private static Color clearColor = Color.Black;
 
-        public static int Width
-        {
-            get
-            {
-                return Device.GraphicsDevice.PresentationParameters.BackBufferWidth;
-            }
-        }
-
-        public static int Height
-        {
-            get
-            {
-                return Device.GraphicsDevice.PresentationParameters.BackBufferHeight;
-            }
-        }
         public static string AssetDirectory
         {
             get
@@ -50,21 +37,14 @@ namespace Frankenweenie
                 return Config.AssetDirectory;
             }
         }
-
-        public static string Title
-        {
-            get
-            {
-                return Instance.Window.Title;
-            }
-        }
-        public static string Directory
+        public static string AssemblyDirectory
         {
             get
             {
                 return AppDomain.CurrentDomain.BaseDirectory;
             }
         }
+
         public Engine()
         {
             Device = new GraphicsDeviceManager(this);
@@ -75,13 +55,11 @@ namespace Frankenweenie
             new ImGuiLayer(Device, this);
         }
 
-
         protected override void Initialize()
         {
             Content.RootDirectory = Config.AssetDirectory;
             IsFixedTimeStep = Config.FixedTimeStep;
             Window.Title = Config.WindowTitle;
-            SceneManager = Config.SceneManager;
             Device.PreferredBackBufferWidth = Config.Width;
             Device.PreferredBackBufferHeight = Config.Height;
             Device.ApplyChanges();
@@ -89,8 +67,13 @@ namespace Frankenweenie
             Logger.Initialize();
 
             RenderTarget = new VirtualRenderTarget();
-#if DEBUG
+#if DEBUG || FRANKENWEENIE_IMGUI
             ImGuiLayer.Initialize();
+#endif
+
+#if DEBUG
+            Logger.Log($"GPU Information\n " +
+               $"{GraphicsAdapter.DefaultAdapter.Description}");
 #endif
             LoadContent();
         }
@@ -113,13 +96,6 @@ namespace Frankenweenie
             {
                 return m_Scene;
             }
-        }
-
-        public static void Size(int width, int height)
-        {
-            Device.PreferredBackBufferWidth = width;
-            Device.PreferredBackBufferHeight = height;
-            Device.ApplyChanges();
         }
 
         public static void Set(Scene scene)
@@ -155,7 +131,7 @@ namespace Frankenweenie
         {
             GraphicsDevice.SetRenderTarget(RenderTarget.Target);
             GraphicsDevice.Clear(clearColor);
-            Drawer.Batch.Begin();
+            Drawer.Batch.Begin(SpriteSortMode.FrontToBack);
             if(m_Scene.IsRunning)
                 m_Scene.Draw();
             Drawer.Batch.End();
@@ -166,7 +142,7 @@ namespace Frankenweenie
             RenderTarget.Render();
             Drawer.Batch.End();
 
-#if DEBUG
+#if DEBUG || FRANKENWEENIE_IMGUI
             ImGuiLayer.Draw();
 #endif
 
@@ -185,16 +161,16 @@ namespace Frankenweenie
             }
         }
 
-        public static void Run(ref Config config, string scene)
+        public static void Run(ref Config config, SceneManager sceneManager, string scene = null)
         {
-            CreateInstance(config, scene);
+            CreateInstance(ref config, sceneManager, scene);
             Engine.Instance.Run();
             End();
         }
 
-        public static void RunWithLogging(ref Config config, string scene)
+        public static void RunWithLogging(ref Config config, SceneManager sceneManager, string scene = null)
         {
-            CreateInstance(config, scene);
+            CreateInstance(ref config, sceneManager, scene);
             try
             {
                 Engine.Instance.Run();
@@ -211,11 +187,19 @@ namespace Frankenweenie
             }
         }
 
-        private static void CreateInstance(Config config, string scene)
+        private static void CreateInstance(ref Config config, SceneManager sceneManager, string scene = null)
         {
             Config = config;
             Engine.Instance = new Engine();
-            Engine.m_Scene = Config.SceneManager[scene];
+            Engine.SceneManager = sceneManager;
+            if(scene != null)
+                Engine.m_Scene = Engine.SceneManager[scene];
+            else
+            {
+                string key = Engine.SceneManager.Scenes.First().Key;
+                Engine.m_Scene= Engine.SceneManager.Scenes[key];
+            }
+
         }
 
         private static void End()

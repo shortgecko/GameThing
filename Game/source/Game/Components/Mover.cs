@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Frankenweenie;
 using System;
+using System.Collections.Generic;
 
 namespace Game
 {
@@ -16,20 +17,36 @@ namespace Game
         public Hitbox Hitbox;
         public Vector2 Move;
         public bool OnGround = false;
+        public Masks Mask = Masks.All;
 
+        List<Component> Hitboxes = World.All<Hitbox>();
+
+        public override void Initialize()
+        {
+            Hitbox = Entity.Get<Hitbox>();
+        }
 
         public override void Update()
         {
+
             CheckX();
             CheckY();
 
         }
 
         private bool Check(Point offset, Hitbox other)
-        {
-            Hitbox = Entity.Get<Hitbox>();
+        { 
             Hitbox.X = (int)Entity.Position.X;
             Hitbox.Y = (int)Entity.Position.Y;
+            var box = new Hitbox(Hitbox.X + offset.X, Hitbox.Y + offset.Y, Hitbox.Width, Hitbox.Height);
+            return Intersects(box, other);
+        }
+        private bool CheckActor(Point offset, Hitbox other)
+        {
+            Hitbox.X = (int)Entity.Position.X;
+            Hitbox.Y = (int)Entity.Position.Y;
+            other.X = (int)other.Entity.Position.X;
+            other.Y = (int)other.Entity.Position.Y;
             var box = new Hitbox(Hitbox.X + offset.X, Hitbox.Y + offset.Y, Hitbox.Width, Hitbox.Height);
             return Intersects(box, other);
         }
@@ -47,13 +64,9 @@ namespace Game
             switch (mask)
             {
                 case Masks.Solids:
-                    if (CheckSolids(offset))
-                        return true;
-                    break;
+                    return CheckSolids(offset);
                 case Masks.Actors:
-                    if (CheckActors(offset))
-                        return true;
-                    break;
+                    return CheckActors(offset);
                 case Masks.All:
                     if (CheckSolids(offset))
                         return true;
@@ -68,8 +81,9 @@ namespace Game
 
         private bool CheckSolids(Point offset)
         {
-            if (Level.Solids.Count > 1)
+
             {
+                
                 for (int i = 0; i < Level.Solids.Count; i++)
                 {
                     var hitbox = Level.Solids[i];
@@ -85,19 +99,13 @@ namespace Game
 
         private bool CheckActors(Point offset)
         {
-            if (Level.Actors.Count > 1)
+            for (int i = 0; i < Hitboxes.Count; i++)
             {
-                for (int i = 0; i < Level.Actors.Count; i++)
+                var hitbox = (Hitbox)Hitboxes[i];
+                if (CheckActor(offset, hitbox))
                 {
-                    var hitbox = Level.Actors[i];
-                    if (hitbox != null)
-                    {
-                        if (Check(offset, hitbox))
-                        {
-                            if (hitbox != this.Hitbox)
-                                return true;
-                        }
-                    }
+                    if (hitbox != this.Hitbox)
+                        return true;
                 }
             }
 
@@ -111,7 +119,7 @@ namespace Game
 
             while (Move.X != 0)
             {
-                if (!collision(new Point(sign, 0), Masks.All))
+                if (!collision(new Point(sign, 0), Mask))
                 {
                     Entity.Position.X += sign * Engine.Delta;
                     Move.X -= sign;
@@ -130,9 +138,7 @@ namespace Game
             Move.Y = (float)Math.Round(Move.Y);
             while (Move.Y != 0)
             {
-                //Logger.Log(Move.Y);
-                //Logger.Log($"sign {sign}");
-                if (!collision(new Point(0, sign), Masks.All))
+                if (!collision(new Point(0, sign), Mask))
                 {
                     Entity.Position.Y += sign * Engine.Delta;
                     Move.Y -= sign;

@@ -25,14 +25,14 @@ namespace Frankenweenie
                 }
         }
 
-        public void Draw(int id, Point Position, Color color)
+        public void Draw(int id, Point Position, Color color, float layerDepth)
         {
             int w = Source.Width / TileWidth;
             int h = Source.Height / TileHeight;
             int x = id / w;
             int y = id % w ;
             var tile = Tiles[y, x];
-            Drawer.Batch.Draw(Source, new Rectangle(Position.X * TileWidth, Position.Y * TileHeight, TileWidth, TileHeight), tile, Color.White);
+            Drawer.Batch.Draw(Source, new Rectangle(Position.X * TileWidth, Position.Y * TileHeight, TileWidth, TileHeight), tile, Color.White, 0, Vector2.Zero, SpriteEffects.None, layerDepth);
         }
 
         public void Dispose() => Source.Dispose();

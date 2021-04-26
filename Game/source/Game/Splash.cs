@@ -16,7 +16,6 @@ namespace Game
 
         protected override void Load()
         {
-            Engine.Size(320 * 4, 180 * 4);
             Logo = Content.Texture("graphics/logo.png");
         }
 

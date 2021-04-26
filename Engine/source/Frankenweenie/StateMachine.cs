@@ -5,9 +5,10 @@ namespace Frankenweenie
 {
     public class StateMachine<T> : Component
     {
-        private Dictionary<T, Action> InitializeStates = new();
-        private Dictionary<T,Action> UpdateStates = new();
-        private Dictionary<T, Action> EndStates = new();
+        private Dictionary<T, Action> InitializeStates = new Dictionary<T, Action>();
+        private Dictionary<T,Action> UpdateStates = new Dictionary<T, Action>();
+        private Dictionary<T, Action> EndStates = new Dictionary<T, Action>();
+
         public T currentState;
         private bool BeginState = false;
         private bool EndState;

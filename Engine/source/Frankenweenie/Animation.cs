@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace Frankenweenie
 {
-
     public class Animation
     {
         public string Name;

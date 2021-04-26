@@ -52,6 +52,10 @@
               "target": "Package",
               "version": "[3.8.0.1641, )"
             },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
             "SpriteFontPlus.MonoGame": {
               "target": "Package",
               "version": "[0.7.0.22, )"
