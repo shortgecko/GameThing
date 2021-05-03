@@ -145,7 +145,6 @@ namespace Game
         {
             if (!new Rectangle(0,0, 320, 180).Contains(Entity.Position) || Input.TempRestart)
                 Entity.Position = startPos;
-
         }
         public override void Render()
         {            

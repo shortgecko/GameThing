@@ -52,28 +52,50 @@ namespace Frankenweenie
             World.Entities.Add(Entity);
         }
 
-        public static void Remove(Entity entity)
+        public static void Remove(Entity Entity)
         {
-            entity.Components.UpdateList();
+            Entity.Components.UpdateList();
 
-            foreach (Component c in entity.Components)
+            foreach (Component c in Entity.Components)
             {
                 c.Removed();
                 Pooler.EntityRemoved(c);
-                entity.Components.Remove(c);
+                Entity.Components.Remove(c);
                 RemoveFromComponentRegistry(c);
             }
             
-            World.Entities.Remove(entity);
+            World.Entities.Remove(Entity);
         }
+        
+        static void UpdateRegistry(Entity e)
+        {
 
+            if (e.Components.Adding.Count > 1)
+            {
+                foreach (Component component in e.Components.Adding)
+                {
+                    AddToComponentRegistry(component);
+                }
+            }
+
+            if(e.Components.Removing.Count > 1)
+            {
+                foreach (Component component in e.Components.Removing)
+                {
+                    RemoveFromComponentRegistry(component);
+                }
+            }
+
+            e.Components.UpdateList();
+
+        }
         public static void Update()
         {
             World.Entities.UpdateList();
 
-            foreach(Entity Entity in Entities)
+            foreach (Entity Entity in Entities)
             {
-                Entity.Components.UpdateList();
+                UpdateRegistry(Entity);
 
                 foreach(Component Component in Entity.Components)
                 {

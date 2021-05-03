@@ -1,12 +1,13 @@
 ﻿using Frankenweenie;
 using Microsoft.Xna.Framework;
+using System;
 
 namespace Game
 {
     public class Platform : Component
     {
-        float speed = -100f;
-        Mover mover;
+        private float speed = -100f;
+        Mover Mover;
         private Parameters Parameters;
         private float Distance;
 
@@ -21,7 +22,7 @@ namespace Game
             Parameters = parameters;
         }
 
-        private StateMachine<States> StateMachine = new StateMachine<States>();
+        private StateMachine<States> StateMachine;
 
         public static Entity Create(Parameters p)
         {
@@ -34,24 +35,25 @@ namespace Game
 
    
         public override void Initialize()
-        {            
+        {
+            Mover = Entity.Get<Mover>();
+            Mover.Mask = Mover.Masks.Solids;
+            StateMachine = new StateMachine<States>();
             Entity.Add(StateMachine);
-            mover = Entity.Get<Mover>();
-            mover.Mask = Mover.Masks.Solids;
             Distance = Vector2.Distance(Entity.Position, Parameters.Nodes[0]);
             StateMachine.Add(States.Normal, null, Normal, null);
             StateMachine.Add(States.Moving, null, Move, null);
-            StateMachine.Set(States.Normal);
+            StateMachine.Set(States.Moving);
         }
 
         public override void Update()
         {
-           
+            
         }
 
         public void Normal()
         {
-            if (mover.Collision(new Point(0, -1), Mover.Masks.All))
+            if (Mover.Collision(new Point(0, 1), Mover.Masks.All))
                 StateMachine.Set(States.Moving);
         }
 
@@ -59,7 +61,7 @@ namespace Game
         {
             if (Distance > 0)
             {
-                mover.Move.Y -= Distance;
+                Mover.Move.Y += Distance;
                 Distance -= speed;
             }
         }

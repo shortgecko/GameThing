@@ -7,9 +7,9 @@ Log Earthward
 [Log Earthward] adding
 [Log Earthward] Wall 2
 [Log Earthward] adding
-[Log Earthward] Player 1
+[Log Earthward] Normal 1
 [Log Earthward] adding
-[Log Earthward] Wall 2
+[Log Earthward] Moving 2
 [Log Earthward] Loaded Assets/graphics/tileset.png
 [Log Earthward] Loaded Assets/graphics/bg_tile.png
 

@@ -18,6 +18,9 @@ namespace Frankenweenie
         private List<T> Components;
         private List<T> ToRemove;
 
+        public List<T> Adding => ToAdd;
+        public List<T> Removing => ToRemove;
+
         public Registry()
         {
             ToAdd = new List<T>();
