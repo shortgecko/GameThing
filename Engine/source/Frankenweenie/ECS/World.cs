@@ -6,86 +6,98 @@ namespace Frankenweenie
 {
     public class World
     {
-        public static List<Entity> Entities = new List<Entity>();
-        private static List<Entity> toRemove = new List<Entity>();
-        private static Dictionary<Type, List<Component>> TypeCollection = new Dictionary<Type, List<Component>>();
+        private static Registry<Entity> Entities = new Registry<Entity>();
+        public static Dictionary<Type, List<Component>> ComponentRegistry = new Dictionary<Type, List<Component>>();
+        
+        public static int Count => Entities.Count;
 
-        public static void AddToTypeCollection(Type t, Component c)
-        {
-
-            if (TypeCollection.ContainsKey(t))
-                TypeCollection[t].Add(c);
-            else
-            {
-                List<Component> components = new List<Component>();
-                components.Add(c);
-                TypeCollection.Add(t, components);
-            }
-        }
         public static List<Component> All<T>() where T : Component
         {
-            return TypeCollection[typeof(T)];
+            Type t = typeof(T);
+            if (!ComponentRegistry.ContainsKey(t))
+                ComponentRegistry.Add(t, new List<Component>());
+            return ComponentRegistry[t];
         }
-        public static void Add(Entity entity)
+
+        static void AddToComponentRegistry(Component c)
         {
-            for (int i = 0; i < entity.Components.Count; i++)
+            Type t = c.GetType();
+            if(!ComponentRegistry.ContainsKey(t))
             {
-                var component = entity.Components[i];
-                component.Entity = entity;
-                component.Initialize();
+                ComponentRegistry.Add(t, new List<Component>());
+            }
+            ComponentRegistry[t].Add(c);
+        }
+
+        static void RemoveFromComponentRegistry(Component c)
+        {
+            Type t = c.GetType();
+            if(ComponentRegistry.ContainsKey(t))
+                ComponentRegistry[t].Remove(c);
+        }
+
+        public static void Add(Entity Entity)
+        {
+            Entity.Components.UpdateList();
+            foreach (Component c in Entity.Components)
+            {
+                AddToComponentRegistry(c);
             }
 
-            World.Entities.Add(entity);
+            foreach (Component c in Entity.Components)
+            {
+                c.Initialize();
+            }
+
+            World.Entities.Add(Entity);
         }
 
         public static void Remove(Entity entity)
         {
-            for (int j = 0; j < entity.Components.Count; j++)
-            {
-                var component = entity.Components[j];
-                component.Removed();
-                Pooler.EntityRemoved(component);
-            }
+            entity.Components.UpdateList();
 
-            toRemove.Add(entity);
+            foreach (Component c in entity.Components)
+            {
+                c.Removed();
+                Pooler.EntityRemoved(c);
+                entity.Components.Remove(c);
+                RemoveFromComponentRegistry(c);
+            }
+            
+            World.Entities.Remove(entity);
         }
 
         public static void Update()
-        {            
-            for (int i = 0; i < World.Entities.Count; i++)
+        {
+            World.Entities.UpdateList();
+
+            foreach(Entity Entity in Entities)
             {
-                for (int j = 0; j < Entities[i].Components.Count; j++)
-                {                 
-                    Entities[i].Components[j].Update();
+                Entity.Components.UpdateList();
+
+                foreach(Component Component in Entity.Components)
+                {
+                    Component.Update();
                 }
+                
             }
-            foreach (Entity e in toRemove)
-                Entities.Remove(e);
-            if(toRemove.Count > 0)
-            {
-                toRemove.Clear();
-            }
+
         }
 
         public static void Render()
         {
-            for (int i = 0; i < Entities.Count; i++)
+            foreach (Entity entity in Entities)
             {
-                for (int j = 0; j < Entities[i].Components.Count; j++)
+                foreach (Component component in entity.Components)
                 {
-                    Entities[i].Components[j].Render();
+                    component.Render();
                 }
+
             }
+
         }
 
-        public static void Clear()
-        {
-            for (int i = 0; i < Entities.Count; i++)
-            {
-                var entity = Entities[i];
-                Remove(entity);
-            }
-        }
+        public static void Clear() => Entities.Clear();
     }
 
 }

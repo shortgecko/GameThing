@@ -43,7 +43,7 @@ namespace Game
             }
 
 
-            Tiler.Tile(Level.Tiles);
+            Autotiler.Tile(Level.Tiles);
 
             level = null;
             tileLayer = null;

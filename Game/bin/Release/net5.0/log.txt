@@ -1,4 +1,4 @@
-LOG Game Thing
--------------------------------------------------------------------------------------------------
-[LOG Game Thing][CONTENT][TEXTURE] Assets/graphics/stone.png
-[LOG Game Thing][CONTENT][TEXTURE] Assets/graphics/bg_tile.png
+LOG Earthward
+------------------------------------------------------------------------------------------------------------------
+[LOG Earthward] Assets/levels/one.json
+[LOG Earthward] [ERROR] APP CRASHED CHECK ERROR LOG FOR MORE DETAILS

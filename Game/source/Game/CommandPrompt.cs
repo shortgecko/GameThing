@@ -35,7 +35,7 @@ namespace Game
         public CommandPrompt()
         {
             Commands.Add("help", Help_CMD);
-            Commands.Add("entity_count", () => ImGui.Text(World.Entities.Count.ToString()));
+            Commands.Add("entity_count", () => ImGui.Text(World.Count.ToString()));
             Commands.Add("load", LoadLevel_CMD);
         }
 

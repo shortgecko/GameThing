@@ -1,14 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 
 namespace Frankenweenie
 {
     public static class Logger
     {
-        private static List<string> Logs = new List<string>();
-        private static string Path = $"{Engine.AssemblyDirectory}/log.txt";
+        private static StringBuilder StringBuilder = new StringBuilder();
+        private static string Path = $"{Engine.AssemblyDirectory}/Log.txt";
         private static string Title;
 
         #region Header
@@ -16,8 +17,8 @@ namespace Frankenweenie
         #endregion
 
         public static void Initialize()
-        {
-            Title = $"LOG {Window.Title}";
+        {      
+            Title = $"Log {Window.Title}";
             Console.WriteLine(Title);
             Console.WriteLine(Header);
         }
@@ -25,8 +26,8 @@ namespace Frankenweenie
         public static void Log(object log, bool addToFile = true)
         {
             string logLine = $"[{Title}] {log.ToString()}";
-            if(addToFile)
-                Logs.Add(logLine);
+            if (addToFile)
+                StringBuilder.Append(logLine + "\n");
             Console.WriteLine(logLine);
         }
 
@@ -38,10 +39,8 @@ namespace Frankenweenie
             {
                 writer.WriteLine(Title);
                 writer.WriteLine(Header);
-                foreach (var log in Logs)
-                {
-                    writer.WriteLine(log);
-                }
+                string logs = StringBuilder.ToString();
+                writer.WriteLine(logs);
                 writer.Close();
             }
         }

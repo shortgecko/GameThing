@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Game
 {
-    [Pooled]   
+     
     public class Player : Component
     {
 
@@ -16,8 +16,8 @@ namespace Game
         private const int speed = 240;
         private const int vSpeed = -20;
         private int normalGravity = 20;
-        private StateMachine<States> StateMachine;
-        private bool grounded { get { return mover.collision(new Point(0, 1), Mover.Masks.All); } }
+        private StateMachine<States> StateMachine = new StateMachine<States>();
+        private bool grounded { get { return mover.Collision(new Point(0, 1), Mover.Masks.All); } }
         private const int jumpForce = -800;
         private const int hJumpForce = 140;
         private Timer coyoteTimer;
@@ -33,12 +33,12 @@ namespace Game
             get
             { 
                 if (Facing != 0)
-                    return mover.collision(new Point(Facing, 0), Mover.Masks.All);
+                    return mover.Collision(new Point(Facing, 0), Mover.Masks.All);
                 else
                 {
-                    if (mover.collision(new Point(1, 0), Mover.Masks.All))
+                    if (mover.Collision(new Point(1, 0), Mover.Masks.All))
                         return true;
-                    else if (mover.collision(new Point(-1, 0), Mover.Masks.All))
+                    else if (mover.Collision(new Point(-1, 0), Mover.Masks.All))
                         return true;
                 }
                 return false;
@@ -48,7 +48,7 @@ namespace Game
 
         private enum States
         {
-            Normal,
+            Player,
             Wall,
         };
 
@@ -65,14 +65,20 @@ namespace Game
         public override void Initialize()
         {
             mover = Entity.Get<Mover>();
+            if (mover == null)
+                Logger.Log("null");
+
             Entity.Add(coyoteTimer = new());
             Entity.Add(jumpInputTimer = new());
             Entity.Add(Facing = new Facing());
             Entity.Add(varJumpTimer = new Timer());
+            
+            Entity.Add(StateMachine);
+
             startPos = Entity.Position;
-            StateMachine = Entity.Get<StateMachine<States>>();
-            StateMachine.Add(States.Normal, null, NormalState, null);
+            StateMachine.Add(States.Player, null, NormalState, null);
             StateMachine.Add(States.Wall, null, WallState, null);
+            StateMachine.Set(States.Player);
         }
 
 
@@ -118,7 +124,7 @@ namespace Game
             if (varJumpTimer.Duration < 0 && jumped)
             {
                 mover.Move.Y *= 2;
-                //Logger.Log();
+
                 jumped = false;
             }
         }
@@ -130,22 +136,16 @@ namespace Game
                 
             }
             
-            StateMachine.Set(States.Normal);
+            StateMachine.Set(States.Player);
 
         }
 
-        bool a = false;
+
         public override void Update()
         {
-            if (Input.Jump.Pressed)
-            {
-                World.Entities.Add(new Entity());
-            }
-
-            Logger.Log(World.Entities.Count);
-
-            if (!new Rectangle(0,0,320,180).Contains(Entity.Position) || Input.TempRestart)
+            if (!new Rectangle(0,0, 320, 180).Contains(Entity.Position) || Input.TempRestart)
                 Entity.Position = startPos;
+
         }
         public override void Render()
         {            

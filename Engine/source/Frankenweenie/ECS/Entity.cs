@@ -13,28 +13,36 @@ namespace Frankenweenie
 {
     public class Entity
     {
-        public int id;
         public Vector2 Position;
-        public List<Component> Components = new List<Component>();
+        public Registry<Component> Components = new Registry<Component>();
 
         public void Add<T>() where T : Component, new()
         {
             Component Component = Pooler.Create<T>();
             Component.Entity = this;
             Components.Add(Component);
-            World.AddToTypeCollection(typeof(T), Component);
         }
 
         public void Add(Component Component)
         { 
             Component.Entity = this;
             Components.Add(Component);
-            World.AddToTypeCollection(Component.GetType(), Component);
         }
         
-        public T Get<T>() where T : Component => (T)World.All<T>().FirstOrDefault(c => c.GetType() == typeof(T) && c.Entity == this);
-        
-        public void Remove<T>() where T : Component => Components.Remove(Get<T>());
+        public T Get<T>() where T : Component
+        {
+            return (T)World.All<T>().FirstOrDefault(c => c.Entity == this);
+        }
+
+        public bool Contains<T>() where T :Component
+        {
+            return Get<T>() != null;
+        }
+
+        public void Remove<T>() where T : Component
+        {
+            Components.Remove(Get<T>());
+        } 
 
     }
 }

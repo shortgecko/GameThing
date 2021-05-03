@@ -27,7 +27,7 @@ namespace Frankenweenie
             var output = JsonConvert.DeserializeObject<T>(value);
             if(output != null)
                 return output;
-            throw new Exception("Could not serialize file");
+            throw new Exception("Could not deserialize file");
         }
 
         public static T DeserializeString<T>(string input)
@@ -36,7 +36,7 @@ namespace Frankenweenie
             var output = JsonConvert.DeserializeObject<T>(input);
             if (output != null)
                 return output;
-            throw new Exception("Could not serialize file");
+            throw new Exception("Could not deserialize string");
         }
     }
 }

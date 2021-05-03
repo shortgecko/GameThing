@@ -32,7 +32,7 @@ namespace Frankenweenie
 
         public VirtualRenderTarget()
         {
-            SourceRectangle = new Rectangle(0, 0, Window.Width,Window.Height);
+            SourceRectangle = new Rectangle(0, 0, Window.Width, Window.Height);
             Target = new RenderTarget2D(Engine.Device.GraphicsDevice, Window.Width, Window.Height);
         }
 

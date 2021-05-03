@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Frankenweenie
 {
-    public class Tiler
+    public class Autotiler
     {
         public static void Tile(Tilemap tilemap)
         {

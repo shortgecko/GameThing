@@ -10,7 +10,7 @@ namespace Frankenweenie
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "External JSON format")]
 
-    public class OgmoVector
+    public struct OgmoVector
     {
         public float x { get; set; }
         public float y { get; set; }

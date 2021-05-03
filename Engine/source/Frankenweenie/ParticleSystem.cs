@@ -115,6 +115,14 @@ namespace Frankenweenie
             }
         }
 
+        public override void Removed()
+        {
+            EmitterLocation = Vector2.Zero;
+            Colors.Clear();
+            Textures.Clear();
+            Particles.Clear();
+        }
+
 
     }
 }

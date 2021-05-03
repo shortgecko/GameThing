@@ -18,11 +18,15 @@ namespace Game
         public Vector2 Move;
         public bool OnGround = false;
         public Masks Mask = Masks.All;
+        public Action OnCollide;
+        public Action<int> OnCollideX;
+        public Action<int> OnCollideY;
 
-        List<Component> Hitboxes = World.All<Hitbox>();
+        List<Component> Hitboxes;
 
         public override void Initialize()
         {
+            Hitboxes = World.All<Hitbox>();
             Hitbox = Entity.Get<Hitbox>();
         }
 
@@ -59,7 +63,7 @@ namespace Game
                 hitbox.Top < other.Bottom;
         }
 
-        public bool collision(Point offset, Masks mask)
+        public bool Collision(Point offset, Masks mask)
         {
             switch (mask)
             {
@@ -119,14 +123,17 @@ namespace Game
 
             while (Move.X != 0)
             {
-                if (!collision(new Point(sign, 0), Mask))
+                if (!Collision(new Point(sign, 0), Mask))
                 {
                     Entity.Position.X += sign * Engine.Delta;
                     Move.X -= sign;
                 }
                 else
                 {
-                    Move.X = 0;
+                    if (OnCollide != null)
+                        OnCollide.Invoke();
+                    if (OnCollideX != null)
+                        OnCollideX.Invoke(sign);
                     break;
                 }
             }
@@ -138,7 +145,7 @@ namespace Game
             Move.Y = (float)Math.Round(Move.Y);
             while (Move.Y != 0)
             {
-                if (!collision(new Point(0, sign), Mask))
+                if (!Collision(new Point(0, sign), Mask))
                 {
                     Entity.Position.Y += sign * Engine.Delta;
                     Move.Y -= sign;
@@ -146,6 +153,10 @@ namespace Game
                 else
                 {
                     Move.Y = 0;
+                    if (OnCollide != null)
+                        OnCollide.Invoke();
+                    if (OnCollideY != null)
+                        OnCollideY.Invoke(sign);
                     break;
                 }
             }

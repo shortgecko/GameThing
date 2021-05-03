@@ -9,31 +9,29 @@ namespace Frankenweenie
         private Dictionary<T,Action> UpdateStates = new Dictionary<T, Action>();
         private Dictionary<T, Action> EndStates = new Dictionary<T, Action>();
 
-        public T currentState;
+        private T currentState;
         private bool BeginState = false;
         private bool EndState;
         private T NextState;
-        public T State
-        {
-            get
-            {
-                return currentState;
-            }
-        }
-     
+        public T State => currentState;
+
         public void Add(T state, Action innit = null, Action update = null, Action end = null)
         {
+            Logger.Log("adding");
             if (update == null)
                 throw new Exception("Update cannot be null!");
-            if(innit != null)
+
+            UpdateStates.Add(state, update);
+
+            if (innit != null)
                 InitializeStates.Add(state, innit);
             if (end != null)
                 EndStates.Add(state, end);
-            UpdateStates.Add(state, update);
-            
+
+            Logger.Log($"{state.ToString()} {UpdateStates.Count}");
         }
 
-        private static bool HasState(Dictionary<T,Action> states, T state)
+        static bool HasState(Dictionary<T,Action> states, T state)
         {
             states.TryGetValue(state, out Action action);
             if (action == null)
@@ -41,21 +39,28 @@ namespace Frankenweenie
             return true;
         }
 
+
         public override void Update()
         {
-            if (!BeginState && HasState(InitializeStates, currentState))
+            if(UpdateStates.Count > 0)
             {
-                InitializeStates[currentState].Invoke();
-                BeginState = true;
-            }
 
-            UpdateStates[currentState].Invoke();
+                if (!BeginState && HasState(InitializeStates, currentState))
+                {
+                    InitializeStates[currentState].Invoke();
+                    BeginState = true;
+                }
 
-            if(EndState && HasState(EndStates, currentState))
-            {
-                EndStates[currentState].Invoke();
-                Reset();
-                currentState = NextState;
+
+                UpdateStates[currentState].Invoke();
+
+                if (EndState && HasState(EndStates, currentState))
+                {
+                    EndStates[currentState].Invoke();
+                    Reset();
+                    currentState = NextState;                
+            
+                }
             }
         }
 
@@ -78,4 +83,6 @@ namespace Frankenweenie
         }
 
     }
+
+    
 }

@@ -5,10 +5,6 @@ namespace Frankenweenie
 
     public class Component
     {
-        public Component()
-        {
-
-        }
         public Entity Entity;
         public virtual void Initialize() { }
         public virtual void Update() { }

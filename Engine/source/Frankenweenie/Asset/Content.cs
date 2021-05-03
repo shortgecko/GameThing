@@ -5,11 +5,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using IO = System.IO;
-using SpriteFontPlus;
 
 namespace Frankenweenie
 {
-
     public class Content
     {
         private static Dictionary<string, object> loadedAssets = new Dictionary<string, object>();
@@ -28,7 +26,7 @@ namespace Frankenweenie
                 input = null;
             }
             loadedAssets.Clear();
-            Logger.Log("[CONTENT] Assets disposed");
+            Logger.Log("[Content] Assets disposed");
 
         }
         public static string Path
@@ -134,36 +132,19 @@ namespace Frankenweenie
         }
         #endregion
         #region SpriteFont
-        public static SpriteFont Font(string assetName, float size)
-        {
-            var key = Directory(assetName);
-            object asset = null;
+        //public static SpriteFont Font(string assetName, float size)
+        //{
+        //    var key = Directory(assetName);
+        //    object asset = null;
 
-            if (GetLoaded<SpriteFont>(key, out asset))
-                return (SpriteFont)asset;
+        //    if (GetLoaded<SpriteFont>(key, out asset))
+        //        return (SpriteFont)asset;
 
-            // Load the asset.
-            var result = LoadFont(assetName, size);
-            loadedAssets[key] = result;
-            return result;
-        }
-        private static SpriteFont LoadFont(string file, float size)
-        {
-            var fontBakeResult = TtfFontBaker.Bake(File.ReadAllBytes(@"C:\\Windows\\Fonts\arial.ttf"),
-            size,
-            1024,
-            1024,
-            new[]
-            {
-                CharacterRange.BasicLatin,
-                CharacterRange.Latin1Supplement,
-                CharacterRange.LatinExtendedA,
-                CharacterRange.Cyrillic
-            }
-        );
-
-            return fontBakeResult.CreateSpriteFont(Engine.Device.GraphicsDevice);
-        }
+        //    // Load the asset.
+        //    var result = LoadFont(assetName, size);
+        //    loadedAssets[key] = result;
+        //    return result;
+        //}
         #endregion
         #region FileLoading
         private static string ReadFile(string filepath)

@@ -2,8 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
-using Blah = Frankenweenie;
 using System.Linq;
+using Blah = Frankenweenie;
 
 
 namespace Frankenweenie
@@ -72,8 +72,7 @@ namespace Frankenweenie
 #endif
 
 #if DEBUG
-            Logger.Log($"GPU Information\n " +
-               $"{GraphicsAdapter.DefaultAdapter.Description}");
+            Logger.Log($"GPU Information {GraphicsAdapter.DefaultAdapter.Description}");
 #endif
             LoadContent();
         }
@@ -82,7 +81,6 @@ namespace Frankenweenie
         {
             new Drawer();
             Blah.Drawer.Batch = new SpriteBatch(Device.GraphicsDevice);
-            
         }
 
         protected override void UnloadContent()
@@ -174,11 +172,11 @@ namespace Frankenweenie
             try
             {
                 Engine.Instance.Run();
-                Logger.Log("[EVENT] APP CLOSED");
+                Logger.Log("Engine closing");
             }
             catch (Exception e)
             {
-                Logger.Log("[ERROR] APP CRASHED CHECK ERROR LOG FOR MORE DETAILS");
+                Logger.Log($"[Error] {e.Message}\n Check Error Log for more details");
                 ErrorLog.Log(e);
             }
             finally

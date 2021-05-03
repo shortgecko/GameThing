@@ -1,7 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using Frankenweenie;
-using System;
+﻿using Frankenweenie;
+using Microsoft.Xna.Framework;
 
 namespace Game
 {
@@ -9,38 +7,38 @@ namespace Game
     {
         float speed = -100f;
         Mover mover;
-        private Hitbox hitbox;
-        private Parameters parameters;
-        private float distance;
-        private Vector2 direction;
+        private Parameters Parameters;
+        private float Distance;
+
         private enum States
         {
             Normal,
             Moving,
         }
+
+        public Platform(Parameters parameters)
+        {
+            Parameters = parameters;
+        }
+
         private StateMachine<States> StateMachine = new StateMachine<States>();
 
         public static Entity Create(Parameters p)
         {
-            Entity j = new Entity();
-            j.Add<Mover>();
-            j.Add(new Hitbox(0, 0, 16, 8));
-            j.Add<Platform>();
-            j.Get<Platform>().parameters = p;
-            return j;
+            Entity e = new Entity();
+            e.Add<Mover>();
+            e.Add(new Hitbox(0, 0, 16, 8));
+            e.Add(new Platform(p));
+            return e;
         }
 
    
         public override void Initialize()
-        {
+        {            
             Entity.Add(StateMachine);
-
             mover = Entity.Get<Mover>();
-            hitbox = Entity.Get<Hitbox>();
             mover.Mask = Mover.Masks.Solids;
-
-            Vector2 end = parameters.Nodes[0];
-            distance = Vector2.Distance(Entity.Position, end);
+            Distance = Vector2.Distance(Entity.Position, Parameters.Nodes[0]);
             StateMachine.Add(States.Normal, null, Normal, null);
             StateMachine.Add(States.Moving, null, Move, null);
             StateMachine.Set(States.Normal);
@@ -48,27 +46,32 @@ namespace Game
 
         public override void Update()
         {
-            Logger.Log(StateMachine.State);
+           
         }
 
         public void Normal()
         {
-            if (mover.collision(new Point(0, -1), Mover.Masks.All))
+            if (mover.Collision(new Point(0, -1), Mover.Masks.All))
                 StateMachine.Set(States.Moving);
         }
 
         void Move()
         {
-            if (distance > 0)
+            if (Distance > 0)
             {
-                mover.Move.Y -= distance;
-                distance -= speed;
+                mover.Move.Y -= Distance;
+                Distance -= speed;
             }
         }
 
         public override void Render()
         {
-            Drawer.Rect(Utils.RectF(Entity.Position, new Vector2(16,8)), Color.Yellow);
+            Drawer.Rect(Utils.RectF(Entity.Position, new Vector2(Parameters.Width, Parameters.Height)), Color.Yellow);
+        }
+
+        public override void Removed()
+        {
+            Parameters = null;
         }
     }
 }
