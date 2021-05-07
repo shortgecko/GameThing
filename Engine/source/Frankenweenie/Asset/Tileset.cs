@@ -12,7 +12,7 @@ namespace Frankenweenie
 
         public Tileset(string texture, int tileWidth, int tileHeight)
         {
-            Source = Content.Texture(texture);
+            Source = Content.LoadTexture(texture);
             Tiles = new Rectangle[Source.Width / tileWidth, Source.Height / tileHeight];
 
             TileWidth = tileWidth;

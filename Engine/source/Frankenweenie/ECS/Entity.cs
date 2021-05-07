@@ -13,6 +13,7 @@ namespace Frankenweenie
 {
     public class Entity
     {
+        public string Name = " ";
         public Vector2 Position;
         public Registry<Component> Components = new Registry<Component>();
 
@@ -20,18 +21,29 @@ namespace Frankenweenie
         {
             Component Component = Pooler.Create<T>();
             Component.Entity = this;
+            World.AddToComponentRegistry(Component);
             Components.Add(Component);
         }
 
         public void Add(Component Component)
         { 
             Component.Entity = this;
+            World.AddToComponentRegistry(Component);
             Components.Add(Component);
         }
         
         public T Get<T>() where T : Component
         {
-            return (T)World.All<T>().FirstOrDefault(c => c.Entity == this);
+            List<Component> components = World.All<T>();
+            Logger.Log("Count " + components.Count);
+            foreach(Component component in components)
+            {
+                if (component.Entity == this)
+                {
+                    return (T)component;
+                }
+            }
+            return null;
         }
 
         public bool Contains<T>() where T :Component
@@ -41,8 +53,16 @@ namespace Frankenweenie
 
         public void Remove<T>() where T : Component
         {
-            Components.Remove(Get<T>());
-        } 
+
+            Component component = Get<T>();
+            Remove(component);
+        }
+
+        public void Remove(Component component)
+        {          
+            World.RemoveFromComponentRegistry(component);
+            Components.Remove(component);
+        }
 
     }
 }

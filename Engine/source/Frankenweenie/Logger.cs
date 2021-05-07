@@ -8,7 +8,7 @@ namespace Frankenweenie
 {
     public static class Logger
     {
-        private static StringBuilder StringBuilder = new StringBuilder();
+        private static List<string> Logs = new List<string>();
         private static string Path = $"{Engine.AssemblyDirectory}/Log.txt";
         private static string Title;
 
@@ -27,7 +27,7 @@ namespace Frankenweenie
         {
             string logLine = $"[{Title}] {log.ToString()}";
             if (addToFile)
-                StringBuilder.Append(logLine + "\n");
+                Logs.Add(logLine);
             Console.WriteLine(logLine);
         }
 
@@ -39,8 +39,10 @@ namespace Frankenweenie
             {
                 writer.WriteLine(Title);
                 writer.WriteLine(Header);
-                string logs = StringBuilder.ToString();
-                writer.WriteLine(logs);
+                foreach(String Log in Logs)
+                {
+                    writer.WriteLine(Log);
+                }
                 writer.Close();
             }
         }

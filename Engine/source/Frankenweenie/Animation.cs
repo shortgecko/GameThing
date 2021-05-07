@@ -22,7 +22,7 @@ namespace Frankenweenie
         }
         public void AddFrame(string file, float duration = 1)
         {
-            Texture2D frame = Content.Texture(file);
+            Texture2D frame = Content.LoadTexture(file);
             Frames.Add(frame);
             FrameSpeeds.Add(duration);
         }

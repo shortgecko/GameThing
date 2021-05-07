@@ -19,8 +19,8 @@ namespace Game
         public bool OnGround = false;
         public Masks Mask = Masks.All;
         public Action OnCollide;
-        public Action<int> OnCollideX;
-        public Action<int> OnCollideY;
+        public Action<Entity> OnCollideX;
+        public Action<Entity> OnCollideY;
 
         List<Component> Hitboxes;
 
@@ -29,6 +29,7 @@ namespace Game
             Hitboxes = World.All<Hitbox>();
             Hitbox = Entity.Get<Hitbox>();
         }
+
 
         public override void Update()
         {
@@ -43,7 +44,7 @@ namespace Game
             Hitbox.X = (int)Entity.Position.X;
             Hitbox.Y = (int)Entity.Position.Y;
             var box = new Hitbox(Hitbox.X + offset.X, Hitbox.Y + offset.Y, Hitbox.Width, Hitbox.Height);
-            return Intersects(box, other);
+            return Hitbox.Intersects(box, other);
         }
         private bool CheckActor(Point offset, Hitbox other)
         {
@@ -52,16 +53,10 @@ namespace Game
             other.X = (int)other.Entity.Position.X;
             other.Y = (int)other.Entity.Position.Y;
             var box = new Hitbox(Hitbox.X + offset.X, Hitbox.Y + offset.Y, Hitbox.Width, Hitbox.Height);
-            return Intersects(box, other);
+            return Hitbox.Intersects(box, other);
         }
 
-        private bool Intersects(Hitbox hitbox, Hitbox other)
-        {
-            return other.Left < hitbox.Right &&
-                hitbox.Left < other.Right &&
-                other.Top < hitbox.Bottom &&
-                hitbox.Top < other.Bottom;
-        }
+
 
         public bool Collision(Point offset, Masks mask)
         {
@@ -133,7 +128,7 @@ namespace Game
                     if (OnCollide != null)
                         OnCollide.Invoke();
                     if (OnCollideX != null)
-                        OnCollideX.Invoke(sign);
+                        OnCollideX.Invoke(Hitbox.Entity);
                     break;
                 }
             }
@@ -156,7 +151,7 @@ namespace Game
                     if (OnCollide != null)
                         OnCollide.Invoke();
                     if (OnCollideY != null)
-                        OnCollideY.Invoke(sign);
+                        OnCollideY.Invoke(Hitbox.Entity);
                     break;
                 }
             }

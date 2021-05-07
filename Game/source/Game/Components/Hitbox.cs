@@ -43,6 +43,15 @@ namespace Game
             Height = height;
         }
 
+        public static bool Intersects(Hitbox hitbox, Hitbox other)
+        {
+            return other.Left < hitbox.Right &&
+                hitbox.Left < other.Right &&
+                other.Top < hitbox.Bottom &&
+                hitbox.Top < other.Bottom;
+        }
+
+
 
     }
 

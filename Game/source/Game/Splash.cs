@@ -16,7 +16,7 @@ namespace Game
 
         protected override void Load()
         {
-            Logo = Content.Texture("graphics/logo.png");
+            Logo = Content.LoadTexture("graphics/logo.png");
         }
 
         protected override void Update()

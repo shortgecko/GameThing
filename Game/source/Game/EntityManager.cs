@@ -19,6 +19,8 @@ namespace Game
                     return Player.Create();
                 case "platform":
                     return Platform.Create(p);
+                case "spinner":
+                    return new Entity();
             }
             throw new Exception("Entity was null");
         }

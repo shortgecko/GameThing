@@ -8,12 +8,14 @@ namespace Frankenweenie
 {
     public class Parameters
     {
-        private Dictionary<string, object> Values;
+        public int Height;
+        public int Width;
+        private Dictionary<string, object> Values = new Dictionary<string, object>();
 
-        public Parameters(OgmoEntity entity)
+        public Parameters(OgmoEntity Entity)
         {
-            Values.Add("width", entity.width);
-            Values.Add("height", entity.height);
+            Width = Entity.width;
+            Height = Entity.height;
         }
         
         public T Get<T>(string value)

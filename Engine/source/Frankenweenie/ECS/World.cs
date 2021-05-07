@@ -14,12 +14,10 @@ namespace Frankenweenie
         public static List<Component> All<T>() where T : Component
         {
             Type t = typeof(T);
-            if (!ComponentRegistry.ContainsKey(t))
-                ComponentRegistry.Add(t, new List<Component>());
             return ComponentRegistry[t];
         }
 
-        static void AddToComponentRegistry(Component c)
+        public static void AddToComponentRegistry(Component c)
         {
             Type t = c.GetType();
             if(!ComponentRegistry.ContainsKey(t))
@@ -29,7 +27,7 @@ namespace Frankenweenie
             ComponentRegistry[t].Add(c);
         }
 
-        static void RemoveFromComponentRegistry(Component c)
+        public static void RemoveFromComponentRegistry(Component c)
         {
             Type t = c.GetType();
             if(ComponentRegistry.ContainsKey(t))
@@ -38,51 +36,34 @@ namespace Frankenweenie
 
         public static void Add(Entity Entity)
         {
-            Entity.Components.UpdateList();
-            foreach (Component c in Entity.Components)
-            {
-                AddToComponentRegistry(c);
-            }
-
-            foreach (Component c in Entity.Components)
-            {
-                c.Initialize();
-            }
-
             World.Entities.Add(Entity);
         }
 
         public static void Remove(Entity Entity)
-        {
-            Entity.Components.UpdateList();
-
-            foreach (Component c in Entity.Components)
-            {
-                c.Removed();
-                Pooler.EntityRemoved(c);
-                Entity.Components.Remove(c);
-                RemoveFromComponentRegistry(c);
-            }
-            
+        {          
             World.Entities.Remove(Entity);
         }
         
         static void UpdateRegistry(Entity e)
         {
-
-            if (e.Components.Adding.Count > 1)
+            if(e.Components.Adding.Count > 1)
             {
-                foreach (Component component in e.Components.Adding)
+                for (int i = 0; i < e.Components.Adding.Count; i++)
                 {
-                    AddToComponentRegistry(component);
+                    Component component = e.Components.Adding[i];
+                    component.Initialize();
                 }
             }
 
-            if(e.Components.Removing.Count > 1)
+            if (e.Components.Removing.Count > 1)
             {
-                foreach (Component component in e.Components.Removing)
+                Logger.Log("Removing");
+                for (int i = 0; i < e.Components.Removing.Count; i++)
                 {
-                    RemoveFromComponentRegistry(component);
+                    Component component = e.Components.Removing[i];
+                    component.Removed();
+                    Pooler.EntityRemoved(component);
+                    Logger.Log();
                 }
             }
 
@@ -91,7 +72,7 @@ namespace Frankenweenie
         }
         public static void Update()
         {
-            World.Entities.UpdateList();
+           Entities.UpdateList();
 
             foreach (Entity Entity in Entities)
             {
@@ -119,7 +100,10 @@ namespace Frankenweenie
 
         }
 
-        public static void Clear() => Entities.Clear();
+        public static void Clear()
+        {
+            
+        }
     }
 
 }

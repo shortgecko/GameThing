@@ -4,7 +4,7 @@ namespace Frankenweenie
     public class VirtualInputAxis : VirtualAxis
     {
         private List<VirtualAxis> Axes = new List<VirtualAxis>();
-        public void add(VirtualAxis axis) => Axes.Add(axis);
+        public void Add(VirtualAxis axis) => Axes.Add(axis);
 
         protected override float GetAxis
         {

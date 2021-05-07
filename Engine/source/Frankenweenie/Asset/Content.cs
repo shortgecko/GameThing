@@ -73,7 +73,7 @@ namespace Frankenweenie
                 return Texture2D.FromStream(Engine.Device.GraphicsDevice, titleStream);
             }
         }
-        public static Texture2D Texture(string assetName)
+        public static Texture2D LoadTexture(string assetName)
         {
             var key = Directory(assetName);
             // Check for a previously loaded asset first

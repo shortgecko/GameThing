@@ -5,7 +5,7 @@ namespace Frankenweenie
     {
         private List<VirtualButton> Buttons = new List<VirtualButton>();
 
-        public void add(VirtualButton button) => Buttons.Add(button);
+        public void Add(VirtualButton button) => Buttons.Add(button);
 
         public override void LateUpdate()
         {

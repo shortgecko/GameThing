@@ -17,27 +17,27 @@ namespace Game
 
         static Input()
         {
-            Horizontal.add(new VirtualAxisGamepadLeftX());
-            Horizontal.add(new VirtualAxisKeyboard(Keys.D, Keys.A));
+            Horizontal.Add(new VirtualAxisGamepadLeftX());
+            Horizontal.Add(new VirtualAxisKeyboard(Keys.D, Keys.A));
 
-            Vertical.add(new VirtualAxisGamepadLeftY());
-            Vertical.add(new VirtualAxisKeyboard(Keys.S, Keys.W));
+            Vertical.Add(new VirtualAxisGamepadLeftY());
+            Vertical.Add(new VirtualAxisKeyboard(Keys.S, Keys.W));
 
-            Jump.add(new VirtualButtonKeyboard(Keys.Z));
-            Jump.add(new VirtualButtonGamepad(Buttons.A));
+            Jump.Add(new VirtualButtonKeyboard(Keys.Z));
+            Jump.Add(new VirtualButtonGamepad(Buttons.A));
 
-            Pause.add(new VirtualButtonKeyboard(Keys.Escape));
-            Pause.add(new VirtualButtonGamepad(Buttons.Start));
+            Pause.Add(new VirtualButtonKeyboard(Keys.Escape));
+            Pause.Add(new VirtualButtonGamepad(Buttons.Start));
 
-            TempRestart.add(new VirtualButtonGamepad(Buttons.X));
-            TempRestart.add(new VirtualButtonKeyboard(Keys.Escape));
+            TempRestart.Add(new VirtualButtonGamepad(Buttons.X));
+            TempRestart.Add(new VirtualButtonKeyboard(Keys.Escape));
 
-            WallClimb.add(new VirtualButtonGamepad(Buttons.RightTrigger));
+            WallClimb.Add(new VirtualButtonGamepad(Buttons.RightTrigger));
 
-            Reload.add(new VirtualButtonKeyboard(Keys.F5));
+            Reload.Add(new VirtualButtonKeyboard(Keys.F5));
 
-            Frankenweenie.Input.add(Horizontal);
-            Frankenweenie.Input.add(Vertical);
+            Frankenweenie.Input.Add(Horizontal);
+            Frankenweenie.Input.Add(Vertical);
             Frankenweenie.Input.add(Jump);
             Frankenweenie.Input.add(Pause);
             Frankenweenie.Input.add(WallClimb);

@@ -91,9 +91,9 @@ namespace Frankenweenie
             return _imGuiTexture;
         }
 
-        public static void add<T>() where T : ImGuiElement
+        public static void add<T>() where T : ImGuiElement, new()
         {
-            Elements.Add((T)Activator.CreateInstance<T>());
+            Elements.Add(new T());
         }
 
         public static void add(ImGuiElement e)

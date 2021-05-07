@@ -45,6 +45,9 @@ namespace Game
             }
         }
         private const float climbSpeed = 180;
+        private Sprite Sprite;
+        Vector2 StartPosition;
+        public bool Die = false;
 
         private enum States
         {
@@ -55,18 +58,22 @@ namespace Game
         public static Entity Create()
         {
             Entity player = new Entity();
+            player.Name = "Player";
             player.Add(new Hitbox(0, 0, 8, 8));
             player.Add<Player>();
             player.Add<Mover>();
+            player.Add<Sprite>();
             player.Add<StateMachine<States>>();
             return player;
         }
 
         public override void Initialize()
         {
+            StartPosition = Entity.Position;
             mover = Entity.Get<Mover>();
-            if (mover == null)
-                Logger.Log("null");
+            Sprite = Entity.Get<Sprite>();
+            Sprite.Texture = Content.CreateTexture(8, 8, Color.Red);
+            
 
             Entity.Add(coyoteTimer = new());
             Entity.Add(jumpInputTimer = new());
@@ -75,10 +82,29 @@ namespace Game
             
             Entity.Add(StateMachine);
 
+
             startPos = Entity.Position;
             StateMachine.Add(States.Player, null, NormalState, null);
             StateMachine.Add(States.Wall, null, WallState, null);
             StateMachine.Set(States.Player);
+        }
+
+        bool done = false;
+
+        public override void Update()
+        {
+            /*Logger.Log($"Count {World.All<Player>().Count}");
+            Logger.Log(World.All<Player>()[0].Entity == Entity);
+            var player = Entity.Get<Sprite>();
+            Entity.Remove(player);*/
+
+
+            if (Die)
+            {
+                Logger.Log("death");
+                Entity.Position = StartPosition;
+                Die = false;
+            }
         }
 
 
@@ -141,14 +167,9 @@ namespace Game
         }
 
 
-        public override void Update()
+        public override void Removed()
         {
-            if (!new Rectangle(0,0, 320, 180).Contains(Entity.Position) || Input.TempRestart)
-                Entity.Position = startPos;
-        }
-        public override void Render()
-        {            
-            Drawer.Rect(Utils.RectF(Entity.Position, 8 ,8), Color.Red);
+            Entity.Remove<Player>();
         }
 
 

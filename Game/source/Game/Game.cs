@@ -17,35 +17,35 @@ namespace Game
         public float LevelTime;
         private Tileset Tileset;
         private Texture2D BgTile;
+        private Camera Camera = new Camera();
 
         public static void Load(string path)
         {
             World.Clear();
-            OgmoLevel level = Content.LoadOgmo($"levels/{path}");
-            var tileLayer = level["Solids"];
+            OgmoLevel Level = Content.LoadOgmo($"levels/{path}");
+            var tileLayer = Level["Solids"];
             var tileLayerData = tileLayer.GridToTileLayer();     
-            Level.Tiles = new Tilemap(tileLayerData, tileLayer.gridCellsX, tileLayer.gridCellsY);
-            for (int x = 0; x < Level.Tiles.Width; x++)
-                for (int y = 0; y < Level.Tiles.Height; y++)
+            global::Game.Level.Tiles = new Tilemap(tileLayerData, tileLayer.gridCellsX, tileLayer.gridCellsY);
+            for (int x = 0; x < global::Game.Level.Tiles.Width; x++)
+                for (int y = 0; y < global::Game.Level.Tiles.Height; y++)
                 {
-                    if (Level.Tiles.Data[x + y * Level.Tiles.Width] > -1)
-                        Level.Solids.Add(new Hitbox(x * 8, y * 8, 8, 8));
+                    if (global::Game.Level.Tiles.Data[x + y * global::Game.Level.Tiles.Width] > -1)
+                        global::Game.Level.Solids.Add(new Hitbox(x * 8, y * 8, 8, 8));
                 }
-            var background = level["Background"];
-            Level.BgTiles = new Tilemap(background.GridToTileLayer(), background.gridCellsX, background.gridCellsY);
-            var entityLayer = level["Entities"];
 
-            foreach(OgmoEntity Entity in entityLayer.entities)
+            var background = Level["Background"];
+            global::Game.Level.BgTiles = new Tilemap(background.GridToTileLayer(), background.gridCellsX, background.gridCellsY);
+            var entityLayer = Level["Entities"];
+
+            foreach(OgmoEntity ogmoEntity in entityLayer.entities)
             {
-                var e = EntityManager.Create(Entity.name, new Parameters(Entity));
-                e.Position = new Vector2(Entity.x, Entity.y);
-                World.Add(e);
+                Entity Entity = EntityManager.Create(ogmoEntity.name, new Parameters(ogmoEntity));
+                Entity.Position = new Vector2(ogmoEntity.x, ogmoEntity.y);
+                World.Add(Entity);
             }
 
-
-            Autotiler.Tile(Level.Tiles);
-
-            level = null;
+            Autotiler.Tile(global::Game.Level.Tiles);
+            Level = null;
             tileLayer = null;
             tileLayerData = null;
             entityLayer = null;
@@ -57,18 +57,21 @@ namespace Game
         {
             Engine.RenderTarget.Scale = new Vector2(4f, 4f);
             Window.Size(320 * 4, 180 * 4);
-            if (ImGuiLayer.get<CommandPrompt>() == null)
-                ImGuiLayer.add<CommandPrompt>();
-            Load("one.json");
+            ImGuiLayer.add<CommandPrompt>();
+            Load("1.json");
             base.Initialize();
         }
+
+        Entity Player;
 
         protected override void Load()
         {
             Tileset = new Tileset("graphics/tileset.png", 8, 8 );
-            BgTile = Content.Texture("graphics/bg_tile.png");
+            BgTile = Content.LoadTexture("graphics/bg_tile.png");
             Level.Tiles.LayerDepth = 0.2f;
             Level.BgTiles.LayerDepth = 0.1f;
+            Camera.Position = Vector2.One;
+            
         }
 
 
@@ -78,10 +81,29 @@ namespace Game
         }
 
 
+        Vector2 GetCameraInput()
+        {
+            Vector2 input;
+            if (Keyboard.GetState().IsKeyDown(Keys.Up))
+                input.Y = -1;
+            else if (Keyboard.GetState().IsKeyDown(Keys.Down))
+                input.Y = 1;
+            else
+                input.Y = 0;
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Left))
+                input.X = -1;
+            else if (Keyboard.GetState().IsKeyDown(Keys.Right))
+                input.X = 1;
+            else
+                input.X = 0;
+            return input;
+        }
+
         protected override void Update()
         {
             if (Input.Reload.Released)
-                Load("one.json");
+                Load("1.json");
 
             base.Update();
         }
@@ -89,9 +111,9 @@ namespace Game
         protected override void Render()
         {
             Engine.ClearColor(Color.Black);
-            Level.BgTiles.Render(BgTile);
+            //Level.BgTiles.Render(BgTile);
             base.Render();
-            Level.Tiles.Render(Tileset);
+            //Level.Tiles.Render(Tileset);
         }
 
     }

@@ -65,6 +65,11 @@ namespace Frankenweenie
             return Components.GetEnumerator();
         }
 
+        public List<T> ToList()
+        {
+            return Components;
+        }
+
         public void Clear()
         {
             foreach (T component in Components)
