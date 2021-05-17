@@ -17,6 +17,7 @@ namespace Game
                 return sign;
             return 0;
         }
+
         public static implicit operator int(Facing facing) => facing.Get();
     }
 }

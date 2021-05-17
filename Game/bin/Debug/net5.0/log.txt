@@ -1,16 +1,71 @@
-Log Earthward
+Log earthward the game the movie the interactive experiance
 ------------------------------------------------------------------------------------------------------------------
-[Log Earthward] GPU Information GeForce MX350/PCIe/SSE2
-[Log Earthward] Assets/levels/1.json
-[Log Earthward] Loaded Assets/graphics/tileset.png
-[Log Earthward] Loaded Assets/graphics/bg_tile.png
-[Log Earthward] adding
-[Log Earthward] Player 1
-[Log Earthward] adding
-[Log Earthward] Wall 2
-[Log Earthward] Initializing
-[Log Earthward] adding
-[Log Earthward] Normal 1
-[Log Earthward] adding
-[Log Earthward] Moving 2
-[Log Earthward] I
+[Log earthward the game the movie the interactive experiance] GPU Information GeForce MX350/PCIe/SSE2
+[Log earthward the game the movie the interactive experiance] Assets/levels/1.json
+[Log earthward the game the movie the interactive experiance] Hitbox
+[Log earthward the game the movie the interactive experiance] Player
+[Log earthward the game the movie the interactive experiance] Mover
+[Log earthward the game the movie the interactive experiance] Sprite
+[Log earthward the game the movie the interactive experiance] StateMachine`1
+[Log earthward the game the movie the interactive experiance] Mover
+[Log earthward the game the movie the interactive experiance] Hitbox
+[Log earthward the game the movie the interactive experiance] Platform
+[Log earthward the game the movie the interactive experiance] Spinner
+[Log earthward the game the movie the interactive experiance] Loaded Assets/graphics/tileset.png
+[Log earthward the game the movie the interactive experiance] Loaded Assets/graphics/bg_tile.png
+[Log earthward the game the movie the interactive experiance] Type not found in registry
+[Log earthward the game the movie the interactive experiance] Hitbox
+[Log earthward the game the movie the interactive experiance] Player
+[Log earthward the game the movie the interactive experiance] Mover
+[Log earthward the game the movie the interactive experiance] Sprite
+[Log earthward the game the movie the interactive experiance] StateMachine`1
+[Log earthward the game the movie the interactive experiance] Timer
+[Log earthward the game the movie the interactive experiance] Timer
+[Log earthward the game the movie the interactive experiance] Facing
+[Log earthward the game the movie the interactive experiance] Timer
+[Log earthward the game the movie the interactive experiance] StateMachine`1
+[Log earthward the game the movie the interactive experiance] Mover
+[Log earthward the game the movie the interactive experiance] Hitbox
+[Log earthward the game the movie the interactive experiance] Platform
+[Log earthward the game the movie the interactive experiance] StateMachine`1
+[Log earthward the game the movie the interactive experiance] Spinner
+[Log earthward the game the movie the interactive experiance] Trigger
+[Log earthward the game the movie the interactive experiance] Sprite
+[Log earthward the game the movie the interactive experiance] Sprite
+[Log earthward the game the movie the interactive experiance] Sprite
+[Log earthward the game the movie the interactive experiance] Sprite
+[Log earthward the game the movie the interactive experiance] Sprite
+[Log earthward the game the movie the interactive experiance] Sprite
+[Log earthward the game the movie the interactive experiance] Sprite
+[Log earthward the game the movie the interactive experiance] Hitbox
+[Log earthward the game the movie the interactive experiance] Player
+[Log earthward the game the movie the interactive experiance] Mover
+[Log earthward the game the movie the interactive experiance] Sprite
+[Log earthward the game the movie the interactive experiance] StateMachine`1
+[Log earthward the game the movie the interactive experiance] Mover
+[Log earthward the game the movie the interactive experiance] Hitbox
+[Log earthward the game the movie the interactive experiance] Platform
+[Log earthward the game the movie the interactive experiance] Spinner
+[Log earthward the game the movie the interactive experiance] Hitbox
+[Log earthward the game the movie the interactive experiance] Player
+[Log earthward the game the movie the interactive experiance] Mover
+[Log earthward the game the movie the interactive experiance] Sprite
+[Log earthward the game the movie the interactive experiance] StateMachine`1
+[Log earthward the game the movie the interactive experiance] Timer
+[Log earthward the game the movie the interactive experiance] Timer
+[Log earthward the game the movie the interactive experiance] Facing
+[Log earthward the game the movie the interactive experiance] Timer
+[Log earthward the game the movie the interactive experiance] StateMachine`1
+[Log earthward the game the movie the interactive experiance] Mover
+[Log earthward the game the movie the interactive experiance] Hitbox
+[Log earthward the game the movie the interactive experiance] Platform
+[Log earthward the game the movie the interactive experiance] StateMachine`1
+[Log earthward the game the movie the interactive experiance] Spinner
+[Log earthward the game the movie the interactive experiance] Trigger
+[Log earthward the game the movie the interactive experiance] Sprite
+[Log earthward the game the movie the interactive experiance] Sprite
+[Log earthward the game the movie the interactive experiance] Sprite
+[Log earthward the game the movie the interactive experiance] Sprite
+[Log earthward the game the movie the interactive experiance] Sprite
+[Log earthward the game the movie the interactive experiance] Sprite
+[Log earthward the game the movie the interactive experiance] Sprite

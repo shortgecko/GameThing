@@ -5,20 +5,8 @@ namespace Frankenweenie
 {
     public class VirtualRenderTarget
     {
-        public int Width
-        {
-            get
-            {
-                return Target.Width;
-            }
-        }
-        public int Height
-        {
-            get
-            {
-                return Target.Height;
-            }
-        }
+        public int Width => Target.Width;
+        public int Height => Target.Height;
 
         public RenderTarget2D Target;
         public Vector2 Position = Vector2.Zero;
@@ -31,7 +19,7 @@ namespace Frankenweenie
         public float LayerDepth = 0f;
 
         public VirtualRenderTarget()
-        {
+        {   
             SourceRectangle = new Rectangle(0, 0, Window.Width, Window.Height);
             Target = new RenderTarget2D(Engine.Device.GraphicsDevice, Window.Width, Window.Height);
         }

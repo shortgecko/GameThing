@@ -19,7 +19,7 @@ namespace Game
         {
             try
             {
-                Game.Load(arguments);
+               LevelLoader.Load(arguments);
             }
             catch
             {
@@ -63,6 +63,7 @@ namespace Game
                 else
                     ImGui.Text($"Command {command} not found");
                 arguments = string.Empty;
+                command = string.Empty;
                 ImGui.End();
             }
         }

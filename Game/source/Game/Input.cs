@@ -33,15 +33,16 @@ namespace Game
             TempRestart.Add(new VirtualButtonKeyboard(Keys.Escape));
 
             WallClimb.Add(new VirtualButtonGamepad(Buttons.RightTrigger));
+            WallClimb.Add(new VirtualButtonKeyboard(Keys.X));
 
             Reload.Add(new VirtualButtonKeyboard(Keys.F5));
 
             Frankenweenie.Input.Add(Horizontal);
             Frankenweenie.Input.Add(Vertical);
-            Frankenweenie.Input.add(Jump);
-            Frankenweenie.Input.add(Pause);
-            Frankenweenie.Input.add(WallClimb);
-            Frankenweenie.Input.add(Reload);
+            Frankenweenie.Input.Add(Jump);
+            Frankenweenie.Input.Add(Pause);
+            Frankenweenie.Input.Add(WallClimb);
+            Frankenweenie.Input.Add(Reload);
 
         }
     }

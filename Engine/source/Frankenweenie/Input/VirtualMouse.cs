@@ -6,13 +6,16 @@ namespace Frankenweenie
 {
     public static class VirtualMouse
     {
-        public static MouseState State;
-        public static Vector2 Position;
+        private static MouseState m_State;
+        private static Vector2 m_Position;
+
+        public static Vector2 Position => m_Position;
+        public static MouseState State => m_State;
 
         public static void Update()
         {
-            State = Mouse.GetState();
-            Position = new Vector2(State.X, State.Y);
+            m_State = Mouse.GetState();
+            m_Position = new Vector2(m_State.X, m_State.Y);
         }
     }
 }

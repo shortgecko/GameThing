@@ -5,18 +5,23 @@ using System;
 
 namespace Game
 {
+    [Pooled]
     public class Platform : Component
     {
         private float Speed = -100f;
         Mover Mover;
         private Parameters Parameters;
         private float Distance;
-        List<Component> All;
 
         private enum States
         {
             Normal,
             Moving,
+        }
+
+        public Platform()
+        {
+            
         }
 
         public Platform(Parameters parameters)
@@ -26,20 +31,20 @@ namespace Game
 
         private StateMachine<States> StateMachine;
 
-        public static Entity Create(Parameters p)
+        public static Entity Create(Vector2 position, Parameters p)
         {
             Entity e = new Entity();
+            e.Position = position;
             e.Add<Mover>();
             e.Add(new Hitbox(0, 0, 16, 8));
-            e.Add(new Platform(p));
-            ///e.Add<StateMachine<States>>();
+            Platform platform = e.Add<Platform>();
+            platform.Parameters = p;
             return e;
         }
 
    
         public override void Initialize()
         {
-            Logger.Log("Initializing");
            Mover = Entity.Get<Mover>();
            Mover.Mask = Mover.Masks.All;
             StateMachine = new StateMachine<States>();
@@ -48,7 +53,6 @@ namespace Game
            StateMachine.Add(States.Normal, null, Normal, null);
            StateMachine.Add(States.Moving, null, Move, null);
            StateMachine.Set(States.Normal);
-           Logger.Log("I");
         }
 
         void Normal()
@@ -56,7 +60,6 @@ namespace Game
             
             if(Mover.Collision(new Point(0, -1), Mover.Masks.Actors))
             {
-                Logger.Log("something");
                 StateMachine.Set(States.Moving);
             }
         }

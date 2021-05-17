@@ -17,7 +17,6 @@ namespace Frankenweenie
 
         public void Add(T state, Action innit = null, Action update = null, Action end = null)
         {
-            Logger.Log("adding");
             if (update == null)
                 throw new Exception("Update cannot be null!");
 
@@ -28,7 +27,6 @@ namespace Frankenweenie
             if (end != null)
                 EndStates.Add(state, end);
 
-            Logger.Log($"{state.ToString()} {UpdateStates.Count}");
         }
 
         static bool HasState(Dictionary<T,Action> states, T state)

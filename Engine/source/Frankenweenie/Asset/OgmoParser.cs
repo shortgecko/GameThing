@@ -28,7 +28,7 @@ namespace Frankenweenie
         public int height { get; set; }
         public int originX { get; set; }
         public int originY { get; set; }
-        public List<OgmoVector> nodes { get; set; }
+        public OgmoVector[] nodes { get; set; }
 
     }
 
@@ -49,6 +49,7 @@ namespace Frankenweenie
         public int arrayMode { get; set; }
         public string[] grid { get; set; }
         public OgmoEntity[] entities { get; set; }
+
         public int[] GridToTileLayer()
         {
             var layer = this;

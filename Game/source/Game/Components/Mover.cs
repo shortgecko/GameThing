@@ -5,6 +5,14 @@ using System.Collections.Generic;
 
 namespace Game
 {
+    public enum Direction
+    {
+        Up,
+        Down,
+        Right,
+        Left
+    }
+
     public class Mover : Component
     {
         public enum Masks
@@ -23,20 +31,21 @@ namespace Game
         public Action<Entity> OnCollideY;
 
         List<Component> Hitboxes;
+        List<Component> Triggers;
 
         public override void Initialize()
         {
             Hitboxes = World.All<Hitbox>();
+            Triggers = World.All<Trigger>();
             Hitbox = Entity.Get<Hitbox>();
         }
 
 
         public override void Update()
         {
-
+            CheckTriggers();
             CheckX();
             CheckY();
-
         }
 
         private bool Check(Point offset, Hitbox other)
@@ -56,10 +65,47 @@ namespace Game
             return Hitbox.Intersects(box, other);
         }
 
-
-
         public bool Collision(Point offset, Masks mask)
         {
+            switch (mask)
+            {
+                case Masks.Solids:
+                    return CheckSolids(offset);
+                case Masks.Actors:
+                    return CheckActors(offset);
+                case Masks.All:
+                    if (CheckSolids(offset))
+                        return true;
+                    if (CheckActors(offset))
+                        return true;
+                    break;
+
+            }
+
+            return false;
+        }
+
+        public bool Collision(Direction direction, Masks mask)
+        {
+            Point offset;
+            switch(direction)
+            {
+                case Direction.Up:
+                    offset = new Point(0, -1);
+                    break;
+                case Direction.Down:
+                    offset = new Point(0, 1);
+                    break;
+                case Direction.Right:
+                    offset = new Point(1,0);
+                    break;
+                case Direction.Left:
+                    offset = new Point(-1, 0);
+                    break;
+                default: offset = new Point();
+                    break;
+            }
+
             switch (mask)
             {
                 case Masks.Solids:
@@ -153,6 +199,32 @@ namespace Game
                     if (OnCollideY != null)
                         OnCollideY.Invoke(Hitbox.Entity);
                     break;
+                }
+            }
+        }
+
+        public void CheckTriggers()
+        {
+            foreach(var triggerRef in Triggers)
+            {
+                var trigger = (Trigger)triggerRef;
+
+                if (Collider.Intersects(Hitbox, trigger))
+                {
+                    if (trigger.OnTriggerEnter != null)
+                        trigger.OnTriggerEnter.Invoke(Entity);
+                    Hitbox.TriggerOverlap = true;
+                }
+                else
+                {
+
+                    if(Hitbox.TriggerOverlap)
+                    {
+                        if (trigger.OnTriggerLeave != null)
+                            trigger.OnTriggerLeave.Invoke(Entity);
+                        Hitbox.TriggerOverlap = false;
+                    }
+
                 }
             }
         }

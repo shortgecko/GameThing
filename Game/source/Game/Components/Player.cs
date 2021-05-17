@@ -6,10 +6,9 @@ using System.Collections.Generic;
 
 namespace Game
 {
-     
+
     public class Player : Component
     {
-
         private Vector2 startPos;
         private Mover mover;
         private Facing Facing;
@@ -17,7 +16,7 @@ namespace Game
         private const int vSpeed = -20;
         private int normalGravity = 20;
         private StateMachine<States> StateMachine = new StateMachine<States>();
-        private bool grounded { get { return mover.Collision(new Point(0, 1), Mover.Masks.All); } }
+        private bool grounded { get { return mover.Collision(Direction.Down, Mover.Masks.All); } }
         private const int jumpForce = -800;
         private const int hJumpForce = 140;
         private Timer coyoteTimer;
@@ -48,6 +47,7 @@ namespace Game
         private Sprite Sprite;
         Vector2 StartPosition;
         public bool Die = false;
+        Hitbox Hitbox;
 
         private enum States
         {
@@ -55,10 +55,10 @@ namespace Game
             Wall,
         };
 
-        public static Entity Create()
+        public static Entity Create(Vector2 Position)
         {
             Entity player = new Entity();
-            player.Name = "Player";
+            player.Position = Position;
             player.Add(new Hitbox(0, 0, 8, 8));
             player.Add<Player>();
             player.Add<Mover>();
@@ -72,8 +72,10 @@ namespace Game
             StartPosition = Entity.Position;
             mover = Entity.Get<Mover>();
             Sprite = Entity.Get<Sprite>();
+            Hitbox = Entity.Get<Hitbox>();
+
             Sprite.Texture = Content.CreateTexture(8, 8, Color.Red);
-            
+            Sprite.LayerDepth = 100;
 
             Entity.Add(coyoteTimer = new());
             Entity.Add(jumpInputTimer = new());
@@ -89,19 +91,12 @@ namespace Game
             StateMachine.Set(States.Player);
         }
 
-        bool done = false;
 
         public override void Update()
         {
-            /*Logger.Log($"Count {World.All<Player>().Count}");
-            Logger.Log(World.All<Player>()[0].Entity == Entity);
-            var player = Entity.Get<Sprite>();
-            Entity.Remove(player);*/
-
 
             if (Die)
             {
-                Logger.Log("death");
                 Entity.Position = StartPosition;
                 Die = false;
             }
@@ -112,12 +107,21 @@ namespace Game
         {
             if (!grounded)
                 mover.Move.Y += normalGravity;
-            Jump();
+
+            mover.Move.Y = Input.Vertical * speed;
+            mover.Move.X = Input.Horizontal * speed;
+
+            if (Input.Jump && grounded)
+            {
+               float y = -1000f;
+  
+            }
 
             if (Input.WallClimb)
             {
-                if(WallCheck)
-                    StateMachine.Set(States.Wall);
+                StateMachine.Set(States.Wall);
+                //if(WallCheck)
+                //    StateMachine.Set(States.Wall);
             }
 
         }
@@ -157,12 +161,9 @@ namespace Game
 
         private void WallState()
         {
-            if (Input.WallClimb.Released)
-            {
-                
-            }
-            
-            StateMachine.Set(States.Player);
+            if (Input.WallClimb.Pressed)
+                StateMachine.Set(States.Player);
+            mover.Move.Y = Input.Vertical * speed;
 
         }
 

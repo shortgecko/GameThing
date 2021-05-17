@@ -1,5 +1,5 @@
 {
-  "name": "New Project",
+  "name": "Earthward",
   "ogmoVersion": "3.4.0",
   "levelPaths": ["."],
   "backgroundColor": "#282c34ff",
@@ -15,8 +15,16 @@
   "compactExport": false,
   "externalScript": "",
   "playCommand": "",
-  "entityTags": [],
+  "entityTags": ["entity", "triggers"],
   "layers": [
+    {
+      "definition": "grid",
+      "name": "Background",
+      "gridSize": {"x": 8, "y": 8},
+      "exportID": "59147415",
+      "arrayMode": 0,
+      "legend": {"0": "#00000000", "1": "#000000ff"}
+    },
     {
       "definition": "grid",
       "name": "Solids",
@@ -34,12 +42,12 @@
       "excludedTags": []
     },
     {
-      "definition": "grid",
-      "name": "Background",
+      "definition": "entity",
+      "name": "Triggers",
       "gridSize": {"x": 8, "y": 8},
-      "exportID": "59147415",
-      "arrayMode": 0,
-      "legend": {"0": "#00000000", "1": "#000000ff"}
+      "exportID": "41611600",
+      "requiredTags": [],
+      "excludedTags": []
     }
   ],
   "entities": [
@@ -76,7 +84,7 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": [],
+      "tags": ["entity"],
       "values": []
     },
     {
@@ -112,7 +120,7 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": [],
+      "tags": ["entity"],
       "values": []
     },
     {
@@ -137,8 +145,8 @@
       "tileX": false,
       "tileY": false,
       "tileSize": {"x": 16, "y": 16},
-      "resizeableX": false,
-      "resizeableY": false,
+      "resizeableX": true,
+      "resizeableY": true,
       "rotatable": false,
       "rotationDegrees": 360,
       "canFlipX": false,
@@ -148,7 +156,79 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": [],
+      "tags": ["entity"],
+      "values": []
+    },
+    {
+      "exportID": "41621859",
+      "name": "trigger",
+      "limit": -1,
+      "size": {"x": 16, "y": 16},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": true,
+      "resizeableY": true,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["triggers"],
+      "values": []
+    },
+    {
+      "exportID": "70442386",
+      "name": "falling_block",
+      "limit": -1,
+      "size": {"x": 8, "y": 8},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#0400ffff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": true,
+      "resizeableY": true,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["entity"],
       "values": []
     }
   ],

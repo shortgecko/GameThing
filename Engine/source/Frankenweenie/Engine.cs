@@ -8,6 +8,7 @@ using Blah = Frankenweenie;
 
 namespace Frankenweenie
 {
+
     public class Engine : Microsoft.Xna.Framework.Game
     {
         public static Engine Instance;
@@ -19,7 +20,6 @@ namespace Frankenweenie
         public static float Timer;
         public static float TimeRate = 1f;
 
-        public static int FPS;
         private TimeSpan counterElapsed = TimeSpan.Zero;
         private int fpsCounter = 0;
         public static GamePadState[] GamePads = new GamePadState[4];
@@ -28,7 +28,10 @@ namespace Frankenweenie
         public static VirtualRenderTarget RenderTarget;
         public static Matrix Transform = Matrix.CreateTranslation(0, 0, 0);
         public static SceneManager SceneManager;
-        private static Color clearColor = Color.Black;
+        private static Color clearColor = Microsoft.Xna.Framework.Color.Black;
+
+        public static float fpsValue;
+        public static float FPS => fpsValue;
 
         public static string AssetDirectory
         {
@@ -58,6 +61,15 @@ namespace Frankenweenie
         protected override void Initialize()
         {
             Content.RootDirectory = Config.AssetDirectory;
+            if(!Config.FixedTimeStep)
+            {
+                Device.SynchronizeWithVerticalRetrace = false;
+                IsFixedTimeStep = false;
+            }
+            else
+            {
+                IsFixedTimeStep = Config.FixedTimeStep;
+            }
             IsFixedTimeStep = Config.FixedTimeStep;
             Window.Title = Config.WindowTitle;
             Device.PreferredBackBufferWidth = Config.Width;
@@ -78,7 +90,7 @@ namespace Frankenweenie
         }
 
         protected override void LoadContent()
-        {
+        {;
             new Drawer();
             Blah.Drawer.Batch = new SpriteBatch(Device.GraphicsDevice);
         }
@@ -104,7 +116,6 @@ namespace Frankenweenie
 
         protected override void Update(GameTime gameTime)
         {
-
             RawDeltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             Delta = RawDeltaTime * TimeRate;
             Timer += RawDeltaTime;
@@ -125,18 +136,25 @@ namespace Frankenweenie
                 Button.LateUpdate();
         }
 
+
+
         protected override void Draw(GameTime gameTime)
         {
+           
+           
             GraphicsDevice.SetRenderTarget(RenderTarget.Target);
             GraphicsDevice.Clear(clearColor);
+
+
+
             Drawer.Batch.Begin(SpriteSortMode.FrontToBack);
             if(m_Scene.IsRunning)
                 m_Scene.Draw();
             Drawer.Batch.End();
             GraphicsDevice.SetRenderTarget(null);
 
-            GraphicsDevice.Clear(Color.Black);
-            Drawer.Batch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, transformMatrix: Transform);
+            GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.Black);
+            Drawer.Batch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, transformMatrix: Transform);
             RenderTarget.Render();
             Drawer.Batch.End();
 
@@ -152,7 +170,7 @@ namespace Frankenweenie
 #if DEBUG
                 Window.Title = Config.WindowTitle + " " + fpsCounter.ToString() + " fps - " + (GC.GetTotalMemory(false) / 1048576f).ToString("F") + " MB";
 #endif
-                FPS = fpsCounter;
+                fpsValue = fpsCounter;
                 fpsCounter = 0;
                 counterElapsed -= TimeSpan.FromSeconds(1);
 
@@ -206,10 +224,21 @@ namespace Frankenweenie
             Frankenweenie.Content.Dispose();
         }
 
-        public static void ClearColor(Color color) => clearColor = color;
+        public static void Color(Color color)
+        {
+            clearColor = color;
+        }
 
-        public static void Fullscreen(bool value) => Device.IsFullScreen = value;
+        public static void Fullscreen(bool value)
+        {
+            Device.IsFullScreen = value;
+        }
 
+        public static void Quit()
+        {
+            End();
+            Instance.Exit();
+        }
 
     }
 }

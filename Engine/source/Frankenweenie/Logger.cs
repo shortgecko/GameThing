@@ -4,11 +4,12 @@ using System.IO;
 using System.Text;
 
 
+
 namespace Frankenweenie
 {
     public static class Logger
     {
-        private static List<string> Logs = new List<string>();
+        private static List<String> Logs = new List<String>();
         private static string Path = $"{Engine.AssemblyDirectory}/Log.txt";
         private static string Title;
 
@@ -23,28 +24,40 @@ namespace Frankenweenie
             Console.WriteLine(Header);
         }
 
-        public static void Log(object log, bool addToFile = true)
+        public static void Log(object log, bool addToFile = true, ConsoleColor color = ConsoleColor.White)
         {
-            string logLine = $"[{Title}] {log.ToString()}";
+            Console.ForegroundColor = color;
+            String logLine = $"[{Title}] {log.ToString()}";
             if (addToFile)
                 Logs.Add(logLine);
             Console.WriteLine(logLine);
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
-        public static void Log() => Logger.Log("***", false);
+        public static void Log(object log, ConsoleColor color)
+        {
+            Console.ForegroundColor = color;
+            String logLine = $"[{Title}] {log.ToString()}";
+            Console.WriteLine(logLine);
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        public static void Log() => Logger.Log("**", false);
         
         public static void Save()
         {
-            using (StreamWriter writer = new StreamWriter(Path))
+            using (StreamWriter Writer = new StreamWriter(Path))
             {
-                writer.WriteLine(Title);
-                writer.WriteLine(Header);
-                foreach(String Log in Logs)
+                Writer.WriteLine(Title);
+                Writer.WriteLine(Header);
+
+                foreach (String Log in Logs)
                 {
-                    writer.WriteLine(Log);
+                    Writer.WriteLine(Log);
                 }
-                writer.Close();
+                Writer.Close();
             }
         }
+
     }
 }

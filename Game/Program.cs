@@ -7,26 +7,19 @@ using System;
 
 namespace Game
 {
-    public delegate void Function(Entity e);
-
-    public class Person
-    {
-        public string Name;
-    }
 
     public class Program
     {
-        
+        #region GameStuff
         private static SceneManager Scenes = new SceneManager()
         {
             Scenes = new Dictionary<string, Scene>()
             {
                 { "Splash", new Splash() },
                 { "Game" , new Game() },
+                {"Text", new GUI()},
             },
         };
-
-
         private static Config LoadConfig()
         {
             if(!File.Exists("engine-config"))
@@ -37,7 +30,6 @@ namespace Game
 
             return Serializer.Deserialize<Config>("engine-config");
         }
-
         private static void Run()
         {
 
@@ -48,6 +40,8 @@ namespace Game
             Engine.RunWithLogging(ref config, Scenes, "Game");
 #endif
         }
+        #endregion
+
 
         private static void Main()
         {

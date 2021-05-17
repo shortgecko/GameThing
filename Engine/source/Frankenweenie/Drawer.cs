@@ -19,6 +19,12 @@ namespace Frankenweenie
             Drawer.Batch.Draw(EmptyTexture, rect, c);
         }
 
+        public static void Rect(Rectangle rect)
+        {
+            Color c = Color.White;
+            Drawer.Batch.Draw(EmptyTexture, rect, c);
+        }
+
         public static void HollowRectangle(Rectangle input, int t, Color c)
         {
             hollowRect.X = input.X;

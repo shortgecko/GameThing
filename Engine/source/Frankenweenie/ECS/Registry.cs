@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections;
 
 namespace Frankenweenie
@@ -74,7 +69,6 @@ namespace Frankenweenie
         {
             foreach (T component in Components)
                 Remove(component);
-            UpdateList();
         }
 
         public int Count

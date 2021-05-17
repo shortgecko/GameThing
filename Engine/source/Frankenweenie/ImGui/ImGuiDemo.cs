@@ -4,7 +4,7 @@ using Num = System.Numerics;
 
 namespace Frankenweenie
 {
-    //Copypated 
+    //Copypasted 
     public class ImGuiDemo : ImGuiElement
     {
         private IntPtr _imGuiTexture;

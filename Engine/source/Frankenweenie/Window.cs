@@ -33,6 +33,7 @@ namespace Frankenweenie
             }
         }
 
+
         public static void Size(int width, int height)
         {
             Engine.Device.PreferredBackBufferWidth = width;

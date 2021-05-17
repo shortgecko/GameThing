@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Frankenweenie
 {
-
+    // copied, I need to refactor this
     public class Particle
     {
         public Texture2D Texture { get; set; }        // The texture that will be drawn to represent the particle
