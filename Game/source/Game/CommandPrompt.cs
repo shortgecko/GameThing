@@ -8,35 +8,37 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Game
 {
-    //very bad, especially when dealing with agruments
     public class CommandPrompt : ImGuiElement
-    {
+    {>
+        private readonly char Quote = '\u0022';
+        private string Input = string.Empty;
+        private bool TextChanged = false;
         private bool showConsole;
-        private static Dictionary<string, Action> Commands = new Dictionary<string, Action>();
-        private string command = string.Empty;
-        private string arguments = string.Empty;
-        private void LoadLevel_CMD()
-        {
-            try
-            {
-               LevelLoader.Load(arguments);
-            }
-            catch
-            {
-                ImGui.Text("Level " + arguments + " not found");
-            }
-        }
-
-        private void Help_CMD()
-        {
-            ImGui.Text("Commands: "); foreach (var cmd in Commands.Keys) ImGui.Text(cmd);
-        }
+        private static Dictionary<string, Action<string[]>> Commands = new Dictionary<string, Action<string[]>>();
 
         public CommandPrompt()
         {
-            Commands.Add("help", Help_CMD);
-            Commands.Add("entity_count", () => ImGui.Text(World.Count.ToString()));
-            Commands.Add("load", LoadLevel_CMD);
+            Commands.Add("help",(string[] args ) =>
+            {
+                ImGui.Text("Commands");
+                foreach(var command in Commands.Keys)
+                {
+                    ImGui.Text(command);
+                }
+            });
+            Commands.Add("entity_count", (string[] args) => ImGui.Text(World.Count.ToString()));
+            Commands.Add("load",(string[] args) => 
+            {
+                string arguments = args[0];
+                try
+                {
+                LevelLoader.Load(arguments);
+                }
+                catch
+                {
+                    ImGui.Text("Level " + arguments + " not found");
+                }
+            });
         }
 
         public override void Draw()
@@ -51,20 +53,26 @@ namespace Game
                 ImGui.Begin("Command Prompt", ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoCollapse);
                 ImGui.SetWindowPos(Vector2.Zero);
                 ImGui.SetWindowSize(new Vector2(Window.Width, ImGui.GetWindowSize().Y));
-                ImGui.InputText("Command", ref command, 1000);
-                Action cmd;
-                if (Commands.TryGetValue(command, out cmd))
-                    cmd.Invoke();
-                else if (Commands.TryGetValue(command.Split(new char[] { ' ' })[0], out cmd))
-                {
-                    arguments = command.Split(new char[] { ' ' })[1];
-                    cmd.Invoke();
-                }
-                else
-                    ImGui.Text($"Command {command} not found");
-                arguments = string.Empty;
-                command = string.Empty;
+                TextChanged = ImGui.InputText("Command", ref Input, 1000);
                 ImGui.End();
+            }
+
+            if(TextChanged)
+            {
+               string[] split =  Input.Split(new char[] {' '});
+               string commandKey = split[0];
+               string[] args = new string[split.Length - 2];
+               for(int i = 1; i < split.Length; i++)
+                   args[i] = split[i];
+               if(Commands.ContainsKey(commandKey))
+               {
+                   var command = Commands[commandKey];
+                   command.Invoke(args);
+               }
+               else
+               {
+                   ImGui.Text($"Command {commandKey} does not exis\n use command {Quote}help{Quote} to see a list of commands.");
+               }
             }
         }
     }
