@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\muham\source\repos\projects\clangs\Cartographer\Cartographer\build\CMakeFiles\cfbdd6d2eac0a707fdee2b8947a29a5d\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{6FDC732B-5064-34F3-920C-8922AB7859B4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

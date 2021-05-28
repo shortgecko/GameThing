@@ -1,0 +1,17 @@
+# ninja log v5
+0	414	6437156664591250	CMakeFiles/Cartographer.dir/source/math/rect.cpp.obj	5716eda30182b922
+4	67	6437157393826172	libs/imgui/imgui.lib	40b098ad8e72a7c7
+6	421	6437156664666312	CMakeFiles/Cartographer.dir/source/logger.cpp.obj	7187e3ac03522638
+15	430	6437156664811348	libs/imgui/CMakeFiles/imgui.dir/GL/gl3w.c.obj	55261e3343c4e712
+5	422	6437156664666312	CMakeFiles/Cartographer.dir/source/graphics/color.cpp.obj	350bce17880a9b7
+12	424	6437156664740894	CMakeFiles/Cartographer.dir/source/renderer.cpp.obj	13cfc366af5d03d9
+1	172	6437157395011389	CMakeFiles/Cartographer.dir/source/app.cpp.obj	c653842ff7f31998
+3	427	6437156664666312	CMakeFiles/Cartographer.dir/source/math/vec2.cpp.obj	26b139098f49d9b7
+17	500	6437156665549707	libs/imgui/CMakeFiles/imgui.dir/imgui_demo.cpp.obj	fbac4832b84ffec0
+19	762	6437156667973902	libs/imgui/CMakeFiles/imgui.dir/imgui.cpp.obj	71f142a6c2970ae7
+9	448	6437157256284754	libs/imgui/CMakeFiles/imgui.dir/imgui_impl_opengl3.cpp.obj	32c87759e2147fe2
+5	468	6437157256578203	libs/imgui/CMakeFiles/imgui.dir/imgui_tables.cpp.obj	ec2c4d401df6a9a7
+7	487	6437157256988041	libs/imgui/CMakeFiles/imgui.dir/imgui_widgets.cpp.obj	686fe2adda85cc42
+3	493	6437157256857269	libs/imgui/CMakeFiles/imgui.dir/imgui_draw.cpp.obj	8eaf64c56b7f1fb3
+173	213	6437157395300922	Cartographer.lib	71d7dd7e29a73f7b
+1	466	6438131786755231	build.ninja	8e40a09a3a116639

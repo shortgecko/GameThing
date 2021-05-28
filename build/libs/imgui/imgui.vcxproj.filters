@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\muham\source\repos\projects\clangs\Cartographer\Cartographer\libs\imgui\GL\gl3w.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\muham\source\repos\projects\clangs\Cartographer\Cartographer\libs\imgui\imgui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\muham\source\repos\projects\clangs\Cartographer\Cartographer\libs\imgui\imgui_demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\muham\source\repos\projects\clangs\Cartographer\Cartographer\libs\imgui\imgui_draw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\muham\source\repos\projects\clangs\Cartographer\Cartographer\libs\imgui\imgui_tables.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\muham\source\repos\projects\clangs\Cartographer\Cartographer\libs\imgui\imgui_widgets.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\muham\source\repos\projects\clangs\Cartographer\Cartographer\libs\imgui\imgui_impl_opengl3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\muham\source\repos\projects\clangs\Cartographer\Cartographer\libs\imgui\GL\khrplatform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\muham\source\repos\projects\clangs\Cartographer\Cartographer\libs\imgui\GL\gl3w.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\muham\source\repos\projects\clangs\Cartographer\Cartographer\libs\imgui\GL\glcorearb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\muham\source\repos\projects\clangs\Cartographer\Cartographer\libs\imgui\imgui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\muham\source\repos\projects\clangs\Cartographer\Cartographer\libs\imgui\imgui_internal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\muham\source\repos\projects\clangs\Cartographer\Cartographer\libs\imgui\imstb_rectpack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\muham\source\repos\projects\clangs\Cartographer\Cartographer\libs\imgui\imstb_textedit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\muham\source\repos\projects\clangs\Cartographer\Cartographer\libs\imgui\imstb_truetype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\muham\source\repos\projects\clangs\Cartographer\Cartographer\libs\imgui\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{DF382822-E294-389B-BBBD-7AD62CA8BAA2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{105159FF-FFEF-327F-A6D5-4FD2704FD84E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

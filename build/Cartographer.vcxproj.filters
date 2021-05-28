@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\muham\source\repos\projects\clangs\Cartographer\Cartographer\source\math\vec2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\muham\source\repos\projects\clangs\Cartographer\Cartographer\source\math\rect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\muham\source\repos\projects\clangs\Cartographer\Cartographer\source\graphics\color.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\muham\source\repos\projects\clangs\Cartographer\Cartographer\source\logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\muham\source\repos\projects\clangs\Cartographer\Cartographer\source\app.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\muham\source\repos\projects\clangs\Cartographer\Cartographer\source\renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\muham\source\repos\projects\clangs\Cartographer\Cartographer\Cartographer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\muham\source\repos\projects\clangs\Cartographer\Cartographer\include\imgui_backend.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\muham\source\repos\projects\clangs\Cartographer\Cartographer\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{DF382822-E294-389B-BBBD-7AD62CA8BAA2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{105159FF-FFEF-327F-A6D5-4FD2704FD84E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

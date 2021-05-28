@@ -1,0 +1,6 @@
+C:/Users/muham/source/repos/projects/clangs/Cartographer/Cartographer/out/build/x64-Debug/CMakeFiles/Cartographer.dir
+C:/Users/muham/source/repos/projects/clangs/Cartographer/Cartographer/out/build/x64-Debug/CMakeFiles/edit_cache.dir
+C:/Users/muham/source/repos/projects/clangs/Cartographer/Cartographer/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
+C:/Users/muham/source/repos/projects/clangs/Cartographer/Cartographer/out/build/x64-Debug/libs/imgui/CMakeFiles/imgui.dir
+C:/Users/muham/source/repos/projects/clangs/Cartographer/Cartographer/out/build/x64-Debug/libs/imgui/CMakeFiles/edit_cache.dir
+C:/Users/muham/source/repos/projects/clangs/Cartographer/Cartographer/out/build/x64-Debug/libs/imgui/CMakeFiles/rebuild_cache.dir
