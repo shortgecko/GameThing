@@ -11,10 +11,32 @@ namespace Game
 {
     public static class LevelLoader
     {
+        public static OgmoLevel Level;
+
+        public static void Reload()
+        {
+            World.Clear();
+            OgmoLayer entityLayer = Level["Entities"];
+
+            foreach (OgmoEntity ogmoEntity in entityLayer.entities)
+            {
+                Vector2 Position = new Vector2(ogmoEntity.x, ogmoEntity.y);
+                Factory.Entity(ogmoEntity.name, Position, new Parameters(ogmoEntity));
+            }
+
+            OgmoLayer triggerLayer = Level["Triggers"];
+
+            foreach (OgmoEntity ogmoEntity in triggerLayer.entities)
+            {
+                Entity Entity = Factory.Trigger(ogmoEntity.name, new Point(ogmoEntity.x, ogmoEntity.y), new Parameters(ogmoEntity));
+                World.Add(Entity);
+            }
+        }
+
         public static void Load(string path)
         {
             World.Clear();
-            OgmoLevel Level = Content.LoadOgmo($"levels/{path}");
+            Level = Content.LoadOgmo($"levels/{path}");
             OgmoLayer tileLayer = Level["Solids"];
             int[] tileLayerData = tileLayer.GridToTileLayer();
             global::Game.Level.Tiles = new Tilemap(tileLayerData, tileLayer.gridCellsX, tileLayer.gridCellsY);
@@ -45,7 +67,6 @@ namespace Game
             }
 
             Autotiler.Tile(global::Game.Level.Tiles);
-            Level = null;
             tileLayer = null;
             tileLayerData = null;
             entityLayer = null;

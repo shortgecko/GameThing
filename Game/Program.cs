@@ -20,6 +20,7 @@ namespace Game
                 {"Text", new GUI()},
             },
         };
+
         private static Config LoadConfig()
         {
             if(!File.Exists("engine-config"))
@@ -33,9 +34,10 @@ namespace Game
         private static void Run()
         {
 
-            Config config = LoadConfig();
+            Config config = Serializer.Deserialize<Config>(Path.Combine(Engine.AssemblyDirectory + "engine-config"));
 #if DEBUG
             Engine.Run(ref config, Scenes, "Game");
+          //  Engine.Run(ref config, Scenes, "Game");
 #else
             Engine.RunWithLogging(ref config, Scenes, "Game");
 #endif
@@ -45,6 +47,11 @@ namespace Game
 
         private static void Main()
         {
+            string[] allfiles = Directory.GetFiles("assets", "*.*", SearchOption.AllDirectories);
+            foreach(var s in allfiles)
+            {
+                Console.WriteLine($"thing {s}");
+            }
             Run();
         }
 

@@ -12,6 +12,7 @@ using System.Linq;
 
 namespace Game
 {
+   
     public class Game : Scene
     {
         public float LevelTime;
@@ -19,22 +20,53 @@ namespace Game
         private Texture2D BgTile;
         private Camera Camera = new Camera();
 
+        private Action ResizeAction = () =>
+        {
+            Vector2 scale = new Vector2()
+            {
+                X = (int)Window.Width / 320,
+                Y = (int)Window.Width / 320,
+            };
+
+            Logger.Log($"scale x {scale.X}");
+            Logger.Log($"scale y {scale.Y}");
+
+            Vector2 screenCenter = new Vector2()
+            {
+                X = (Window.Width - (320 * scale.X)) / 2,
+                Y = (Window.Height - (180 * scale.Y)) / 2,
+            };
+
+
+            Engine.RenderTarget.Scale = scale;
+            Engine.RenderTarget.Position = screenCenter;
+
+            if (Window.Width > Profile.Width || Window.Height > Profile.Height)
+            {
+                Point DesktopPosition = new Point((Profile.Width - Window.Width) / 2, (Profile.Height - Window.Height) / 2);
+                Window.SetPosition(DesktopPosition);
+            }
+        };
+
         protected override void Initialize()
         {
-            Engine.RenderTarget.Scale = new Vector2(6);
-            ImGuiLayer.add<CommandPrompt>();
+            ResizeAction.Invoke();
+            Window.ResizeActions.Add(ResizeAction);
+            ImGuiLayer.Add<CommandPrompt>();
+            
             LevelLoader.Load("1.json");
             base.Initialize();
         }
 
         protected override void Load()
         {
-
+            Engine.Color(Color.Black);
             Tileset = new Tileset("graphics/tileset.png", 8, 8);
             BgTile = Content.LoadTexture("graphics/bg_tile.png");
-            Level.Tiles.LayerDepth = 1f;
+            Level.Tiles.LayerDepth = 100f / Sprite.MaxLayerDepth;
             Level.BgTiles.LayerDepth = 10f / Sprite.MaxLayerDepth;
             Camera.Position = Vector2.One;
+
         }
 
 
@@ -72,12 +104,10 @@ namespace Game
 
         protected override void Render()
         {
-            Engine.Color(Color.Black);
             Level.BgTiles.Render(BgTile);
+           
             World.Render();
             Level.Tiles.Render(Tileset);
-
-            DebugDraw.Draw();
         }
 
     }

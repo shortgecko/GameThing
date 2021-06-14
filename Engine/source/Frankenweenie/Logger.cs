@@ -9,7 +9,7 @@ namespace Frankenweenie
 {
     public static class Logger
     {
-        private static List<String> Logs = new List<String>();
+        private static StringBuilder Logs = new StringBuilder();
         private static string Path = $"{Engine.AssemblyDirectory}/Log.txt";
         private static string Title;
 
@@ -29,7 +29,7 @@ namespace Frankenweenie
             Console.ForegroundColor = color;
             String logLine = $"[{Title}] {log.ToString()}";
             if (addToFile)
-                Logs.Add(logLine);
+                Logs.Append(logLine + "\n");
             Console.WriteLine(logLine);
             Console.ForegroundColor = ConsoleColor.White;
         }
@@ -50,11 +50,7 @@ namespace Frankenweenie
             {
                 Writer.WriteLine(Title);
                 Writer.WriteLine(Header);
-
-                foreach (String Log in Logs)
-                {
-                    Writer.WriteLine(Log);
-                }
+                Writer.Write(Logs.ToString());
                 Writer.Close();
             }
         }

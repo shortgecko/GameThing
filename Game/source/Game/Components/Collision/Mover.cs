@@ -48,13 +48,7 @@ namespace Game
             CheckY();
         }
 
-        private bool Check(Point offset, Hitbox other)
-        { 
-            Hitbox.X = (int)Entity.Position.X;
-            Hitbox.Y = (int)Entity.Position.Y;
-            var box = new Hitbox(Hitbox.X + offset.X, Hitbox.Y + offset.Y, Hitbox.Width, Hitbox.Height);
-            return Hitbox.Intersects(box, other);
-        }
+        private bool Check(Point offset, Hitbox other) => Hitbox.Check(offset, Hitbox, other);
         private bool CheckActor(Point offset, Hitbox other)
         {
             Hitbox.X = (int)Entity.Position.X;

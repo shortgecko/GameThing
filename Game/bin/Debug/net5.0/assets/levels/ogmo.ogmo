@@ -44,7 +44,7 @@
     {
       "definition": "entity",
       "name": "Triggers",
-      "gridSize": {"x": 8, "y": 8},
+      "gridSize": {"x":8, "y": 8},
       "exportID": "41611600",
       "requiredTags": [],
       "excludedTags": []
@@ -55,9 +55,9 @@
       "exportID": "35718577",
       "name": "player",
       "limit": -1,
-      "size": {"x": 8, "y": 8},
+      "size": {"x": 8, "y": 10},
       "origin": {"x": 0, "y": 0},
-      "originAnchored": true,
+      "originAnchored": false,
       "shape": {
         "label": "Rectangle",
         "points": [

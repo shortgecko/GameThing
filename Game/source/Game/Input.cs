@@ -19,11 +19,15 @@ namespace Game
         {
             Horizontal.Add(new VirtualAxisGamepadLeftX());
             Horizontal.Add(new VirtualAxisKeyboard(Keys.D, Keys.A));
+            Horizontal.Add(new VirtualAxisKeyboard(Keys.Right, Keys.Left));
 
             Vertical.Add(new VirtualAxisGamepadLeftY());
             Vertical.Add(new VirtualAxisKeyboard(Keys.S, Keys.W));
+            Vertical.Add(new VirtualAxisKeyboard(Keys.Down, Keys.Up));
+
 
             Jump.Add(new VirtualButtonKeyboard(Keys.Z));
+            Jump.Add(new VirtualButtonKeyboard(Keys.Space));
             Jump.Add(new VirtualButtonGamepad(Buttons.A));
 
             Pause.Add(new VirtualButtonKeyboard(Keys.Escape));

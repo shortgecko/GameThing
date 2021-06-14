@@ -9,20 +9,20 @@
                 {
                     int i = tilemap.Data[x + y * tilemap.Width];
                     if (i > -1)
-                        tilemap.Data[x + y * tilemap.Width] = set(tilemap, x, y);
+                        tilemap.Data[x + y * tilemap.Width] = Set(tilemap, x, y);
                 }
         }              
 
-        private static int set(Tilemap tilemap, int x, int y)
+        private static int Set(Tilemap tilemap, int x, int y)
         {
-            int north = get(tilemap, x, y - 1);
-            int south = get(tilemap, x, y + 1);
-            int east = get(tilemap, x + 1, y);
-            int west = get(tilemap, x - 1, y);
+            int north = Get(tilemap, x, y - 1);
+            int south = Get(tilemap, x, y + 1);
+            int east = Get(tilemap, x + 1, y);
+            int west = Get(tilemap, x - 1, y);
             return north + 2 * west + 4 * east + 8 * south;
         }
 
-        private static int get(Tilemap tilemap, int x, int y)
+        private static int Get(Tilemap tilemap, int x, int y)
         {
             bool lessX = x < 0;
             bool lessY = y < 0;

@@ -17,7 +17,7 @@ namespace Game
         private int normalGravity = 20;
         private StateMachine<States> StateMachine = new StateMachine<States>();
         private bool grounded { get { return mover.Collision(Direction.Down, Mover.Masks.All); } }
-        private const int jumpForce = -800;
+        private const int jumpForce = -1500;
         private const int hJumpForce = 140;
         private Timer coyoteTimer;
         private float coyoteTime = 0.3f;
@@ -59,7 +59,7 @@ namespace Game
         {
             Entity player = new Entity();
             player.Position = Position;
-            player.Add(new Hitbox(0, 0, 8, 8));
+            player.Add(new Hitbox(0, 0, 8, 10));
             player.Add<Player>();
             player.Add<Mover>();
             player.Add<Sprite>();
@@ -74,8 +74,8 @@ namespace Game
             Sprite = Entity.Get<Sprite>();
             Hitbox = Entity.Get<Hitbox>();
 
-            Sprite.Texture = Content.CreateTexture(8, 8, Color.Red);
-            Sprite.LayerDepth = 100;
+            Sprite.Texture = Content.CreateTexture(8, 10, Color.Red);
+            Sprite.LayerDepth = 1000;
 
             Entity.Add(coyoteTimer = new());
             Entity.Add(jumpInputTimer = new());
@@ -108,18 +108,19 @@ namespace Game
             if (!grounded)
                 mover.Move.Y += normalGravity;
 
-            mover.Move.Y = Input.Vertical * speed;
             mover.Move.X = Input.Horizontal * speed;
 
-            if (Input.Jump && grounded)
+            if(mover.Move.Y == 1)
             {
-               float y = -1000f;
-  
+                Logger.Log();
+                mover.Move.Y -= speed;
             }
+
+            Jump();
 
             if (Input.WallClimb)
             {
-                StateMachine.Set(States.Wall);
+               // StateMachine.Set(States.Wall);
                 //if(WallCheck)
                 //    StateMachine.Set(States.Wall);
             }
@@ -170,7 +171,7 @@ namespace Game
 
         public override void Removed()
         {
-            Entity.Remove<Player>();
+            
         }
 
 

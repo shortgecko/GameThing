@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 namespace Game
 {
     public class CommandPrompt : ImGuiElement
-    {>
+    {
         private readonly char Quote = '\u0022';
         private string Input = string.Empty;
         private bool TextChanged = false;
@@ -61,9 +61,14 @@ namespace Game
             {
                string[] split =  Input.Split(new char[] {' '});
                string commandKey = split[0];
-               string[] args = new string[split.Length - 2];
-               for(int i = 1; i < split.Length; i++)
-                   args[i] = split[i];
+               Logger.Log(split.Length);
+                string[] args = null;
+               if (split.Length > 1)
+               {
+                    args = new string[split.Length - 2];
+                    for (int i = 1; i < split.Length - 1; i++)
+                        args[i] = split[i];
+               }
                if(Commands.ContainsKey(commandKey))
                {
                    var command = Commands[commandKey];

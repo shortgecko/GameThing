@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 namespace Frankenweenie
 {
     public class VirtualInputButton : VirtualButton
@@ -6,14 +7,6 @@ namespace Frankenweenie
         private List<VirtualButton> Buttons = new List<VirtualButton>();
 
         public void Add(VirtualButton button) => Buttons.Add(button);
-
-        public override void LateUpdate()
-        {
-            foreach (VirtualButton button in Buttons)
-            {
-                button.LateUpdate();
-            }
-        }
 
         public override void EarlyUpdate()
         {
@@ -30,7 +23,7 @@ namespace Frankenweenie
                 foreach (VirtualButton button in Buttons)
                 {
                     if (button.Pressed)
-                        return button.Pressed;
+                        return true;
                 }
                 return false;
             }
@@ -43,9 +36,17 @@ namespace Frankenweenie
                 foreach (VirtualButton button in Buttons)
                 {
                     if (button.Released)
-                        return button.Released;
+                        return true;
                 }
                 return false;
+            }
+        }
+
+        public override void LateUpdate()
+        {
+            foreach (VirtualButton button in Buttons)
+            {
+                button.LateUpdate();
             }
         }
 

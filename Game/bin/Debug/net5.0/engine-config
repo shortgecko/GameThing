@@ -1,8 +1,8 @@
 {
-  "WindowTitle": "earthward the game the movie the interactive experiance",
+  "WindowTitle": "Earthward",
   "AssetDirectory": "Assets",
   "FixedTimeStep": true,
-  "Width": 1920,
-  "Height": 1080,
+  "Width": 1280,
+  "Height": 720,
   "IsMouseVisible": true
 }

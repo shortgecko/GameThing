@@ -66,13 +66,7 @@ namespace Frankenweenie
                 }
         }
 
-        public int this[int i]
-        {
-            get
-            {
-                return Data[i];
-            }
-        }
+        public int this[int i] => Data[i];
 
     }
 }

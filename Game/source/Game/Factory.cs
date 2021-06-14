@@ -13,9 +13,10 @@ namespace Game
     {
         private static void Add(Entity e) => World.Add(e);
 
+
         public static void Entity(string name, Vector2 Position, Parameters Parameters)
         {
-
+         
             switch(name)
             {
                 case "player":
@@ -29,7 +30,6 @@ namespace Game
                     break;
                 default:
                     throw new Exception("Entity not found");
-
             }
         }
 

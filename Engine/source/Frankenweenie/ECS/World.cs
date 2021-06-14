@@ -6,10 +6,16 @@ namespace Frankenweenie
 {
     public class World
     {
-        private static Registry<Entity> Entities = new Registry<Entity>();
+        private static Registry<Entity> EntityRegistry = new Registry<Entity>();
         public static Dictionary<Type, List<Component>> ComponentRegistry = new Dictionary<Type, List<Component>>();
-        
-        public static int Count => Entities.Count;
+        public static List<Entity> Entities
+        {
+            get
+            {
+                return EntityRegistry.ToList();
+            }
+        }
+        public static int Count => EntityRegistry.Count;
 
         public static List<Component> All<T>() where T : Component
         {
@@ -43,7 +49,7 @@ namespace Frankenweenie
 
         public static void Add(Entity Entity)
         {
-            World.Entities.Add(Entity);
+            World.EntityRegistry.Add(Entity);
             for (int i = 0; i < Entity.Components.Adding.Count; i++)
             {
                 AddToRegistry(Entity.Components.Adding[i]);
@@ -55,35 +61,41 @@ namespace Frankenweenie
         public static void Remove(Entity Entity)
         {
             Entity.Clear();
-            World.Entities.Remove(Entity);
+            World.EntityRegistry.Remove(Entity);
             Entity = null;
         }
 
         static void UpdateRegistry(Entity Entity)
         {
 
-            for (int i = 0; i < Entity.Components.Adding.Count; i++)
+            if(Entity.Components.Adding.Count > 0)
             {
-                Entity.Components.Adding[i].Initialize();
+                for (int i = 0; i < Entity.Components.Adding.Count; i++)
+                {
+                    Entity.Components.Adding[i].Initialize();
+                }
+
+                for (int i = 0; i < Entity.Components.Adding.Count; i++)
+                {
+                    AddToRegistry(Entity.Components.Adding[i]);
+                }
             }
 
-            for (int i = 0; i < Entity.Components.Adding.Count; i++)
+            if(Entity.Components.Removing.Count > 0)
             {
-                AddToRegistry(Entity.Components.Adding[i]);
-            }
+                for (int i = 0; i < Entity.Components.Removing.Count; i++)
+                {
+                    Component component = Entity.Components.Removing[i];
+                    component.Removed();
+                    Pooler.EntityRemoved(component);
+                }
 
-            for(int i = 0; i < Entity.Components.Removing.Count; i++)
-            {
-                Component component = Entity.Components.Removing[i];
-                component.Removed();
-                Pooler.EntityRemoved(component);
-            }
+                for (int i = 0; i < Entity.Components.Removing.Count; i++)
+                {
+                    Component component = Entity.Components.Removing[i];
+                    RemoveFromRegistry(component);
 
-            for (int i = 0; i < Entity.Components.Removing.Count; i++)
-            {
-                Component component = Entity.Components.Removing[i];
-                RemoveFromRegistry(component);
-
+                }
             }
 
             Entity.Components.UpdateList();
@@ -92,9 +104,9 @@ namespace Frankenweenie
 
         public static void Update()
         {
-           Entities.UpdateList();
+           EntityRegistry.UpdateList();
 
-            foreach (Entity Entity in Entities)
+            foreach (Entity Entity in EntityRegistry)
             {
                 UpdateRegistry(Entity);
 
@@ -109,7 +121,7 @@ namespace Frankenweenie
 
         public static void Render()
         {
-            foreach (Entity entity in Entities)
+            foreach (Entity entity in EntityRegistry)
             {
                 foreach (Component component in entity.Components)
                 {
@@ -122,7 +134,7 @@ namespace Frankenweenie
 
         public static void Clear()
         {
-            foreach (Entity entity in Entities)
+            foreach (Entity entity in EntityRegistry)
                 Remove(entity);
         }
     }

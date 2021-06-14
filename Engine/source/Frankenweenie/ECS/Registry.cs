@@ -10,7 +10,7 @@ namespace Frankenweenie
     public class Registry<T> : IEnumerable<T>
     {
         private List<T> ToAdd;
-        private List<T> Components;
+        private List<T> Active;
         private List<T> ToRemove;
 
         public List<T> Adding => ToAdd;
@@ -19,7 +19,7 @@ namespace Frankenweenie
         public Registry()
         {
             ToAdd = new List<T>();
-            Components = new List<T>();
+            Active = new List<T>();
             ToRemove = new List<T>();
         }
 
@@ -38,14 +38,14 @@ namespace Frankenweenie
             if(ToAdd.Count > 1)
             {
                 foreach (T component in ToAdd)
-                    Components.Add(component);
+                    Active.Add(component);
                 ToAdd.Clear();
             }
 
             if(ToRemove.Count > 1)
             {
                 foreach (T component in ToRemove)
-                    Components.Remove(component);
+                    Active.Remove(component);
                 ToRemove.Clear();
             }
         }
@@ -57,17 +57,17 @@ namespace Frankenweenie
 
         public IEnumerator<T> GetEnumerator()
         {
-            return Components.GetEnumerator();
+            return Active.GetEnumerator();
         }
 
         public List<T> ToList()
         {
-            return Components;
+            return Active;
         }
 
         public void Clear()
         {
-            foreach (T component in Components)
+            foreach (T component in Active)
                 Remove(component);
         }
 
@@ -75,7 +75,7 @@ namespace Frankenweenie
         {
             get
             {
-                return Components.Count;
+                return Active.Count;
             }
         }
 
@@ -83,7 +83,7 @@ namespace Frankenweenie
         {
             get
             {
-                return Components[i];
+                return Active[i];
             }
         }
     }

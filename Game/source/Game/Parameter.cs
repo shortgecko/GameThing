@@ -19,6 +19,7 @@ namespace Game
         {
             Width = entity.width;
             Height = entity.height;
+
             if(entity.nodes != null)
             {
                 foreach (OgmoVector node in entity.nodes)

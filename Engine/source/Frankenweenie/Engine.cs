@@ -32,6 +32,7 @@ namespace Frankenweenie
 
         public static float fpsValue;
         public static float FPS => fpsValue;
+        public static float MaxRunTime = 0f;
 
         public static string AssetDirectory
         {
@@ -48,13 +49,21 @@ namespace Frankenweenie
             }
         }
 
-        public Engine()
+        private void Window_ClientSizeChanged(object sender, EventArgs e)
         {
+            foreach (Action action in Frankenweenie.Window.ResizeActions)
+            {
+                action.Invoke();
+            }
+        }
+
+        public Engine()
+        {       
             Device = new GraphicsDeviceManager(this);
             Device.PreferMultiSampling = true;
-            Device.IsFullScreen = false;
             Window.AllowUserResizing = true;
             IsMouseVisible = true;
+            Window.ClientSizeChanged += Window_ClientSizeChanged;
             new ImGuiLayer(Device, this);
         }
 
@@ -68,14 +77,12 @@ namespace Frankenweenie
             }
             else
             {
-                IsFixedTimeStep = Config.FixedTimeStep;
+                IsFixedTimeStep = true;
             }
-            IsFixedTimeStep = Config.FixedTimeStep;
             Window.Title = Config.WindowTitle;
             Device.PreferredBackBufferWidth = Config.Width;
             Device.PreferredBackBufferHeight = Config.Height;
             Device.ApplyChanges();
-
             Logger.Initialize();
 
             RenderTarget = new VirtualRenderTarget();
@@ -87,10 +94,11 @@ namespace Frankenweenie
             Logger.Log($"GPU Information {GraphicsAdapter.DefaultAdapter.Description}");
 #endif
             LoadContent();
+            //base.InactiveSleepTime = TimeSpan.FromSeconds(0);
         }
 
         protected override void LoadContent()
-        {;
+        {
             new Drawer();
             Blah.Drawer.Batch = new SpriteBatch(Device.GraphicsDevice);
         }
@@ -121,6 +129,13 @@ namespace Frankenweenie
             Timer += RawDeltaTime;
 
 
+            if(MaxRunTime != 0)
+            {
+                if (Timer > MaxRunTime)
+                    Exit();
+            }    
+
+
             GamePads[0] = GamePad.GetState(PlayerIndex.One);
             GamePads[1] = GamePad.GetState(PlayerIndex.Two);
             GamePads[2] = GamePad.GetState(PlayerIndex.Three);
@@ -134,6 +149,8 @@ namespace Frankenweenie
             m_Scene.Begin();
             foreach (VirtualButton Button in Input.Buttons)
                 Button.LateUpdate();
+
+            Profiler.Update();
         }
 
 
@@ -149,7 +166,7 @@ namespace Frankenweenie
 
             Drawer.Batch.Begin(SpriteSortMode.FrontToBack);
             if(m_Scene.IsRunning)
-                m_Scene.Draw();
+                m_Scene.BeginDraw();
             Drawer.Batch.End();
             GraphicsDevice.SetRenderTarget(null);
 
@@ -222,6 +239,7 @@ namespace Frankenweenie
         {
             Logger.Save();
             Frankenweenie.Content.Dispose();
+            Profiler.End();
         }
 
         public static void Color(Color color)

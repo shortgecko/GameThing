@@ -5,7 +5,7 @@ namespace Frankenweenie
 {
     public static class ErrorLog
     {
-        public static readonly string Path = $"{Engine.AssemblyDirectory}/{Path}/ERROR_LOG.txt";
+        public static readonly string Path = $"{Engine.AssemblyDirectory}/{Path}/error_log.txt";
         public static readonly string Header = "--------------------------------------------------------------------------------";
         private static string[] Lines;
         public static void Log(Exception e)

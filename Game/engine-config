@@ -1,8 +1,0 @@
-{
-  "WindowTitle": "Frankenweenie Engine",
-  "AssetDirectory": "Assets",
-  "FixedTimeStep": true,
-  "Width": 1920,
-  "Height": 1080,
-  "IsMouseVisible": true
-}

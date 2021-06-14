@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
@@ -11,7 +11,7 @@
     <None Remove="source\Game\Scenes\**" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="source\Game\Components\Mover.cs" />
+    <Content Include="source\Game\Components\Collision\Mover.cs" />
     <Content Include="source\Game\Components\Timer.cs" />
     <Content Include="source\Game\Components\Player.cs" />
   </ItemGroup>

@@ -9,7 +9,7 @@ namespace Game
     public class Platform : Component
     {
         private float Speed = -100f;
-        Mover Mover;
+        Solid  Mover;
         private Parameters Parameters;
         private float Distance;
 
@@ -19,25 +19,15 @@ namespace Game
             Moving,
         }
 
-        public Platform()
-        {
-            
-        }
-
-        public Platform(Parameters parameters)
-        {
-            Parameters = parameters;
-        }
-
         private StateMachine<States> StateMachine;
 
         public static Entity Create(Vector2 position, Parameters p)
         {
             Entity e = new Entity();
             e.Position = position;
-            e.Add<Mover>();
+            e.Add<Solid>();
             e.Add(new Hitbox(0, 0, 16, 8));
-            Platform platform = e.Add<Platform>();
+            var platform = e.Add<Platform>();
             platform.Parameters = p;
             return e;
         }
@@ -45,23 +35,25 @@ namespace Game
    
         public override void Initialize()
         {
-           Mover = Entity.Get<Mover>();
-           Mover.Mask = Mover.Masks.All;
-            StateMachine = new StateMachine<States>();
-            Entity.Add(StateMachine);
+           Mover = Entity.Get<Solid>();
+           StateMachine = new StateMachine<States>();
+           Entity.Add(StateMachine);
            Distance = Vector2.Distance(Entity.Position, Parameters.Nodes[0]);
            StateMachine.Add(States.Normal, null, Normal, null);
            StateMachine.Add(States.Moving, null, Move, null);
            StateMachine.Set(States.Normal);
         }
 
+        public override void Update()
+        {
+            Move();
+        }
         void Normal()
         {
-            
-            if(Mover.Collision(new Point(0, -1), Mover.Masks.Actors))
-            {
-                StateMachine.Set(States.Moving);
-            }
+            // if(Mover.Collision(new Point(0, -1), Mover.Masks.Actors))
+            // {
+            //     StateMachine.Set(States.Moving);
+            // }
         }
         
 
@@ -69,13 +61,9 @@ namespace Game
         {
             if (Distance > 0)
             {
-                Mover.Move.Y -= Distance;
+                Mover.Move.X = + Distance;
                 Distance -= Speed;
             }
-        }
-
-        public override void Update()
-        {
         }
 
         public override void Render()
@@ -85,6 +73,7 @@ namespace Game
 
         public override void Removed()
         {
+            Entity.Position = Vector2.Zero;
             Parameters = null;
         }
     }

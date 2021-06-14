@@ -37,7 +37,7 @@ namespace Game
                     Player player = entity.Get<Player>();
                     if (player != null)
                     {
-                        LevelLoader.Load("1.json");
+                        LevelLoader.Reload();
                     }
                 },
             });

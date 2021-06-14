@@ -12,6 +12,13 @@ namespace Frankenweenie
         public static Vector2 Position => m_Position;
         public static MouseState State => m_State;
 
+        public static Vector2 WorldPosition
+        {
+            get
+            {
+                return Vector2.Transform(m_Position, Matrix.Invert(Engine.Transform));
+            }
+        }
         public static void Update()
         {
             m_State = Mouse.GetState();

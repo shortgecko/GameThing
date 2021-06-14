@@ -5,6 +5,7 @@ namespace Frankenweenie
     {
         private Keys Positive;
         private Keys Negative;
+
         public VirtualAxisKeyboard(Keys positive, Keys negative)
         {
             Positive = positive;
