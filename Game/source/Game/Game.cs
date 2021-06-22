@@ -50,6 +50,7 @@ namespace Game
 
         protected override void Initialize()
         {
+            Engine.Fullscreen(true);
             ResizeAction.Invoke();
             Window.ResizeActions.Add(ResizeAction);
             ImGuiLayer.Add<CommandPrompt>();

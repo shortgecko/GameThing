@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Gtup1XogsxTl28QlA6Fxm7FmQsjtf6VzKixRU0WEq9I++D9gvQk+TJPxK1rL6O+jmgBvadCEt4eNO/M2hTENRg==",
+  "dgSpecHash": "MK8GCxGAqBYz0ovS2B0Xk+dcMjJz9ar7JVuzWyUZXIZxEtc9ZNvaXFBxN4WOh43rn0lVrxH7+cCvr10s11RiZw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\muham\\source\\repos\\projects\\c#\\GameThing\\Game\\Game.csproj",
+  "projectFilePath": "C:\\Users\\muham\\repos\\project\\Game\\Game.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\muham\\.nuget\\packages\\imgui.net\\1.78.0\\imgui.net.1.78.0.nupkg.sha512",
     "C:\\Users\\muham\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.0.1641\\monogame.framework.desktopgl.3.8.0.1641.nupkg.sha512",

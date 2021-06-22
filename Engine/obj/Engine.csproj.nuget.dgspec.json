@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\muham\\source\\repos\\projects\\c#\\GameThing\\Engine\\Engine.csproj": {}
+    "C:\\Users\\muham\\repos\\project\\Engine\\Engine.csproj": {}
   },
   "projects": {
-    "C:\\Users\\muham\\source\\repos\\projects\\c#\\GameThing\\Engine\\Engine.csproj": {
+    "C:\\Users\\muham\\repos\\project\\Engine\\Engine.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\muham\\source\\repos\\projects\\c#\\GameThing\\Engine\\Engine.csproj",
+        "projectUniqueName": "C:\\Users\\muham\\repos\\project\\Engine\\Engine.csproj",
         "projectName": "Frankenweenie",
-        "projectPath": "C:\\Users\\muham\\source\\repos\\projects\\c#\\GameThing\\Engine\\Engine.csproj",
+        "projectPath": "C:\\Users\\muham\\repos\\project\\Engine\\Engine.csproj",
         "packagesPath": "C:\\Users\\muham\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\muham\\source\\repos\\projects\\c#\\GameThing\\Engine\\obj\\",
+        "outputPath": "C:\\Users\\muham\\repos\\project\\Engine\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\muham\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\muham\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -76,7 +70,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,6 +1,6 @@
 Log Earthward
 ------------------------------------------------------------------------------------------------------------------
-[Log Earthward] GPU Information Intel(R) Iris(R) Xe Graphics
+[Log Earthward] GPU Information Intel(R) Iris(R) Graphics 540
 [Log Earthward] scale x 4
 [Log Earthward] scale y 4
 [Log Earthward] Assets/levels/1.json
@@ -10,9 +10,6 @@ Log Earthward
 [Log Earthward] Sprite
 [Log Earthward] StateMachine`1
 [Log Earthward] Spinner
-[Log Earthward] Solid
-[Log Earthward] Hitbox
-[Log Earthward] Platform
 [Log Earthward] Loaded Assets/graphics/tileset.png
 [Log Earthward] Loaded Assets/graphics/bg_tile.png
 [Log Earthward] Type not found in registry
@@ -31,7 +28,5 @@ Log Earthward
 [Log Earthward] Sprite
 [Log Earthward] Sprite
 [Log Earthward] Sprite
-[Log Earthward] Solid
-[Log Earthward] Hitbox
-[Log Earthward] Platform
-[Log Earthward] StateMachine`1
+[Log Earthward] scale x 6
+[Log Earthward] scale y 6
