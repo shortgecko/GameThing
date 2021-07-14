@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Frankenweenie;
 
-namespace Game
+namespace  Frankenweenie
 {
     public class Collider : Component
     {
@@ -43,6 +43,15 @@ namespace Game
                 other.Top < hitbox.Bottom &&
                 hitbox.Top < other.Bottom;
         }
+
+        public static bool Intersects(Collider hitbox, Rectangle other)
+        {
+            return other.Left < hitbox.Right &&
+                hitbox.Left < other.Right &&
+                other.Top < hitbox.Bottom &&
+                hitbox.Top < other.Bottom;
+        }
+
 
         public Rectangle ToRect()
         {

@@ -137,6 +137,7 @@ namespace Frankenweenie
             foreach (Entity entity in EntityRegistry)
                 Remove(entity);
         }
+
     }
 
 }

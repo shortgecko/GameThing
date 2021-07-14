@@ -19,7 +19,18 @@ namespace Game
         private Tileset Tileset;
         private Texture2D BgTile;
         private Camera Camera = new Camera();
+        private Entity Player;
 
+        Vector2 last;
+        private void Follow(Entity entity)
+        {
+            if(last != entity.Position)
+            {
+                last = Vector2.Zero;
+            }
+            
+            Camera.Position += last;
+        }
         private Action ResizeAction = () =>
         {
             Vector2 scale = new Vector2()
@@ -37,7 +48,7 @@ namespace Game
                 Y = (Window.Height - (180 * scale.Y)) / 2,
             };
 
-
+            
             Engine.RenderTarget.Scale = scale;
             Engine.RenderTarget.Position = screenCenter;
 
@@ -54,8 +65,9 @@ namespace Game
             ResizeAction.Invoke();
             Window.ResizeActions.Add(ResizeAction);
             ImGuiLayer.Add<CommandPrompt>();
-            
+
             LevelLoader.Load("1.json");
+            Player = World.All<Player>()[0].Entity;
             base.Initialize();
         }
 
@@ -100,6 +112,9 @@ namespace Game
 
         protected override void Update()
         {
+            
+            Follow(Player);
+            Engine.Transform = Camera.Transform;
             base.Update();
         }
 

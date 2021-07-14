@@ -28,5 +28,3 @@ Log Earthward
 [Log Earthward] Sprite
 [Log Earthward] Sprite
 [Log Earthward] Sprite
-[Log Earthward] scale x 6
-[Log Earthward] scale y 6

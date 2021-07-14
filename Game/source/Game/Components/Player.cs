@@ -16,9 +16,9 @@ namespace Game
         private const int vSpeed = -20;
         private int normalGravity = 20;
         private StateMachine<States> StateMachine = new StateMachine<States>();
-        private bool grounded { get { return mover.Collision(Direction.Down, Mover.Masks.All); } }
+        private bool grounded { get { return mover.Collision(new Point(0, 1), mover.Move.ToPoint(), Mover.Masks.All); } }
         private const int jumpForce = -1500;
-        private const int hJumpForce = 140;
+        private const int hJumpForce = 1500;
         private Timer coyoteTimer;
         private float coyoteTime = 0.3f;
         private Timer jumpInputTimer;
@@ -32,12 +32,12 @@ namespace Game
             get
             { 
                 if (Facing != 0)
-                    return mover.Collision(new Point(Facing, 0), Mover.Masks.All);
+                    return mover.Collision(new Point(Facing, 0), mover.Move.ToPoint(),Mover.Masks.All);
                 else
                 {
-                    if (mover.Collision(new Point(1, 0), Mover.Masks.All))
+                    if (mover.Collision(new Point(1, 0), mover.Move.ToPoint(), Mover.Masks.All))
                         return true;
-                    else if (mover.Collision(new Point(-1, 0), Mover.Masks.All))
+                    else if (mover.Collision(new Point(-1, 0), mover.Move.ToPoint(), Mover.Masks.All))
                         return true;
                 }
                 return false;
@@ -46,7 +46,6 @@ namespace Game
         private const float climbSpeed = 180;
         private Sprite Sprite;
         Vector2 StartPosition;
-        public bool Die = false;
         Hitbox Hitbox;
 
         private enum States
@@ -74,16 +73,14 @@ namespace Game
             Sprite = Entity.Get<Sprite>();
             Hitbox = Entity.Get<Hitbox>();
 
-            Sprite.Texture = Content.CreateTexture(8, 10, Color.Red);
+            Sprite.Texture = Content.CreateTexture(8, 10,Color.Red);
             Sprite.LayerDepth = 1000;
 
             Entity.Add(coyoteTimer = new());
             Entity.Add(jumpInputTimer = new());
             Entity.Add(Facing = new Facing());
             Entity.Add(varJumpTimer = new Timer());
-            
             Entity.Add(StateMachine);
-
 
             startPos = Entity.Position;
             StateMachine.Add(States.Player, null, NormalState, null);
@@ -95,11 +92,6 @@ namespace Game
         public override void Update()
         {
 
-            if (Die)
-            {
-                Entity.Position = StartPosition;
-                Die = false;
-            }
         }
 
 
@@ -158,14 +150,14 @@ namespace Game
 
                 jumped = false;
             }
+
+            if(Input.WallClimb.Pressed)
+                StateMachine.Set(States.Wall);
         }
 
         private void WallState()
         {
-            if (Input.WallClimb.Pressed)
-                StateMachine.Set(States.Player);
-            mover.Move.Y = Input.Vertical * speed;
-
+            mover.Move.Y = Input.Vertical * jumpForce;
         }
 
 

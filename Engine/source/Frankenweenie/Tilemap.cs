@@ -67,6 +67,19 @@ namespace Frankenweenie
         }
 
         public int this[int i] => Data[i];
+        public int this[int x, int y] => Data[x + y *Width];
+
+        public bool Contains(int x, int y)
+        {
+            bool lessX = x < 0;
+            bool lessY = y < 0;
+            bool biggerX = x > Width - 1;
+            bool biggerY = y > Height - 1;
+
+            if (lessX || lessY || biggerX || biggerY)
+                return false;
+            return true;
+        }
 
     }
 }

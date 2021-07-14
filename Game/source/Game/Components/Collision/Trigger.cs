@@ -2,7 +2,7 @@ using System;
 using Frankenweenie;
 using Microsoft.Xna.Framework;
 
-namespace Game
+namespace  Frankenweenie
 {
     public class Trigger : Collider
     {

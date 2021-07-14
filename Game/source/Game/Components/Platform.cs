@@ -46,10 +46,17 @@ namespace Game
 
         public override void Update()
         {
-            Move();
+           if(!v)
+           {
+               Mover.Move.X += 100f;
+               v = true;
+           }
         }
+
+        bool v;
         void Normal()
         {
+
             // if(Mover.Collision(new Point(0, -1), Mover.Masks.Actors))
             // {
             //     StateMachine.Set(States.Moving);
@@ -59,15 +66,16 @@ namespace Game
 
         void Move()
         {
-            if (Distance > 0)
-            {
-                Mover.Move.X = + Distance;
-                Distance -= Speed;
-            }
+            // if (Distance > 0)
+            // {
+            //     Mover.Move.X -= Distance;
+            //     Distance -= Speed;
+            // }
         }
 
         public override void Render()
         {
+            Logger.Log(Entity.Position);
             Drawer.Rect(Utils.RectF(Entity.Position, new Vector2(Parameters.Width, Parameters.Height)), Color.Yellow);
         }
 

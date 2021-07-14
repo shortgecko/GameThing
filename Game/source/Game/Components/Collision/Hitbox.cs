@@ -1,6 +1,6 @@
 using Frankenweenie;
 using Microsoft.Xna.Framework;
-namespace Game
+namespace  Frankenweenie
 {
     public class Hitbox : Collider
     {

@@ -59,84 +59,15 @@ namespace Game
             return Hitbox.Intersects(box, other);
         }
 
-        public bool Collision(Point offset, Masks mask)
+        private bool CheckActor(Point offset, Rectangle other)
         {
-            switch (mask)
-            {
-                case Masks.Solids:
-                    return CheckSolids(offset);
-                case Masks.Actors:
-                    return CheckActors(offset);
-                case Masks.All:
-                    if (CheckSolids(offset))
-                        return true;
-                    if (CheckActors(offset))
-                        return true;
-                    break;
-
-            }
-
-            return false;
+            Hitbox.X = (int)Entity.Position.X;
+            Hitbox.Y = (int)Entity.Position.Y;
+            var box = new Hitbox(Hitbox.X + offset.X, Hitbox.Y + offset.Y, Hitbox.Width, Hitbox.Height);
+            return Hitbox.Intersects(box, other);
         }
 
-        public bool Collision(Direction direction, Masks mask)
-        {
-            Point offset;
-            switch(direction)
-            {
-                case Direction.Up:
-                    offset = new Point(0, -1);
-                    break;
-                case Direction.Down:
-                    offset = new Point(0, 1);
-                    break;
-                case Direction.Right:
-                    offset = new Point(1,0);
-                    break;
-                case Direction.Left:
-                    offset = new Point(-1, 0);
-                    break;
-                default: offset = new Point();
-                    break;
-            }
-
-            switch (mask)
-            {
-                case Masks.Solids:
-                    return CheckSolids(offset);
-                case Masks.Actors:
-                    return CheckActors(offset);
-                case Masks.All:
-                    if (CheckSolids(offset))
-                        return true;
-                    if (CheckActors(offset))
-                        return true;
-                    break;
-
-            }
-
-            return false;
-        }
-
-        private bool CheckSolids(Point offset)
-        {
-
-            {
-                
-                for (int i = 0; i < Level.Solids.Count; i++)
-                {
-                    var hitbox = Level.Solids[i];
-                    if (Check(offset, hitbox))
-                    {
-                        if (hitbox != this.Hitbox)
-                            return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        private bool CheckActors(Point offset)
+    private bool CheckActors(Point offset)
         {
             for (int i = 0; i < Hitboxes.Count; i++)
             {
@@ -151,14 +82,63 @@ namespace Game
             return false;
         }
 
+
+        public bool Collision(Point offset, Point moveAmount, Masks mask)
+        {
+            switch (mask)
+            {
+                case Masks.Solids:
+                    return CheckSolids(offset, moveAmount);
+                case Masks.Actors:
+                    return CheckActors(offset);
+                case Masks.All:
+                    if (CheckSolids(offset, moveAmount))
+                        return true;
+                    if (CheckActors(offset))
+                        return true;
+                    break;
+
+            }
+
+            return false;
+        }
+
+       
+
+        private bool CheckSolids(Point offset, Point amount)
+        {
+            Point entityPosition = Entity.Position.ToPoint();
+            entityPosition.X /= 8;
+            entityPosition.Y /= 8;
+            int X = entityPosition.X + offset.X;
+            int Y = entityPosition.Y + offset.Y;
+            int tileHitboxWidth = Hitbox.Width / 8 * 8;
+            int tileHitboxHeight = Hitbox.Height / 8 * 8;
+            int[,] tiles = new int[tileHitboxWidth, tileHitboxHeight];
+            for(int x = 0; x < tileHitboxWidth; x++)
+                    for(int y = 0; y < tileHitboxHeight; y++)
+                        tiles[X,Y] = entityPosition.X + X;
+
+                if(Level.Tiles[X,Y] != -1)
+                {
+                    int height = 
+                    var tile = new Rectangle(X * 8, Y * 8, 8,8);
+                    if(CheckActor(offset, tile))
+                    {
+                        return true;
+                    }
+                }
+            return false;
+        }
+
         private void CheckX()
         {
             int sign = Math.Sign(Move.X);
             Move.X = (float)Math.Round(Move.X);
-
+  
             while (Move.X != 0)
             {
-                if (!Collision(new Point(sign, 0), Mask))
+                if (!Collision(new Point(sign, 0), Move.ToPoint(),Mask))
                 {
                     Entity.Position.X += sign * Engine.Delta;
                     Move.X -= sign;
@@ -180,7 +160,7 @@ namespace Game
             Move.Y = (float)Math.Round(Move.Y);
             while (Move.Y != 0)
             {
-                if (!Collision(new Point(0, sign), Mask))
+                if (!Collision(new Point(0, sign), Move.ToPoint(), Mask))
                 {
                     Entity.Position.Y += sign * Engine.Delta;
                     Move.Y -= sign;

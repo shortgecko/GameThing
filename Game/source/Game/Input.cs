@@ -22,7 +22,7 @@ namespace Game
             Horizontal.Add(new VirtualAxisKeyboard(Keys.Right, Keys.Left));
 
             Vertical.Add(new VirtualAxisGamepadLeftY());
-            Vertical.Add(new VirtualAxisKeyboard(Keys.S, Keys.W));
+            Vertical.Add(new VirtualAxisKeyboard(Keys.W, Keys.S));
             Vertical.Add(new VirtualAxisKeyboard(Keys.Down, Keys.Up));
 
 
