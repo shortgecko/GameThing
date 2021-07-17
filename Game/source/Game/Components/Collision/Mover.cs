@@ -67,7 +67,7 @@ namespace Game
             return Hitbox.Intersects(box, other);
         }
 
-    private bool CheckActors(Point offset)
+        private bool CheckActors(Point offset)
         {
             for (int i = 0; i < Hitboxes.Count; i++)
             {
@@ -99,12 +99,17 @@ namespace Game
                     break;
 
             }
-
+                
             return false;
         }
 
-       
-
+         public int RoundUp(int input, int offset)
+         {
+            int r = input & offset;
+            if (r == 0)
+                return input;
+            return input + (8 - r);
+         }
         private bool CheckSolids(Point offset, Point amount)
         {
             Point entityPosition = Entity.Position.ToPoint();
@@ -112,18 +117,16 @@ namespace Game
             entityPosition.Y /= 8;
             int X = entityPosition.X + offset.X;
             int Y = entityPosition.Y + offset.Y;
-            int tileHitboxWidth = Hitbox.Width / 8 * 8;
-            int tileHitboxHeight = Hitbox.Height / 8 * 8;
+            int tileHitboxWidth = Hitbox.Width / 8;
+            int tileHitboxHeight = Hitbox.Height / 8;
+            Logger.Log(RoundUp(tileHitboxHeight, 8));
             int[,] tiles = new int[tileHitboxWidth, tileHitboxHeight];
-            for(int x = 0; x < tileHitboxWidth; x++)
-                    for(int y = 0; y < tileHitboxHeight; y++)
-                        tiles[X,Y] = entityPosition.X + X;
-
-                if(Level.Tiles[X,Y] != -1)
+            for (int x = 0; x < tileHitboxWidth; x++)
+                for (int y = 0; y < tileHitboxHeight; y++)
                 {
-                    int height = 
-                    var tile = new Rectangle(X * 8, Y * 8, 8,8);
-                    if(CheckActor(offset, tile))
+                    var r = new Rectangle(entityPosition.X + X * 8, entityPosition.X + X * 8, 8, 8);
+                    //Logger.Log(r);
+                    if (CheckActor(offset, r))
                     {
                         return true;
                     }
