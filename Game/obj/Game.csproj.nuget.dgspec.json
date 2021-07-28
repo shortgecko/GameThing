@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\muham\\source\\repos\\GameThing\\Game\\Game.csproj": {}
+    "C:\\Users\\muham\\repos\\GameThing\\Game\\Game.csproj": {}
   },
   "projects": {
-    "C:\\Users\\muham\\source\\repos\\GameThing\\Engine\\Engine.csproj": {
+    "C:\\Users\\muham\\repos\\GameThing\\Engine\\Engine.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\muham\\source\\repos\\GameThing\\Engine\\Engine.csproj",
+        "projectUniqueName": "C:\\Users\\muham\\repos\\GameThing\\Engine\\Engine.csproj",
         "projectName": "Frankenweenie",
-        "projectPath": "C:\\Users\\muham\\source\\repos\\GameThing\\Engine\\Engine.csproj",
+        "projectPath": "C:\\Users\\muham\\repos\\GameThing\\Engine\\Engine.csproj",
         "packagesPath": "C:\\Users\\muham\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\muham\\source\\repos\\GameThing\\Engine\\obj\\",
+        "outputPath": "C:\\Users\\muham\\repos\\GameThing\\Engine\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\muham\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\muham\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -76,32 +74,30 @@
         }
       }
     },
-    "C:\\Users\\muham\\source\\repos\\GameThing\\Game\\Game.csproj": {
+    "C:\\Users\\muham\\repos\\GameThing\\Game\\Game.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\muham\\source\\repos\\GameThing\\Game\\Game.csproj",
+        "projectUniqueName": "C:\\Users\\muham\\repos\\GameThing\\Game\\Game.csproj",
         "projectName": "Game",
-        "projectPath": "C:\\Users\\muham\\source\\repos\\GameThing\\Game\\Game.csproj",
+        "projectPath": "C:\\Users\\muham\\repos\\GameThing\\Game\\Game.csproj",
         "packagesPath": "C:\\Users\\muham\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\muham\\source\\repos\\GameThing\\Game\\obj\\",
+        "outputPath": "C:\\Users\\muham\\repos\\GameThing\\Game\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\muham\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\muham\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\muham\\source\\repos\\GameThing\\Engine\\Engine.csproj": {
-                "projectPath": "C:\\Users\\muham\\source\\repos\\GameThing\\Engine\\Engine.csproj"
+              "C:\\Users\\muham\\repos\\GameThing\\Engine\\Engine.csproj": {
+                "projectPath": "C:\\Users\\muham\\repos\\GameThing\\Engine\\Engine.csproj"
               }
             }
           }

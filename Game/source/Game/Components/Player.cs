@@ -58,7 +58,7 @@ namespace Game
         {
             Entity player = new Entity();
             player.Position = Position;
-            player.Add(new Hitbox(0, 0, 8, 10));
+            player.Add(new Hitbox(0, 0, 8, 8));
             player.Add<Player>();
             player.Add<Mover>();
             player.Add<Sprite>();
@@ -73,7 +73,7 @@ namespace Game
             Sprite = Entity.Get<Sprite>();
             Hitbox = Entity.Get<Hitbox>();
 
-            Sprite.Texture = Content.CreateTexture(8, 10,Color.Red);
+            Sprite.Texture = Content.CreateTexture(8, 8,Color.Red);
             Sprite.LayerDepth = 1000;
 
             Entity.Add(coyoteTimer = new());

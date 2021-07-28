@@ -1,6 +1,6 @@
 Log Earthward
 ------------------------------------------------------------------------------------------------------------------
-[Log Earthward] GPU Information Intel(R) UHD Graphics 620
+[Log Earthward] GPU Information Intel(R) Iris(R) Graphics 540
 [Log Earthward] scale x 4
 [Log Earthward] scale y 4
 [Log Earthward] Assets/levels/1.json

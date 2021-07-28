@@ -89,7 +89,7 @@
         {
           "name": "direction",
           "definition": "Enum",
-          "display": 2,
+          "display": 1,
           "choices": ["up", "down", "right", "left"],
           "defaults": 0
         }
@@ -221,7 +221,7 @@
           {"x": 1, "y": 1}
         ]
       },
-      "color": "#ffe800ff",
+      "color": "#ea00ffff",
       "tileX": false,
       "tileY": false,
       "tileSize": {"x": 16, "y": 16},
@@ -312,8 +312,8 @@
       "values": []
     },
     {
-      "exportID": "70442386",
-      "name": "falling_block",
+      "exportID": "45813491",
+      "name": "treadmill",
       "limit": -1,
       "size": {"x": 8, "y": 8},
       "origin": {"x": 0, "y": 0},
@@ -329,12 +329,12 @@
           {"x": 1, "y": 1}
         ]
       },
-      "color": "#0400ffff",
+      "color": "#cacacaff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
-      "resizeableX": true,
-      "resizeableY": true,
+      "tileSize": {"x": 8, "y": 8},
+      "resizeableX": false,
+      "resizeableY": false,
       "rotatable": false,
       "rotationDegrees": 360,
       "canFlipX": false,

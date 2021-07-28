@@ -124,6 +124,7 @@ namespace Game
            
             World.Render();
             Level.Tiles.Render(Tileset);
+            DebugDraw.Draw();
         }
 
     }

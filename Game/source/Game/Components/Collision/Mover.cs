@@ -115,22 +115,14 @@ namespace Game
             Point entityPosition = Entity.Position.ToPoint();
             entityPosition.X /= 8;
             entityPosition.Y /= 8;
-            int X = entityPosition.X + offset.X;
-            int Y = entityPosition.Y + offset.Y;
-            int tileHitboxWidth = Hitbox.Width / 8;
-            int tileHitboxHeight = Hitbox.Height / 8;
-            Logger.Log(RoundUp(tileHitboxHeight, 8));
-            int[,] tiles = new int[tileHitboxWidth, tileHitboxHeight];
-            for (int x = 0; x < tileHitboxWidth; x++)
-                for (int y = 0; y < tileHitboxHeight; y++)
-                {
-                    var r = new Rectangle(entityPosition.X + X * 8, entityPosition.X + X * 8, 8, 8);
-                    //Logger.Log(r);
-                    if (CheckActor(offset, r))
-                    {
-                        return true;
-                    }
-                }
+            int X = entityPosition.X + (offset.X);
+            int Y = entityPosition.Y + (offset.Y);
+            
+            if(Level.Tiles[X, Y] != -1)
+            {
+                return true;
+            }
+
             return false;
         }
 
