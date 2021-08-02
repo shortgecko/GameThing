@@ -22,9 +22,6 @@ namespace Game
                 case "player":
                     Add(Player.Create(Position));
                     break;
-                case "platform":
-                    Add(Platform.Create(Position, Parameters));
-                    break;
                 case "spinner":
                     Add(Spinner.Create(Position, Parameters));
                     break;

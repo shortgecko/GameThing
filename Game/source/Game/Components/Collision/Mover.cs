@@ -83,16 +83,16 @@ namespace Game
         }
 
 
-        public bool Collision(Point offset, Point moveAmount, Masks mask)
+        public bool Collision(Point offset, Masks mask)
         {
             switch (mask)
             {
                 case Masks.Solids:
-                    return CheckSolids(offset, moveAmount);
+                    return CheckSolids(offset);
                 case Masks.Actors:
                     return CheckActors(offset);
                 case Masks.All:
-                    if (CheckSolids(offset, moveAmount))
+                    if (CheckSolids(offset))
                         return true;
                     if (CheckActors(offset))
                         return true;
@@ -110,7 +110,8 @@ namespace Game
                 return input;
             return input + (8 - r);
          }
-        private bool CheckSolids(Point offset, Point amount)
+
+        private bool CheckSolids(Point offset)
         {
             for (int i = 0; i < Level.Solids.Count; i++)
             {
@@ -132,7 +133,7 @@ namespace Game
   
             while (Move.X != 0)
             {
-                if (!Collision(new Point(sign, 0), Move.ToPoint(),Mask))
+                if (!Collision(new Point(sign, 0),Mask))
                 {
                     Entity.Position.X += sign * Engine.Delta;
                     Move.X -= sign;
@@ -154,7 +155,7 @@ namespace Game
             Move.Y = (float)Math.Round(Move.Y);
             while (Move.Y != 0)
             {
-                if (!Collision(new Point(0, sign), Move.ToPoint(), Mask))
+                if (!Collision(new Point(0, sign), Mask))
                 {
                     Entity.Position.Y += sign * Engine.Delta;
                     Move.Y -= sign;

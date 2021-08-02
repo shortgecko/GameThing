@@ -16,7 +16,7 @@ namespace Game
         private const int vSpeed = -20;
         private int normalGravity = 20;
         private StateMachine<States> StateMachine = new StateMachine<States>();
-        private bool grounded { get { return mover.Collision(new Point(0, 1), mover.Move.ToPoint(), Mover.Masks.All); } }
+        private bool grounded { get { return mover.Collision(new Point(0, 1),  Mover.Masks.All); } }
         private const int jumpForce = -1500;
         private const int hJumpForce = 1500;
         private Timer coyoteTimer;
@@ -32,12 +32,12 @@ namespace Game
             get
             { 
                 if (Facing != 0)
-                    return mover.Collision(new Point(Facing, 0), mover.Move.ToPoint(),Mover.Masks.All);
+                    return mover.Collision(new Point(Facing, 0),Mover.Masks.All);
                 else
                 {
-                    if (mover.Collision(new Point(1, 0), mover.Move.ToPoint(), Mover.Masks.All))
+                    if (mover.Collision(new Point(1, 0), Mover.Masks.All))
                         return true;
-                    else if (mover.Collision(new Point(-1, 0), mover.Move.ToPoint(), Mover.Masks.All))
+                    else if (mover.Collision(new Point(-1, 0), Mover.Masks.All))
                         return true;
                 }
                 return false;
