@@ -112,15 +112,14 @@ namespace Game
          }
         private bool CheckSolids(Point offset, Point amount)
         {
-            Point entityPosition = Entity.Position.ToPoint();
-            entityPosition.X /= 8;
-            entityPosition.Y /= 8;
-            int X = entityPosition.X + (offset.X);
-            int Y = entityPosition.Y + (offset.Y);
-            
-            if(Level.Tiles[X, Y] != -1)
+            for (int i = 0; i < Level.Solids.Count; i++)
             {
-                return true;
+                var hitbox = Level.Solids[i];
+                if (Check(offset, hitbox))
+                {
+                    if (hitbox != this.Hitbox)
+                        return true;
+                }
             }
 
             return false;

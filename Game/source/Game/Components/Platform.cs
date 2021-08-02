@@ -8,10 +8,10 @@ namespace Game
     [Pooled]
     public class Platform : Component
     {
-        private float Speed = -100f;
-        Solid  Mover;
+        private float Speed = 100f;
+        Mover  Mover;
         private Parameters Parameters;
-        private float Distance;
+        private float Distance = 48;
 
         private enum States
         {
@@ -25,7 +25,7 @@ namespace Game
         {
             Entity e = new Entity();
             e.Position = position;
-            e.Add<Solid>();
+            e.Add<Mover>();
             e.Add(new Hitbox(0, 0, 16, 8));
             var platform = e.Add<Platform>();
             platform.Parameters = p;
@@ -35,47 +35,16 @@ namespace Game
    
         public override void Initialize()
         {
-           Mover = Entity.Get<Solid>();
-           StateMachine = new StateMachine<States>();
-           Entity.Add(StateMachine);
-           Distance = Vector2.Distance(Entity.Position, Parameters.Nodes[0]);
-           StateMachine.Add(States.Normal, null, Normal, null);
-           StateMachine.Add(States.Moving, null, Move, null);
-           StateMachine.Set(States.Normal);
+           Mover = Entity.Get<Mover>();
         }
 
         public override void Update()
         {
-           if(!v)
-           {
-               Mover.Move.X += 100f;
-               v = true;
-           }
-        }
-
-        bool v;
-        void Normal()
-        {
-
-            // if(Mover.Collision(new Point(0, -1), Mover.Masks.Actors))
-            // {
-            //     StateMachine.Set(States.Moving);
-            // }
-        }
-        
-
-        void Move()
-        {
-            // if (Distance > 0)
-            // {
-            //     Mover.Move.X -= Distance;
-            //     Distance -= Speed;
-            // }
+            //Mover.Move.X -= 200f;
         }
 
         public override void Render()
         {
-            Logger.Log(Entity.Position);
             Drawer.Rect(Utils.RectF(Entity.Position, new Vector2(Parameters.Width, Parameters.Height)), Color.Yellow);
         }
 

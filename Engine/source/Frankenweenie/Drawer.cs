@@ -14,9 +14,9 @@ namespace Frankenweenie
             EmptyTexture = Content.Empty;
         }
 
-        public static void Rect(Rectangle rect, Color c, float LayerDepth)
+        public static void Rect(Rectangle rect, Color c)
         {
-            Drawer.Batch.Draw(EmptyTexture, rect, c, 0f, Vector2.Zero, SpriteEffects.None, LayerDepth);
+            Drawer.Batch.Draw(EmptyTexture, rect, c);
         }
 
         public static void Rect(Rectangle rect)
@@ -25,24 +25,24 @@ namespace Frankenweenie
             Drawer.Batch.Draw(EmptyTexture, rect, c);
         }
 
-        public static void HollowRectangle(Rectangle input, int t, float depth, Color c)
+        public static void HollowRectangle(Rectangle input, int t, Color c)
         {
             hollowRect.X = input.X;
             hollowRect.Y = input.Y;
             hollowRect.Width = input.Width;
             hollowRect.Height = t;
-            Rect(hollowRect, c, depth);
+            Rect(hollowRect, c);
 
             hollowRect.Y += input.Height - t;
-            Rect(hollowRect, c,depth);
+            Rect(hollowRect, c);
 
             hollowRect.Y = input.Y;
             hollowRect.Width = t;
             hollowRect.Height = input.Height;
-            Rect(hollowRect, c,depth);
+            Rect(hollowRect, c);
 
             hollowRect.X += input.Width - t;
-            Rect(hollowRect, c,depth);
+            Rect(hollowRect, c);
         }
 
         public static void String(SpriteFont font, string text, Vector2 positon, Color color)

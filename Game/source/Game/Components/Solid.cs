@@ -22,7 +22,12 @@ namespace Game
             Hitbox = Entity.Get<Hitbox>();
             base.Initialize();
         }
-        
+
+        public override void Update()
+        {
+            base.Update();
+        }
+
         private bool Check(Point offset, Hitbox other) => Hitbox.Check(offset, Hitbox, other);
 
     }
