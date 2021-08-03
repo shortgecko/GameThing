@@ -26,7 +26,7 @@ namespace Game
 
         public override void Initialize()
         {
-            Texture2D Texture = Content.CreateTexture(8, 8, Color.White);
+            Texture2D Texture = Content.CreateTexture(4, 6, Color.White);
             int width = Parameters.Width / 8;
             int height = Parameters.Height / 8;
 
@@ -48,7 +48,7 @@ namespace Game
                 {
                     var sprite = Entity.Add<Sprite>();
                     sprite.Texture = Texture;
-                    sprite.DrawOffset = new Vector2(x * 8, y * 8);
+                    //sprite.DrawOffset = new Vector2(x * 8, y * 8);
                     sprite.LayerDepth = 100f;
                 }
         }

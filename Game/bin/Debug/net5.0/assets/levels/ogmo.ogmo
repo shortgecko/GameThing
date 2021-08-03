@@ -99,7 +99,7 @@
       "exportID": "34289124",
       "name": "treadmill",
       "limit": -1,
-      "size": {"x": 16, "y": 16},
+      "size": {"x": 8, "y": 8},
       "origin": {"x": 0, "y": 0},
       "originAnchored": true,
       "shape": {
@@ -113,11 +113,11 @@
           {"x": 1, "y": 1}
         ]
       },
-      "color": "#2fedff4c",
+      "color": "#0037ffff",
       "tileX": false,
       "tileY": false,
       "tileSize": {"x": 16, "y": 16},
-      "resizeableX": false,
+      "resizeableX": true,
       "resizeableY": false,
       "rotatable": false,
       "rotationDegrees": 360,
@@ -129,7 +129,15 @@
       "nodeDisplay": 0,
       "nodeGhost": true,
       "tags": ["entity"],
-      "values": []
+      "values": [
+        {
+          "name": "direction",
+          "definition": "Enum",
+          "display": 2,
+          "choices": ["right", "left"],
+          "defaults": 0
+        }
+      ]
     },
     {
       "exportID": "33992666",
@@ -197,42 +205,6 @@
       "canFlipY": false,
       "canSetColor": false,
       "hasNodes": false,
-      "nodeLimit": 0,
-      "nodeDisplay": 0,
-      "nodeGhost": true,
-      "tags": ["entity"],
-      "values": []
-    },
-    {
-      "exportID": "41762353",
-      "name": "platform",
-      "limit": -1,
-      "size": {"x": 8, "y": 8},
-      "origin": {"x": 0, "y": 0},
-      "originAnchored": true,
-      "shape": {
-        "label": "Rectangle",
-        "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
-        ]
-      },
-      "color": "#ea00ffff",
-      "tileX": false,
-      "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
-      "resizeableX": true,
-      "resizeableY": true,
-      "rotatable": false,
-      "rotationDegrees": 360,
-      "canFlipX": false,
-      "canFlipY": false,
-      "canSetColor": false,
-      "hasNodes": true,
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
@@ -309,42 +281,6 @@
       "nodeDisplay": 0,
       "nodeGhost": true,
       "tags": ["triggers"],
-      "values": []
-    },
-    {
-      "exportID": "45813491",
-      "name": "treadmill",
-      "limit": -1,
-      "size": {"x": 8, "y": 8},
-      "origin": {"x": 0, "y": 0},
-      "originAnchored": true,
-      "shape": {
-        "label": "Rectangle",
-        "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
-        ]
-      },
-      "color": "#cacacaff",
-      "tileX": false,
-      "tileY": false,
-      "tileSize": {"x": 8, "y": 8},
-      "resizeableX": false,
-      "resizeableY": false,
-      "rotatable": false,
-      "rotationDegrees": 360,
-      "canFlipX": false,
-      "canFlipY": false,
-      "canSetColor": false,
-      "hasNodes": false,
-      "nodeLimit": 0,
-      "nodeDisplay": 0,
-      "nodeGhost": true,
-      "tags": ["entity"],
       "values": []
     }
   ],

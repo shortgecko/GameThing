@@ -66,7 +66,7 @@ namespace Game
             Window.ResizeActions.Add(ResizeAction);
             ImGuiLayer.Add<CommandPrompt>();
 
-            LevelLoader.Load("1.json");
+            LevelLoader.Load("area one/a2.json");
             Player = World.All<Player>()[0].Entity;
             base.Initialize();
         }
