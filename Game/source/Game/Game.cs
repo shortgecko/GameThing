@@ -65,9 +65,11 @@ namespace Game
             ResizeAction.Invoke();
             Window.ResizeActions.Add(ResizeAction);
             ImGuiLayer.Add<CommandPrompt>();
+            ImGuiLayer.Add<Logger>();
 
             LevelLoader.Load("area one/a2.json");
             Player = World.All<Player>()[0].Entity;
+            Logger.Log(World.All<Hitbox>().Count);
             base.Initialize();
         }
 

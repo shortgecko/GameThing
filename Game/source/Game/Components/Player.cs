@@ -14,8 +14,9 @@ namespace Game
         
         public enum States
         { 
-            Normal
-        }
+            Normal,
+            WallClimb
+        };
 
         public static Entity Create(Vector2 Position)
         {
@@ -33,26 +34,88 @@ namespace Game
         private float Speed = 200f;
         private float gravity = 100f;
         private float jumpForce = -1800f;
+        private Timer coyoteTimer;
+        private float coyoteTime = 0.14f;
+        private StateMachine<States> StateMachine;
+        private bool jumping = false;
 
         public override void Initialize()
         {
             var sprite = Entity.Get<Sprite>();
-            sprite.Texture = Content.CreateTexture(8, 8, Color.Red);
+            var hitbox = Entity.Get<Hitbox>();
+            sprite.Texture = Content.CreateTexture(hitbox.Width, hitbox.Height, Color.Red);
             sprite.LayerDepth = 2;
             Mover = Entity.Get<Mover>();
+            Entity.Add(coyoteTimer = new());
+
+            StateMachine = Entity.Get<StateMachine<States>>();
+            StateMachine.Add(States.Normal, null, Normal, null);
+            StateMachine.Add(States.WallClimb, null, WallClimb, null);
+        }
+
+        public bool Grounded
+        {
+            get
+            {
+                return Mover.Collision(new Point(0, 1));
+            }
+        }
+        
+        public void Normal()
+        {
+            Mover.Move.X = Speed * Input.Horizontal;
+
+            if(Input.Horizontal != 0)
+            {
+                Mover.Move.X += 100f;
+            }
+
+            if (Grounded)
+            {
+                coyoteTimer.Start(coyoteTime);
+            }
+
+            if (Input.Jump.Pressed && coyoteTimer.Duration > 0)
+            {
+                Mover.Move.Y = jumpForce;
+                Mover.Move.X = Input.Horizontal * Math.Abs(jumpForce);
+            }
+
+            //if(jumping)
+            //{
+            //    Mover.Move.Y = jumpForce * 
+            //    Mover.Move.X = Input.Horizontal * Math.Abs(jumpForce);
+            //}
+
+            //if(Input.WallClimb.Pressed)
+            //{
+            //    int x = (int)Input.Horizontal;
+            //    if (Mover.Collision(new Point(x, 0)))
+            //    {
+            //        StateMachine.Set(States.WallClimb);
+            //    }
+            //}
+
+        }
+
+        public void WallClimb()
+        {
+            Mover.Move.Y = Speed * Input.Vertical;
+            //if (Input.WallClimb.Released)
+            //{
+            //    StateMachine.Set(States.Normal);
+            //}
+
+            if(Input.Jump)
+            {
+                Mover.Move.X += Math.Abs(jumpForce) * Input.Horizontal;
+                Mover.Move.Y = -200;
+            }
         }
 
         public override void Update()
         {
-            Mover.Move.X = Speed * Input.Horizontal;
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && Mover.Collision(new Point(0, 1), Mover.Masks.All))
-            {
-                //Logger.Log("something");
-                Mover.Move.Y = jumpForce;
-                Mover.Move.X = Input.Horizontal * 500f;
-            }
-            Gravity(125);
-          
+            Gravity(150);
         }
 
         private void Gravity(float maxGravity)

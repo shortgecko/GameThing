@@ -2,6 +2,8 @@
 using Frankenweenie;
 using System;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework.Input;
+
 
 namespace Game
 {
@@ -24,14 +26,15 @@ namespace Game
 
         public Hitbox Hitbox;
         public Vector2 Move;
-        public bool OnGround = false;
         public Masks Mask = Masks.All;
-        public Action OnCollide;
+        public Action<Entity> OnCollide;
         public Action<Entity> OnCollideX;
         public Action<Entity> OnCollideY;
+        private bool m_Grounded = false;
+        public bool Grounded => m_Grounded;
 
-        List<Component> Hitboxes;
-        List<Component> Triggers;
+        private List<Component> Hitboxes;
+        private List<Component> Triggers;
 
         public override void Initialize()
         {
@@ -40,21 +43,29 @@ namespace Game
             Hitbox = Entity.Get<Hitbox>();
         }
 
+        bool j = false;
+
 
         public override void Update()
         {
+            Hitbox.X = (int)Math.Floor(Entity.Position.X);
+            Hitbox.Y = (int)Math.Ceiling(Entity.Position.Y);
             CheckTriggers();
             CheckX();
             CheckY();
+
+            if(Keyboard.GetState().IsKeyDown(Keys.J))
+            {
+                j = true;
+            }
         }
+
+
+
 
         private bool Check(Point offset, Hitbox other) => Hitbox.Check(offset, Hitbox, other);
         private bool CheckActor(Point offset, Hitbox other)
         {
-            Hitbox.X = (int)Entity.Position.X;
-            Hitbox.Y = (int)Entity.Position.Y;
-            other.X = (int)other.Entity.Position.X;
-            other.Y = (int)other.Entity.Position.Y;
             var box = new Hitbox(Hitbox.X + offset.X, Hitbox.Y + offset.Y, Hitbox.Width, Hitbox.Height);
             return Hitbox.Intersects(box, other);
         }
@@ -82,6 +93,10 @@ namespace Game
             return false;
         }
 
+        public bool Collision(Point offset)
+        {
+            return Collision(offset, Mover.Masks.All);
+        }
 
         public bool Collision(Point offset, Masks mask)
         {
@@ -103,26 +118,62 @@ namespace Game
             return false;
         }
 
-         public int RoundUp(int input, int offset)
-         {
-            int r = input & offset;
-            if (r == 0)
-                return input;
-            return input + (8 - r);
-         }
+        private int Thing(double  thing)
+        {
+
+            if(thing % 1 == 0)
+            {
+                if(j)
+                {
+                    Logger.Log("whole" + thing);
+                }
+                return (int)thing;
+            }
+            else
+            {
+                return (int)thing + 1;
+            }
+        }
 
         private bool CheckSolids(Point offset)
         {
-            for (int i = 0; i < Level.Solids.Count; i++)
+            if (Level.Solids.Count > 1)
             {
-                var hitbox = Level.Solids[i];
-                if (Check(offset, hitbox))
+                for (int i = 0; i < Level.Solids.Count; i++)
                 {
-                    if (hitbox != this.Hitbox)
-                        return true;
+                    var hitbox = Level.Solids[i];
+                    if (Check(offset, hitbox))
+                    {
+                        if (hitbox != this.Hitbox)
+                            return true;
+                    }
                 }
             }
+            return false;
+        }
 
+        private bool _CheckSolids(Point offset)
+        {
+            Hitbox hitbox = new Hitbox(Hitbox.X + offset.X, Hitbox.Y + offset.Y, Hitbox.Width, Hitbox.Height);
+
+            int left = (int)Thing(Math.Clamp(Math.Floor((double)hitbox.X / Level.Tiles.CellSize.X), 0, Level.Tiles.Width));
+            int right = (int)Thing(Math.Clamp(Math.Ceiling((double)hitbox.Right / Level.Tiles.CellSize.X), 0, Level.Tiles.Width));
+            int top = (int)Thing(Math.Clamp(Math.Floor((double)hitbox.Y / Level.Tiles.CellSize.Y), 0, Level.Tiles.Height));
+            int bottom = (int)Thing(Math.Clamp(Math.Ceiling((double)hitbox.Bottom / Level.Tiles.CellSize.Y), 0, Level.Tiles.Height));
+
+            if(j)
+            {
+                Logger.Log(Entity.Position.X);
+                Logger.Log(left);
+            }
+
+            for (int x = left; x < right; x++)
+                for (int y = top; y < bottom; y++)
+                {
+                    if (Level.Tiles[x, y] != -1)
+                        return true;
+                    
+                }
             return false;
         }
 
@@ -140,8 +191,9 @@ namespace Game
                 }
                 else
                 {
+                    Move.X = 0;
                     if (OnCollide != null)
-                        OnCollide.Invoke();
+                        OnCollide.Invoke(Hitbox.Entity);
                     if (OnCollideX != null)
                         OnCollideX.Invoke(Hitbox.Entity);
                     break;
@@ -164,7 +216,7 @@ namespace Game
                 {
                     Move.Y = 0;
                     if (OnCollide != null)
-                        OnCollide.Invoke();
+                        OnCollide.Invoke(Hitbox.Entity);
                     if (OnCollideY != null)
                         OnCollideY.Invoke(Hitbox.Entity);
                     break;
@@ -197,6 +249,8 @@ namespace Game
                 }
             }
         }
+
+
 
     }
 }

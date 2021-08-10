@@ -39,17 +39,18 @@ namespace Game
             Level = Content.LoadOgmo($"levels/{path}");
             OgmoLayer tileLayer = Level["Solids"];
             int[] tileLayerData = tileLayer.GridToTileLayer();
-            global::Game.Level.Tiles = new Tilemap(tileLayerData, tileLayer.gridCellsX, tileLayer.gridCellsY);
-            
+            global::Game.Level.Tiles = new Tilemap(tileLayerData, tileLayer.gridCellsX, tileLayer.gridCellsY, new Point(8,8));
             for (int x = 0; x < global::Game.Level.Tiles.Width; x++)
                 for (int y = 0; y < global::Game.Level.Tiles.Height; y++)
                 {
-                    if (global::Game.Level.Tiles.Data[x + y * global::Game.Level.Tiles.Width] > -1)
+                    if (global::Game.Level.Tiles[x,y] != -1)
+                    {
                         global::Game.Level.Solids.Add(new Hitbox(x * 8, y * 8, 8, 8));
+                    }
                 }
-
+            
             OgmoLayer background = Level["Background"]; ;
-            global::Game.Level.BgTiles = new Tilemap(background.GridToTileLayer(), background.gridCellsX, background.gridCellsY);
+            global::Game.Level.BgTiles = new Tilemap(background.GridToTileLayer(), background.gridCellsX, background.gridCellsY, new Point(8, 8));
             OgmoLayer entityLayer = Level["Entities"];
 
             foreach (OgmoEntity ogmoEntity in entityLayer.entities)

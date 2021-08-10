@@ -45,9 +45,10 @@ namespace Game
         }
         #endregion
 
-
         private static void Main()
         {
+            int top = 0;
+            int bottom = 2;
             Run();
         }
 
