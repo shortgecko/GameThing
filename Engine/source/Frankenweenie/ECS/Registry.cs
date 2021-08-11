@@ -35,14 +35,15 @@ namespace Frankenweenie
 
         public void UpdateList()
         {
-            if(ToAdd.Count > 1)
+            //if(ToAdd.Count > 1)
             {
+
                 foreach (T component in ToAdd)
                     Active.Add(component);
                 ToAdd.Clear();
             }
 
-            if(ToRemove.Count > 1)
+            //if(ToRemove.Count > 1)
             {
                 foreach (T component in ToRemove)
                     Active.Remove(component);

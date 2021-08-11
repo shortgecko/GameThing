@@ -67,7 +67,7 @@ namespace Game
             ImGuiLayer.Add<CommandPrompt>();
             ImGuiLayer.Add<Logger>();
 
-            LevelLoader.Load("area one/a2.json");
+            LevelLoader.Load("area one/a1.json");
             Player = World.All<Player>()[0].Entity;
             Logger.Log(World.All<Hitbox>().Count);
             base.Initialize();

@@ -14,6 +14,16 @@ namespace Frankenweenie
         public Vector2 Position;
         public Registry<Component> Components = new Registry<Component>();
 
+        public Entity()
+        {
+
+        }
+
+        public Entity(Vector2 position)
+        {
+            Position = position;
+        }
+
         public T Add<T>() where T : Component, new()
         {
             Component Component = Pooler.Create<T>();

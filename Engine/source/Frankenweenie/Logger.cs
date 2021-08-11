@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using ImGuiNET;
 
 
 
 namespace Frankenweenie
 {
-    public static class Logger
+    public class Logger : ImGuiElement
     {
         private static StringBuilder Logs = new StringBuilder();
         private static string Path = $"{Engine.AssemblyDirectory}/Log.txt";
@@ -20,8 +21,17 @@ namespace Frankenweenie
         public static void Initialize()
         {      
             Title = $"Log {Window.Title}";
-            Console.WriteLine(Title);
-            Console.WriteLine(Header);
+            Logs.Append(Title);            Logs.Append(Header);
+
+        }
+
+        public override void Draw()
+        {
+            ////ImGui.SetNextWindowPos(new System.Numerics.Vector2(0, Window.Height - 500), 0);
+            ////ImGui.SetNextWindowSize(new System.Numerics.Vector2(500, 500));
+            //ImGui.Begin("Logs");
+            ////ImGui.Text(Logs.ToString());
+            //ImGui.End();
         }
 
         public static void Log(object log, bool addToFile = true, ConsoleColor color = ConsoleColor.White)
@@ -31,8 +41,9 @@ namespace Frankenweenie
             if (addToFile)
                 Logs.Append(logLine + "\n");
             Console.WriteLine(logLine);
-            Console.ForegroundColor = ConsoleColor.White;
+            //Console.ForegroundColor = ConsoleColor.White;
         }
+
 
         public static void Log(object log, ConsoleColor color)
         {

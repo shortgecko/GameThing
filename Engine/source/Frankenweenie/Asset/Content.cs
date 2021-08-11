@@ -81,7 +81,13 @@ namespace Frankenweenie
             if(GetLoaded<Texture2D>(key, out asset))
                 return (Texture2D)asset;
             // Load the asset.
-            var result = TexFromFile(key);
+
+            Texture2D texture;
+            using (System.IO.Stream titleStream = TitleContainer.OpenStream(key))
+            {
+                texture = Texture2D.FromStream(Engine.Device.GraphicsDevice, titleStream);
+            }
+            var result = texture;
             loadedAssets[key] = result;
             Logger.Log($"Loaded {key}");
             return result;
@@ -97,17 +103,14 @@ namespace Frankenweenie
             if (GetLoaded<XmlDataDocument>(key, out asset))
                 return (XmlDocument)asset;
 
+            XmlDocument xml = new XmlDocument();
+            xml.Load(TitleContainer.OpenStream(key));
             // Load the asset.
-            var result = XMLFromFile(key);
+            var result = xml;
             loadedAssets[key] = result;
             return result;
         }
-        private static XmlDocument XMLFromFile(string filepath)
-        {
-            XmlDocument xml = new XmlDocument();
-            xml.Load(TitleContainer.OpenStream(filepath));
-            return xml;
-        }
+
         #endregion
         #region Ogmo
         public static OgmoLevel LoadOgmo(string assetName)
@@ -120,15 +123,9 @@ namespace Frankenweenie
                 return (OgmoLevel)asset;
 
             // Load the asset.
-            var result = LoadOgmoLevelFromFile(key);
+            var result = new OgmoLevel(TitleContainer.OpenStream($"{key}")); 
             loadedAssets[key] = result;
             return result;
-        }
-        private static OgmoLevel LoadOgmoLevelFromFile(string path)
-        {
-            Logger.Log(path);
-            OgmoLevel level = new OgmoLevel(TitleContainer.OpenStream($"{path}"));
-            return level;
         }
         #endregion
         #region SpriteFont

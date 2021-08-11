@@ -52,6 +52,42 @@
   ],
   "entities": [
     {
+      "exportID": "66662259",
+      "name": "destructable tiles",
+      "limit": -1,
+      "size": {"x": 8, "y": 8},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff9000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": true,
+      "resizeableY": true,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["entity"],
+      "values": []
+    },
+    {
       "exportID": "54270546",
       "name": "spring",
       "limit": -1,
@@ -232,7 +268,7 @@
       "color": "#00baffff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {"x": 4, "y": 6},
       "resizeableX": true,
       "resizeableY": true,
       "rotatable": false,

@@ -49,7 +49,7 @@ namespace Frankenweenie
 
         public static void Add(Entity Entity)
         {
-            World.EntityRegistry.Add(Entity);
+            EntityRegistry.Add(Entity);
             for (int i = 0; i < Entity.Components.Adding.Count; i++)
             {
                 AddToRegistry(Entity.Components.Adding[i]);
@@ -68,7 +68,7 @@ namespace Frankenweenie
         static void UpdateRegistry(Entity Entity)
         {
 
-            if(Entity.Components.Adding.Count > 0)
+            if (Entity.Components.Adding.Count > 0)
             {
                 for (int i = 0; i < Entity.Components.Adding.Count; i++)
                 {
@@ -81,7 +81,7 @@ namespace Frankenweenie
                 }
             }
 
-            if(Entity.Components.Removing.Count > 0)
+            if (Entity.Components.Removing.Count > 0)
             {
                 for (int i = 0; i < Entity.Components.Removing.Count; i++)
                 {
@@ -105,7 +105,6 @@ namespace Frankenweenie
         public static void Update()
         {
            EntityRegistry.UpdateList();
-
             foreach (Entity Entity in EntityRegistry)
             {
                 UpdateRegistry(Entity);

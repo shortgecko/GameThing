@@ -12,15 +12,17 @@ namespace Frankenweenie
     {
         public int Width;
         public int Height;
-        public int[] Data;
+        public Point CellSize;
+        public int[] Cells;
         public float LayerDepth = 1f;
         private RenderTarget2D RenderData;
  
-        public Tilemap(int[] data, int width, int height)
+        public Tilemap(int[] data, int width, int height, Point size)
         {
-            Data = data;
+            Cells = data;
             Width = width;
             Height = height;
+            CellSize = size;
         }
 
         private void UploadToData(Tileset Tileset)
@@ -32,7 +34,7 @@ namespace Frankenweenie
             for (int x = 0; x < Width; x++)
                 for (int y = 0; y < Height; y++)
                 {
-                    int id = Data[x + y * Width];
+                    int id = Cells[x + y * Width];
                     if (id > -1)
                         Tileset.Draw(id, new Point(x, y), Color.White, LayerDepth);
                 }
@@ -47,7 +49,7 @@ namespace Frankenweenie
             for (int x = 0; x < Width; x++)
                 for (int y = 0; y < Height; y++)
                 {
-                    int id = Data[x + y * Width];
+                    int id = Cells[x + y * Width];
                     if (id > -1)
                         Tileset.Draw(id, new Point(x , y ), Color.White, LayerDepth);
                 }
@@ -59,15 +61,15 @@ namespace Frankenweenie
             for (int x = 0; x < Width; x++)
                 for (int y = 0; y < Height; y++)
                 {
-                    int id = Data[x + y * Width];
+                    int id = Cells[x + y * Width];
 
                     if (id > -1)
-                        Drawer.Batch.Draw(Texture, new Rectangle(x * 8, y * 8, 8, 8), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, LayerDepth);
+                        Drawer.Batch.Draw(Texture, new Rectangle(x * CellSize.X, y * CellSize.Y, CellSize.X, CellSize.Y), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, LayerDepth);
                 }
         }
 
-        public int this[int i] => Data[i];
-        public int this[int x, int y] => Data[x + y *Width];
+        public int this[int i] => Cells[i];
+        public int this[int x, int y] => Cells[x + y *Width];
 
         public bool Contains(int x, int y)
         {

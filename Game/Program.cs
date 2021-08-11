@@ -49,6 +49,8 @@ namespace Game
         {
             int top = 0;
             int bottom = 2;
+            bool hello = true;
+            
             Run();
         }
 

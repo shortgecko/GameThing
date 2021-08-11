@@ -7,9 +7,9 @@
             for(int x = 0; x < tilemap.Width; x++)
                 for(int y = 0; y < tilemap.Height; y++)
                 {
-                    int i = tilemap.Data[x + y * tilemap.Width];
+                    int i = tilemap.Cells[x + y * tilemap.Width];
                     if (i > -1)
-                        tilemap.Data[x + y * tilemap.Width] = Set(tilemap, x, y);
+                        tilemap.Cells[x + y * tilemap.Width] = Set(tilemap, x, y);
                 }
         }              
 
@@ -31,7 +31,7 @@
 
             if (lessX || lessY || biggerX || biggerY)
                 return 0;
-            if (tilemap.Data[x + y * tilemap.Width] > -1)
+            if (tilemap.Cells[x + y * tilemap.Width] > -1)
                 return 1;
             return 0;
         }

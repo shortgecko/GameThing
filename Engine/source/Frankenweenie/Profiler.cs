@@ -42,7 +42,6 @@ namespace Frankenweenie
                 float n = 0f;
                 lowest = Frames.Min();
                 highest = Frames.Max();
-                Frames.Min();
                 foreach (float f in Frames)
                 {
 
@@ -53,7 +52,10 @@ namespace Frankenweenie
                 return;
             }
 
-            throw new Exception("Game did not run long enough to get profile");
+            Logger.Log("Game did not run long enough to get profile");
+            lowest = 0f;
+            highest = 0f;
+            average = 0f;
             
         }
     }

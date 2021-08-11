@@ -31,26 +31,29 @@ namespace Game
         }
 
         private Mover Mover;
-        private float Speed = 200f;
-        private float gravity = 100f;
-        private float jumpForce = -1800f;
-        private Timer coyoteTimer;
-        private float coyoteTime = 0.14f;
         private StateMachine<States> StateMachine;
-        private bool jumping = false;
+        public Vector2 Start;
+
+        private float Speed = 80f;
+        private float MaxRun = 100f;
+        private float RunAccelerate = 113f;
+        private float RunDeccelerate = 400f;
 
         public override void Initialize()
         {
+            Start = Entity.Position;
             var sprite = Entity.Get<Sprite>();
             var hitbox = Entity.Get<Hitbox>();
             sprite.Texture = Content.CreateTexture(hitbox.Width, hitbox.Height, Color.Red);
-            sprite.LayerDepth = 2;
+            sprite.LayerDepth = 100f;
+  
             Mover = Entity.Get<Mover>();
-            Entity.Add(coyoteTimer = new());
+
 
             StateMachine = Entity.Get<StateMachine<States>>();
             StateMachine.Add(States.Normal, null, Normal, null);
             StateMachine.Add(States.WallClimb, null, WallClimb, null);
+
         }
 
         public bool Grounded
@@ -63,71 +66,22 @@ namespace Game
         
         public void Normal()
         {
-            Mover.Move.X = Speed * Input.Horizontal;
-
-            if(Input.Horizontal != 0)
-            {
-                Mover.Move.X += 100f;
-            }
-
-            if (Grounded)
-            {
-                coyoteTimer.Start(coyoteTime);
-            }
-
-            if (Input.Jump.Pressed && coyoteTimer.Duration > 0)
-            {
-                Mover.Move.Y = jumpForce;
-                Mover.Move.X = Input.Horizontal * Math.Abs(jumpForce);
-            }
-
-            //if(jumping)
-            //{
-            //    Mover.Move.Y = jumpForce * 
-            //    Mover.Move.X = Input.Horizontal * Math.Abs(jumpForce);
-            //}
-
-            //if(Input.WallClimb.Pressed)
-            //{
-            //    int x = (int)Input.Horizontal;
-            //    if (Mover.Collision(new Point(x, 0)))
-            //    {
-            //        StateMachine.Set(States.WallClimb);
-            //    }
-            //}
 
         }
 
+
         public void WallClimb()
         {
-            Mover.Move.Y = Speed * Input.Vertical;
-            //if (Input.WallClimb.Released)
-            //{
-            //    StateMachine.Set(States.Normal);
-            //}
 
-            if(Input.Jump)
-            {
-                Mover.Move.X += Math.Abs(jumpForce) * Input.Horizontal;
-                Mover.Move.Y = -200;
-            }
         }
 
         public override void Update()
         {
-            Gravity(150);
+
+
+            Logger.Log(Mover.Move.X);
+
         }
 
-        private void Gravity(float maxGravity)
-        {
-            if(gravity <= maxGravity)
-            {
-                Mover.Move.Y += gravity;
-            }
-            if(Input.Vertical == 1 && gravity <= maxGravity)
-            {
-                Mover.Move.Y++;
-            }
-        }
     }
 }

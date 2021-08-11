@@ -18,5 +18,7 @@ namespace Frankenweenie
         {
             return new Vector2(position.X + (Width / 2), position.Y + (Height / 2));
         }
+
+
     }
 }

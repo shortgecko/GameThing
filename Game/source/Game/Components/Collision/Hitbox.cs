@@ -1,5 +1,7 @@
 using Frankenweenie;
 using Microsoft.Xna.Framework;
+using System;
+
 namespace  Frankenweenie
 {
     public class Hitbox : Collider

@@ -26,9 +26,9 @@ namespace Game
 
         public override void Initialize()
         {
-            Texture2D Texture = Content.CreateTexture(4, 6, Color.White);
-            int width = Parameters.Width / 8;
-            int height = Parameters.Height / 8;
+            Texture2D Texture = Content.CreateTexture(Parameters.Width, Parameters.Height, Color.White);
+            int width = Parameters.Width / Texture.Width;
+            int height = Parameters.Height / Texture.Height;
 
             Entity.Add(new Trigger(Entity.Position.X, Entity.Position.Y, Parameters.Width, Parameters.Height)
             {
@@ -37,7 +37,7 @@ namespace Game
                     Player player = entity.Get<Player>();
                     if (player != null)
                     {
-                        LevelLoader.Reload();
+                        player.Entity.Position = player.Start;
                     }
                 },
             });

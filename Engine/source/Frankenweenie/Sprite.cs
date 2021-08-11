@@ -8,9 +8,30 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Frankenweenie
 {
+
+    public struct Frame
+    {
+        public Texture2D Texture;
+        public float Duration;
+
+        public Frame(float legnth, Texture2D texture)
+        {
+            Texture = texture;
+            Duration = legnth;
+        }
+    }
+
     public class Animation
     {
-        public Dictionary<Texture2D, float> Frames;
+        private Dictionary<float, Frame> Frames;
+        private string m_Name;
+        public string Name => m_Name;
+
+        public Animation(string name, Dictionary<float, Frame> frames)
+        {
+            Frames = frames;
+            m_Name = name;
+        }
     }
 
     [Pooled]
@@ -39,8 +60,7 @@ namespace Frankenweenie
 
         public void Play(string animationName)
         {
-            Animation animation = Animations[animationName];
-            
+
         }
 
 

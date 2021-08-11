@@ -203,10 +203,11 @@ namespace Game
 
         private void CheckY()
         {
-            int sign = Math.Sign(Math.Round(Move.Y));
-            Move.Y = (float)Math.Round(Move.Y);
             while (Move.Y != 0)
             {
+                int sign = Math.Sign(Math.Round(Move.Y));
+                Move.Y = (float)Math.Round(Move.Y);
+
                 if (!Collision(new Point(0, sign), Mask))
                 {
                     Entity.Position.Y += sign * Engine.Delta;

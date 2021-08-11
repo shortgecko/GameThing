@@ -25,8 +25,11 @@ namespace Game
                 case "spinner":
                     Add(Spinner.Create(Position, Parameters));
                     break;
+                case "spring":
+                    Add(Spring.Create(Position));
+                    break;
                 default:
-                    throw new Exception("Entity not found");
+                    return;
             }
         }
 
