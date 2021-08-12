@@ -20,6 +20,7 @@ namespace Game
         private Texture2D BgTile;
         private Camera Camera = new Camera();
         private Entity Player;
+        
 
         Vector2 last;
         private void Follow(Entity entity)
@@ -67,7 +68,7 @@ namespace Game
             ImGuiLayer.Add<CommandPrompt>();
             ImGuiLayer.Add<Logger>();
 
-            LevelLoader.Load("area one/a1.json");
+            LevelLoader.Load("area one/a4.json");
             Player = World.All<Player>()[0].Entity;
             Logger.Log(World.All<Hitbox>().Count);
             base.Initialize();
@@ -76,10 +77,9 @@ namespace Game
         protected override void Load()
         {
             Engine.Color(Color.Black);
-            Tileset = new Tileset("graphics/tileset.png", 8, 8);
-            BgTile = Content.LoadTexture("graphics/bg_tile.png");
-            Level.Tiles.LayerDepth = 100f / Sprite.MaxLayerDepth;
-            Level.BgTiles.LayerDepth = 10f / Sprite.MaxLayerDepth;
+            var tilemap = (Tilemap)World.All<Tilemap>()[0];
+            tilemap.LayerDepth = 1f;
+            
             Camera.Position = Vector2.One;
 
         }
@@ -121,11 +121,8 @@ namespace Game
         }
 
         protected override void Render()
-        {
-            Level.BgTiles.Render(BgTile);
-           
+        {           
             World.Render();
-            Level.Tiles.Render(Tileset);
             DebugDraw.Draw();
         }
 

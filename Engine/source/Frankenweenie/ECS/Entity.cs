@@ -31,10 +31,11 @@ namespace Frankenweenie
             return (T)Component;
         }
 
-        public void Add(Component Component)
+        public Component Add(Component Component)
         { 
             Component.Entity = this;
             Components.Add(Component);
+            return Component;
         }
         
         public T Get<T>() where T : Component

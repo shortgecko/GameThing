@@ -30,6 +30,13 @@ namespace Game
             sprite.Texture = Content.CreateTexture(8, 8, Color.Green);
             sprite.LayerDepth = 100f;
             Mover = Entity.Get<Mover>();
+            Mover.OnCollideY = (CollisionData collisionData) =>
+            {
+                if(collisionData.Offset == new Point(0, -1))
+                {
+                    collisionData.Entity.Get<Mover>().Move.Y = 100;
+                }
+            };
 
         }
 

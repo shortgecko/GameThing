@@ -36,15 +36,15 @@ namespace  Frankenweenie
         }
 
 
-        public static bool Intersects(Collider hitbox, Collider other)
+        public bool Intersects( Collider other)
         {
-            return other.Left < hitbox.Right &&
-                hitbox.Left < other.Right &&
-                other.Top < hitbox.Bottom &&
-                hitbox.Top < other.Bottom;
+            return other.Left < Right &&
+                Left < other.Right &&
+                other.Top < Bottom &&
+                Top < other.Bottom;
         }
 
-        public static bool Intersects(Collider hitbox, Rectangle other)
+        public bool Intersects(Collider hitbox, Rectangle other)
         {
             return other.Left < hitbox.Right &&
                 hitbox.Left < other.Right &&
@@ -61,6 +61,11 @@ namespace  Frankenweenie
         public void Draw(Color color)
         {
             Drawer.HollowRectangle(ToRect(), 1, color);
+        }
+
+        public virtual CollisionData Check(Point offset, Collider other)
+        {
+            return null;
         }
 
 

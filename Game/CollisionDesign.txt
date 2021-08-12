@@ -1,0 +1,8 @@
+Things to do:
+Make Colliders return entity
+Make Tilemap a component and entity
+Fix redundant code
+Move collision in to engine.
+
+Things to do if you have time:
+Collision layers

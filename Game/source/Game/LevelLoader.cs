@@ -39,18 +39,12 @@ namespace Game
             Level = Content.LoadOgmo($"levels/{path}");
             OgmoLayer tileLayer = Level["Solids"];
             int[] tileLayerData = tileLayer.GridToTileLayer();
-            global::Game.Level.Tiles = new Tilemap(tileLayerData, tileLayer.gridCellsX, tileLayer.gridCellsY, new Point(8,8));
-            for (int x = 0; x < global::Game.Level.Tiles.Width; x++)
-                for (int y = 0; y < global::Game.Level.Tiles.Height; y++)
-                {
-                    if (global::Game.Level.Tiles[x,y] != -1)
-                    {
-                        global::Game.Level.Solids.Add(new Hitbox(x * 8, y * 8, 8, 8));
-                    }
-                }
+            
+            Entity tilemap = Tilemap.Create(tileLayerData, tileLayer.gridCellsX, tileLayer.gridCellsY, new Point(8,8), new Tileset("graphics/tileset.png", 8, 8));
+            World.Add(tilemap);
             
             OgmoLayer background = Level["Background"]; ;
-            global::Game.Level.BgTiles = new Tilemap(background.GridToTileLayer(), background.gridCellsX, background.gridCellsY, new Point(8, 8));
+            //global::Game.Level.BgTiles = new Tilemap(background.GridToTileLayer(), background.gridCellsX, background.gridCellsY, new Point(8, 8));
             OgmoLayer entityLayer = Level["Entities"];
 
             foreach (OgmoEntity ogmoEntity in entityLayer.entities)
@@ -67,7 +61,8 @@ namespace Game
                 World.Add(Entity);
             }
 
-            Autotiler.Tile(global::Game.Level.Tiles);
+            //Autotiler.Tile(global::Game.Level.Tiles);
+            Autotiler.Tile(tilemap.Get<Tilemap>());
             tileLayer = null;
             tileLayerData = null;
             entityLayer = null;

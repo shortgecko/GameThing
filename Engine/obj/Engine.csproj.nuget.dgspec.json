@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\muham\\GameThing\\Engine\\Engine.csproj": {}
+    "C:\\Users\\muham\\source\\repos\\C# Projects\\GameThing\\Engine\\Engine.csproj": {}
   },
   "projects": {
-    "C:\\Users\\muham\\GameThing\\Engine\\Engine.csproj": {
+    "C:\\Users\\muham\\source\\repos\\C# Projects\\GameThing\\Engine\\Engine.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\muham\\GameThing\\Engine\\Engine.csproj",
+        "projectUniqueName": "C:\\Users\\muham\\source\\repos\\C# Projects\\GameThing\\Engine\\Engine.csproj",
         "projectName": "Frankenweenie",
-        "projectPath": "C:\\Users\\muham\\GameThing\\Engine\\Engine.csproj",
+        "projectPath": "C:\\Users\\muham\\source\\repos\\C# Projects\\GameThing\\Engine\\Engine.csproj",
         "packagesPath": "C:\\Users\\muham\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\muham\\GameThing\\Engine\\obj\\",
+        "outputPath": "C:\\Users\\muham\\source\\repos\\C# Projects\\GameThing\\Engine\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\muham\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -72,7 +72,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

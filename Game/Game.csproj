@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <UserSecretsId>fe9606b8-ff8d-47c4-8d05-0a3c59959b27</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="source\Game\Scenes\**" />
@@ -11,9 +12,11 @@
     <None Remove="source\Game\Scenes\**" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="source\Game\Components\Collision\Mover.cs" />
     <Content Include="source\Game\Components\Timer.cs" />
     <Content Include="source\Game\Components\Player.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.csproj" />

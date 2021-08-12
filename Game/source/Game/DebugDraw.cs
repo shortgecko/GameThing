@@ -12,14 +12,7 @@ namespace Game
     {
         public static void Draw()
         {
-            for(int x = 0; x < Level.Tiles.Width; x++)
-                for(int y = 0; y < Level.Tiles.Height; y++)
-                {
-                    if(Level.Tiles[x,y] != -1)
-                    {
-                      Drawer.HollowRectangle(new Rectangle(x * 8, y * 8, 8,8), 2, Color.Green);
-                    }
-                }
+
 
         }
     }

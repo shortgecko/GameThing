@@ -60,7 +60,7 @@ namespace Game
         {
             get
             {
-                return Mover.Collision(new Point(0, 1));
+                return Mover.Check(new Point(0, 1)) != null;
             }
         }
         
@@ -78,8 +78,8 @@ namespace Game
         public override void Update()
         {
 
+            Mover.Move.X = Speed * Input.Horizontal;
 
-            Logger.Log(Mover.Move.X);
 
         }
 

@@ -173,3 +173,47 @@ C:\Users\muham\GameThing\Game\obj\Debug\net5.0\Game.dll
 C:\Users\muham\GameThing\Game\obj\Debug\net5.0\ref\Game.dll
 C:\Users\muham\GameThing\Game\obj\Debug\net5.0\Game.pdb
 C:\Users\muham\GameThing\Game\obj\Debug\net5.0\Game.genruntimeconfig.cache
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\obj\Debug\net5.0\Game.csproj.AssemblyReference.cache
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\obj\Debug\net5.0\Game.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\obj\Debug\net5.0\Game.AssemblyInfoInputs.cache
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\obj\Debug\net5.0\Game.AssemblyInfo.cs
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\obj\Debug\net5.0\Game.csproj.CoreCompileInputs.cache
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\obj\Debug\net5.0\Game.dll
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\obj\Debug\net5.0\ref\Game.dll
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\obj\Debug\net5.0\Game.pdb
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\Game.exe
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\Game.deps.json
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\Game.runtimeconfig.json
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\Game.runtimeconfig.dev.json
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\Game.dll
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\ref\Game.dll
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\Game.pdb
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\ImGui.NET.dll
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\Microsoft.Extensions.Configuration.dll
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\Microsoft.Extensions.Configuration.FileExtensions.dll
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\Microsoft.Extensions.Configuration.Json.dll
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\Microsoft.Extensions.Configuration.UserSecrets.dll
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\Microsoft.Extensions.FileProviders.Physical.dll
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\Microsoft.Extensions.FileSystemGlobbing.dll
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\MonoGame.Framework.dll
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\SpriteFontPlus.dll
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\runtimes\linux-x64\native\libcimgui.so
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\runtimes\osx-x64\native\libcimgui.dylib
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\runtimes\win-x64\native\cimgui.dll
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\runtimes\win-x86\native\cimgui.dll
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\runtimes\linux-x64\native\libSDL2-2.0.so.0
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\runtimes\linux-x64\native\libopenal.so.1
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\runtimes\osx\native\libSDL2-2.0.0.dylib
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\runtimes\osx\native\libopenal.1.dylib
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\runtimes\win-x64\native\SDL2.dll
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\runtimes\win-x64\native\soft_oal.dll
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\runtimes\win-x86\native\SDL2.dll
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\runtimes\win-x86\native\soft_oal.dll
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\Frankenweenie.dll
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\bin\Debug\net5.0\Frankenweenie.pdb
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\obj\Debug\net5.0\Game.csproj.CopyComplete
+C:\Users\muham\source\repos\C# Projects\GameThing\Game\obj\Debug\net5.0\Game.genruntimeconfig.cache
