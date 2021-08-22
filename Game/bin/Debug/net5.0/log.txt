@@ -1,9 +1,0 @@
-Log Earthward
-------------------------------------------------------------------------------------------------------------------
-Log Earthward------------------------------------------------------------------------------------------------------------------[Log Earthward] GPU Information Intel(R) Iris(R) Xe Graphics
-[Log Earthward] Camera
-[Log Earthward] scale x 4
-[Log Earthward] scale y 4
-[Log Earthward] Type not found in registry
-[Log Earthward] 0
-[Log Earthward] Camera

@@ -1,0 +1,7 @@
+Log Engine
+------------------------------------------------------------------------------------------------------------------
+[] PlayerComponent
+Log Engine------------------------------------------------------------------------------------------------------------------[Log Engine] GPU Information Intel(R) Iris(R) Xe Graphics
+[Log Engine] Camera
+[Log Engine] PlayerComponent
+[Log Engine] Camera
