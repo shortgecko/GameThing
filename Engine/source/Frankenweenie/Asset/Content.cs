@@ -52,34 +52,28 @@ namespace Frankenweenie
                 return texture;
             }
         }
-        public static Texture2D CreateTexture(int width, int height, Color color)
+        public static VTexture CreateTexture(int width, int height, Color color)
         {
             //initialize a texture
             var texture = new Texture2D(Engine.Device.GraphicsDevice, width, height);
+            texture.Name = "Blank";
             //the array holds the color for each pixel in the texture
             Color[] data = new Color[width * height];
             for (int i = 0; i < data.Length; i++)
                 data[i] = color;
             //set the color
             texture.SetData(data);
-            return texture;
+            return new VTexture(texture);
         }
         #endregion
         #region Texture
-        private static Texture2D TexFromFile(string file)
-        {
-            using (System.IO.Stream titleStream = TitleContainer.OpenStream(file))
-            {
-                return Texture2D.FromStream(Engine.Device.GraphicsDevice, titleStream);
-            }
-        }
-        public static Texture2D LoadTexture(string assetName)
+        public static  VTexture LoadTexture(string assetName)
         {
             var key = Directory(assetName);
             // Check for a previously loaded asset first
             object asset = null;
-            if(GetLoaded<Texture2D>(key, out asset))
-                return (Texture2D)asset;
+            if(GetLoaded<VTexture>(key, out asset))
+                return (VTexture)asset;
             // Load the asset.
 
             Texture2D texture;
@@ -87,7 +81,7 @@ namespace Frankenweenie
             {
                 texture = Texture2D.FromStream(Engine.Device.GraphicsDevice, titleStream);
             }
-            var result = texture;
+            var result = new VTexture(texture);
             loadedAssets[key] = result;
             Logger.Log($"Loaded {key}");
             return result;

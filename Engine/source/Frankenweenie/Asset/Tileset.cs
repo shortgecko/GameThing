@@ -6,7 +6,7 @@ namespace Frankenweenie
     public class Tileset
     {
         private Rectangle[,] Tiles;
-        private Texture2D Source;
+        private VTexture Source;
         private int TileWidth;
         private int TileHeight;
 
@@ -32,7 +32,7 @@ namespace Frankenweenie
             int x = id / w;
             int y = id % w ;
             var tile = Tiles[y, x];
-            Drawer.Batch.Draw(Source, new Rectangle(Position.X * TileWidth, Position.Y * TileHeight, TileWidth, TileHeight), tile, Color.White, 0, Vector2.Zero, SpriteEffects.None, layerDepth);
+            Drawer.Batch.Draw(Source.Texture, new Rectangle(Position.X * TileWidth, Position.Y * TileHeight, TileWidth, TileHeight), tile, Color.White, 0, Vector2.Zero, SpriteEffects.None, layerDepth);
         }
 
         public void Dispose() => Source.Dispose();

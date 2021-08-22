@@ -24,6 +24,14 @@ namespace Frankenweenie
             Position = position;
         }
 
+        public Entity(List<Component> components)
+        {
+            foreach(var component in components)
+            {
+                Add(component);
+            }
+        }
+
         public T Add<T>() where T : Component, new()
         {
             Component Component = Pooler.Create<T>();

@@ -8,7 +8,7 @@ namespace Frankenweenie
     public class Atlas
     {
         private XmlDocument AtlasDef { get; set; }
-        public Texture2D Source { get; set; }
+        public VTexture Source { get; set; }
 
         private Dictionary<string, Subtexture> Subtextures = new Dictionary<string, Subtexture>();
 

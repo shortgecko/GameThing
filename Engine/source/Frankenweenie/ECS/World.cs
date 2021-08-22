@@ -30,6 +30,14 @@ namespace Frankenweenie
 
         }
 
+        public static Entity CreateCamera()
+        {
+            Entity entity = new Entity();
+            entity.Add<Camera>();
+            World.Add(entity);
+            return entity;
+        }
+
         public static void AddToRegistry(Component c)
         {
             Type t = c.GetType();

@@ -38,7 +38,7 @@ namespace Frankenweenie
     public class Sprite : Component
     {
         public static int MaxLayerDepth = 100000;
-        public Texture2D Texture;
+        public VTexture Texture;
         public int Width;
         public int Height;
         public Vector2 Position { get { return Entity.Position; } }
@@ -67,7 +67,7 @@ namespace Frankenweenie
         public override void Render()
         {
             if(Texture != null)
-                Drawer.Batch.Draw(Texture, Position + DrawOffset, new Rectangle(0,0,Texture.Width, Texture.Height), Color, Rotation, Origin, Scale, Effects, LayerDepth / MaxLayerDepth);
+                Drawer.Batch.Draw(Texture.Texture, Position + DrawOffset, new Rectangle(0,0,Texture.Width, Texture.Height), Color, Rotation, Origin, Scale, Effects, LayerDepth / MaxLayerDepth);
         }
 
         public override void Removed()

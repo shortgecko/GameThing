@@ -7,13 +7,6 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Frankenweenie
 {
-    public enum Direction
-    {
-        Up,
-        Down,
-        Right,
-        Left
-    }
 
     public class Mover : Component
     {
@@ -39,7 +32,7 @@ namespace Frankenweenie
 
         public override void Initialize()
         {
-            Hitboxes = World.All<Collider>();
+            Hitboxes = World.All<Hitbox>();
             Triggers = World.All<Trigger>();
             Tilemaps = World.All<Tilemap>();
             Hitbox = Entity.Get<Hitbox>();
@@ -65,9 +58,12 @@ namespace Frankenweenie
         {
             foreach (Hitbox collider in Hitboxes)
             {
-                CollisionData collisionData = Hitbox.Check(offset,collider);
-                if (collisionData != null)
-                    return collisionData;
+                if(collider != Hitbox)
+                {
+                    CollisionData collisionData = Hitbox.Check(offset, collider);
+                    if (collisionData != null)
+                        return collisionData;
+                }
             }
 
 
@@ -115,7 +111,8 @@ namespace Frankenweenie
   
             while (Move.X != 0)
             {
-                CollisionData collisionData = Check(new Point(sign, 0));
+                Point offset = new Point(sign, 0);
+                CollisionData collisionData = Check(offset);
                 if (collisionData == null)
                 {
                     Entity.Position.X += sign * Engine.Delta;
@@ -124,23 +121,42 @@ namespace Frankenweenie
                 else
                 {
                     Move.X = 0;
-                    if (OnCollide != null)
-                        OnCollide.Invoke(collisionData);
-                    if (OnCollideX != null)
-                        OnCollideX.Invoke(collisionData);
+                    CollisionResponseX(collisionData);
+                    Mover mover = collisionData.Entity.Get<Mover>();
+                    if (mover != null)
+                    {
+                        mover.CollisionResponseX(new CollisionData(true, Entity, offset));
+                    }
                     break;
                 }
             }
         }
 
+        public void CollisionResponseX(CollisionData collisionData)
+        {
+            if (OnCollide != null)
+                OnCollide.Invoke(collisionData);
+            if (OnCollideX != null)
+                OnCollideX.Invoke(collisionData);
+        }
+
+        public void CollisionResponseY(CollisionData collisionData)
+        {
+            if (OnCollide != null)
+                OnCollide.Invoke(collisionData);
+            if (OnCollideY != null)
+                OnCollideY.Invoke(collisionData);
+        }
+
         private void CheckY()
         {
+            int sign = Math.Sign(Math.Round(Move.Y));
+            Move.Y = (float)Math.Round(Move.Y);
+            Point offset = new Point(0, sign);
+
             while (Move.Y != 0)
             {
-                int sign = Math.Sign(Math.Round(Move.Y));
-                Move.Y = (float)Math.Round(Move.Y);
-
-                CollisionData collisionData = Check(new Point(0, sign));
+                CollisionData collisionData = Check(offset);
                 if (collisionData == null)
                 {
                     Entity.Position.Y += sign * Engine.Delta;
@@ -149,10 +165,12 @@ namespace Frankenweenie
                 else
                 {
                     Move.Y = 0;
-                    if (OnCollide != null)
-                        OnCollide.Invoke(collisionData);
-                    if (OnCollideY != null)
-                        OnCollideY.Invoke(collisionData);
+                    CollisionResponseY(collisionData);
+                    Mover mover = collisionData.Entity.Get<Mover>();
+                    if (mover != null)
+                    {
+                        mover.CollisionResponseY(new CollisionData(true, Entity, offset));
+                    }
                     break;
                 }
             }

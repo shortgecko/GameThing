@@ -23,15 +23,7 @@ namespace Game
         
 
         Vector2 last;
-        private void Follow(Entity entity)
-        {
-            if(last != entity.Position)
-            {
-                last = Vector2.Zero;
-            }
-            
-            Camera.Position += last;
-        }
+
         private Action ResizeAction = () =>
         {
             Vector2 scale = new Vector2()
@@ -63,67 +55,19 @@ namespace Game
         protected override void Initialize()
         {
             Engine.Fullscreen(true);
+            World.CreateCamera();
             ResizeAction.Invoke();
             Window.ResizeActions.Add(ResizeAction);
-            ImGuiLayer.Add<CommandPrompt>();
-            ImGuiLayer.Add<Logger>();
-
-            LevelLoader.Load("area one/a4.json");
-            Player = World.All<Player>()[0].Entity;
             Logger.Log(World.All<Hitbox>().Count);
             base.Initialize();
         }
 
-        protected override void Load()
-        {
-            Engine.Color(Color.Black);
-            var tilemap = (Tilemap)World.All<Tilemap>()[0];
-            tilemap.LayerDepth = 1f;
-            
-            Camera.Position = Vector2.One;
-
-        }
 
 
-        protected override void End()
-        {
-            
-        }
-
-        Vector2 GetCameraInput
-        {
-            get
-            {
-                Vector2 input;
-                if (Keyboard.GetState().IsKeyDown(Keys.Up))
-                    input.Y = -1;
-                else if (Keyboard.GetState().IsKeyDown(Keys.Down))
-                    input.Y = 1;
-                else
-                    input.Y = 0;
-
-                if (Keyboard.GetState().IsKeyDown(Keys.Left))
-                    input.X = -1;
-                else if (Keyboard.GetState().IsKeyDown(Keys.Right))
-                    input.X = 1;
-                else
-                    input.X = 0;
-                return input;
-            }
-        }
-
-        protected override void Update()
-        {
-            
-            Follow(Player);
-            Engine.Transform = Camera.Transform;
-            base.Update();
-        }
 
         protected override void Render()
         {           
             World.Render();
-            DebugDraw.Draw();
         }
 
     }

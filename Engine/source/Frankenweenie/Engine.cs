@@ -26,13 +26,14 @@ namespace Frankenweenie
         public static GameTime GameTime;
 
         public static VirtualRenderTarget RenderTarget;
-        public static Matrix Transform = Matrix.CreateTranslation(0, 0, 0);
         public static SceneManager SceneManager;
         private static Color clearColor = Microsoft.Xna.Framework.Color.Black;
 
         public static float fpsValue;
         public static float FPS => fpsValue;
         public static float MaxRunTime = 0f;
+
+        private Camera Camera;
 
         public static string AssetDirectory
         {
@@ -170,8 +171,21 @@ namespace Frankenweenie
             Drawer.Batch.End();
             GraphicsDevice.SetRenderTarget(null);
 
+            if(Camera == null)
+            {
+                try
+                {
+                    Camera = (Camera)World.All<Camera>()[0];
+
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Scene cannot start, Camera not found!");
+                }
+
+            }    
             GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.Black);
-            Drawer.Batch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, transformMatrix: Transform);
+            Drawer.Batch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, transformMatrix:Camera.Transform);
             RenderTarget.Render();
             Drawer.Batch.End();
 

@@ -1,49 +1,9 @@
 Log Earthward
 ------------------------------------------------------------------------------------------------------------------
 Log Earthward------------------------------------------------------------------------------------------------------------------[Log Earthward] GPU Information Intel(R) Iris(R) Xe Graphics
+[Log Earthward] Camera
 [Log Earthward] scale x 4
 [Log Earthward] scale y 4
-[Log Earthward] Loaded Assets/graphics/tileset.png
-[Log Earthward] Tilemap
-[Log Earthward] Mover
-[Log Earthward] Sprite
-[Log Earthward] Hitbox
-[Log Earthward] Spring
-[Log Earthward] Mover
-[Log Earthward] Sprite
-[Log Earthward] Hitbox
-[Log Earthward] Spring
-[Log Earthward] Spinner
-[Log Earthward] Spinner
-[Log Earthward] Hitbox
-[Log Earthward] Player
-[Log Earthward] Mover
-[Log Earthward] Sprite
-[Log Earthward] StateMachine`1
-[Log Earthward] Spinner
-[Log Earthward] 3
-[Log Earthward] Tilemap
 [Log Earthward] Type not found in registry
-[Log Earthward] Type not found in registry
-[Log Earthward] Mover
-[Log Earthward] Sprite
-[Log Earthward] Hitbox
-[Log Earthward] Spring
-[Log Earthward] Mover
-[Log Earthward] Sprite
-[Log Earthward] Hitbox
-[Log Earthward] Spring
-[Log Earthward] Spinner
-[Log Earthward] Trigger
-[Log Earthward] Sprite
-[Log Earthward] Spinner
-[Log Earthward] Trigger
-[Log Earthward] Sprite
-[Log Earthward] Hitbox
-[Log Earthward] Player
-[Log Earthward] Mover
-[Log Earthward] Sprite
-[Log Earthward] StateMachine`1
-[Log Earthward] Spinner
-[Log Earthward] Trigger
-[Log Earthward] Sprite
+[Log Earthward] 0
+[Log Earthward] Camera

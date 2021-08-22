@@ -15,9 +15,7 @@ namespace Game
         {
             Scenes = new Dictionary<string, Scene>()
             {
-                { "Splash", new Splash() },
                 { "Game" , new Game() },
-                {"Text", new GUI()},
             },
         };
 
@@ -47,10 +45,6 @@ namespace Game
 
         private static void Main()
         {
-            int top = 0;
-            int bottom = 2;
-            bool hello = true;
-            
             Run();
         }
 
