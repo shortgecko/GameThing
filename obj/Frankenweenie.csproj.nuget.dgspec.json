@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\muham\\source\\repos\\C# Projects\\GameEngineProject\\Frankenweenie\\Frankenweenie.csproj": {}
+    "C:\\Users\\muham\\source\\repos\\C# Projects\\Frankenweenie\\Frankenweenie.csproj": {}
   },
   "projects": {
-    "C:\\Users\\muham\\source\\repos\\C# Projects\\GameEngineProject\\Frankenweenie\\Frankenweenie.csproj": {
+    "C:\\Users\\muham\\source\\repos\\C# Projects\\Frankenweenie\\Frankenweenie.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\muham\\source\\repos\\C# Projects\\GameEngineProject\\Frankenweenie\\Frankenweenie.csproj",
+        "projectUniqueName": "C:\\Users\\muham\\source\\repos\\C# Projects\\Frankenweenie\\Frankenweenie.csproj",
         "projectName": "Frankenweenie",
-        "projectPath": "C:\\Users\\muham\\source\\repos\\C# Projects\\GameEngineProject\\Frankenweenie\\Frankenweenie.csproj",
+        "projectPath": "C:\\Users\\muham\\source\\repos\\C# Projects\\Frankenweenie\\Frankenweenie.csproj",
         "packagesPath": "C:\\Users\\muham\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\muham\\source\\repos\\C# Projects\\GameEngineProject\\Frankenweenie\\obj\\",
+        "outputPath": "C:\\Users\\muham\\source\\repos\\C# Projects\\Frankenweenie\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\muham\\AppData\\Roaming\\NuGet\\NuGet.Config",

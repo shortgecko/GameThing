@@ -43,3 +43,11 @@ C:\Users\muham\source\repos\C# Projects\GameEngineProject\Frankenweenie\bin\Debu
 C:\Users\muham\source\repos\C# Projects\GameEngineProject\Frankenweenie\bin\Debug\net5.0\runtimes\win-x86\native\soft_oal.dll
 C:\Users\muham\source\repos\C# Projects\GameEngineProject\Frankenweenie\obj\Debug\net5.0\Frankenweenie.csproj.CopyComplete
 C:\Users\muham\source\repos\C# Projects\GameEngineProject\Frankenweenie\obj\Debug\net5.0\Frankenweenie.genruntimeconfig.cache
+C:\Users\muham\source\repos\C# Projects\Frankenweenie\obj\Debug\net5.0\Frankenweenie.csproj.AssemblyReference.cache
+C:\Users\muham\source\repos\C# Projects\Frankenweenie\obj\Debug\net5.0\Frankenweenie.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\muham\source\repos\C# Projects\Frankenweenie\obj\Debug\net5.0\Frankenweenie.AssemblyInfoInputs.cache
+C:\Users\muham\source\repos\C# Projects\Frankenweenie\obj\Debug\net5.0\Frankenweenie.AssemblyInfo.cs
+C:\Users\muham\source\repos\C# Projects\Frankenweenie\obj\Debug\net5.0\Frankenweenie.csproj.CoreCompileInputs.cache
+C:\Users\muham\source\repos\C# Projects\Frankenweenie\obj\Debug\net5.0\Frankenweenie.dll
+C:\Users\muham\source\repos\C# Projects\Frankenweenie\obj\Debug\net5.0\ref\Frankenweenie.dll
+C:\Users\muham\source\repos\C# Projects\Frankenweenie\obj\Debug\net5.0\Frankenweenie.pdb
