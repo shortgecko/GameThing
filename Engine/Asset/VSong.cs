@@ -23,6 +23,7 @@ namespace Frankenweenie
 
         public void Play()
         {
+
             MediaPlayer.Play(Song);
         }
 

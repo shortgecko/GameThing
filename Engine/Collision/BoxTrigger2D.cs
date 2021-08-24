@@ -4,12 +4,12 @@ using Microsoft.Xna.Framework;
 
 namespace  Frankenweenie
 {
-    public class Trigger : Collider
+    public class BoxTrigger2D : Collider2D
     {
         public Action<Entity> OnTriggerEnter;
         public Action<Entity> OnTriggerLeave;
 
-        public Trigger()
+        public BoxTrigger2D()
         {
             X = 0;
             Y = 0;
@@ -17,7 +17,7 @@ namespace  Frankenweenie
             Height = 0;
         }
 
-        public Trigger(int x, int y, int width, int height)
+        public BoxTrigger2D(int x, int y, int width, int height)
         {
             X = x;
             Y = y;
@@ -25,7 +25,7 @@ namespace  Frankenweenie
             Height = height;
         }
 
-        public Trigger(float x, float y, float width, float height)
+        public BoxTrigger2D(float x, float y, float width, float height)
         {
             X = (int)x;
             Y = (int)y;
@@ -33,7 +33,7 @@ namespace  Frankenweenie
             Height = (int)height;
         }
 
-        public Trigger(Rectangle rectangle)
+        public BoxTrigger2D(Rectangle rectangle)
         {
             X = rectangle.X;
             Y = rectangle.Y;

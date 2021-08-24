@@ -128,7 +128,21 @@ namespace Frankenweenie
         #region Song
         public static VSong LoadSong(string assetName)
         {
-           
+            var key = Directory(assetName);
+
+            // Check for a previously loaded asset first
+            object asset = null;
+            if (GetLoaded<VSong>(key, out asset))
+                return (VSong)asset;
+            var uri = new System.Uri(Engine.AssemblyDirectory + "/assets/" + assetName);
+            var converted = uri.AbsoluteUri;
+            var song = Song.FromUri("Song", uri);
+
+            VSong vSong = new VSong(song);
+            // Load the asset.
+            var result = vSong;
+            loadedAssets[key] = result;
+            return result;
         }
         #endregion
         #region SpriteFont

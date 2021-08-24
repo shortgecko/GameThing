@@ -8,6 +8,15 @@ namespace Frankenweenie.Game
 {
     public class Game : Scene
     {
+        public VSong vSong;
 
+        protected override void Initialize()
+        {
+        }
+
+        protected override void Update()
+        {
+           
+        }
     }
 }

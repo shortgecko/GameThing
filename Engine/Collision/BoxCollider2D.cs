@@ -4,11 +4,11 @@ using System;
 
 namespace  Frankenweenie
 {
-    public class Hitbox : Collider
+    public class BoxCollider2D : Collider2D
     {
         public bool TriggerOverlap = false;
 
-        public Hitbox(int x, int y, int width, int height)
+        public BoxCollider2D(int x, int y, int width, int height)
         {
             X = x;
             Y = y;
@@ -16,9 +16,9 @@ namespace  Frankenweenie
             Height = height;
         }
 
-        public override CollisionData Check(Point offset, Collider other)
+        public override CollisionData Check(Point offset, Collider2D other)
         {
-            Hitbox box = new Hitbox(X + offset.X, Y + offset.Y, Width, Height);
+            BoxCollider2D box = new BoxCollider2D(X + offset.X, Y + offset.Y, Width, Height);
             if(box.Intersects(other))
             {
                 return new CollisionData(true, other.Entity, offset);

@@ -3,7 +3,7 @@ using Frankenweenie;
 
 namespace  Frankenweenie
 {
-    public class Collider : Component
+    public class Collider2D : Component
     {
         public int X;
         public int Y;
@@ -36,7 +36,7 @@ namespace  Frankenweenie
         }
 
 
-        public bool Intersects( Collider other)
+        public bool Intersects( Collider2D other)
         {
             return other.Left < Right &&
                 Left < other.Right &&
@@ -44,7 +44,7 @@ namespace  Frankenweenie
                 Top < other.Bottom;
         }
 
-        public bool Intersects(Collider hitbox, Rectangle other)
+        public bool Intersects(Collider2D hitbox, Rectangle other)
         {
             return other.Left < hitbox.Right &&
                 hitbox.Left < other.Right &&
@@ -63,7 +63,7 @@ namespace  Frankenweenie
             Drawer.HollowRectangle(ToRect(), 1, color);
         }
 
-        public virtual CollisionData Check(Point offset, Collider other)
+        public virtual CollisionData Check(Point offset, Collider2D other)
         {
             return null;
         }

@@ -17,7 +17,7 @@ namespace Frankenweenie
             All
         };
 
-        public Hitbox Hitbox;
+        public BoxCollider2D Hitbox;
         public Vector2 Move;
         public Masks Mask = Masks.All;
         public Action<CollisionData> OnCollide;
@@ -32,10 +32,10 @@ namespace Frankenweenie
 
         public override void Initialize()
         {
-            Hitboxes = World.All<Hitbox>();
-            Triggers = World.All<Trigger>();
+            Hitboxes = World.All<BoxCollider2D>();
+            Triggers = World.All<BoxTrigger2D>();
             Tilemaps = World.All<Tilemap>();
-            Hitbox = Entity.Get<Hitbox>();
+            Hitbox = Entity.Get<BoxCollider2D>();
         }
 
         bool j = false;
@@ -56,7 +56,7 @@ namespace Frankenweenie
 
         public CollisionData Check(Point offset)
         {
-            foreach (Hitbox collider in Hitboxes)
+            foreach (BoxCollider2D collider in Hitboxes)
             {
                 if(collider != Hitbox)
                 {
@@ -180,7 +180,7 @@ namespace Frankenweenie
         {
             foreach(var triggerRef in Triggers)
             {
-                var trigger = (Trigger)triggerRef;
+                var trigger = (BoxTrigger2D)triggerRef;
 
                 if (Hitbox.Intersects(trigger))
                 {

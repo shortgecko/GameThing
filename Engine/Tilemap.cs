@@ -8,7 +8,7 @@ using System.IO;
 
 namespace Frankenweenie
 {
-    public class Tilemap : Collider
+    public class Tilemap : Collider2D
     {
         public static Entity Create(int[] data, int width, int height, Point size, Tileset tileset)
         {
@@ -25,7 +25,7 @@ namespace Frankenweenie
         public int[] Cells;
         public float LayerDepth = 1f;
         private RenderTarget2D RenderData;
-        private List<Hitbox> Hitboxes;
+        private List<BoxCollider2D> Hitboxes;
 
         public Tileset Tileset;
 
@@ -35,13 +35,13 @@ namespace Frankenweenie
             Width = width;
             Height = height;
             CellSize = size;
-            Hitboxes = new List<Hitbox>();
+            Hitboxes = new List<BoxCollider2D>();
 
             for(int x = 0; x < Width; x++)
                 for (int y = 0; y < Height; y++)
                 {
                     if(data[x + y * Width] != -1)
-                     Hitboxes.Add(new Hitbox(x * 8, y * 8, 8, 8));
+                     Hitboxes.Add(new BoxCollider2D(x * 8, y * 8, 8, 8));
                 }
         }
 
@@ -74,7 +74,7 @@ namespace Frankenweenie
             return true;
         }
 
-        public override CollisionData Check(Point offset, Collider other)
+        public override CollisionData Check(Point offset, Collider2D other)
         {
             foreach(var hitbox in Hitboxes)
             {

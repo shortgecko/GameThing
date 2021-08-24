@@ -7,7 +7,6 @@ using Microsoft.Xna.Framework;
 
 namespace Frankenweenie
 { 
-    [EntityDef]
     public class CameraEntity : Entity
     {
         public CameraEntity()
