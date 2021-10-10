@@ -126,19 +126,18 @@ namespace Frankenweenie
         }
         #endregion
         #region Song
-        public static VSong LoadSong(string assetName)
+        public static AudioFile LoadSong(string assetName)
         {
             var key = Directory(assetName);
-
-            // Check for a previously loaded asset first
             object asset = null;
-            if (GetLoaded<VSong>(key, out asset))
-                return (VSong)asset;
-            var uri = new System.Uri(Engine.AssemblyDirectory + "/assets/" + assetName);
-            var converted = uri.AbsoluteUri;
-            var song = Song.FromUri("Song", uri);
+            if (GetLoaded<AudioFile>(key, out asset))
+                return (AudioFile)asset;
 
-            VSong vSong = new VSong(song);
+            if(!File.Exists(key))
+            {
+                Console.WriteLine($"File {key} does not exist");
+            }
+            AudioFile vSong = new AudioFile(key);
             // Load the asset.
             var result = vSong;
             loadedAssets[key] = result;

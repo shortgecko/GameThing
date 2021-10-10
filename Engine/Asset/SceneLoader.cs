@@ -15,6 +15,15 @@ namespace Frankenweenie
             World.Clear();
             var OgmoLevel = Content.LoadLevel(path);
             var EntityLayer = OgmoLevel["Entity"];
+
+            foreach(var layer in OgmoLevel.Data.layers)
+            {
+                if(layer.data != null)
+                {
+
+                }
+            }
+
             foreach(var e in EntityLayer.entities)
             {
                 Entity entity = EntityInstancer.Get(e.name);

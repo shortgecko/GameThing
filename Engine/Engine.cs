@@ -94,6 +94,7 @@ namespace Frankenweenie
 #if DEBUG
             Logger.Log($"GPU Information {GraphicsAdapter.DefaultAdapter.Description}");
 #endif
+            Audio.Innitialize();
             LoadContent();
             //base.InactiveSleepTime = TimeSpan.FromSeconds(0);
         }
@@ -150,8 +151,7 @@ namespace Frankenweenie
             m_Scene.Begin();
             foreach (VirtualButton Button in Input.Buttons)
                 Button.LateUpdate();
-
-            Profiler.Update();
+            Audio.Update();
         }
 
 
@@ -165,7 +165,7 @@ namespace Frankenweenie
 
 
 
-            Drawer.Batch.Begin(SpriteSortMode.FrontToBack);
+            Drawer.Batch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointClamp);
             if(m_Scene.IsRunning)
                 m_Scene.BeginDraw();
             Drawer.Batch.End();
@@ -201,6 +201,7 @@ namespace Frankenweenie
 #if DEBUG
                 Window.Title = Config.WindowTitle + " " + fpsCounter.ToString() + " fps - " + (GC.GetTotalMemory(false) / 1048576f).ToString("F") + " MB";
 #endif
+                Profiler.Update(fpsCounter);
                 fpsValue = fpsCounter;
                 fpsCounter = 0;
                 counterElapsed -= TimeSpan.FromSeconds(1);
@@ -253,7 +254,9 @@ namespace Frankenweenie
         {
             Logger.Save();
             Frankenweenie.Content.Dispose();
+            Audio.Deinitialize();
             Profiler.End();
+
         }
 
         public static void Color(Color color)

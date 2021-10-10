@@ -8,15 +8,21 @@ namespace Frankenweenie.Game
 {
     public class Game : Scene
     {
-        public VSong vSong;
+        public AudioFile vSong;
 
         protected override void Initialize()
         {
+            World.CreateCamera();
+
+            vSong = Content.LoadSong("on_sight.mp3");
+
         }
 
         protected override void Update()
         {
-           
+            vSong.Play();
+            vSong.SetVolume(100f);
+
         }
     }
 }

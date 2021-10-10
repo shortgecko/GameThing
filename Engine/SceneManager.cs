@@ -8,7 +8,7 @@ namespace Frankenweenie
 {
     public class SceneManager
     {
-        public Dictionary<string, Scene> Scenes = new();
+        public Dictionary<string, Scene> Scenes = new Dictionary<string, Scene>();
 
         public void Add(Scene scene)
         {

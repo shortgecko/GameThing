@@ -11,27 +11,69 @@ namespace Frankenweenie
 
     public struct Frame
     {
-        public Texture2D Texture;
+        public VTexture Texture;
         public float Duration;
 
-        public Frame(float legnth, Texture2D texture)
+        public Frame(float legnth, VTexture texture)
         {
             Texture = texture;
             Duration = legnth;
         }
     }
 
-    public class Animation
+    public class Animation : Component
     {
-        private Dictionary<float, Frame> Frames;
+        private List<Frame> m_Frames;
+        public List<Frame> Frames => m_Frames;
         private string m_Name;
         public string Name => m_Name;
+        private float Timer;
+        private int CurrentFrame = 0;
+        private Sprite sprite;
 
-        public Animation(string name, Dictionary<float, Frame> frames)
+        public Animation(string name, List<Frame> frames)
         {
-            Frames = frames;
+            m_Frames = frames;
             m_Name = name;
         }
+
+        public Animation(string name)
+        {
+            m_Frames = new List<Frame>();
+            m_Name = name;
+
+        }
+
+        public override void Initialize()
+        {
+            sprite = Entity.Get<Sprite>();
+        }
+
+        public void Add(Frame frame)
+        {
+            m_Frames.Add(frame);
+        }
+
+        public void Play()
+        {
+            Timer += Engine.Delta;
+
+            Frame frame = Frames[CurrentFrame];
+
+            if (Timer > frame.Duration)
+            {
+                Timer = 0f;
+
+                CurrentFrame++;
+
+                if (CurrentFrame >= Frames.Count)
+                    CurrentFrame = 0;
+            }
+
+            sprite.Texture = frame.Texture;
+        }
+
+            
     }
 
     [Pooled]

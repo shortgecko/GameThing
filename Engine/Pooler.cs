@@ -6,7 +6,7 @@ namespace Frankenweenie
 {
     public static class Pooler
     {
-        private static Dictionary<Type, Queue<Component>> Pools = new();
+        private static Dictionary<Type, Queue<Component>> Pools = new Dictionary<Type, Queue<Component>>();
 
         static Pooler()
         {

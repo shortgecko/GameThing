@@ -11,7 +11,7 @@ namespace Frankenweenie
         public static void Main()
         {
             SceneManager sceneManager = new SceneManager();
-            sceneManager.Add(SceneLoader.Load("level.json"));
+            sceneManager.Add(new Game.Game());
             Config config = Serializer.Deserialize<Config>("engine-config");
             Engine.Run(ref config, sceneManager);
         }
